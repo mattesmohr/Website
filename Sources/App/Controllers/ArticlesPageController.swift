@@ -10,10 +10,6 @@ final class ArticlesPageController {
             throw Abort(.badRequest)
         }
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
         return ArticleRepository(database: request.db)
             .page(index: id, with: 10)
             .mapEach(ArticleModel.Output.init)
@@ -21,9 +17,8 @@ final class ArticlesPageController {
                 
                 return ArticlePageTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show entities"),
+                        view: ViewMetadata(title: "Articles"),
                         items: entities,
-                        identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
                     for: request)
             }

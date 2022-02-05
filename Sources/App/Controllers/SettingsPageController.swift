@@ -12,7 +12,7 @@ final class SettingsPageController {
         
         return SettingPageTemplate.IndexView()
             .render(with: EmptyContext(
-                view: ViewMetadata(title: "Setting"),
+                view: ViewMetadata(title: "Settings"),
                 route: RouteMetadata(route: route)),
             for: request)
     }

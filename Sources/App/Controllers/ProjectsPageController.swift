@@ -1,6 +1,6 @@
 import Vapor
 
-// [/solutions]
+// [/projects]
 final class ProjectsPageController {
     
     // [/index:/id]
@@ -10,10 +10,6 @@ final class ProjectsPageController {
             throw Abort(.badRequest)
         }
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
         return ProjectRepository(database: request.db)
             .page(index: id, with: 6)
             .mapEach(ProjectModel.Output.init)
@@ -21,9 +17,8 @@ final class ProjectsPageController {
                 
                 return ProjectPageTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show entries"),
+                        view: ViewMetadata(title: "Projects"),
                         items: entities,
-                        identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
                 for: request)
             }
@@ -45,7 +40,7 @@ final class ProjectsPageController {
             .flatMap { entity in
                 
                 return request.view.render("/projects/show", ShowContext(
-                    view: ViewMetadata(title: "Show entry"),
+                    view: ViewMetadata(title: "Project"),
                     item: ProjectModel.Output(entity: entity),
                     route: RouteMetadata(route: route)
                 ))
@@ -57,7 +52,7 @@ extension ProjectsPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("solutions", configure: { routes in
+        routes.group("projects", configure: { routes in
             
             routes.get("index", ":id", use: self.getIndex)
             routes.get("show", ":id", use: self.getShow)

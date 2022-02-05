@@ -58,8 +58,8 @@ public struct ViewContainer: Page {
                                     .fontSize(.small)
                                 }
                                 ListRow {
-                                    Link(destination: "/solutions/index") {
-                                        "Solutions"
+                                    Link(destination: "/projects/index") {
+                                        "Projects"
                                     }
                                 }
                             }
@@ -116,8 +116,8 @@ public struct ViewContainer: Page {
                                     }
                                 }
                                 ListRow {
-                                    Link(destination: "/solutions/index") {
-                                        "Solutions"
+                                    Link(destination: "/projects/index") {
+                                        "Projects"
                                     }
                                 }
                                 ListRow {
@@ -199,7 +199,7 @@ public struct ViewContainer: Page {
                                 .fontSize(.small)
                             }
                             ListRow {
-                                Link(destination: "/solutions/index") {
+                                Link(destination: "/projects/index") {
                                     "Explore solutions"
                                 }
                             }

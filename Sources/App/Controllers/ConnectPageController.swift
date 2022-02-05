@@ -12,7 +12,7 @@ final class ConnectPageController {
         
         return ConnectPageTemplate.IndexView()
             .render(with: EmptyContext(
-                view: ViewMetadata(title: "Conditions"),
+                view: ViewMetadata(title: "Connect"),
                 route: RouteMetadata(route: route)),
             for: request)
     }
