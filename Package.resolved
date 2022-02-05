@@ -66,10 +66,10 @@
       },
       {
         "package": "HTMLKitComponents",
-        "repositoryURL": "https://github.com/mattesmohr/HTMLKit-Components.git",
+        "repositoryURL": "https://github.com/vapor-community/HTMLKit-Components.git",
         "state": {
           "branch": "main",
-          "revision": "5acbbaf74b8b6cd9354deaad2e38462add1346e6",
+          "revision": "4fb8ea3b98a9fa03367017cd89629707924541b1",
           "version": null
         }
       },

@@ -11,19 +11,22 @@ enum PrivacyPageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text(size: .medium) {
+                            Text {
                                 context.view.title
                             }
-                            Text(size: .large, weight: .bold) {
+                            .fontSize(.medium)
+                            Text {
                                 "Lorem ipsum"
                             }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 "Lorem ipsum"
@@ -32,7 +35,7 @@ enum PrivacyPageTemplate {
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }

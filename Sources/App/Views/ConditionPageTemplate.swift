@@ -11,36 +11,41 @@ enum ConditionPageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    StackColumn(size: .six) {
-                        Text(size: .medium) {
-                            context.view.title
-                        }
-                        Text(size: .large, weight: .bold) {
-                            "Lorem ipsum..."
-                        }
-                    }
-                    StackColumn(size: .six) {
-                        NavigationContainer(direction: .horizontal) {
-                            NavigationItem {
-                                NavigationLink(uri: "#terms") {
-                                    "Terms of use"
-                                }
+                    HStack {
+                        StackColumn(size: .six) {
+                            Text {
+                                context.view.title
                             }
-                            NavigationItem {
-                                NavigationLink(uri: "#privacy") {
-                                    "Privacy policy"
-                                }
+                            .fontWeight(.medium)
+                            Text {
+                                "Lorem ipsum..."
                             }
-                            NavigationItem {
-                                NavigationLink(uri: "#links") {
-                                    "Links"
+                            .fontSize(.large)
+                            .fontWeight(.bold)
+                        }
+                        StackColumn(size: .six) {
+                            List(direction: .horizontal) {
+                                ListRow {
+                                    Link(destination: "#terms") {
+                                        "Terms of use"
+                                    }
+                                }
+                                ListRow {
+                                    Link(destination: "#privacy") {
+                                        "Privacy policy"
+                                    }
+                                }
+                                ListRow {
+                                    Link(destination: "#links") {
+                                        "Links"
+                                    }
                                 }
                             }
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .vertical) {
+                    VStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 "Privacy policy"
@@ -59,7 +64,7 @@ enum ConditionPageTemplate {
                     }
                 }
                 Footer {
-                    Stack(direction: .vertical) {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }

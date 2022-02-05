@@ -11,28 +11,23 @@ enum HomePageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text(size: .medium) {
+                            Text {
                                 context.view.title
                             }
-                            Text(size: .large, weight: .bold) {
-                                "Lorem ipsum"
-                            }
+                            .fontSize(.medium)
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text {
-                                "Lorem ipsum"
-                            }
                         }
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }

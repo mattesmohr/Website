@@ -11,22 +11,23 @@ enum LoginAreaTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text(size: .medium) {
+                            Text {
                                 "Login"
                             }
+                            .fontSize(.medium)
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }

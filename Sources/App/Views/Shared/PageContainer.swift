@@ -24,16 +24,10 @@ public struct PageContainer: Page {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/frontend.css")
+                    .reference("/css/custom.css")
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/images.css")
-                Link()
-                    .relationship(.stylesheet)
-                    .reference("https://cdn.mattesmohr.de/honeycomb/css/all.css")
-                Link()
-                    .relationship(.stylesheet)
-                    .reference("https://cdn.mattesmohr.de/fontawesome/css/all.css")
+                    .reference("/css/components/all.css")
             }
             Body {
                 content

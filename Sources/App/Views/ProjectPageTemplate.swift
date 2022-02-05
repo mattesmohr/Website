@@ -11,64 +11,72 @@ enum ProjectPageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text(size: .medium) {
+                            Text {
                                 context.view.title
                             }
-                            Text(size: .large, weight: .bold) {
+                            .fontSize(.medium)
+                            Text {
                                 "Lorem ipsum..."
                             }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 "Lorem ipsum..."
                             }
                         }
                     }
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            TabGroup {
-                                TabItem {
+                            List(direction: .horizontal) {
+                                ListRow {
                                     Italic {
                                     }
                                     .class("fas fa-search")
                                 }
-                                TabItem {
-                                    Text(transformation: .uppercase) {
+                                ListRow {
+                                    Text {
                                         "All"
                                     }
+                                    .fontTransformation(.uppercase)
                                 }
-                                TabItem {
-                                    Text(transformation: .uppercase) {
+                                ListRow {
+                                    Text {
                                         "iPhone"
                                     }
+                                    .fontTransformation(.uppercase)
                                 }
-                                TabItem {
-                                    Text(transformation: .uppercase) {
+                                ListRow {
+                                    Text {
                                         "iPad"
                                     }
+                                    .fontTransformation(.uppercase)
                                 }
-                                TabItem {
-                                    Text(transformation: .uppercase) {
+                                ListRow {
+                                    Text {
                                         "Mac"
                                     }
+                                    .fontTransformation(.uppercase)
                                 }
-                                TabItem {
-                                    Text(transformation: .uppercase) {
+                                ListRow {
+                                    Text {
                                         "Safari"
                                     }
+                                    .fontTransformation(.uppercase)
                                 }
                             }
                         }
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }
@@ -84,29 +92,32 @@ enum ProjectPageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .six) {
-                            Text(size: .medium) {
+                            Text {
                                 context.view.title
                             }
-                            Text(size: .large, weight: .bold) {
+                            .fontSize(.medium)
+                            Text {
                                 "Lorem ipsum..."
                             }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
                         }
                         StackColumn(size: .six) {
-                            NavigationContainer(direction: .horizontal) {
-                                NavigationItem {
-                                    NavigationLink(uri: "#overview") {
+                            List(direction: .horizontal) {
+                                ListRow {
+                                    Link(destination: "#overview") {
                                         "Overview"
                                     }
                                 }
-                                NavigationItem {
-                                    NavigationLink(uri: "#features") {
+                                ListRow {
+                                    Link(destination: "#features") {
                                         "Features"
                                     }
                                 }
-                                NavigationItem {
-                                    NavigationLink(uri: "#download") {
+                                ListRow {
+                                    Link(destination: "#download") {
                                         "Download"
                                     }
                                 }
@@ -115,7 +126,7 @@ enum ProjectPageTemplate {
                     }
                 }
                 Section {
-                    Stack(direction: .vertical) {
+                    VStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 context.item.content
@@ -139,7 +150,7 @@ enum ProjectPageTemplate {
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }

@@ -11,57 +11,22 @@ enum ArticleAdminTemplate {
         public var body: AnyContent {
             Main {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 context.view.title
                             }
                         }
-                        StackColumn(size: .twelve) {
-                            DropdownButton {
-                                Anchor {
-                                    "Create"
-                                }
-                                .reference("context.route.baseUrl/create")
-                                .class("dropdown-action")
-                                Anchor {
-                                    Italic {
-                                    }
-                                    .class("fas fa-caret-down")
-                                }
-                                .class("dropdown-menu-toggle js_toggle")
-                                DropdownMenu {
-                                    DropdownItem {
-                                        DropdownLink {
-                                            "Import"
-                                        }
-                                    }
-                                    DropdownItem {
-                                        DropdownLink {
-                                            "Export"
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
                 Section {
-                    Stack(direction: .vertical) {
+                    VStack {
                         StackColumn(size: .twelve) {
-                            ListContainer {
-                                ListHeader {
-                                }
-                                ListBody {
-                                }
-                                ListFooter {
-                                }
-                            }
                         }
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }

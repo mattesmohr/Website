@@ -11,64 +11,78 @@ enum ConnectPageTemplate {
         public var body: AnyContent {
             ViewContainer {
                 Header {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
-                            Text(size: .medium) {
+                            Text {
                                 context.view.title
                             }
-                            Text(size: .large, weight: .bold) {
+                            .fontSize(.medium)
+                            Text {
                                 "Lorem ipsum..."
                             }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
                         }
                     }
                 }
                 Section {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                             Text {
                                 "Lorem ipsum..."
                             }
                         }
                     }
-                    Stack(direction: .horizontal) {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
-                                FormHeader {
+                                Header {
                                 }
-                                FormBody {
-                                    FormRow {
-                                        // Lastname
-                                        FormColumn(size: .six) {
-                                            TextInput(title: "Lastname", name: "lastname", value: .constant(nil), placeholder: .constant(nil))
+                                Section {
+                                    HStack {
+                                        StackColumn(size: .six) {
+                                            FieldLabel {
+                                                "Lastname"
+                                            }
+                                            TextField(name: "lastname") {
+                                            }
                                         }
-                                        // Firstname
-                                        FormColumn(size: .six) {
-                                            TextInput(title: "Firstname", name: "firstname", value: .constant(nil), placeholder: .constant(nil))
+                                        StackColumn(size: .six) {
+                                            FieldLabel {
+                                                "Firstname"
+                                            }
+                                            TextField(name: "firstname") {
+                                            }
                                         }
                                     }
-                                    Division {
-                                        // Email
+                                    HStack {
                                         StackColumn(size: .twelve) {
-                                            TextInput(title: "Email", name: "email", value: .constant(nil), placeholder: .constant(nil))
+                                            FieldLabel {
+                                                "Email"
+                                            }
+                                            TextField(name: "email") {
+                                            }
                                         }
                                     }
-                                    FormRow {
-                                        // Message
-                                        FormColumn(size: .twelve) {
-                                            TextareaInput(title: "Message", name: "message", placeholder: .constant(nil)) {
+                                    HStack {
+                                        StackColumn(size: .twelve) {
+                                            FieldLabel {
+                                                "Message"
+                                            }
+                                            TextField(name: "message") {
                                             }
                                         }
                                     }
                                 }
-                                FormFooter {
-                                    SubmitButton(title: "Submit")
+                                Footer {
+                                    SubmitButton(label: "Submit")
                                 }
                             }
                         }
                     }
                 }
                 Footer {
-                    Stack(direction: .horizontal) {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }
