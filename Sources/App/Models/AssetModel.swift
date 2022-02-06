@@ -2,6 +2,8 @@ import Vapor
 
 struct AssetModel: Content {
     
+    var output: Output?
+    
     struct Input: Content, Validatable {
         
         var title: String?

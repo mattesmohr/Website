@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-// [/area/admin/article]
+// [/area/admin/articles]
 final class ArticleAdminController {
 
     // [/index/:id]
@@ -22,7 +22,7 @@ final class ArticleAdminController {
                 
                 return ArticleAdminTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "Article"),
+                        view: ViewMetadata(title: "Show articles"),
                         items: entities,
                         identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
@@ -49,13 +49,13 @@ final class ArticleAdminController {
             states: ["published", "draft", "archived"]
         )
         
-        return request.view.render("/area/admin/article/create", CreateContext(
-            
-            view: ViewMetadata(title: "Create entry"),
-            item: model,
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)
-        ))
+        return ArticleAdminTemplate.CreateView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Create article"),
+                item: model,
+                identity: IdentityMetadata(user: user),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/create/:model]
@@ -69,7 +69,7 @@ final class ArticleAdminController {
         return ArticleRepository(database: request.db)
             .insert(entity: ArticleEntity(input: model))
             .map { _ in
-                return request.redirect(to: "/area/admin/article/index/0")
+                return request.redirect(to: "/area/admin/articles/index/0")
             }
     }
     
@@ -96,12 +96,13 @@ final class ArticleAdminController {
                     states: ["published", "draft", "archived"]
                 )
                 
-                return request.view.render("/area/admin/article/edit", EditContext(
-                    view: ViewMetadata(title: "Edit entry"),
-                    item: model,
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)
-                ))
+                return ArticleAdminTemplate.EditView()
+                    .render(with: EditContext(
+                        view: ViewMetadata(title: "Edit article"),
+                        item: model,
+                        identity: IdentityMetadata(user: user),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
             .flatMap { view in
                 return view
@@ -123,7 +124,7 @@ final class ArticleAdminController {
         return ArticleRepository(database: request.db)
             .update(entity: ArticleEntity(input: model), on: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/article/index/0")
+                return request.redirect(to: "/area/admin/articles/index/0")
             }
     }
     
@@ -137,7 +138,7 @@ final class ArticleAdminController {
         return ArticleRepository(database: request.db)
             .delete(id: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/article/index/0")
+                return request.redirect(to: "/area/admin/articles/index/0")
             }
     }
 }
@@ -146,7 +147,7 @@ extension ArticleAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
     
-        routes.group("article", configure: { routes in
+        routes.group("articles", configure: { routes in
             
             routes.get("index", ":id", use: self.getIndex)
             routes.get("create", use: self.getCreate)

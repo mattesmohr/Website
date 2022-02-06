@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-// [/area/admin/report]
+// [/area/admin/reports]
 final class ReportAdminController {
     
     // [/index]
@@ -17,7 +17,7 @@ final class ReportAdminController {
         
         return ReportAdminTemplate.IndexView()
             .render(with: EmptyContext(
-                view: ViewMetadata(title: "Report"),
+                view: ViewMetadata(title: "Show reports"),
                 identity: IdentityMetadata(user: user),
                 route: RouteMetadata(route: route)),
             for: request)

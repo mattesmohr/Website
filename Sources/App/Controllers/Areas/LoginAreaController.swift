@@ -19,11 +19,12 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("/area/login/register", CreateContext(
-            view: ViewMetadata(title: "Register account"),
-            item: RegisterModel(),
-            route: RouteMetadata(route: route)
-        ))
+        return LoginAreaTemplate.RegisterView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Register account"),
+                item: RegisterModel(),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/register/:model]

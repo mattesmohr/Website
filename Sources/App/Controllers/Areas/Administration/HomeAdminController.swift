@@ -17,7 +17,7 @@ final class HomeAdminController {
         
         return HomeAdminTemplate.IndexView()
             .render(with: EmptyContext(
-                view: ViewMetadata(title: "Home"),
+                view: ViewMetadata(title: "Show home"),
                 identity: IdentityMetadata(user: user),
                 route: RouteMetadata(route: route)),
             for: request)

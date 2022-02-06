@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,600,700');
+
+:root {
+    
+    --blackColor: hsla(0, 0%, 0%, 100%);
+    
+    --blueLightColor: hsla(198, 50%, 75%, 100%);
+    --blueColor: hsla(198, 50%, 50%, 100%);
+    --blueDarkColor: hsla(198, 50%, 35%, 100%);
+    
+    --brownLightColor: hsla(23, 50%, 75%, 100%);
+    --brownColor: hsla(23, 50%, 50%, 100%);
+    --brownDarkColor: hsla(23, 50%, 35%, 100%);
+    
+    --cyanLightColor: hsla(180, 50%, 75%, 100%);
+    --cyanColor: hsla(180, 50%, 50%, 100%);
+    --cyanDarkColor: hsla(180, 50%, 35%, 100%);
+    
+    --grayLightColor: hsla(222, 50%, 75%, 100%);
+    --grayColor: hsla(222, 50%, 50%, 100%);
+    --grayDarkColor: hsla(222, 50%, 35%, 100%);
+    
+    --greenLightColor: hsla(94, 50%, 75%, 100%);
+    --greenColor: hsla(94, 50%, 50%, 100%);
+    --greenDarkColor: hsla(94, 50%, 35%, 100%);
+    
+    --indigoLightColor: hsla(208, 50%, 75%, 100%);
+    --indigoColor: hsla(208, 50%, 50%, 100%);
+    --indigoDarkColor: hsla(208, 50%, 35%, 100%);
+    
+    --mintLightColor: hsla(178, 50%, 75%, 100%);
+    --mintColor: hsla(178, 50%, 50%, 100%);
+    --mintDarkColor: hsla(178, 50%, 35%, 100%);
+    
+    --orangeLightColor: hsla(33, 50%, 75%, 100%);
+    --orangeColor: hsla(33, 50%, 50%, 100%);
+    --orangeDarkColor: hsla(33, 50%, 35%, 100%);
+    
+    --pinkLightColor: hsla(342, 50%, 75%, 100%);
+    --pinkColor: hsla(342, 50%, 50%, 100%);
+    --pinkDarkColor: hsla(342, 50%, 35%, 100%);
+    
+    --purpleLightColor: hsla(273, 50%, 75%, 100%);
+    --purpleColor: hsla(273, 50%, 50%, 100%);
+    --purpleDarkColor: hsla(273, 50%, 35%, 100%);
+    
+    --redLightColor: hsla(359, 50%, 75%, 100%);
+    --redColor: hsla(359, 50%, 50%, 100%);
+    --redDarkColor: hsla(359, 50%, 35%, 100%);
+    
+    --tealLightColor: hsla(162, 50%, 75%, 100%);
+    --tealColor: hsla(162, 50%, 50%, 100%);
+    --tealDarkColor: hsla(162, 50%, 35%, 100%);
+    
+    --whiteColor: hsla(0, 0%, 100%, 100%);
+    
+    --yellowLightColor: hsla(42, 50%, 75%, 100%);
+    --yellowColor: hsla(42, 50%, 50%, 100%);
+    --yellowDarkColor: hsla(42, 50%, 35%, 100%);
+    
+    --silverLightColor: hsla(210, 50%, 75%, 100%);
+    --silverColor: hsla(210, 50%, 50%, 100%);
+    --silverDarkColor: hsla(210, 50%, 35%, 100%);
+    
+    --primaryLightColor: hsla(0, 50%, 75%, 100%);
+    --primaryColor: hsla(0, 50%, 50%, 100%);
+    --primaryDarkColor: hsla(0, 50%, 35%, 100%);
+    
+    --primaryLightColor: hsla(0, 50%, 75%, 100%);
+    --primaryColor: hsla(0, 50%, 50%, 100%);
+    --primaryDarkColor: hsla(0, 50%, 35%, 100%);
+    
+    --secondaryLightColor: hsla(0, 50%, 75%, 100%);
+    --secondaryColor: hsla(0, 50%, 50%, 100%);
+    --secondaryDarkColor: hsla(0, 50%, 35%, 100%);
+    
+    --buttonPadding: 10px 24px;
+    --buttonBorderColor: 5;
+    --buttonBorderWidth: 1px;
+    --buttonBorderRadius: 5px;
+    --buttonFontSize: 14px;
+    --buttonFontWeight: normal;
+    --buttonLineHeight: 1.2rem;
+    
+    --smallFontSize: 0.8em;
+    --smallFontWeight: 600;
+    --smallLineHeight: 1.6em;
+    --normalFontSize: 1.4em;
+    --normalFontWeight: 600;
+    --normalLineHeight: 1.8em;
+    --mediumFontSize: 1.6em;
+    --mediumFontWeight: 600;
+    --mediumLineHeight: 2.0em;
+    --largeFontSize: 2.3em;
+    --largeFontWeight: 900;
+    --largeLineHeight: 1.1em;
+    
+    --inputBorderColor: #DEE2E6;
+    --inputBorderWidth: 1px;
+    --inputBorderRadius: 5px;
+}
+
+* {
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+a {
+    
+    color: #FFFFFF
+}
+
+html {
+    
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    font-size: 100%;
+    font-weight: 300;
+    line-height: 2.2em;
+    color: #FFFFFF
+}
+
+body {
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #0C0C0F
+}
+
+body > header {
+    
+    font-size: 1.0rem;
+    color: #9CA7B2;
+    background-color: #0C0C0F;
+    border-bottom: 1px solid #202024
+}
+
+body > main {
+    
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1
+}
+
+body > footer {
+    
+    font-size: 1.0rem;
+    color: #9CA7B2;
+    background-color: #0C0C0F;
+    border-top: 1px solid #202024
+}
+
+main > header {
+}
+
+main > section {
+    
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1
+}
+
+main > footer {
+}

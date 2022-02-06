@@ -15,36 +15,36 @@
 .button.style\:primary {
     
     color: var(--whiteColor);
-    background-color: hsl(var(--primaryColor), 100%, 50%)
+    background-color: var(--primaryColor)
 }
 
 .button.style\:primary:hover {
     
-    background-color: hsl(var(--primaryColor), 100%, 60%)
+    background-color: var(--primaryDarkColor)
 }
 
 .button.style\:secondary {
     
     color: var(--whiteColor);
-    background-color: hsl(var(--secondaryColor), 100%, 50%)
+    background-color: var(--secondaryColor)
 }
 
 .button.style\:secondary:hover {
     
-    background-color: hsl(var(--secondaryColor), 100%, 60%)
+    background-color: var(--secondaryDarkColor)
 }
 
 .button.style\:outline {
     
-    color: hsl(var(--buttonBorderColor), 100%, 60%);
+    color: var(--secondaryColor);
     background-color: transparent;
-    border-color: hsl(var(--buttonBorderColor), 100%, 60%)
+    border-color: var(--secondaryColor)
 }
 
 .button.style\:outline:hover {
     
     color: var(--whiteColor);
-    background-color: hsl(var(--buttonBorderColor), 100%, 60%);
+    background-color: var(--secondaryDarkColor);
     border-color: transparent
 }
 
@@ -104,13 +104,32 @@
 
 .form {}
 
+.label {
+    
+    display: block;
+    color: var(--labelColor);
+    margin: 8px 0px;
+}
+
 .input {
     
+    display: block;
     width: 100%;
-    padding: 0px 15px;
+    margin: 8px 0px;
+    padding: 7px 12px;
     border: var(--inputBorderWidth) solid var(--inputBorderColor);
     border-radius: var(--inputBorderRadius);
-    font-size: 1.0em
+    font-size: 1.0rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--inputTextColor);
+    background-color: var(--inputBackgroundColor)
+}
+
+.input:focus {
+    
+    outline: 0;
+    box-shadow: 0 0 0 4px var(--inputFocusColor);
 }
 
 .input.type\:text {
@@ -143,6 +162,10 @@
     
     content: " *";
     color: var(--redColor)
+}
+
+.resize\:false {
+    resize: none;
 }
 
 .image {
@@ -216,7 +239,8 @@
 
 .list.direction\:vertical {
     
-    flex-direction: column
+    flex-direction: column;
+    gap: 15px
 }
 
 .list-row {}
@@ -698,4 +722,134 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.75
+}
+
+.background\:black {
+    
+    background-color: var(--blackColor)
+}
+
+.background\:blue {
+    
+    background-color: var(--blueColor)
+}
+
+.background\:brown {
+    
+    background-color: var(--brownColor)
+}
+
+.background\:transparent {
+    
+    background-color: transparent
+}
+
+.background\:cyan {
+    
+    background-color: var(--cyanColor)
+}
+
+.background\:gray {
+    
+    background-color: var(--grayColor)
+}
+
+.background\:green {
+    
+    background-color: var(--greenColor)
+}
+
+.background\:indigo {
+    
+    background-color: var(--indigoColor)
+}
+
+.background\:mint {
+    
+    background-color: var(--mintColor)
+}
+
+.background\:orange {
+    
+    background-color: var(--orangeColor)
+}
+
+.background\:pink {
+    
+    background-color: var(--pinkColor)
+}
+
+.background\:purple {
+    
+    background-color: var(--purpleColor)
+}
+
+.background\:red {
+    
+    background-color: var(--redColor)
+}
+
+.background\:teal {
+    
+    background-color: var(--tealColor)
+}
+
+.background\:white {
+    
+    background-color: var(--whiteColor)
+}
+
+.background\:yellow {
+    
+    background-color: var(--yellowColor)
+}
+
+.background\:silver {
+    
+    background-color: var(--silverColor)
+}
+
+.background\:highlight {
+    
+    background-color: var(--yellowColor)
+}
+
+.background\:primary {
+    
+    background-color: var(--primaryColor)
+}
+
+.background\:secondary {
+    
+    background-color: var(--secondaryColor)
+}
+
+zindex\:1 {
+
+    position: relative;
+    z-index: 1
+}
+
+zindex\:2 {
+
+    position: relative;
+    z-index: 2
+}
+
+zindex\:3 {
+
+    position: relative;
+    z-index: 3
+}
+
+zindex\:4 {
+
+    position: relative;
+    z-index: 4
+}
+
+zindex\:5 {
+
+    position: relative;
+    z-index: 5
 }

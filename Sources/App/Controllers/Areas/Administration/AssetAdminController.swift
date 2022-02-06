@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-// [/area/admin/asset]
+// [/area/admin/assets]
 final class AssetAdminController {
     
     // [/index/:id]
@@ -22,7 +22,7 @@ final class AssetAdminController {
                 
                 return AssetAdminTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "Asset"),
+                        view: ViewMetadata(title: "Show assets"),
                         items: entities,
                         identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
@@ -44,12 +44,13 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return request.view.render("/area/admin/asset/create", CreateContext(
-            view: ViewMetadata(title: "Create entry"),
-            item: ArticleModel(),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)
-        ))
+        return AssetAdminTemplate.CreateView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Create asset"),
+                item: AssetModel(),
+                identity: IdentityMetadata(user: user),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/create/:model]
@@ -62,7 +63,7 @@ final class AssetAdminController {
         return AssetRepository(database: request.db)
             .insert(entity: AssetEntity(input: model))
             .map { _ in
-                return request.redirect(to: "/area/admin/asset/index/0")
+                return request.redirect(to: "/area/admin/assets/index/0")
             }
     }
     
@@ -82,13 +83,18 @@ final class AssetAdminController {
             .unwrap(or: Abort(.notFound))
             .flatMapThrowing { entity in
                 
-                return request.view.render("/area/admin/asset/edit", EditContext(
-                    
-                    view: ViewMetadata(title: "Edit entry"),
-                    item: AssetModel.Output(entity: entity),
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)
-                ))
+                let model = AssetModel(
+                
+                    output: AssetModel.Output(entity: entity)
+                )
+                
+                return AssetAdminTemplate.EditView()
+                    .render(with: EditContext(
+                        view: ViewMetadata(title: "Edit asset"),
+                        item: model,
+                        identity: IdentityMetadata(user: user),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
             .flatMap { view in
                 return view
@@ -109,7 +115,7 @@ final class AssetAdminController {
         return AssetRepository(database: request.db)
             .update(entity: AssetEntity(input: model), on: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/asset/index/0")
+                return request.redirect(to: "/area/admin/assets/index/0")
             }
     }
     
@@ -123,7 +129,7 @@ final class AssetAdminController {
         return AssetRepository(database: request.db)
             .delete(id: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/asset/index/0")
+                return request.redirect(to: "/area/admin/assets/index/0")
             }
     }
 }
@@ -132,7 +138,7 @@ extension AssetAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("asset", configure: { routes in
+        routes.group("assets", configure: { routes in
             
             routes.get("index", ":id", use: self.getIndex)
             routes.get("create", use: self.getCreate)

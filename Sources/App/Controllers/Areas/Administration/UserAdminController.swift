@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-// [/area/admin/user]
+// [/area/admin/users]
 final class UserAdminController {
     
     // [/index/:id]
@@ -22,7 +22,7 @@ final class UserAdminController {
                 
                 return UserAdminTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "User"),
+                        view: ViewMetadata(title: "Show users"),
                         items: entities,
                         identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
@@ -44,13 +44,13 @@ final class UserAdminController {
             throw Abort(.unauthorized)
         }
         
-        return request.view.render("/area/admin/user/create", CreateContext(
-            
-            view: ViewMetadata(title: "Create entry"),
-            item: UserModel(),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)
-        ))
+        return UserAdminTemplate.CreateView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Create user"),
+                item: UserModel(),
+                identity: IdentityMetadata(user: user),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/create/:model]
@@ -63,7 +63,7 @@ final class UserAdminController {
         return UserRepository(database: request.db)
             .insert(entity: UserEntity(input: model))
             .map { _ in
-                return request.redirect(to: "/area/admin/user/index/0")
+                return request.redirect(to: "/area/admin/users/index/0")
             }
     }
     
@@ -83,16 +83,18 @@ final class UserAdminController {
             .unwrap(or: Abort(.notFound))
             .flatMapThrowing { entity in
                 
-                var model = UserModel()
-                model.output = UserModel.Output(entity: entity)
-                
-                return request.view.render("/area/admin/user/edit/", ShowContext(
+                let model = UserModel(
                     
-                    view: ViewMetadata(title: "Edit entry"),
-                    item: model,
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)
-                ))
+                    output: UserModel.Output(entity: entity)
+                )
+                
+                return UserAdminTemplate.EditView()
+                    .render(with: EditContext(
+                        view: ViewMetadata(title: "Edit user"),
+                        item: model,
+                        identity: IdentityMetadata(user: user),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
             .flatMap { view in
                 return view
@@ -113,7 +115,7 @@ final class UserAdminController {
         return UserRepository(database: request.db)
             .update(entity: UserEntity(input: model), on: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/user/index/0")
+                return request.redirect(to: "/area/admin/users/index/0")
             }
     }
     
@@ -127,7 +129,7 @@ final class UserAdminController {
         return UserRepository(database: request.db)
             .delete(id: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/user/index/0")
+                return request.redirect(to: "/area/admin/users/index/0")
             }
     }
 }

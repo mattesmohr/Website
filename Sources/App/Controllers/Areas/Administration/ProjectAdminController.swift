@@ -1,7 +1,7 @@
 import Vapor
 import Fluent
 
-// [/area/admin/project]
+// [/area/admin/projects]
 final class ProjectAdminController {
     
     // [/index/:id]
@@ -22,7 +22,7 @@ final class ProjectAdminController {
                 
                 return ProjectAdminTemplate.IndexView()
                     .render(with: IndexContext(
-                        view: ViewMetadata(title: "Project"),
+                        view: ViewMetadata(title: "Show projects"),
                         items: entities,
                         identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
@@ -49,13 +49,13 @@ final class ProjectAdminController {
             states: ["published", "confidential"]
         )
         
-        return request.view.render("/area/admin/project/create", CreateContext(
-            
-            view: ViewMetadata(title: "Create entry"),
-            item: model,
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)
-        ))
+        return ProjectAdminTemplate.CreateView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Create project"),
+                item: model,
+                identity: IdentityMetadata(user: user),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/create/:model]
@@ -69,7 +69,7 @@ final class ProjectAdminController {
         return ProjectRepository(database: request.db)
             .insert(entity: ProjectEntity(input: model))
             .map { _ in
-                return request.redirect(to: "/area/admin/project/index/0")
+                return request.redirect(to: "/area/admin/projects/index/0")
             }
     }
     
@@ -96,12 +96,13 @@ final class ProjectAdminController {
                     states: ["published", "draft", "archived"]
                 )
                 
-                return request.view.render("/area/admin/project/edit", EditContext(
-                    view: ViewMetadata(title: "Edit entry"),
-                    item: model,
-                    identity:  IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)
-                ))
+                return ProjectAdminTemplate.EditView()
+                    .render(with: EditContext(
+                        view: ViewMetadata(title: "Edit project"),
+                        item: model,
+                        identity:  IdentityMetadata(user: user),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
             .flatMap { view in
                 return view
@@ -123,7 +124,7 @@ final class ProjectAdminController {
         return ProjectRepository(database: request.db)
             .update(entity: ProjectEntity(input: model), on: id)
             .map { _ in
-                return request.redirect(to: "/area/admin/project/index/0")
+                return request.redirect(to: "/area/admin/projects/index/0")
             }
     }
     
@@ -137,7 +138,7 @@ final class ProjectAdminController {
         return ProjectRepository(database: request.db)
             .delete(id: id)
             .map { _ in 
-                return request.redirect(to: "/area/admin/project/index/0")
+                return request.redirect(to: "/area/admin/projects/index/0")
             }
     }
 }

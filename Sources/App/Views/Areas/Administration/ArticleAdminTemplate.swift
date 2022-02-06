@@ -9,7 +9,7 @@ enum ArticleAdminTemplate {
         @TemplateValue(IndexContext<ArticleModel.Output>.self) var context
         
         public var body: AnyContent {
-            Main {
+            AreaViewContainer {
                 Header {
                     HStack {
                         StackColumn(size: .twelve) {
@@ -20,7 +20,7 @@ enum ArticleAdminTemplate {
                     }
                 }
                 Section {
-                    VStack {
+                    HStack {
                         StackColumn(size: .twelve) {
                         }
                     }
@@ -37,20 +37,130 @@ enum ArticleAdminTemplate {
     
     struct CreateView: View {
      
-        @TemplateValue(CreateContext<ArticleModel.Output>.self)  var context
+        @TemplateValue(CreateContext<ArticleModel>.self)  var context
         
         var body: AnyContent {
-            Division {
+            AreaViewContainer {
+                Header {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                            Text {
+                                context.view.title
+                            }
+                        }
+                    }
+                }
+                Section {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                            FormContainer {
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Title"
+                                        }
+                                        TextField(name: "title") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Excerpt"
+                                        }
+                                        TextField(name: "excerpt") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Content"
+                                        }
+                                        TextField(name: "content") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        SubmitButton(label: "Submit")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Footer {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                        }
+                    }
+                }
             }
         }
     }
     
     struct EditView: View {
         
-        @TemplateValue(EditContext<ArticleModel.Output>.self) var context
+        @TemplateValue(EditContext<ArticleModel>.self) var context
         
         var body: AnyContent {
-            Division {
+            AreaViewContainer {
+                Header {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                            Text {
+                                context.view.title
+                            }
+                        }
+                    }
+                }
+                Section {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                            FormContainer {
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Title"
+                                        }
+                                        TextField(name: "title") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Excerpt"
+                                        }
+                                        TextField(name: "excerpt") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        FieldLabel {
+                                            "Content"
+                                        }
+                                        TextField(name: "content") {
+                                        }
+                                    }
+                                }
+                                HStack {
+                                    StackColumn(size: .twelve) {
+                                        SubmitButton(label: "Submit")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                Footer {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                        }
+                    }
+                }
             }
         }
     }

@@ -9,7 +9,28 @@ enum HomeAdminTemplate {
         @TemplateValue(EmptyContext.self) var context
         
         var body: AnyContent {
-            Division {
+            AreaViewContainer {
+                Header {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                            Text {
+                                context.view.title
+                            }
+                        }
+                    }
+                }
+                Section {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                        }
+                    }
+                }
+                Footer {
+                    HStack {
+                        StackColumn(size: .twelve) {
+                        }
+                    }
+                }
             }
         }
     }

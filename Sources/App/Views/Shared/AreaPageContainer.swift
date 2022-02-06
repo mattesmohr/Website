@@ -2,7 +2,7 @@ import HTMLKit
 import HTMLKitVaporProvider
 import HTMLKitComponents
 
-public struct PageContainer: Page {
+public struct AreaPageContainer: Page {
     
     public var content: [BodyElement]
     
@@ -24,7 +24,7 @@ public struct PageContainer: Page {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/page.css")
+                    .reference("/css/area.css")
                 Link()
                     .relationship(.stylesheet)
                     .reference("/css/components/all.css")
