@@ -18,7 +18,9 @@ func routes(_ app: Application) throws {
         
         try routes.group("admin", configure: { routes in
             
-            let group = routes.grouped(app.sessions.middleware)
+            let group = routes.grouped(app.sessions.middleware,
+                                       UserSessionAuthenticator(),
+                                       UserModel.Output.redirectMiddleware(path: "/area/login/index"))
         
             try group.register(collection: HomeAdminController())
             try group.register(collection: ProjectAdminController())
