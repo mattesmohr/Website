@@ -10,32 +10,21 @@ enum LoginAreaTemplate {
 
         public var body: AnyContent {
             AreaPageContainer {
-                Header {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                            Text {
-                                context.view.title
-                            }
-                            .fontSize(.medium)
-                        }
-                    }
-                }
                 Section {
                     HStack {
                         StackColumn(size: .five) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email") {
-                                        }
+                                        TextField(name: "email")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "password") {
                                             "Password"
                                         }
                                         SecureField(name: "password")
@@ -51,12 +40,6 @@ enum LoginAreaTemplate {
                     }
                     .contentSpace(.around)
                 }
-                Footer {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                        }
-                    }
-                }
             }
         }
     }
@@ -67,32 +50,21 @@ enum LoginAreaTemplate {
 
         public var body: AnyContent {
             AreaPageContainer {
-                Header {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                            Text {
-                                context.view.title
-                            }
-                            .fontSize(.medium)
-                        }
-                    }
-                }
                 Section {
                     HStack {
                         StackColumn(size: .five) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email") {
-                                        }
+                                        TextField(name: "email")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "password") {
                                             "Password"
                                         }
                                         SecureField(name: "password")
@@ -100,7 +72,7 @@ enum LoginAreaTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "confirmation") {
                                             "Confirmation"
                                         }
                                         SecureField(name: "confirmation")
@@ -108,11 +80,10 @@ enum LoginAreaTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "code") {
                                             "Code"
                                         }
-                                        TextField(name: "code") {
-                                        }
+                                        TextField(name: "code")
                                     }
                                 }
                                 HStack {
@@ -124,12 +95,6 @@ enum LoginAreaTemplate {
                         }
                     }
                     .contentSpace(.around)
-                }
-                Footer {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                        }
-                    }
                 }
             }
         }
@@ -141,27 +106,16 @@ enum LoginAreaTemplate {
 
         public var body: AnyContent {
             AreaPageContainer {
-                Header {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                            Text {
-                                context.view.title
-                            }
-                            .fontSize(.medium)
-                        }
-                    }
-                }
                 Section {
                     HStack {
                         StackColumn(size: .five) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email") {
-                                        }
+                                        TextField(name: "email")
                                     }
                                 }
                                 HStack {
@@ -173,12 +127,6 @@ enum LoginAreaTemplate {
                         }
                     }
                     .contentSpace(.around)
-                }
-                Footer {
-                    HStack {
-                        StackColumn(size: .twelve) {
-                        }
-                    }
                 }
             }
         }

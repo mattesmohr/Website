@@ -16,14 +16,18 @@ enum ProjectAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -47,29 +51,31 @@ enum ProjectAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextField(name: "content") {
+                                        TextEditor(name: "content") {
                                         }
+                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -80,6 +86,8 @@ enum ProjectAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -103,29 +111,31 @@ enum ProjectAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextField(name: "content") {
+                                        TextEditor(name: "content") {
                                         }
+                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -136,6 +146,8 @@ enum ProjectAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {

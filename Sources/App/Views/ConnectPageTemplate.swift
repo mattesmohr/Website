@@ -41,35 +41,47 @@ enum ConnectPageTemplate {
                                 Section {
                                     HStack {
                                         StackColumn(size: .six) {
-                                            FieldLabel {
+                                            FieldLabel(for: "lastname") {
                                                 "Lastname"
                                             }
-                                            TextField(name: "lastname") {
+                                            TextField(name: "lastname")
+                                        }
+                                        StackColumn(size: .six) {
+                                            FieldLabel(for: "firstname") {
+                                                "Firstname"
+                                            }
+                                            TextField(name: "firstname")
+                                        }
+                                    }
+                                    HStack {
+                                        StackColumn(size: .twelve) {
+                                            FieldLabel(for: "email") {
+                                                "Email"
+                                            }
+                                            TextField(name: "email")
+                                        }
+                                    }
+                                    HStack {
+                                        StackColumn(size: .twelve) {
+                                            FieldLabel(for: "message") {
+                                                "Message"
+                                            }
+                                            TextEditor(name: "message") {
+                                            }
+                                            .lineLimit(4)
+                                        }
+                                    }
+                                    HStack {
+                                        StackColumn(size: .six) {
+                                            CheckField(name: "name", value: "name")
+                                            FieldLabel(for: "name") {
+                                                "name"
                                             }
                                         }
                                         StackColumn(size: .six) {
-                                            FieldLabel {
-                                                "Firstname"
-                                            }
-                                            TextField(name: "firstname") {
-                                            }
-                                        }
-                                    }
-                                    HStack {
-                                        StackColumn(size: .twelve) {
-                                            FieldLabel {
-                                                "Email"
-                                            }
-                                            TextField(name: "email") {
-                                            }
-                                        }
-                                    }
-                                    HStack {
-                                        StackColumn(size: .twelve) {
-                                            FieldLabel {
-                                                "Message"
-                                            }
-                                            TextField(name: "message") {
+                                            CheckField(name: "name", value: "name")
+                                            FieldLabel(for: "name") {
+                                                "name"
                                             }
                                         }
                                     }

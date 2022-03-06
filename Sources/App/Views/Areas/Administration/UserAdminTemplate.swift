@@ -16,11 +16,13 @@ enum UserAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }
@@ -47,45 +49,46 @@ enum UserAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email") {
-                                        }
+                                        TextField(name: "email")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .six) {
-                                        FieldLabel {
+                                        FieldLabel(for: "firstname") {
                                             "Firstname"
                                         }
-                                        TextField(name: "firstname") {
-                                        }
+                                        TextField(name: "firstname")
                                     }
                                     StackColumn(size: .six) {
-                                        FieldLabel {
+                                        FieldLabel(for: "lastname") {
                                             "Lastname"
                                         }
-                                        TextField(name: "lastname") {
-                                        }
+                                        TextField(name: "lastname")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "description") {
                                             "Description"
                                         }
-                                        TextField(name: "desription") {
+                                        TextEditor(name: "desription") {
+                                            
                                         }
+                                        .lineLimit(4)
                                     }
                                 }
                                 HStack {
@@ -119,45 +122,45 @@ enum UserAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email") {
-                                        }
+                                        TextField(name: "email")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .six) {
-                                        FieldLabel {
+                                        FieldLabel(for: "firstname") {
                                             "Firstname"
                                         }
-                                        TextField(name: "firstname") {
-                                        }
+                                        TextField(name: "firstname")
                                     }
                                     StackColumn(size: .six) {
-                                        FieldLabel {
+                                        FieldLabel(for: "lastname") {
                                             "Lastname"
                                         }
-                                        TextField(name: "lastname") {
-                                        }
+                                        TextField(name: "lastname")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "description") {
                                             "Description"
                                         }
-                                        TextField(name: "desription") {
+                                        TextEditor(name: "desription") {
                                         }
+                                        .lineLimit(4)
                                     }
                                 }
                                 HStack {

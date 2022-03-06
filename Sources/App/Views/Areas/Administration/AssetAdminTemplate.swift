@@ -16,14 +16,18 @@ enum AssetAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -47,20 +51,21 @@ enum AssetAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
@@ -71,6 +76,8 @@ enum AssetAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -94,20 +101,21 @@ enum AssetAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
@@ -118,6 +126,8 @@ enum AssetAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {

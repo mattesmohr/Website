@@ -28,10 +28,23 @@ public struct PageContainer: Page {
                 Link()
                     .relationship(.stylesheet)
                     .reference("/css/components/all.css")
+                Script {
+                }
+                .source("/js/all.js")
             }
             Body {
                 content
+                Script {
+                }
             }
         }
     }
+    
+    public var scripts: BodyElement {        
+        return [content.scripts]
+    }
 }
+
+extension Array: AnyElement where Element == AnyContent {}
+
+extension Array: BodyElement where Element == AnyContent {}

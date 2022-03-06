@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.0.1"),
         .package(name: "HTMLKit", url: "https://github.com/vapor-community/HTMLKit.git", .branch("main")),
         .package(name: "HTMLKitVaporProvider", url: "https://github.com/vapor-community/htmlkit-vapor-provider.git", .branch("main")),
-        .package(name: "HTMLKitComponents", url: "https://github.com/vapor-community/HTMLKit-Components.git", .branch("main"))
+        .package(name: "HTMLKitComponents", url: "https://github.com/mattesmohr/HTMLKit-Components.git", .branch("main"))
     ],
     targets: [
         .target(

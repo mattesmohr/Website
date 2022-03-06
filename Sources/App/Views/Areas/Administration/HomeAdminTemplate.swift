@@ -16,11 +16,13 @@ enum HomeAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }

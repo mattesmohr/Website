@@ -28,26 +28,30 @@ public struct ViewContainer: Page {
                                     }
                                 }
                                 ListRow {
-                                    Span {
+                                    Text {
                                         "Explore"
                                     }
-                                    .class("js_nav_1")
+                                    .id("explore")
+                                    .onHover(perfom: .show("nav1"))
                                 }
                                 ListRow {
-                                    Span {
+                                    Text {
                                         "Read"
                                     }
-                                    .class("js_nav_2")
+                                    .id("read")
+                                    .onHover(perfom: .show("nav2"))
                                 }
                                 ListRow {
-                                    Link(destination: "/connect/index") {
+                                    Text {
                                         "Connect"
                                     }
+                                    .id("connect")
+                                    .onHover(perfom: .show("nav3"))
                                 }
                             }
                     }
                 }
-                ZStack {
+                Navigation {
                     HStack(alignment: .top) {
                         StackColumn(size: .three, offset: .six) {
                             List(direction: .vertical) {
@@ -81,7 +85,8 @@ public struct ViewContainer: Page {
                         }
                     }
                 }
-                ZStack {
+                .id("nav1")
+                Navigation {
                     HStack(alignment: .top) {
                         StackColumn(size: .three, offset: .nine) {
                             List(direction: .vertical) {
@@ -100,7 +105,8 @@ public struct ViewContainer: Page {
                         }
                     }
                 }
-                ZStack {
+                .id("nav2")
+                Navigation {
                     HStack(alignment: .top) {
                         StackColumn(size: .three, offset: .six) {
                             List(direction: .vertical) {
@@ -164,6 +170,7 @@ public struct ViewContainer: Page {
                         }
                     }
                 }
+                .id("nav3")
             }
             Main {
                 content

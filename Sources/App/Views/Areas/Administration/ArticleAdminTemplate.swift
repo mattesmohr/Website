@@ -16,14 +16,18 @@ enum ArticleAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -47,38 +51,41 @@ enum ArticleAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "excerpt") {
                                             "Excerpt"
                                         }
-                                        TextField(name: "excerpt") {
+                                        TextEditor(name: "excerpt") {
                                         }
+                                        .lineLimit(4)
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextField(name: "content") {
+                                        TextEditor(name: "content") {
                                         }
+                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -89,6 +96,8 @@ enum ArticleAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -112,38 +121,41 @@ enum ArticleAdminTemplate {
                             Text {
                                 context.view.title
                             }
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
                             FormContainer {
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title") {
-                                        }
+                                        TextField(name: "title")
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "excerpt") {
                                             "Excerpt"
                                         }
-                                        TextField(name: "excerpt") {
+                                        TextEditor(name: "excerpt") {
                                         }
+                                        .lineLimit(4)
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        FieldLabel {
+                                        FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextField(name: "content") {
+                                        TextEditor(name: "content") {
                                         }
+                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -154,6 +166,8 @@ enum ArticleAdminTemplate {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
