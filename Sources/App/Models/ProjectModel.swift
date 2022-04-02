@@ -2,17 +2,25 @@ import Vapor
 
 struct ProjectModel: Content {
     
+    enum Categories: String, Codable, CaseIterable {
+        case macOS
+        case iOS
+    }
+    
+    enum States: String, Codable, CaseIterable {
+        case published
+        case confidential
+    }
+    
     var output: Output?
-    var categories: [String]?
-    var states: [String]?
     
     struct Input: Content, Validatable {
         
         var thumbnailId: String?
-        var title: String?
-        var content: String?
-        var category: String?
-        var status: String?
+        var title: String
+        var content: String
+        var category: String
+        var status: String
         var publishedOn: Date?
         var authorId: UUID?
         
@@ -27,22 +35,20 @@ struct ProjectModel: Content {
     
     struct Output: Content {
         
-        var id: UUID?
+        var id: UUID
         var thumbnail: AssetModel.Output?
-        var title: String?
-        var content: String?
-        var category: String?
-        var status: SolutionStatus?
+        var title: String
+        var content: String
+        var category: String
+        var status: String
         var publishedOn: Date?
         var author: UserModel.Output?
         var links: [LinkModel.Output]?
         var assets: [AssetModel.Output]?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var createdAt: Date
+        var modifiedAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, thumbnail: AssetModel.Output? = nil, title: String? = nil, content: String? = nil, category: String? = nil, status: SolutionStatus? = nil, publishedOn: Date? = nil, author: UserModel.Output? = nil, links: [LinkModel.Output]? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, content: String, category: String, status: String, publishedOn: Date? = nil, author: UserModel.Output? = nil, links: [LinkModel.Output]? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.thumbnail = thumbnail
@@ -60,7 +66,7 @@ struct ProjectModel: Content {
         
         init(entity: ProjectEntity) {
             
-            self.init(id: entity.id, title: entity.title, content: entity.content, category: entity.category, status: SolutionStatus(rawValue: entity.status), publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, title: entity.title, content: entity.content, category: entity.category, status: entity.status, publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)

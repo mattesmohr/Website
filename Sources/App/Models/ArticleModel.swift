@@ -1,19 +1,29 @@
 import Vapor
+import Foundation
 
 struct ArticleModel: Content {
     
-    var output: Output?
-    var categories: [String]?
-    var states: [String]?
+    enum Categories: String, Codable, CaseIterable {
+        case macOS
+        case iOS
+    }
+    
+    enum States: String, Codable, CaseIterable {
+        case published
+        case draft
+        case archived
+    }
+    
+    var output: Self.Output?
     
     struct Input: Content, Validatable {
         
         var thumbnailId: String?
-        var title: String?
+        var title: String
         var excerpt: String?
-        var content: String?
-        var category: String?
-        var status: String?
+        var content: String
+        var category: String
+        var status: String
         var publishedOn: Date?
         var authorId: UUID?
         
@@ -27,23 +37,21 @@ struct ArticleModel: Content {
     
     struct Output: Content {
         
-        var id: UUID?
+        var id: UUID
         var thumbnail: AssetModel.Output?
-        var title: String?
+        var title: String
         var excerpt: String?
-        var content: String?
-        var category: String?
-        var status: ArticleStatus?
+        var content: String
+        var category: String
+        var status: String
         var publishedOn: Date?
         var assets: [AssetModel.Output]?
         var comments: [CommentModel.Output]?
         var author: UserModel.Output?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var createdAt: Date
+        var modifiedAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, thumbnail: AssetModel.Output? = nil, title: String? = nil, excerpt: String? = nil, content: String? = nil, category: String? = nil, status: ArticleStatus? = nil, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String? = nil, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.thumbnail = thumbnail
@@ -62,7 +70,7 @@ struct ArticleModel: Content {
         
         init(entity: ArticleEntity) {
             
-            self.init(id: entity.id, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: ArticleStatus(rawValue: entity.status), publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)

@@ -62,7 +62,8 @@ final class ArticleEntity: Model {
     }
     
     convenience init(input: ArticleModel.Input) {
-        self.init(title: input.title!, excerpt: input.excerpt, content: input.content!, category: input.category!, status: input.status!, publishedOn: input.publishedOn, authorId: input.authorId!)
+        
+        self.init(title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
             self.$thumbnail.id = UUID(uuidString: thumbnailId)

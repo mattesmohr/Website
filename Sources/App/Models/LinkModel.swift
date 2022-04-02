@@ -4,25 +4,24 @@ struct LinkModel: Content {
     
     struct Input: Content, Validatable {
         
-        var title: String?
-        var url: String?
+        var title: String
+        var url: String
         
         static func validations(_ validations: inout Validations) {
-            validations.add("email", as: String.self, is: !.empty)
+            validations.add("title", as: String.self, is: !.empty)
+            validations.add("url", as: String.self, is: !.empty)
         }
     }
     
     struct Output: Content {
         
-        var id: UUID?
-        var title: String?
-        var url: String?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var id: UUID
+        var title: String
+        var url: String
+        var createdAt: Date
+        var modifiedAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, title: String? = nil, url: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, title: String, url: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.title = title
@@ -33,7 +32,7 @@ struct LinkModel: Content {
         
         init(entity: LinkEntity) {
             
-            self.init(id: entity.id, createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, title: entity.title, url: entity.url, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }
     }
 }

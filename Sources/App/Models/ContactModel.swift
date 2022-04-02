@@ -4,10 +4,10 @@ struct ContactModel: Content {
     
     struct Input: Content, Validatable {
         
-        var firstName: String?
-        var lastName: String?
-        var email: String?
-        var message: String?
+        var firstName: String
+        var lastName: String
+        var email: String
+        var message: String
         
         static func validations(_ validations: inout Validations) {
             validations.add("firstname", as: String.self, is: !.empty)
@@ -19,17 +19,15 @@ struct ContactModel: Content {
     
     struct Output: Content {
         
-        var id: UUID?
-        var firstName: String?
-        var lastName: String?
-        var message: String?
-        var email: String?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var id: UUID
+        var firstName: String
+        var lastName: String
+        var email: String
+        var message: String
+        var createdAt: Date
+        var modifiedAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, message: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, firstName: String, lastName: String, email: String, message: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.firstName = firstName
@@ -42,7 +40,7 @@ struct ContactModel: Content {
         
         init(entity: ContactEntity) {
             
-            self.init(id: entity.id, firstName: entity.firstName, lastName: entity.lastName, email: entity.email, message: entity.message, createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, firstName: entity.firstName, lastName: entity.lastName, email: entity.email, message: entity.message, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }
     }
 }

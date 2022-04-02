@@ -28,18 +28,19 @@ final class CredentialEntity: Model {
     
     init() {}
     
-    init(id: UUID? = nil, password: String, role: CredentialRole, status: CredentialStatus, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, password: String, role: String, status: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.password = password
-        self.role = role.rawValue
-        self.status = status.rawValue
+        self.role = role
+        self.status = status
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
     }
     
     convenience init(input: CredentialModel.Input) {
-        self.init(password: input.password!, role: input.role!, status: input.status!)
+        
+        self.init(password: input.password, role: input.role, status: input.status)
     }
 }
 

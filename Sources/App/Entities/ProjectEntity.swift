@@ -59,7 +59,7 @@ final class ProjectEntity: Model {
     
     convenience init(input: ProjectModel.Input) {
         
-        self.init(title: input.title!, content: input.content!, category: input.category!, status: input.status!, publishedOn: input.publishedOn, authorId: input.authorId!)
+        self.init(title: input.title, content: input.content, category: input.category, status: input.status, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
             self.$thumbnail.id = UUID(uuidString: thumbnailId)

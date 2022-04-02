@@ -11,8 +11,8 @@ final class ReportEntity: Model {
     @Field(key: "uri")
     var uri: String
     
-    @Field(key: "count")
-    var count: Int
+    @OptionalField(key: "count")
+    var count: Int?
     
     @Timestamp(key: "created_at", on: .create)
     var createdAt: Date?
@@ -31,8 +31,9 @@ final class ReportEntity: Model {
         self.modifiedAt = modifiedAt
     }
     
-    convenience init(input: ReportModel) {
-        self.init(id: input.id, uri: input.uri!, count: input.count!)
+    convenience init(input: ReportModel.Input) {
+        
+        self.init(uri: input.uri, count: input.count!)
     }
 }
 

@@ -6,7 +6,7 @@ struct AssetModel: Content {
     
     struct Input: Content, Validatable {
         
-        var title: String?
+        var title: String
         
         static func validations(_ validations: inout Validations) {
             
@@ -16,19 +16,17 @@ struct AssetModel: Content {
     
     struct Output: Content {
         
-        var id: UUID?
-        var title: String?
+        var id: UUID
+        var title: String
         var fileName: String?
         var fileFullName: String?
         var filePath: String?
         var fileExtension: String?
         var fileSize: Double?
-        var modifiedAt: Date?
-        var createdAt: Date?
+        var modifiedAt: Date
+        var createdAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, title: String? = nil, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Double? = nil, modifiedAt: Date? = nil, createdAt: Date? = nil) {
+        init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Double? = nil, modifiedAt: Date, createdAt: Date) {
 
             self.id = id
             self.title = title
@@ -43,7 +41,7 @@ struct AssetModel: Content {
         
         init(entity: AssetEntity) {
             
-            self.init(id: entity.id, title: entity.title, fileName: entity.fileName, fileFullName: entity.fileFullName, filePath: entity.filePath, fileExtension: entity.fileExtension, fileSize: entity.fileSize, modifiedAt: entity.modifiedAt, createdAt: entity.createdAt)
+            self.init(id: entity.id!, title: entity.title, fileName: entity.fileName, fileFullName: entity.fileFullName, filePath: entity.filePath, fileExtension: entity.fileExtension, fileSize: entity.fileSize, modifiedAt: entity.modifiedAt!, createdAt: entity.createdAt!)
         }
     }
 }

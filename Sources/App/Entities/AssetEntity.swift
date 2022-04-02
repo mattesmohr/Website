@@ -63,6 +63,7 @@ final class AssetEntity: Model {
     }
     
     convenience init(input: AssetModel.Input) {
-        self.init(title: input.title!)
+        
+        self.init(title: input.title)
     }
 }

@@ -4,8 +4,8 @@ struct CommentModel: Content {
     
     struct Input: Content, Validatable {
         
-        var name: String?
-        var content: String?
+        var name: String
+        var content: String
         
         static func validations(_ validations: inout Validations) {
             validations.add("name", as: String.self, is: !.empty)
@@ -15,16 +15,14 @@ struct CommentModel: Content {
     
     struct Output: Content {
         
-        var id: UUID?
+        var id: UUID
         var avatar: AssetModel.Output?
-        var name: String?
-        var content: String?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var name: String
+        var content: String
+        var createdAt: Date
+        var modifiedAt: Date
         
-        init() {}
-        
-        init(id: UUID? = nil, avatar: AssetModel.Output? = nil, name: String? = nil, content: String? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, avatar: AssetModel.Output? = nil, name: String, content: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar
@@ -36,7 +34,7 @@ struct CommentModel: Content {
         
         init(entity: CommentEntity) {
             
-            self.init(id: entity.id, avatar: AssetModel.Output(entity: entity.avatar!), name: entity.name, content: entity.content, createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, avatar: AssetModel.Output(entity: entity.avatar!), name: entity.name, content: entity.content, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }
     }
 }

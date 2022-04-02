@@ -2,19 +2,16 @@ import Vapor
 
 struct ResetModel: Content {
     
-    var email: String?
-    
-    init() {}
-    
-    init(email: String? = nil) {
+    struct Input: Content, Validatable {
         
-        self.email = email
-    }
-}
-
-extension ResetModel: Validatable {
-    
-    static func validations(_ validations: inout Validations) {
-        validations.add("email", as: String.self, is: .email)
+        var email: String
+        
+        init(email: String) {
+            self.email = email
+        }
+        
+        static func validations(_ validations: inout Validations) {
+            validations.add("email", as: String.self, is: .email)
+        }
     }
 }

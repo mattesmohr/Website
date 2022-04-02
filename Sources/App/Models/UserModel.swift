@@ -19,25 +19,20 @@ struct UserModel: Content {
     
     struct Output: Content, SessionAuthenticatable {
         
-        var id: UUID?
+        var id: UUID
         var avatar: AssetModel.Output?
         var email: String
         var firstName: String?
         var lastName: String?
         var description: String?
         var credential: CredentialModel.Output?
-        var createdAt: Date?
-        var modifiedAt: Date?
+        var createdAt: Date
+        var modifiedAt: Date
         var sessionID: String {
             self.email
         }
         
-        init(email: String) {
-            
-            self.email = email
-        }
-        
-        init(id: UUID? = nil, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, credential: CredentialModel.Output? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, credential: CredentialModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar
@@ -52,7 +47,7 @@ struct UserModel: Content {
         
         init(entity: UserEntity) {
             
-            self.init(id: entity.id, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, description: entity.description, createdAt: entity.createdAt, modifiedAt: entity.modifiedAt)
+            self.init(id: entity.id!, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, description: entity.description, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             
             if let avatar = entity.avatar {
                 self.avatar = AssetModel.Output(entity: avatar)

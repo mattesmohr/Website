@@ -14,7 +14,7 @@ final class LinkEntity: Model {
     @Field(key: "url")
     var url: String
     
-    @Parent(key: "solution_id")
+    @Parent(key: "project_id")
     var solution: ProjectEntity
     
     @Timestamp(key: "created_at", on: .create)
@@ -36,6 +36,6 @@ final class LinkEntity: Model {
     
     convenience init(input: LinkModel.Input) {
         
-        self.init(title: input.title!, url: input.url!)
+        self.init(title: input.title, url: input.url)
     }
 }

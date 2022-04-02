@@ -41,6 +41,6 @@ final class ContactEntity: Model {
     
     convenience init(input: ContactModel.Input) {
         
-        self.init(firstName: input.firstName!, lastName: input.lastName!, email: input.email!, message: input.message!)
+        self.init(firstName: input.firstName, lastName: input.lastName, email: input.email, message: input.message)
     }
 }

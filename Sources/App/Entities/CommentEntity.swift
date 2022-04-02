@@ -40,6 +40,6 @@ final class CommentEntity: Model {
     
     convenience init(input: CommentModel.Input) {
         
-        self.init(name: input.name!, content: input.content!)
+        self.init(name: input.name, content: input.content)
     }
 }
