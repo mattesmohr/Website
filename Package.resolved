@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/swift-server/async-http-client.git",
         "state": {
           "branch": null,
-          "revision": "cbf533073d9a5edfb16c266d14151f69137ba7c9",
-          "version": "1.8.2"
+          "revision": "7a4dfe026f6ee0f8ad741b58df74c60af296365d",
+          "version": "1.9.0"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/vapor/fluent-kit.git",
         "state": {
           "branch": null,
-          "revision": "d5273e8d050c51dd7e1d3a4dab08fe32ec9ffffa",
-          "version": "1.20.0"
+          "revision": "9c7fbdc931ef6afa2dcd45edf253d25cadbbd5fc",
+          "version": "1.22.0"
         }
       },
       {
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/mattesmohr/HTMLKit-Components.git",
         "state": {
           "branch": "main",
-          "revision": "999dddecd3f8759f4d066156994a26700d9cd8ba",
+          "revision": "c97108aaddf032764df0c480a50e2b06ee015db1",
           "version": null
         }
       },
@@ -186,8 +186,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "51c3fc2e4a0fcdf4a25089b288dd65b73df1b0ef",
-          "version": "2.37.0"
+          "revision": "154f1d32366449dcccf6375a173adf4ed2a74429",
+          "version": "2.38.0"
         }
       },
       {
@@ -204,8 +204,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio-http2.git",
         "state": {
           "branch": null,
-          "revision": "6e94a7be32891d1b303a3fcfde8b5bf64d162e74",
-          "version": "1.19.1"
+          "revision": "000ca94f9de92c95b9ac85d44600b7b0fe25a3e5",
+          "version": "1.19.2"
         }
       },
       {
@@ -231,8 +231,8 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "18e9419cae5049e43ca1e8002ca3cf0449f2c8ed",
-          "version": "4.55.0"
+          "revision": "e0fd4f3d76469dd6a0efb2be5c0b2f96b7581187",
+          "version": "4.55.1"
         }
       },
       {

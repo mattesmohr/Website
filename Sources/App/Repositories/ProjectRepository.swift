@@ -24,7 +24,10 @@ final class ProjectRepository {
     func find() -> EventLoopFuture<[ProjectEntity]> {
         
         return ProjectEntity.query(on: database)
+            .with(\.$thumbnail)
             .with(\.$author)
+            .with(\.$links)
+            .with(\.$assets)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
@@ -32,7 +35,10 @@ final class ProjectRepository {
     func page(index: Int, with items: Int) -> EventLoopFuture<[ProjectEntity]> {
         
         return ProjectEntity.query(on: database)
+            .with(\.$thumbnail)
             .with(\.$author)
+            .with(\.$links)
+            .with(\.$assets)
             .paginate(PageRequest(page: index, per: items))
             .map { page in
                 return page.items

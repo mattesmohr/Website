@@ -24,7 +24,10 @@ final class ArticleRepository {
     func find() -> EventLoopFuture<[ArticleEntity]> {
         
         return ArticleEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$assets)
             .with(\.$author)
+            .with(\.$comments)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
@@ -32,7 +35,10 @@ final class ArticleRepository {
     func page(index: Int, with items: Int) -> EventLoopFuture<[ArticleEntity]> {
         
         return ArticleEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$assets)
             .with(\.$author)
+            .with(\.$comments)
             .paginate(PageRequest(page: index, per: items))
             .map {
                 return $0.items
