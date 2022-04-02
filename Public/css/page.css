@@ -1,81 +1,74 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:300,400,700,900');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,600,700');
 
 * {
-    
     margin: 0;
     padding: 0;
     box-sizing: border-box
 }
 
-a {
-    
-    color: #FFFFFF
+html {
 }
 
-html {
-    
-    min-height: 100vh;
-    
-    font-family: 'Inter', sans-serif;
-    font-size: 100%;
-    font-weight: 300;
-    line-height: 2.2em;
-    color: #FFFFFF
-}
+/*
+ page
+ */
 
 body {
-    
     min-height: 100vh;
-    
     display: flex;
     flex-direction: column;
-    
-    background-color: #0C0C0F
+    background-color: #FFFFFF;
 }
+
+/*
+ page header
+ */
 
 body > header {
-    
-    font-size: 1.0rem;
-    color: #9CA7B2;
-    
-    background-color: #0C0C0F;
-    border-bottom: 1px solid #202024
+    height: 10%;
+    padding: 10px 25px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E5F0F5;
 }
+
+/*
+ page content
+ */
 
 body > main {
-    
+    padding: 10px 150px;
     display: flex;
     flex-direction: column;
-    
     flex-grow: 1
 }
+
+
+body > main > header {
+    padding: 10px 25px;
+}
+
+body > main > section {
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+body > main > footer {
+    padding: 10px 25px;
+}
+
+/*
+ page footer
+ */
 
 body > footer {
-    
-    font-size: 1.0rem;
+    padding: 10px 25px;
     color: #9CA7B2;
-    
-    background-color: #0C0C0F;
-    border-top: 1px solid #202024
-}
-
-main > header {
-}
-
-main > section {
-    
-    display: flex;
-    flex-direction: column;
-    
-    flex-grow: 1
-}
-
-main > footer {
+    background-color: #FAFCFD;
+    border-top: 1px solid #E5F0F5;
 }
 
 #nav1, #nav2, #nav3 {
-    
     display: none;
 }

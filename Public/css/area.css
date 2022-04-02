@@ -1,113 +1,129 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:300,400,700,900');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,600,700');
 
 * {
-    
     margin: 0;
     padding: 0;
     box-sizing: border-box
 }
 
-a {
-    
-    color: #000000;
-}
-
 html {
-
-    max-height: 100vh;
-    height: 100%;
-    
-    font-family: 'Inter', sans-serif;
-    font-size: 100%;
-    font-weight: 400;
-    line-height: 2.2em;
-    color: #000000;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
+
+/*
+ page
+ */
 
 body {
-    
-    min-height: 100vh;
-    
+    height: 100%;
     display: flex;
     flex-direction: column;
-    
-    background-color: #FFFFFF
+    background-color: #FFFFFF;
 }
+
+/*
+ page header
+ */
 
 body > header {
-    
-    height: 63px;
-    
-    font-size: 1.0rem;
-    color: #9CA7B2;
-    
+    height: 10%;
+    padding: 10px 25px;
     background-color: #FFFFFF;
-    border-bottom: 1px solid #E5F0F5
+    border-bottom: 1px solid #E5F0F5;
 }
 
+/*
+ page content
+ */
+
 body > main {
-    
+    height: 90%;
     display: flex;
     flex-direction: row;
-    
     flex-grow: 1;
 }
 
+/*
+ page aside
+ */
+
 body > main > aside {
-    
-    width: 10%;
-    
+    width: 15%;
     display: flex;
     flex-direction: column;
-    
     background-color: #FAFCFD;
     border-right: 1px solid #E5F0F5;
 }
 
+/*
+ aside content
+ */
+
 body > main > aside > section {
-    
     flex-grow: 1;
+    padding: 10px 25px;
 }
 
+/*
+ aside footer
+ */
+
 body > main > aside > footer {
-    
-    height: 63px;
-    
+    padding: 10px 25px;
     border-top: 1px solid #E5F0F5;
 }
 
+/*
+ content
+ */
+
 body > main > section {
-    
-    width: 90%;
-    
+    width: 85%;
+    height: 100%;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-columns: 85% 15%;
+    grid-template-columns: 77% 23%;
     grid-template-areas: "header aside"
                          "section aside"
                          "footer aside";
+    overflow-y: scroll;
 }
+
+/*
+ content header
+ */
 
 body > main > section > header {
-    
     grid-area: header;
+    padding: 10px 25px;
 }
+
+/*
+ content content
+ */
 
 body > main > section > section {
-    
     grid-area: section;
+    padding: 10px 25px;
 }
 
+/*
+ content aside
+ */
+
 body > main > section > aside {
-    
     grid-area: aside;
-    
+    padding: 10px 25px;
     border-left: 1px solid #E5F0F5;
 }
 
+/*
+ content footer
+ */
+
 body > main > section > footer {
-    
     grid-area: footer;
+    padding: 10px 25px;
 }
