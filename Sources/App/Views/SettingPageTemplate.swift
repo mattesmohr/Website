@@ -17,11 +17,13 @@ enum SettingPageTemplate {
                                 context.view.title
                             }
                             .fontSize(.medium)
+                            .foregroundColor(.white)
                             Text {
                                 "Lorem ipsum"
                             }
                             .fontSize(.large)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                     }
                 }
@@ -31,6 +33,7 @@ enum SettingPageTemplate {
                             Text {
                                 "Lorem ipsum"
                             }
+                            .foregroundColor(.white)
                         }
                     }
                 }

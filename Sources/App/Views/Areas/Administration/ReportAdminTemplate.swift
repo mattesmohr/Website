@@ -12,12 +12,14 @@ enum ReportAdminTemplate {
             AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
+                        }
+                        StackColumn(size: .six) {
                         }
                     }
                 }

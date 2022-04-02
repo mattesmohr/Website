@@ -79,6 +79,9 @@ public struct AreaViewContainer: Page {
                         }
                     }
                     Footer {
+                        Link(destination: "/area/login/logout") {
+                            "Log out"
+                        }
                     }
                 }
                 Section {
@@ -88,4 +91,3 @@ public struct AreaViewContainer: Page {
         }
     }
 }
-

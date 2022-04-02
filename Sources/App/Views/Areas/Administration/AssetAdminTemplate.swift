@@ -12,12 +12,22 @@ enum AssetAdminTemplate {
             AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
+                        }
+                        StackColumn(size: .six) {
+                            ActionButton(destination: "/area/admin/assets/create") {
+                                Symbol(name: "file-earmark-plus")
+                                Text {
+                                    "Create"
+                                }
+                            }
+                            .buttonStyle(.primary)
+                            .borderShape(.smallrounded)
                         }
                     }
                 }
@@ -70,7 +80,11 @@ enum AssetAdminTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }
@@ -120,7 +134,11 @@ enum AssetAdminTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }

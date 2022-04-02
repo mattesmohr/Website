@@ -8,22 +8,95 @@ enum ArticleAdminTemplate {
 
         @TemplateValue(IndexContext<ArticleModel.Output>.self) var context
         
-        public var body: AnyContent {
+        var body: AnyContent {
             AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
                         }
+                        StackColumn(size: .six) {
+                            ActionButton(destination: "/area/admin/articles/create") {
+                                Symbol(name: "file-earmark-plus")
+                                Text {
+                                    "Create"
+                                }
+                            }
+                            .buttonStyle(.primary)
+                            .borderShape(.smallrounded)
+                        }
                     }
                 }
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
+                            List(direction: .vertical) {
+                                ListRow {
+                                    HStack {
+                                        StackColumn(size: .four) {
+                                            Text {
+                                                "Title"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Category"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Status"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Date"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Action"
+                                            }
+                                        }
+                                    }
+                                }
+                                ForEach(in: context.items) { item in
+                                    ListRow {
+                                        HStack {
+                                            StackColumn(size: .four) {
+                                                Text {
+                                                    item.title
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.category
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.status
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Link(destination: "/area/admin/articles/edit") {
+                                                    "Edit"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .listStyle(.grouped)
                         }
                     }
                 }
@@ -41,7 +114,7 @@ enum ArticleAdminTemplate {
     
     struct CreateView: View {
      
-        @TemplateValue(CreateContext<ArticleModel>.self)  var context
+        @TemplateValue(CreateContext<ArticleModel.Output>.self)  var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -89,8 +162,38 @@ enum ArticleAdminTemplate {
                                     }
                                 }
                                 HStack {
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "category") {
+                                            "Category"
+                                        }
+                                        SelectField(name: "category") {
+                                            ForEach(in: ArticleModel.Categories.allCases) { category in
+                                                Option {
+                                                    category.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "status") {
+                                            "Status"
+                                        }
+                                        SelectField(name: "status") {
+                                            ForEach(in: ArticleModel.States.allCases) { state in
+                                                Option {
+                                                    state.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }
@@ -111,7 +214,7 @@ enum ArticleAdminTemplate {
     
     struct EditView: View {
         
-        @TemplateValue(EditContext<ArticleModel>.self) var context
+        @TemplateValue(EditContext<ArticleModel.Output>.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -159,8 +262,38 @@ enum ArticleAdminTemplate {
                                     }
                                 }
                                 HStack {
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "category") {
+                                            "Category"
+                                        }
+                                        SelectField(name: "category") {
+                                            ForEach(in: ArticleModel.Categories.allCases) { category in
+                                                Option {
+                                                    category.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "status") {
+                                            "Status"
+                                        }
+                                        SelectField(name: "status") {
+                                            ForEach(in: ArticleModel.States.allCases) { state in
+                                                Option {
+                                                    state.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }
@@ -179,3 +312,5 @@ enum ArticleAdminTemplate {
         }
     }
 }
+
+extension ForEach: InputElement {}

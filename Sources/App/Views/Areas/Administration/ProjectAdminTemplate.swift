@@ -12,22 +12,93 @@ enum ProjectAdminTemplate {
             AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
                         }
+                        StackColumn(size: .six) {
+                            ActionButton(destination: "/area/admin/projects/create") {
+                                Symbol(name: "file-earmark-plus")
+                                Text {
+                                    "Create"
+                                }
+                            }
+                            .buttonStyle(.primary)
+                            .borderShape(.smallrounded)
+                        }
                     }
                 }
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
+                            List(direction: .vertical) {
+                                ListRow {
+                                    HStack {
+                                        StackColumn(size: .four) {
+                                            Text {
+                                                "Title"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Category"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Status"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Date"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Action"
+                                            }
+                                        }
+                                    }
+                                }
+                                ForEach(in: context.items) { item in
+                                    ListRow {
+                                        HStack {
+                                            StackColumn(size: .four) {
+                                                Text {
+                                                    item.title
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.category
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.status
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Link(destination: "/area/admin/projects/edit") {
+                                                    "Edit"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .listStyle(.grouped)
                         }
                     }
-                }
-                Aside {
                 }
                 Footer {
                     HStack {
@@ -41,7 +112,7 @@ enum ProjectAdminTemplate {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext<ProjectModel>.self) var context
+        @TemplateValue(CreateContext<ProjectModel.Output>.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -79,8 +150,40 @@ enum ProjectAdminTemplate {
                                     }
                                 }
                                 HStack {
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "category") {
+                                            "Category"
+                                        }
+                                        SelectField(name: "category") {
+                                            ForEach(in: ProjectModel.Categories.allCases) { category in
+                                                Option {
+                                                    category.rawValue
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "status") {
+                                            "Status"
+                                        }
+                                        SelectField(name: "status") {
+                                            ForEach(in: ProjectModel.States.allCases) { state in
+                                                Option {
+                                                    state.rawValue
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                                HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }
@@ -101,7 +204,7 @@ enum ProjectAdminTemplate {
     
     struct EditView: View {
      
-        @TemplateValue(EditContext<ProjectModel>.self) var context
+        @TemplateValue(EditContext<ProjectModel.Output>.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -139,8 +242,38 @@ enum ProjectAdminTemplate {
                                     }
                                 }
                                 HStack {
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "category") {
+                                            "Category"
+                                        }
+                                        SelectField(name: "category") {
+                                            ForEach(in: ProjectModel.Categories.allCases) { category in
+                                                Option {
+                                                    category.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                    StackColumn(size: .six) {
+                                        FieldLabel(for: "status") {
+                                            "Status"
+                                        }
+                                        SelectField(name: "status") {
+                                            ForEach(in: ProjectModel.States.allCases) { state in
+                                                Option {
+                                                    state.rawValue
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }

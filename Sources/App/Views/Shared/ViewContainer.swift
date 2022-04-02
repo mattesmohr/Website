@@ -19,8 +19,9 @@ public struct ViewContainer: Page {
                             "mattesmohr"
                         }
                         .fontSize(.medium)
+                        .foregroundColor(.black)
                     }
-                    StackColumn(size: .six) {
+                    StackColumn(size: .six, alignment: .right) {
                             List(direction: .horizontal) {
                                 ListRow {
                                     Link(destination: "/home/index") {
@@ -239,12 +240,7 @@ public struct ViewContainer: Page {
                     }
                 }
                 HStack {
-                    StackColumn(size: .eight) {
-                        Paragraph {
-                            "&copy; 2021"
-                        }
-                    }
-                    StackColumn(size: .four) {
+                    StackColumn(size: .four, offset: .eight) {
                         List(direction: .horizontal) {
                             ListRow {
                                 Link(destination: "/settings/index") {

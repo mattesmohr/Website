@@ -17,11 +17,13 @@ enum ImpressumPageTemplate {
                                 context.view.title
                             }
                             .fontSize(.medium)
+                            .foregroundColor(.white)
                             Text {
                                 "Lorem ipsum"
                             }
                             .fontSize(.large)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                     }
                 }
@@ -31,6 +33,7 @@ enum ImpressumPageTemplate {
                             Text {
                                 "Lorem ipsum"
                             }
+                            .foregroundColor(.white)
                         }
                     }
                 }

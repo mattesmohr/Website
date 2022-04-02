@@ -12,18 +12,91 @@ enum UserAdminTemplate {
             AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
                         }
+                        StackColumn(size: .six) {
+                            ActionButton(destination: "/area/admin/users/create") {
+                                Symbol(name: "person-plus")
+                                Text {
+                                    "Create"
+                                }
+                            }
+                            .buttonStyle(.primary)
+                            .borderShape(.smallrounded)
+                        }
                     }
                 }
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
+                            List(direction: .vertical) {
+                                ListRow {
+                                    HStack {
+                                        StackColumn(size: .four) {
+                                            Text {
+                                                "Email"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Firstname"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Lastname"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Date"
+                                            }
+                                        }
+                                        StackColumn(size: .two) {
+                                            Text {
+                                                "Action"
+                                            }
+                                        }
+                                    }
+                                }
+                                ForEach(in: context.items) { item in
+                                    ListRow {
+                                        HStack {
+                                            StackColumn(size: .four) {
+                                                Text {
+                                                    item.email
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.firstName
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.lastName
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Text {
+                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                }
+                                            }
+                                            StackColumn(size: .two) {
+                                                Link(destination: "/area/admin/users/edit") {
+                                                    "Edit"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .listStyle(.grouped)
                         }
                     }
                 }
@@ -93,7 +166,11 @@ enum UserAdminTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }
@@ -165,7 +242,11 @@ enum UserAdminTemplate {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton(label: "Submit")
+                                        SubmitButton {
+                                            "Submit"
+                                        }
+                                        .buttonStyle(.primary)
+                                        .borderShape(.smallrounded)
                                     }
                                 }
                             }

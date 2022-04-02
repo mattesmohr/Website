@@ -87,7 +87,10 @@ enum ConnectPageTemplate {
                                     }
                                 }
                                 Footer {
-                                    SubmitButton(label: "Submit")
+                                    SubmitButton {
+                                        "Submit"
+                                    }
+                                    .buttonStyle(.primary)
                                 }
                             }
                         }

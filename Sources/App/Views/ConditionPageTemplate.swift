@@ -16,12 +16,14 @@ enum ConditionPageTemplate {
                             Text {
                                 context.view.title
                             }
-                            .fontWeight(.medium)
+                            .fontSize(.medium)
+                            .foregroundColor(.white)
                             Text {
                                 "Lorem ipsum..."
                             }
                             .fontSize(.large)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                         StackColumn(size: .six) {
                             List(direction: .horizontal) {

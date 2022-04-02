@@ -17,11 +17,13 @@ enum PrivacyPageTemplate {
                                 context.view.title
                             }
                             .fontSize(.medium)
+                            .foregroundColor(.white)
                             Text {
                                 "Lorem ipsum"
                             }
                             .fontSize(.large)
                             .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                     }
                 }
