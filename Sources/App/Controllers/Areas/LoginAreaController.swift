@@ -30,14 +30,14 @@ final class LoginAreaController {
     // [/register/:model]
     func postRegister(_ request: Request) throws -> EventLoopFuture<Response> {
         
-        try RegisterModel.validate(content: request)
+        try RegisterModel.Input.validate(content: request)
         
-        let model = try request.content.decode(RegisterModel.self)
+        let model = try request.content.decode(RegisterModel.Input.self)
         
-        let digest = try request.password.hash(model.password!)
+        let digest = try request.password.hash(model.password)
         
         return CredentialRepository(database: request.db)
-            .insert(entity: CredentialEntity(password: digest, role: .administrator, status: .unlocked), with: UserEntity(email: model.email!))
+            .insert(entity: CredentialEntity(password: digest, role: CredentialModel.Roles.administrator.rawValue, status: CredentialModel.States.unlocked.rawValue), with: UserEntity(email: model.email))
             .map { _ in
                 return request.redirect(to: "/area/login/login")
             }
@@ -50,7 +50,7 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return LoginAreaTemplate.IndexView()
+        return LoginAreaTemplate.LoginView()
             .render(with: EmptyContext(
                 view: ViewMetadata(title: "Register account"),
                 route: RouteMetadata(route: route)),
@@ -60,16 +60,16 @@ final class LoginAreaController {
     // [/login/:model]
     func postLogin(_ request: Request) throws -> EventLoopFuture<Response> {
         
-        try LoginModel.validate(content: request)
+        try LoginModel.Input.validate(content: request)
         
-        let model = try request.content.decode(LoginModel.self)
+        let model = try request.content.decode(LoginModel.Input.self)
         
         return UserRepository(database: request.db)
-            .find(name: model.email!)
+            .find(name: model.email)
             .unwrap(or: Abort(.notFound))
             .map { entity in
                 
-                if try! request.password.verify(model.password!, created: entity.credential!.password) {
+                if try! request.password.verify(model.password, created: entity.credential!.password) {
                 
                     let model = UserModel.Output(entity: entity)
                 
@@ -102,11 +102,12 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("/area/login/reset", CreateContext(
-            view: ViewMetadata(title: "Reset password"),
-            item: ResetModel(),
-            route: RouteMetadata(route: route)
-        ))
+        return LoginAreaTemplate.ResetView()
+            .render(with: CreateContext(
+                view: ViewMetadata(title: "Reset"),
+                item: ResetModel(),
+                route: RouteMetadata(route: route)),
+            for: request)
     }
     
     // [/reset/:model]

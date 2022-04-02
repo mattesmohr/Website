@@ -47,7 +47,6 @@ final class AssetAdminController {
         return AssetAdminTemplate.CreateView()
             .render(with: CreateContext(
                 view: ViewMetadata(title: "Create asset"),
-                item: AssetModel(),
                 identity: IdentityMetadata(user: user),
                 route: RouteMetadata(route: route)),
             for: request)

@@ -6,7 +6,7 @@ final class ArticleAdminController {
 
     // [/index/:id]
     func getIndex(_ request: Request) throws -> EventLoopFuture<View> {
-        
+
         guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
             throw Abort(.badRequest)
         }
@@ -44,15 +44,9 @@ final class ArticleAdminController {
             throw Abort(.unauthorized)
         }
         
-        let model = ArticleModel(
-            categories: ["iOS", "macOS", "padOS"],
-            states: ["published", "draft", "archived"]
-        )
-        
         return ArticleAdminTemplate.CreateView()
             .render(with: CreateContext(
                 view: ViewMetadata(title: "Create article"),
-                item: model,
                 identity: IdentityMetadata(user: user),
                 route: RouteMetadata(route: route)),
             for: request)
@@ -88,18 +82,11 @@ final class ArticleAdminController {
             .find(id: id)
             .unwrap(or: Abort(.notFound))
             .flatMapThrowing { entity in
-                
-                let model = ArticleModel(
-                    
-                    output: ArticleModel.Output(entity: entity),
-                    categories: ["iOS", "macOS", "padOS"],
-                    states: ["published", "draft", "archived"]
-                )
-                
+
                 return ArticleAdminTemplate.EditView()
                     .render(with: EditContext(
                         view: ViewMetadata(title: "Edit article"),
-                        item: model,
+                        item: ArticleModel.Output(entity: entity),
                         identity: IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
                     for: request)

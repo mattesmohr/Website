@@ -39,11 +39,12 @@ final class ProjectsPageController {
             .unwrap(or: Abort(.notFound))
             .flatMap { entity in
                 
-                return request.view.render("/projects/show", ShowContext(
-                    view: ViewMetadata(title: "Project"),
-                    item: ProjectModel.Output(entity: entity),
-                    route: RouteMetadata(route: route)
-                ))
+                return ProjectPageTemplate.ShowView()
+                    .render(with: ShowContext(
+                        view: ViewMetadata(title: "Project"),
+                        item: ProjectModel.Output(entity: entity),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
     }
 }

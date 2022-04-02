@@ -30,7 +30,7 @@ final class ArticlesPageController {
     // [/show]
     func getShow(_ request: Request) throws -> EventLoopFuture<View> {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
             throw Abort(.badRequest)
         }
         
@@ -38,10 +38,13 @@ final class ArticlesPageController {
             .find(id: id)
             .unwrap(or: Abort(.notFound))
             .flatMap { entity in
-            
-                let model = ArticleModel.Output(entity: entity)
                 
-                return request.view.render("/articles/show", model)
+                return ArticlePageTemplate.ShowView()
+                    .render(with: ShowContext(
+                        view: ViewMetadata(title: "Article"),
+                        item: ArticleModel.Output(entity: entity),
+                        route: RouteMetadata(route: route)),
+                    for: request)
             }
     }
 }

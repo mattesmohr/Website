@@ -44,15 +44,9 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        let model = ProjectModel(
-            categories: ["ios"],
-            states: ["published", "confidential"]
-        )
-        
         return ProjectAdminTemplate.CreateView()
             .render(with: CreateContext(
                 view: ViewMetadata(title: "Create project"),
-                item: model,
                 identity: IdentityMetadata(user: user),
                 route: RouteMetadata(route: route)),
             for: request)
@@ -89,17 +83,10 @@ final class ProjectAdminController {
             .unwrap(or: Abort(.notFound))
             .flatMapThrowing { entity in
                 
-                let model = ProjectModel(
-                
-                    output: ProjectModel.Output(entity: entity),
-                    categories: ["iOS", "macOS", "padOS"],
-                    states: ["published", "draft", "archived"]
-                )
-                
                 return ProjectAdminTemplate.EditView()
                     .render(with: EditContext(
                         view: ViewMetadata(title: "Edit project"),
-                        item: model,
+                        item: ProjectModel.Output(entity: entity),
                         identity:  IdentityMetadata(user: user),
                         route: RouteMetadata(route: route)),
                     for: request)

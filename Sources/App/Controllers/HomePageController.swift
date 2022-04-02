@@ -10,7 +10,6 @@ final class HomePageController {
             throw Abort(.badRequest)
         }
     
-        
         return HomePageTemplate.IndexView()
             .render(with: EmptyContext(
                 view: ViewMetadata(title: "Home"),
