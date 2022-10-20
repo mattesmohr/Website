@@ -3,8 +3,9 @@
 /Packages
 /*.xcodeproj
 xcuserdata/
+/.swiftpm
 DerivedData/
-.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+Package.resolved
 .env
 .env.development
 .env.testing
