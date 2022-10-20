@@ -21,7 +21,6 @@ enum ArticleAdminTemplate {
                         }
                         StackColumn(size: .six) {
                             ActionButton(destination: "/area/admin/articles/create") {
-                                Symbol(name: "file-earmark-plus")
                                 Text {
                                     "Create"
                                 }
@@ -114,7 +113,7 @@ enum ArticleAdminTemplate {
     
     struct CreateView: View {
      
-        @TemplateValue(CreateContext<ArticleModel.Output>.self)  var context
+        @TemplateValue(CreateContext.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -132,7 +131,7 @@ enum ArticleAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -232,7 +231,7 @@ enum ArticleAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -312,5 +311,3 @@ enum ArticleAdminTemplate {
         }
     }
 }
-
-extension ForEach: InputElement {}

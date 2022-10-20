@@ -1,8 +1,8 @@
-import Foundation
-import Vapor
 import Fluent
 import FluentMySQLDriver
-import HTMLKit
+import Foundation
+import HTMLKitVaporProvider
+import Vapor
 
 public func configure(_ app: Application) throws {
     
@@ -17,6 +17,10 @@ public func configure(_ app: Application) throws {
     app.sessions.use(.memory)
     
     app.passwords.use(.bcrypt)
+
+    app.views.use(.htmlkit)
+    
+    app.htmlkit.add(layout: HomePageTemplate.IndexView())
     
     var tls = TLSConfiguration.makeClientConfiguration()
     tls.certificateVerification = .none

@@ -21,7 +21,6 @@ enum ProjectAdminTemplate {
                         }
                         StackColumn(size: .six) {
                             ActionButton(destination: "/area/admin/projects/create") {
-                                Symbol(name: "file-earmark-plus")
                                 Text {
                                     "Create"
                                 }
@@ -112,7 +111,7 @@ enum ProjectAdminTemplate {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext<ProjectModel.Output>.self) var context
+        @TemplateValue(CreateContext.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -130,7 +129,7 @@ enum ProjectAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -222,7 +221,7 @@ enum ProjectAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {

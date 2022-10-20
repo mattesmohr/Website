@@ -11,7 +11,7 @@ public struct PageContainer: Page {
     }
 
     public var body: AnyContent {
-        Document(type: .html5)
+        Document(.html5)
         Html {
             Head {
                 Meta()

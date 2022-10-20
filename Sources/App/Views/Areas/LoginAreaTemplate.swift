@@ -12,7 +12,7 @@ enum LoginAreaTemplate {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        FormContainer {
+                        HTMLKitComponents.Form {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -81,13 +81,14 @@ enum LoginAreaTemplate {
     
     struct RegisterView: View {
 
-        @TemplateValue(CreateContext<RegisterModel>.self) var context
+        @TemplateValue(CreateContext.self)
+        var context
 
         public var body: AnyContent {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        FormContainer {
+                        HTMLKitComponents.Form {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -129,7 +130,6 @@ enum LoginAreaTemplate {
                             HStack {
                                 StackColumn(size: .two) {
                                     ActionButton(destination: "/area/login/login") {
-                                        Symbol(name: "caret-left-fill")
                                     }
                                     .buttonSize(.full)
                                     .buttonStyle(.secondary)
@@ -154,13 +154,14 @@ enum LoginAreaTemplate {
     
     struct ResetView: View {
 
-        @TemplateValue(CreateContext<ResetModel>.self) var context
+        @TemplateValue(CreateContext.self)
+        var context
 
         public var body: AnyContent {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        FormContainer {
+                        HTMLKitComponents.Form {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -186,7 +187,6 @@ enum LoginAreaTemplate {
                             HStack {
                                 StackColumn(size: .two) {
                                     ActionButton(destination: "/area/login/login") {
-                                        Symbol(name: "caret-left-fill")
                                     }
                                     .buttonSize(.full)
                                     .buttonStyle(.secondary)

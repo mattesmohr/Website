@@ -10,11 +10,9 @@ final class SettingsPageController {
             throw Abort(.badRequest)
         }
         
-        return SettingPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Settings"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Settings"),
+            route: RouteMetadata(route: route)))
     }
 }
 

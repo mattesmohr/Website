@@ -15,12 +15,10 @@ final class ReportAdminController {
             throw Abort(.unauthorized)
         }
         
-        return ReportAdminTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Show reports"),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Show reports"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
 }
 

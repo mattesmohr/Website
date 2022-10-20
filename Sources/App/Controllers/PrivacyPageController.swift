@@ -10,11 +10,9 @@ final class PrivacyPageController {
             throw Abort(.badRequest)
         }
         
-        return PrivacyPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Privacy"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Privacy"),
+            route: RouteMetadata(route: route)))
     }
 }
 

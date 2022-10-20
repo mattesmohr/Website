@@ -10,11 +10,9 @@ final class ConditionsPageController {
             throw Abort(.badRequest)
         }
         
-        return ConditionPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Conditions"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Conditions"),
+            route: RouteMetadata(route: route)))
     }
 }
 

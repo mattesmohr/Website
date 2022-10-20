@@ -18,18 +18,13 @@ final class ArticleAdminController {
         return ArticleRepository(database: request.db)
             .page(index: id, with: 10)
             .mapEach(ArticleModel.Output.init)
-            .flatMapThrowing { entities in
+            .flatMap { entities in
                 
-                return ArticleAdminTemplate.IndexView()
-                    .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show articles"),
-                        items: entities,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("IndexView", IndexContext(
+                    view: ViewMetadata(title: "Show articles"),
+                    items: entities,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     
@@ -44,12 +39,10 @@ final class ArticleAdminController {
             throw Abort(.unauthorized)
         }
         
-        return ArticleAdminTemplate.CreateView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Create article"),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("CreateView", CreateContext(
+            view: ViewMetadata(title: "Create article"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
@@ -81,18 +74,13 @@ final class ArticleAdminController {
         return ArticleRepository(database: request.db)
             .find(id: id)
             .unwrap(or: Abort(.notFound))
-            .flatMapThrowing { entity in
-
-                return ArticleAdminTemplate.EditView()
-                    .render(with: EditContext(
-                        view: ViewMetadata(title: "Edit article"),
-                        item: ArticleModel.Output(entity: entity),
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+            .flatMap { entity in
+                
+                return request.view.render("EditView", EditContext(
+                    view: ViewMetadata(title: "Edit article"),
+                    item: ArticleModel.Output(entity: entity),
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     

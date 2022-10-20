@@ -10,11 +10,9 @@ final class ConnectPageController {
             throw Abort(.badRequest)
         }
         
-        return ConnectPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Connect"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Connect"),
+            route: RouteMetadata(route: route)))
     }
     
     // [/index/:model]

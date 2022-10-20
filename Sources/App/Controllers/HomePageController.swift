@@ -9,12 +9,10 @@ final class HomePageController {
         guard let route = request.route else {
             throw Abort(.badRequest)
         }
-    
-        return HomePageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Home"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Home"),
+            route: RouteMetadata(route: route)))
     }
 }
 

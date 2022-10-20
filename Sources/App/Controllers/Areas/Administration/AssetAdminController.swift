@@ -18,18 +18,13 @@ final class AssetAdminController {
         return AssetRepository(database: request.db)
             .page(index: id, with: 10)
             .mapEach(AssetModel.Output.init)
-            .flatMapThrowing { entities in
+            .flatMap { entities in
                 
-                return AssetAdminTemplate.IndexView()
-                    .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show assets"),
-                        items: entities,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("IndexView", IndexContext(
+                    view: ViewMetadata(title: "Show assets"),
+                    items: entities,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     
@@ -44,12 +39,10 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return AssetAdminTemplate.CreateView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Create asset"),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("CreateView", CreateContext(
+            view: ViewMetadata(title: "Create asset"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
@@ -80,23 +73,18 @@ final class AssetAdminController {
         return AssetRepository(database: request.db)
             .find(id: id)
             .unwrap(or: Abort(.notFound))
-            .flatMapThrowing { entity in
+            .flatMap { entity in
                 
                 let model = AssetModel(
                 
                     output: AssetModel.Output(entity: entity)
                 )
                 
-                return AssetAdminTemplate.EditView()
-                    .render(with: EditContext(
-                        view: ViewMetadata(title: "Edit asset"),
-                        item: model,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("EditView", EditContext(
+                    view: ViewMetadata(title: "Edit asset"),
+                    item: model,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     

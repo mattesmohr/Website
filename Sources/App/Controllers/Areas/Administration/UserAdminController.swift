@@ -18,18 +18,13 @@ final class UserAdminController {
         return UserRepository(database: request.db)
             .page(index: id, with: 10)
             .mapEach(UserModel.Output.init)
-            .flatMapThrowing { entities in
+            .flatMap { entities in
                 
-                return UserAdminTemplate.IndexView()
-                    .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show users"),
-                        items: entities,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("IndexView", IndexContext(
+                    view: ViewMetadata(title: "Show users"),
+                    items: entities,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     
@@ -44,13 +39,10 @@ final class UserAdminController {
             throw Abort(.unauthorized)
         }
         
-        return UserAdminTemplate.CreateView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Create user"),
-                item: UserModel(),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("CreateView", CreateContext(
+            view: ViewMetadata(title: "Create user"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
@@ -81,23 +73,18 @@ final class UserAdminController {
         return UserRepository(database: request.db)
             .find(id: id)
             .unwrap(or: Abort(.notFound))
-            .flatMapThrowing { entity in
+            .flatMap { entity in
                 
                 let model = UserModel(
                     
                     output: UserModel.Output(entity: entity)
                 )
                 
-                return UserAdminTemplate.EditView()
-                    .render(with: EditContext(
-                        view: ViewMetadata(title: "Edit user"),
-                        item: model,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("EditView", EditContext(
+                    view: ViewMetadata(title: "Edit user"),
+                    item: model,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     

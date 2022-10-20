@@ -21,7 +21,6 @@ enum UserAdminTemplate {
                         }
                         StackColumn(size: .six) {
                             ActionButton(destination: "/area/admin/users/create") {
-                                Symbol(name: "person-plus")
                                 Text {
                                     "Create"
                                 }
@@ -112,7 +111,7 @@ enum UserAdminTemplate {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext<UserModel>.self) var context
+        @TemplateValue(CreateContext.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -130,7 +129,7 @@ enum UserAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "email") {
@@ -207,7 +206,7 @@ enum UserAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "email") {

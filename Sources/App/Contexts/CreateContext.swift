@@ -1,9 +1,8 @@
 import Vapor
 
-struct CreateContext<T:Codable>: Codable {
+struct CreateContext: Codable {
     
     var view: ViewMetadata
-    var item: T?
     var identity: IdentityMetadata?
     var route: RouteMetadata
 }

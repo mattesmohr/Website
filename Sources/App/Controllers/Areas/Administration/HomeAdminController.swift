@@ -15,12 +15,10 @@ final class HomeAdminController {
             throw Abort(.unauthorized)
         }
         
-        return HomeAdminTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Show home"),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Show home"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
 }
 

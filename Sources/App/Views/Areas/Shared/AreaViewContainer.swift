@@ -29,48 +29,42 @@ public struct AreaViewContainer: Page {
                     Section {
                         List(direction: .vertical) {
                             ListRow {
-                                Group {
-                                    Symbol(name: "house")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/home/index") {
                                         "Home"
                                     }
                                 }
                             }
                             ListRow {
-                                Group {
-                                    Symbol(name: "folder")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/projects/index/0") {
                                         "Projects"
                                     }
                                 }
                             }
                             ListRow {
-                                Group {
-                                    Symbol(name: "folder")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/articles/index/0") {
                                         "Articles"
                                     }
                                 }
                             }
                             ListRow {
-                                Group {
-                                    Symbol(name: "folder")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/assets/index/0") {
                                         "Assets"
                                     }
                                 }
                             }
                             ListRow {
-                                Group {
-                                    Symbol(name: "pie-chart")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/reports/index") {
                                         "Report"
                                     }
                                 }
                             }
                             ListRow {
-                                Group {
-                                    Symbol(name: "people")
+                                HTMLKitComponents.Group {
                                     Link(destination: "/area/admin/users/index/0") {
                                         "Users"
                                     }

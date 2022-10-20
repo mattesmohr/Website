@@ -21,7 +21,6 @@ enum AssetAdminTemplate {
                         }
                         StackColumn(size: .six) {
                             ActionButton(destination: "/area/admin/assets/create") {
-                                Symbol(name: "file-earmark-plus")
                                 Text {
                                     "Create"
                                 }
@@ -51,7 +50,7 @@ enum AssetAdminTemplate {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext<AssetModel>.self) var context
+        @TemplateValue(CreateContext.self) var context
         
         var body: AnyContent {
             AreaViewContainer {
@@ -69,7 +68,7 @@ enum AssetAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -123,7 +122,7 @@ enum AssetAdminTemplate {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {

@@ -10,11 +10,9 @@ final class CompanyPageController {
             throw Abort(.badRequest)
         }
         
-        return CompanyPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Company"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Company"),
+            route: RouteMetadata(route: route)))
     }
 }
 

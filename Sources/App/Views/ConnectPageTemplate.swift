@@ -35,7 +35,7 @@ enum ConnectPageTemplate {
                     }
                     VStack {
                         StackColumn(size: .twelve) {
-                            FormContainer {
+                            HTMLKitComponents.Form {
                                 Header {
                                 }
                                 Section {

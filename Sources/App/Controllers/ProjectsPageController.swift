@@ -13,17 +13,12 @@ final class ProjectsPageController {
         return ProjectRepository(database: request.db)
             .page(index: id, with: 6)
             .mapEach(ProjectModel.Output.init)
-            .flatMapThrowing { entities in
+            .flatMap { entities in
                 
-                return ProjectPageTemplate.IndexView()
-                    .render(with: IndexContext(
-                        view: ViewMetadata(title: "Projects"),
-                        items: entities,
-                        route: RouteMetadata(route: route)),
-                for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("IndexView", IndexContext(
+                    view: ViewMetadata(title: "Projects"),
+                    items: entities,
+                    route: RouteMetadata(route: route)))
             }
     }
 
@@ -39,12 +34,10 @@ final class ProjectsPageController {
             .unwrap(or: Abort(.notFound))
             .flatMap { entity in
                 
-                return ProjectPageTemplate.ShowView()
-                    .render(with: ShowContext(
-                        view: ViewMetadata(title: "Project"),
-                        item: ProjectModel.Output(entity: entity),
-                        route: RouteMetadata(route: route)),
-                    for: request)
+                return request.view.render("ShowView", ShowContext(
+                    view: ViewMetadata(title: "Project"),
+                    item: ProjectModel.Output(entity: entity),
+                    route: RouteMetadata(route: route)))
             }
     }
 }

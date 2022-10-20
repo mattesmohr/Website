@@ -19,12 +19,9 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return LoginAreaTemplate.RegisterView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Register account"),
-                item: RegisterModel(),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("RegisterView", CreateContext(
+            view: ViewMetadata(title: "Register account"),
+            route: RouteMetadata(route: route)))
     }
     
     // [/register/:model]
@@ -50,11 +47,9 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return LoginAreaTemplate.LoginView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Register account"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("LoginView", EmptyContext(
+            view: ViewMetadata(title: "Register account"),
+            route: RouteMetadata(route: route)))
     }
     
     // [/login/:model]
@@ -102,12 +97,9 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return LoginAreaTemplate.ResetView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Reset"),
-                item: ResetModel(),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("ResetView", CreateContext(
+            view: ViewMetadata(title: "Reset"),
+            route: RouteMetadata(route: route)))
     }
     
     // [/reset/:model]

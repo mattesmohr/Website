@@ -10,11 +10,9 @@ final class ImpressumPageController {
             throw Abort(.badRequest)
         }
         
-        return ImpressumPageTemplate.IndexView()
-            .render(with: EmptyContext(
-                view: ViewMetadata(title: "Impressum"),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("IndexView", EmptyContext(
+            view: ViewMetadata(title: "Impressum"),
+            route: RouteMetadata(route: route)))
     }
 }
 

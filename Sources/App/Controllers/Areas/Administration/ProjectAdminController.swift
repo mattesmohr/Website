@@ -18,18 +18,13 @@ final class ProjectAdminController {
         return ProjectRepository(database: request.db)
             .page(index: id, with: 10)
             .mapEach(ProjectModel.Output.init)
-            .flatMapThrowing { entities in
+            .flatMap { entities in
                 
-                return ProjectAdminTemplate.IndexView()
-                    .render(with: IndexContext(
-                        view: ViewMetadata(title: "Show projects"),
-                        items: entities,
-                        identity: IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("IndexView", IndexContext(
+                    view: ViewMetadata(title: "Show projects"),
+                    items: entities,
+                    identity: IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     
@@ -44,12 +39,10 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return ProjectAdminTemplate.CreateView()
-            .render(with: CreateContext(
-                view: ViewMetadata(title: "Create project"),
-                identity: IdentityMetadata(user: user),
-                route: RouteMetadata(route: route)),
-            for: request)
+        return request.view.render("CreateView", CreateContext(
+            view: ViewMetadata(title: "Create project"),
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
@@ -81,18 +74,13 @@ final class ProjectAdminController {
         return ProjectRepository(database: request.db)
             .find(id: id)
             .unwrap(or: Abort(.notFound))
-            .flatMapThrowing { entity in
+            .flatMap { entity in
                 
-                return ProjectAdminTemplate.EditView()
-                    .render(with: EditContext(
-                        view: ViewMetadata(title: "Edit project"),
-                        item: ProjectModel.Output(entity: entity),
-                        identity:  IdentityMetadata(user: user),
-                        route: RouteMetadata(route: route)),
-                    for: request)
-            }
-            .flatMap { view in
-                return view
+                return request.view.render("EditView", EditContext(
+                    view: ViewMetadata(title: "Edit project"),
+                    item: ProjectModel.Output(entity: entity),
+                    identity:  IdentityMetadata(user: user),
+                    route: RouteMetadata(route: route)))
             }
     }
     
