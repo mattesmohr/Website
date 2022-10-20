@@ -1,9 +1,10 @@
 import Fluent
 
-struct CommentMigration: Migration {
+struct CommentMigration: AsyncMigration {
     
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("comments")
+    func prepare(on database: Database) async throws {
+        
+        try await database.schema("comments")
             .id()
             .field("avatar_id", .uuid, .references("assets", "id"))
             .field("name", .string, .required)
@@ -14,8 +15,9 @@ struct CommentMigration: Migration {
             .create()
     }
     
-    func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("comments")
+    func revert(on database: Database) async throws {
+        
+        try await database.schema("comments")
             .delete()
     }
 }

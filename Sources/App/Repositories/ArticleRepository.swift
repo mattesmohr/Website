@@ -10,9 +10,9 @@ final class ArticleRepository {
         self.database = database
     }
     
-    func find(id: UUID) -> EventLoopFuture<ArticleEntity?> {
+    func find(id: UUID) async throws -> ArticleEntity? {
        
-        return ArticleEntity.query(on: database)
+        return try await ArticleEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author)
@@ -21,9 +21,9 @@ final class ArticleRepository {
             .first()
     }
     
-    func find() -> EventLoopFuture<[ArticleEntity]> {
+    func find() async throws -> [ArticleEntity] {
         
-        return ArticleEntity.query(on: database)
+        return try await ArticleEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author)
@@ -32,9 +32,9 @@ final class ArticleRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) -> EventLoopFuture<[ArticleEntity]> {
+    func page(index: Int, with items: Int) async throws -> [ArticleEntity] {
         
-        return ArticleEntity.query(on: database)
+        return try await ArticleEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author)
@@ -43,24 +43,24 @@ final class ArticleRepository {
             .map {
                 return $0.items
             }
+            .get()
     }
     
-    func insert(entity: ArticleEntity) -> EventLoopFuture<Void> {
-                
-        return entity.create(on: database)
+    func insert(entity: ArticleEntity) async throws {
+        try await entity.create(on: database)
     }
     
-    func patch<Field>(field: KeyPath<ArticleEntity, Field>, to value: Field.Value, on id: UUID) -> EventLoopFuture<Void> where Field: QueryableProperty, Field.Model == ArticleEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<ArticleEntity, Field>, to value: Field.Value, on id: UUID) async throws where Field.Model == ArticleEntity {
         
-        return ArticleEntity.query(on: database)
+        try await ArticleEntity.query(on: database)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
         
-    func update(entity: ArticleEntity, on id: UUID) -> EventLoopFuture<Void> {
+    func update(entity: ArticleEntity, on id: UUID) async throws {
         
-        return ArticleEntity.query(on: database)
+        try await ArticleEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
             .set(\.$content, to: entity.content)
@@ -68,16 +68,16 @@ final class ArticleRepository {
             .update()
     }
     
-    func delete(id: UUID) -> EventLoopFuture<Void> {
+    func delete(id: UUID) async throws {
         
-        return ArticleEntity.query(on: database)
+        try await ArticleEntity.query(on: database)
             .filter(\.$id == id)
             .delete()
     }
     
-    func count() -> EventLoopFuture<Int> {
+    func count() async throws -> Int {
         
-        return ArticleEntity.query(on: database)
+        return try await ArticleEntity.query(on: database)
             .count()
     }
 }

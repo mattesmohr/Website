@@ -1,21 +1,14 @@
 import Vapor
 
-struct UserSessionAuthenticator: SessionAuthenticator {
+struct UserSessionAuthenticator: AsyncSessionAuthenticator {
     
     typealias User = App.UserModel.Output
     
-    func authenticate(sessionID: String, for request: Request) -> EventLoopFuture<Void> {
+    func authenticate(sessionID: String, for request: Request) async throws {
     
-        return UserRepository(database: request.db)
-            .find(name: sessionID)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { entity in
+        if let entity = try await UserRepository(database: request.db).find(name: sessionID) {
             
-            let model = UserModel.Output(entity: entity)
-            
-            request.auth.login(model)
-                
-            return request.eventLoop.makeSucceededFuture(())
+            request.auth.login(UserModel.Output(entity: entity))
         }
     }
 }

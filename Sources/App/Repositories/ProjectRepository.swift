@@ -10,20 +10,20 @@ final class ProjectRepository {
         self.database = database
     }
     
-    func find(id: UUID) -> EventLoopFuture<ProjectEntity?> {
+    func find(id: UUID) async throws -> ProjectEntity? {
         
-       return ProjectEntity.query(on: database)
-        .with(\.$thumbnail)
-        .with(\.$author)
-        .with(\.$links)
-        .with(\.$assets)
-        .filter(\.$id == id)
-        .first()
+       return try await ProjectEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$author)
+            .with(\.$links)
+            .with(\.$assets)
+            .filter(\.$id == id)
+            .first()
     }
     
-    func find() -> EventLoopFuture<[ProjectEntity]> {
+    func find() async throws -> [ProjectEntity] {
         
-        return ProjectEntity.query(on: database)
+        return try await ProjectEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$links)
@@ -32,9 +32,9 @@ final class ProjectRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) -> EventLoopFuture<[ProjectEntity]> {
+    func page(index: Int, with items: Int) async throws -> [ProjectEntity] {
         
-        return ProjectEntity.query(on: database)
+        return try await ProjectEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$links)
@@ -43,24 +43,24 @@ final class ProjectRepository {
             .map { page in
                 return page.items
             }
+            .get()
     }
     
-    func insert(entity: ProjectEntity) -> EventLoopFuture<Void> {
-        
-        return entity.create(on: database)
+    func insert(entity: ProjectEntity) async throws {
+        try await entity.create(on: database)
     }
     
-    func patch<Field>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: UUID) -> EventLoopFuture<Void> where Field: QueryableProperty, Field.Model == ProjectEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ProjectEntity {
         
-        return ProjectEntity.query(on: database)
+        try await ProjectEntity.query(on: database)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
     
-    func update(entity: ProjectEntity, on id: UUID) -> EventLoopFuture<Void> {
+    func update(entity: ProjectEntity, on id: UUID) async throws {
         
-        return ProjectEntity.query(on: database)
+        try await ProjectEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
             .set(\.$content, to: entity.content)
@@ -68,16 +68,16 @@ final class ProjectRepository {
             .update()
     }
     
-    func delete(id: UUID) -> EventLoopFuture<Void> {
+    func delete(id: UUID) async throws {
         
-        return ProjectEntity.query(on: database)
+        try await ProjectEntity.query(on: database)
             .filter(\.$id == id)
             .delete()
     }
     
-    func count() -> EventLoopFuture<Int> {
+    func count() async throws -> Int {
         
-        return ProjectEntity.query(on: database)
+        return try await ProjectEntity.query(on: database)
             .count()
     }
 }

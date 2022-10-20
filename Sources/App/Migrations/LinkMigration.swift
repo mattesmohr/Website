@@ -1,9 +1,10 @@
 import Fluent
 
-struct LinkMigration: Migration {
+struct LinkMigration: AsyncMigration {
     
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("links")
+    func prepare(on database: Database) async throws {
+        
+        try await database.schema("links")
             .id()
             .field("title", .string, .required)
             .field("url", .string)
@@ -13,8 +14,9 @@ struct LinkMigration: Migration {
             .create()
     }
     
-    func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("links")
+    func revert(on database: Database) async throws {
+        
+        try await database.schema("links")
             .delete()
     }
 }

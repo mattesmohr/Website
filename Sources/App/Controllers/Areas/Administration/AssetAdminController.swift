@@ -5,7 +5,7 @@ import Fluent
 final class AssetAdminController {
     
     // [/index/:id]
-    func getIndex(_ request: Request) throws -> EventLoopFuture<View> {
+    func getIndex(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
             throw Abort(.badRequest)
@@ -15,21 +15,19 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return AssetRepository(database: request.db)
+        let entities = try await AssetRepository(database: request.db)
             .page(index: id, with: 10)
-            .mapEach(AssetModel.Output.init)
-            .flatMap { entities in
-                
-                return request.view.render("IndexView", IndexContext(
-                    view: ViewMetadata(title: "Show assets"),
-                    items: entities,
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)))
-            }
+            .map(AssetModel.Output.init)
+        
+        return try await request.view.render("IndexView", IndexContext(
+            view: ViewMetadata(title: "Show assets"),
+            items: entities,
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create]
-    func getCreate(_ request: Request) throws -> EventLoopFuture<View> {
+    func getCreate(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
@@ -39,28 +37,27 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return request.view.render("CreateView", CreateContext(
+        return try await request.view.render("CreateView", CreateContext(
             view: ViewMetadata(title: "Create asset"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
-    func postCreate(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postCreate(_ request: Request) async throws -> Response {
         
         try AssetModel.Input.validate(content: request)
         
         let model = try request.content.decode(AssetModel.Input.self)
         
-        return AssetRepository(database: request.db)
+        try await AssetRepository(database: request.db)
             .insert(entity: AssetEntity(input: model))
-            .map { _ in
-                return request.redirect(to: "/area/admin/assets/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/assets/index/0")
     }
     
     // [/edit/:id]
-    func getEdit(_ request: Request) throws -> EventLoopFuture<View> {
+    func getEdit(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
             throw Abort(.badRequest)
@@ -70,26 +67,19 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return AssetRepository(database: request.db)
-            .find(id: id)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { entity in
-                
-                let model = AssetModel(
-                
-                    output: AssetModel.Output(entity: entity)
-                )
-                
-                return request.view.render("EditView", EditContext(
-                    view: ViewMetadata(title: "Edit asset"),
-                    item: model,
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)))
-            }
+        guard let entity = try await AssetRepository(database: request.db).find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        return try await request.view.render("EditView", EditContext(
+            view: ViewMetadata(title: "Edit asset"),
+            item: entity,
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/edit/:model]
-    func postEdit(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postEdit(_ request: Request) async throws -> Response {
         
         try AssetModel.Input.validate(content: request)
         
@@ -99,25 +89,23 @@ final class AssetAdminController {
         
         let model = try request.content.decode(AssetModel.Input.self)
         
-        return AssetRepository(database: request.db)
+        try await AssetRepository(database: request.db)
             .update(entity: AssetEntity(input: model), on: id)
-            .map { _ in
-                return request.redirect(to: "/area/admin/assets/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/assets/index/0")
     }
     
     // [/delete/:id]
-    func getDelete(_ request: Request) throws -> EventLoopFuture<Response> {
+    func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
-        return AssetRepository(database: request.db)
+        try await AssetRepository(database: request.db)
             .delete(id: id)
-            .map { _ in
-                return request.redirect(to: "/area/admin/assets/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/assets/index/0")
     }
 }
 

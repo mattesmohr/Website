@@ -5,7 +5,7 @@ import Fluent
 final class HomeAdminController {
     
     // [/index]
-    func getIndex(_ request: Request) throws -> EventLoopFuture<View> {
+    func getIndex(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
@@ -15,7 +15,7 @@ final class HomeAdminController {
             throw Abort(.unauthorized)
         }
         
-        return request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("IndexView", EmptyContext(
             view: ViewMetadata(title: "Show home"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))

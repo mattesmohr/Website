@@ -1,9 +1,10 @@
 import Fluent
 
-struct AssetMigration: Migration {
+struct AssetMigration: AsyncMigration {
     
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("assets")
+    func prepare(on database: Database) async throws {
+        
+        try await database.schema("assets")
             .id()
             .field("title", .string, .required)
             .field("fileName", .string, .required)
@@ -16,8 +17,9 @@ struct AssetMigration: Migration {
             .create()
     }
     
-    func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("assets")
+    func revert(on database: Database) async throws {
+        
+        try await database.schema("assets")
             .delete()
     }
 }

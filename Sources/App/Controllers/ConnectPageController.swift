@@ -4,29 +4,28 @@ import Vapor
 final class ConnectPageController {
     
     // [/index]
-    func getIndex(_ request: Request) throws -> EventLoopFuture<View> {
+    func getIndex(_ request: Request) async throws -> View {
        
         guard let route = request.route else {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("IndexView", EmptyContext(
             view: ViewMetadata(title: "Connect"),
             route: RouteMetadata(route: route)))
     }
     
     // [/index/:model]
-    func postIndex(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postIndex(_ request: Request) async throws -> Response {
         
         try ContactModel.Input.validate(content: request)
         
         let model = try request.content.decode(ContactModel.Input.self)
         
-        return ContactRepository(database: request.db)
+        try await ContactRepository(database: request.db)
             .insert(entity: ContactEntity(input: model))
-            .map { _ in 
-                return request.redirect(to: "/connect/Index")
-            }
+        
+        return request.redirect(to: "/connect/Index")
     }
 }
 

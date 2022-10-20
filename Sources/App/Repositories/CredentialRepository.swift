@@ -10,46 +10,43 @@ final class CredentialRepository {
         self.database = database
     }
     
-    func find(id: UUID) -> EventLoopFuture<CredentialEntity?> {
+    func find(id: UUID) async throws -> CredentialEntity? {
         
-       return CredentialEntity.query(on: database)
-        .with(\.$user)
-        .filter(\.$id == id)
-        .first()
+       return try await CredentialEntity.query(on: database)
+            .with(\.$user)
+            .filter(\.$id == id)
+            .first()
     }
     
-    func find() -> EventLoopFuture<[CredentialEntity]> {
+    func find() async throws -> [CredentialEntity] {
         
-        return CredentialEntity.query(on: database)
+        return try await CredentialEntity.query(on: database)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
     
-    func insert(entity: CredentialEntity) -> EventLoopFuture<Void> {
-        
-        return entity.create(on: database)
+    func insert(entity: CredentialEntity) async throws {
+        try await entity.create(on: database)
     }
     
-    func insert(entity: CredentialEntity, with child: UserEntity) -> EventLoopFuture<Void> {
+    func insert(entity: CredentialEntity, with child: UserEntity) async throws {
         
-        return entity.create(on: database)
-            .map { _ in
-                
-                _ = entity.$user.create(child, on: self.database)
-            }
+        try await entity.create(on: database)
+        
+        _ = try await entity.$user.create(child, on: self.database)
     }
     
-    func patch<Field>(field: KeyPath<CredentialEntity, Field>, to value: Field.Value, for id: UUID) -> EventLoopFuture<Void> where Field: QueryableProperty, Field.Model == CredentialEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<CredentialEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == CredentialEntity {
         
-        return CredentialEntity.query(on: database)
+        try await CredentialEntity.query(on: database)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
         
-    func update(entity: CredentialEntity, on id: UUID) -> EventLoopFuture<Void> {
+    func update(entity: CredentialEntity, on id: UUID) async throws {
         
-        return CredentialEntity.query(on: database)
+        try await CredentialEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$password, to: entity.password)
             .set(\.$role, to: entity.role)
@@ -57,16 +54,16 @@ final class CredentialRepository {
             .update()
     }
     
-    func delete(id: UUID) -> EventLoopFuture<Void> {
+    func delete(id: UUID) async throws {
         
-        return CredentialEntity.query(on: database)
+        try await CredentialEntity.query(on: database)
             .filter(\.$id == id)
             .delete()
     }
     
-    func count() -> EventLoopFuture<Int> {
+    func count() async throws -> Int {
         
-        return CredentialEntity.query(on: database)
+        return try await CredentialEntity.query(on: database)
             .count()
     }
 }

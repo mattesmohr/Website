@@ -5,7 +5,7 @@ import Fluent
 final class ProjectAdminController {
     
     // [/index/:id]
-    func getIndex(_ request: Request) throws -> EventLoopFuture<View> {
+    func getIndex(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
             throw Abort(.badRequest)
@@ -15,21 +15,19 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return ProjectRepository(database: request.db)
+        let entities = try await ProjectRepository(database: request.db)
             .page(index: id, with: 10)
-            .mapEach(ProjectModel.Output.init)
-            .flatMap { entities in
-                
-                return request.view.render("IndexView", IndexContext(
-                    view: ViewMetadata(title: "Show projects"),
-                    items: entities,
-                    identity: IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)))
-            }
+            .map(ProjectModel.Output.init)
+        
+        return try await request.view.render("IndexView", IndexContext(
+            view: ViewMetadata(title: "Show projects"),
+            items: entities,
+            identity: IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/create]
-    func getCreate(_ request: Request) throws -> EventLoopFuture<View> {
+    func getCreate(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
@@ -39,29 +37,28 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return request.view.render("CreateView", CreateContext(
+        return try await request.view.render("CreateView", CreateContext(
             view: ViewMetadata(title: "Create project"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
     }
     
     // [/create/:model]
-    func postCreate(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postCreate(_ request: Request) async throws -> Response {
         
         try ProjectModel.Input.validate(content: request)
         
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
-        return ProjectRepository(database: request.db)
+        try await ProjectRepository(database: request.db)
             .insert(entity: ProjectEntity(input: model))
-            .map { _ in
-                return request.redirect(to: "/area/admin/projects/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/projects/index/0")
     }
     
     // [/edit/:id]
-    func getEdit(_ request: Request) throws -> EventLoopFuture<View> {
+    func getEdit(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
             throw Abort(.badRequest)
@@ -71,21 +68,19 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return ProjectRepository(database: request.db)
-            .find(id: id)
-            .unwrap(or: Abort(.notFound))
-            .flatMap { entity in
-                
-                return request.view.render("EditView", EditContext(
-                    view: ViewMetadata(title: "Edit project"),
-                    item: ProjectModel.Output(entity: entity),
-                    identity:  IdentityMetadata(user: user),
-                    route: RouteMetadata(route: route)))
-            }
+        guard let entity = try await ProjectRepository(database: request.db).find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        return try await request.view.render("EditView", EditContext(
+            view: ViewMetadata(title: "Edit project"),
+            item: ProjectModel.Output(entity: entity),
+            identity:  IdentityMetadata(user: user),
+            route: RouteMetadata(route: route)))
     }
     
     // [/edit/:model]
-    func postEdit(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postEdit(_ request: Request) async throws -> Response {
         
         try ProjectModel.Input.validate(content: request)
         
@@ -96,25 +91,23 @@ final class ProjectAdminController {
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
-        return ProjectRepository(database: request.db)
+        try await ProjectRepository(database: request.db)
             .update(entity: ProjectEntity(input: model), on: id)
-            .map { _ in
-                return request.redirect(to: "/area/admin/projects/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/projects/index/0")
     }
     
     // [/delete/:id]
-    func getDelete(_ request: Request) throws -> EventLoopFuture<Response> {
+    func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
-        return ProjectRepository(database: request.db)
+        try await ProjectRepository(database: request.db)
             .delete(id: id)
-            .map { _ in 
-                return request.redirect(to: "/area/admin/projects/index/0")
-            }
+        
+        return request.redirect(to: "/area/admin/projects/index/0")
     }
 }
 

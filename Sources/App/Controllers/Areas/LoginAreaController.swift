@@ -5,27 +5,24 @@ import Fluent
 final class LoginAreaController {
     
     // [/index]
-    func getIndex(_ request: Request) throws -> EventLoopFuture<Response> {
-        
-        let redirect = request.redirect(to: "/area/login/login")
-        
-        return request.eventLoop.future(redirect)
+    func getIndex(_ request: Request) async throws -> Response {        
+        return request.redirect(to: "/area/login/login")
     }
     
     // [/register]
-    func getRegister(_ request: Request) throws -> EventLoopFuture<View> {
+    func getRegister(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("RegisterView", CreateContext(
+        return try await request.view.render("RegisterView", CreateContext(
             view: ViewMetadata(title: "Register account"),
             route: RouteMetadata(route: route)))
     }
     
     // [/register/:model]
-    func postRegister(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postRegister(_ request: Request) async throws -> Response {
         
         try RegisterModel.Input.validate(content: request)
         
@@ -33,79 +30,71 @@ final class LoginAreaController {
         
         let digest = try request.password.hash(model.password)
         
-        return CredentialRepository(database: request.db)
+        try await CredentialRepository(database: request.db)
             .insert(entity: CredentialEntity(password: digest, role: CredentialModel.Roles.administrator.rawValue, status: CredentialModel.States.unlocked.rawValue), with: UserEntity(email: model.email))
-            .map { _ in
-                return request.redirect(to: "/area/login/login")
-            }
+        
+        return request.redirect(to: "/area/login/login")
     }
     
     // [/login]
-    func getLogin(_ request: Request) throws -> EventLoopFuture<View> {
+    func getLogin(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("LoginView", EmptyContext(
+        return try await request.view.render("LoginView", EmptyContext(
             view: ViewMetadata(title: "Register account"),
             route: RouteMetadata(route: route)))
     }
     
     // [/login/:model]
-    func postLogin(_ request: Request) throws -> EventLoopFuture<Response> {
+    func postLogin(_ request: Request) async throws -> Response {
         
         try LoginModel.Input.validate(content: request)
         
         let model = try request.content.decode(LoginModel.Input.self)
         
-        return UserRepository(database: request.db)
-            .find(name: model.email)
-            .unwrap(or: Abort(.notFound))
-            .map { entity in
-                
-                if try! request.password.verify(model.password, created: entity.credential!.password) {
-                
-                    let model = UserModel.Output(entity: entity)
-                
-                    request.session.authenticate(model)
-            
-                    return request.redirect(to: "/area/admin/home/index")
-                    
-                } else {
-                    
-                    return request.redirect(to: "/area/login/login")
-                }
-            }
+        guard let entity = try await UserRepository(database: request.db).find(name: model.email) else {
+            return request.redirect(to: "/area/login/login")
+        }
+        
+        if try! request.password.verify(model.password, created: entity.credential!.password) {
+        
+            let model = UserModel.Output(entity: entity)
+        
+            request.session.authenticate(model)
+    
+            return request.redirect(to: "/area/admin/home/index")
+        }
+        
+        return request.redirect(to: "/area/login/login")
     }
     
     // [/logout]
-    func getLogout(_ request: Request) throws -> EventLoopFuture<Response> {
+    func getLogout(_ request: Request) async throws -> Response {
         
         request.auth.logout(UserModel.Output.self)
         request.session.unauthenticate(UserModel.Output.self)
         
-        let response = request.redirect(to: "/area/login/index")
-        
-        return request.eventLoop.future(response)
+        return request.redirect(to: "/area/login/index")
     }
     
     // [/reset]
-    func getReset(_ request: Request) throws -> EventLoopFuture<View> {
+    func getReset(_ request: Request) async throws -> View {
         
         guard let route = request.route else {
             throw Abort(.badRequest)
         }
         
-        return request.view.render("ResetView", CreateContext(
+        return try await request.view.render("ResetView", CreateContext(
             view: ViewMetadata(title: "Reset"),
             route: RouteMetadata(route: route)))
     }
     
     // [/reset/:model]
-    func postReset(_ request: Request) throws -> EventLoopFuture<Response> {
-        
-        return request.eventLoop.future(request.redirect(to: "/area/login/login"))
+    func postReset(_ request: Request) async throws -> Response {
+        return request.redirect(to: "/area/login/login")
     }
 }
 

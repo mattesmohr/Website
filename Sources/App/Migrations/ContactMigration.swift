@@ -1,9 +1,10 @@
 import Fluent
 
-struct ContactMigration: Migration {
+struct ContactMigration: AsyncMigration {
     
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("contacts")
+    func prepare(on database: Database) async throws {
+        
+        try await database.schema("contacts")
             .id()
             .field("first_name", .string, .required)
             .field("last_name", .string, .required)
@@ -14,8 +15,9 @@ struct ContactMigration: Migration {
             .create()
     }
     
-    func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("contacts")
+    func revert(on database: Database) async throws {
+        
+        try await database.schema("contacts")
             .delete()
     }
 }

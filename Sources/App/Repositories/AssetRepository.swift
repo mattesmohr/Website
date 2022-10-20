@@ -10,45 +10,45 @@ final class AssetRepository {
         self.database = database
     }
     
-    func find(id: UUID) -> EventLoopFuture<AssetEntity?> {
+    func find(id: UUID) async throws -> AssetEntity? {
         
-        return AssetEntity.query(on: database)
+        return try await AssetEntity.query(on: database)
             .filter(\.$id == id)
             .first()
     }
     
-    func find() -> EventLoopFuture<[AssetEntity]> {
+    func find() async throws -> [AssetEntity] {
         
-        return AssetEntity.query(on: database)
+        return try await AssetEntity.query(on: database)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
     
-    func page(index: Int, with items: Int) -> EventLoopFuture<[AssetEntity]> {
+    func page(index: Int, with items: Int) async throws -> [AssetEntity] {
         
-        return AssetEntity.query(on: database)
+        return try await AssetEntity.query(on: database)
             .paginate(PageRequest(page: index, per: items))
             .map { page in
                 return page.items
             }
+            .get()
     }
     
-    func insert(entity: AssetEntity) -> EventLoopFuture<Void> {
-        
-        return entity.create(on: database)
+    func insert(entity: AssetEntity) async throws {
+        try await entity.create(on: database)
     }
     
-    func patch<Field>(field: KeyPath<AssetEntity, Field>, to value: Field.Value, for id: UUID) -> EventLoopFuture<Void> where Field: QueryableProperty, Field.Model == AssetEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<AssetEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == AssetEntity {
         
-        return AssetEntity.query(on: database)
+        try await AssetEntity.query(on: database)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
     
-    func update(entity: AssetEntity, on id: UUID) -> EventLoopFuture<Void> {
+    func update(entity: AssetEntity, on id: UUID) async throws {
         
-        return AssetEntity.query(on: database)
+        try await AssetEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
             .set(\.$fileName, to: entity.fileName)
@@ -59,16 +59,16 @@ final class AssetRepository {
             .update()
     }
     
-    func delete(id: UUID) -> EventLoopFuture<Void> {
+    func delete(id: UUID) async throws {
         
-        return AssetEntity.query(on: database)
+        try await AssetEntity.query(on: database)
             .filter(\.$id == id)
             .delete()
     }
     
-    func count() -> EventLoopFuture<Int> {
+    func count() async throws -> Int {
         
-        return AssetEntity.query(on: database)
+        return try await AssetEntity.query(on: database)
             .count()
     }
 }

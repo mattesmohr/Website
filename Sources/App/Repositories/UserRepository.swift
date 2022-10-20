@@ -10,54 +10,54 @@ final class UserRepository {
         self.database = database
     }
     
-    func find(id: UUID) -> EventLoopFuture<UserEntity?> {
+    func find(id: UUID) async throws -> UserEntity? {
         
-       return UserEntity.query(on: database)
-        .with(\.$credential)
-        .filter(\.$id == id)
-        .first()
+       return try await UserEntity.query(on: database)
+            .with(\.$credential)
+            .filter(\.$id == id)
+            .first()
     }
     
-    func find(name: String) -> EventLoopFuture<UserEntity?> {
+    func find(name: String) async throws -> UserEntity? {
         
-        return UserEntity.query(on: database)
+        return try await UserEntity.query(on: database)
             .with(\.$credential)
             .filter(\.$email == name)
             .first()
     }
     
-    func find() -> EventLoopFuture<[UserEntity]> {
+    func find() async throws -> [UserEntity] {
         
-        return UserEntity.query(on: database)
+        return try await UserEntity.query(on: database)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
     
-    func page(index: Int, with items: Int) -> EventLoopFuture<[UserEntity]> {
+    func page(index: Int, with items: Int) async throws -> [UserEntity] {
         
-        return UserEntity.query(on: database)
+        return try await UserEntity.query(on: database)
             .paginate(PageRequest(page: index, per: items))
             .map { page in
                 return page.items
             }
+            .get()
     }
     
-    func insert(entity: UserEntity) -> EventLoopFuture<Void> {
-        
-        return entity.create(on: database)
+    func insert(entity: UserEntity) async throws {
+        try await entity.create(on: database)
     }
     
-    func patch<Field>(field: KeyPath<UserEntity, Field>, to value: Field.Value, for id: UUID) -> EventLoopFuture<Void> where Field: QueryableProperty, Field.Model == UserEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<UserEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == UserEntity {
         
-        return UserEntity.query(on: database)
+        try await UserEntity.query(on: database)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
     
-    func update(entity: UserEntity, on id: UUID) -> EventLoopFuture<Void> {
+    func update(entity: UserEntity, on id: UUID) async throws {
         
-        return UserEntity.query(on: database)
+        try await UserEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$email, to: entity.email)
             .set(\.$firstName, to: entity.firstName)
@@ -66,16 +66,16 @@ final class UserRepository {
             .update()
     }
     
-    func delete(id: UUID) -> EventLoopFuture<Void> {
+    func delete(id: UUID) async throws {
         
-        return UserEntity.query(on: database)
+        try await UserEntity.query(on: database)
             .filter(\.$id == id)
             .delete()
     }
     
-    func count() -> EventLoopFuture<Int> {
+    func count() async throws -> Int {
         
-        return UserEntity.query(on: database)
+        return try await UserEntity.query(on: database)
             .count()
     }
 }
