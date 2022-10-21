@@ -1,5 +1,4 @@
 import Vapor
-import Fluent
 
 // [/area/admin/assets]
 final class AssetAdminController {

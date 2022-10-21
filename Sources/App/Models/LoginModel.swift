@@ -14,6 +14,7 @@ struct LoginModel: Content {
         }
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("email", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }

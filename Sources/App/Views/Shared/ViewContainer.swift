@@ -1,5 +1,4 @@
 import HTMLKit
-import HTMLKitVaporProvider
 import HTMLKitComponents
 
 public struct ViewContainer: Page {

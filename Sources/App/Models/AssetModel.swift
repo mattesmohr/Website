@@ -23,8 +23,8 @@ struct AssetModel: Content {
         var filePath: String?
         var fileExtension: String?
         var fileSize: Double?
-        var modifiedAt: Date
         var createdAt: Date
+        var modifiedAt: Date
         
         init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Double? = nil, modifiedAt: Date, createdAt: Date) {
 

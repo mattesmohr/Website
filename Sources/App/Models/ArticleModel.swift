@@ -1,14 +1,15 @@
 import Vapor
-import Foundation
 
 struct ArticleModel: Content {
     
     enum Categories: String, Codable, CaseIterable {
+        
         case macOS
         case iOS
     }
     
     enum States: String, Codable, CaseIterable {
+        
         case published
         case draft
         case archived
@@ -28,6 +29,7 @@ struct ArticleModel: Content {
         var authorId: UUID?
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("title", as: String.self, is: !.empty)
             validations.add("content", as: String.self, is: !.empty)
             validations.add("category", as: String.self, is: !.empty)

@@ -8,6 +8,7 @@ struct CommentModel: Content {
         var content: String
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("name", as: String.self, is: !.empty)
             validations.add("content", as: String.self, is: !.empty)
         }

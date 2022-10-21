@@ -1,5 +1,4 @@
 import Vapor
-import Fluent
 
 // [/area/admin/reports]
 final class ReportAdminController {

@@ -8,6 +8,7 @@ struct LinkModel: Content {
         var url: String
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("title", as: String.self, is: !.empty)
             validations.add("url", as: String.self, is: !.empty)
         }

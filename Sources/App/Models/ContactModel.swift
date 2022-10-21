@@ -10,6 +10,7 @@ struct ContactModel: Content {
         var message: String
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("firstname", as: String.self, is: !.empty)
             validations.add("lastname", as: String.self, is: !.empty)
             validations.add("email", as: String.self, is: .email)

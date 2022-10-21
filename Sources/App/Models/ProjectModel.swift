@@ -3,11 +3,13 @@ import Vapor
 struct ProjectModel: Content {
     
     enum Categories: String, Codable, CaseIterable {
+        
         case macOS
         case iOS
     }
     
     enum States: String, Codable, CaseIterable {
+        
         case published
         case confidential
     }

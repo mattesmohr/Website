@@ -8,6 +8,7 @@ struct ReportModel: Content {
         var count: Int?
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("uri", as: String.self, is: !.empty)
         }
     }

@@ -1,5 +1,4 @@
 import Vapor
-import Fluent
 
 // [/area/login]
 final class LoginAreaController {

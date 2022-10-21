@@ -13,6 +13,7 @@ struct UserModel: Content {
         var description: String?
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("email", as: String.self, is: !.empty)
         }
     }

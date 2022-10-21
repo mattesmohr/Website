@@ -1,5 +1,5 @@
-import Vapor
 import Fluent
+import Foundation
 
 final class ReportEntity: Model {
     

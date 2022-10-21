@@ -3,12 +3,14 @@ import Vapor
 struct CredentialModel: Content {
     
     enum Roles: String, Codable, CaseIterable {
+        
         case administrator
         case moderator
         case customer
     }
 
     enum States: String, Codable, CaseIterable {
+        
         case deactivated
         case locked
         case new
@@ -24,6 +26,7 @@ struct CredentialModel: Content {
         var status: String
         
         static func validations(_ validations: inout Validations) {
+            
             validations.add("password", as: String.self, is: !.empty)
         }
     }
