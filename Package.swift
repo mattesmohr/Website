@@ -10,6 +10,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", from: "4.66.1"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.5.0"),
+        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.35.1"),
         .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.1.0"),
         .package(url: "https://github.com/vapor-community/HTMLKit.git", branch: "main")
     ],
@@ -19,6 +20,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentMySQLDriver", package: "fluent-mysql-driver"),
+                .product(name: "FluentKit", package: "fluent-kit"),
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "HTMLKit", package: "HTMLKit")
             ],
@@ -31,7 +33,8 @@ let package = Package(
         ]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
-            .product(name: "XCTVapor", package: "vapor")
+            .product(name: "XCTVapor", package: "vapor"),
+            .product(name: "XCTFluent", package: "fluent")
         ])
     ]
 )
