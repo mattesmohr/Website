@@ -14,7 +14,7 @@ final class ArticlesPageController {
             .page(index: id, with: 10)
             .map(ArticleModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.ArticlePage.IndexView", IndexContext(
             view: ViewMetadata(title: "Articles"),
             items: entities,
             route: RouteMetadata(route: route)))
@@ -31,7 +31,7 @@ final class ArticlesPageController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("ShowView", ShowContext(
+        return try await request.view.render("App.ArticlePage.ShowView", ShowContext(
             view: ViewMetadata(title: "Article"),
             item: ArticleModel.Output(entity: entity),
             route: RouteMetadata(route: route)))

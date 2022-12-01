@@ -1,11 +1,14 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ProjectPageTemplate {
+struct ProjectPage {
+    
+    var views: [View] = [IndexView(), ShowView()]
     
     struct IndexView: View {
 
-        @TemplateValue(IndexContext<ProjectModel.Output>.self) var context
+        @TemplateValue(IndexContext<ProjectModel.Output>.self)
+        var context
 
         public var body: AnyContent {
             ViewContainer {

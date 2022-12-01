@@ -1,38 +1,33 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum SettingPageTemplate {
+struct ReportAdminPage {
+    
+    var views: [View] = [IndexView()]
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self) var context
-
-        public var body: AnyContent {
-            ViewContainer {
+        @TemplateValue(EmptyContext.self)
+        var context
+        
+        var body: AnyContent {
+            AreaViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .twelve) {
+                        StackColumn(size: .six) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
-                            .foregroundColor(.white)
-                            Text {
-                                "Lorem ipsum"
-                            }
-                            .fontSize(.large)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .fontWeight(.medium)
+                        }
+                        StackColumn(size: .six) {
                         }
                     }
                 }
                 Section {
-                    HStack {
+                    VStack {
                         StackColumn(size: .twelve) {
-                            Text {
-                                "Lorem ipsum"
-                            }
-                            .foregroundColor(.white)
                         }
                     }
                 }

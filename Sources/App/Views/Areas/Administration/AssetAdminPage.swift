@@ -1,11 +1,14 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum AssetAdminTemplate {
+struct AssetAdminPage {
+    
+    var views: [View] = [IndexView(), CreateView(), EditView()]
     
     struct IndexView: View {
         
-        @TemplateValue(IndexContext<AssetModel.Output>.self) var context
+        @TemplateValue(IndexContext<AssetModel.Output>.self)
+        var context
         
         var body: AnyContent {
             AreaViewContainer {

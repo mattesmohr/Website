@@ -10,7 +10,7 @@ final class CompanyPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.CompanyPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Company"),
             route: RouteMetadata(route: route)))
     }

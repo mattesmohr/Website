@@ -10,7 +10,7 @@ final class SettingsPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.SettingPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Settings"),
             route: RouteMetadata(route: route)))
     }

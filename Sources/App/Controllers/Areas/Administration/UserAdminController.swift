@@ -18,7 +18,7 @@ final class UserAdminController {
             .page(index: id, with: 10)
             .map(UserModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.UserAdminPage.IndexView", IndexContext(
             view: ViewMetadata(title: "Show users"),
             items: entities,
             identity: IdentityMetadata(user: user),
@@ -36,7 +36,7 @@ final class UserAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("CreateView", CreateContext(
+        return try await request.view.render("App.UserAdminPage.CreateView", CreateContext(
             view: ViewMetadata(title: "Create user"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
@@ -70,7 +70,7 @@ final class UserAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("EditView", EditContext(
+        return try await request.view.render("App.UserAdminPage.EditView", EditContext(
             view: ViewMetadata(title: "Edit user"),
             item: entity,
             identity: IdentityMetadata(user: user),

@@ -15,7 +15,7 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("RegisterView", CreateContext(
+        return try await request.view.render("App.LoginAreaPage.RegisterView", CreateContext(
             view: ViewMetadata(title: "Register account"),
             route: RouteMetadata(route: route)))
     }
@@ -42,7 +42,7 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("LoginView", EmptyContext(
+        return try await request.view.render("App.LoginAreaPage.LoginView", EmptyContext(
             view: ViewMetadata(title: "Register account"),
             route: RouteMetadata(route: route)))
     }
@@ -86,7 +86,7 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("ResetView", CreateContext(
+        return try await request.view.render("App.LoginAreaPage.ResetView", CreateContext(
             view: ViewMetadata(title: "Reset"),
             route: RouteMetadata(route: route)))
     }

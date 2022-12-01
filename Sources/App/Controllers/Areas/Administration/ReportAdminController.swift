@@ -14,7 +14,7 @@ final class ReportAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.ReportAdminPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Show reports"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))

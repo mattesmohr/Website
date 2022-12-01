@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-public struct AreaViewContainer: Page {
+public struct AreaViewContainer: View {
     
     public let content: AnyContent
     

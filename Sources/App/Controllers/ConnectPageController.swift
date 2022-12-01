@@ -10,7 +10,7 @@ final class ConnectPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.ConnectPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Connect"),
             route: RouteMetadata(route: route)))
     }

@@ -18,7 +18,7 @@ final class ProjectAdminController {
             .page(index: id, with: 10)
             .map(ProjectModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.ProjectAdminPage.IndexView", IndexContext(
             view: ViewMetadata(title: "Show projects"),
             items: entities,
             identity: IdentityMetadata(user: user),
@@ -36,7 +36,7 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("CreateView", CreateContext(
+        return try await request.view.render("App.ProjectAdminPage.CreateView", CreateContext(
             view: ViewMetadata(title: "Create project"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
@@ -71,7 +71,7 @@ final class ProjectAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("EditView", EditContext(
+        return try await request.view.render("App.ProjectAdminPage.EditView", EditContext(
             view: ViewMetadata(title: "Edit project"),
             item: ProjectModel.Output(entity: entity),
             identity:  IdentityMetadata(user: user),

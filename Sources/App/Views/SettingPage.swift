@@ -1,14 +1,17 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum HomeAdminTemplate {
+struct SettingPage {
+    
+    var views: [View] = [IndexView()]
     
     struct IndexView: View {
-        
-        @TemplateValue(EmptyContext.self) var context
-        
-        var body: AnyContent {
-            AreaViewContainer {
+
+        @TemplateValue(EmptyContext.self)
+        var context
+
+        public var body: AnyContent {
+            ViewContainer {
                 Header {
                     HStack {
                         StackColumn(size: .twelve) {
@@ -16,13 +19,23 @@ enum HomeAdminTemplate {
                                 context.view.title
                             }
                             .fontSize(.medium)
-                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                            Text {
+                                "Lorem ipsum"
+                            }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                     }
                 }
                 Section {
-                    VStack {
+                    HStack {
                         StackColumn(size: .twelve) {
+                            Text {
+                                "Lorem ipsum"
+                            }
+                            .foregroundColor(.white)
                         }
                     }
                 }

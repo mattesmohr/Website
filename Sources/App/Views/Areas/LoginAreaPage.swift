@@ -1,11 +1,14 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum LoginAreaTemplate {
+struct LoginAreaPage {
+    
+    var views: [View] = [LoginView(), RegisterView(), ResetView()]
     
     struct LoginView: View {
 
-        @TemplateValue(EmptyContext.self) var context
+        @TemplateValue(EmptyContext.self)
+        var context
 
         public var body: AnyContent {
             AreaPageContainer {

@@ -1,7 +1,7 @@
 import Fluent
 import FluentMySQLDriver
 import Foundation
-import HTMLKitVaporProvider
+import HTMLKitVapor
 import Vapor
 
 public func configure(_ app: Application) throws {
@@ -20,7 +20,7 @@ public func configure(_ app: Application) throws {
 
     app.views.use(.htmlkit)
     
-    app.htmlkit.add(layout: HomePageTemplate.IndexView())
+    app.htmlkit.views.add(view: HomePage.IndexView())
     
     var tls = TLSConfiguration.makeClientConfiguration()
     tls.certificateVerification = .none

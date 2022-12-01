@@ -14,7 +14,7 @@ final class HomeAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.HomeAdminPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Show home"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))

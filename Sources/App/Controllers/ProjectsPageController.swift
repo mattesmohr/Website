@@ -14,7 +14,7 @@ final class ProjectsPageController {
             .page(index: id, with: 6)
             .map(ProjectModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.ProjectPage.IndexView", IndexContext(
             view: ViewMetadata(title: "Projects"),
             items: entities,
             route: RouteMetadata(route: route)))
@@ -31,7 +31,7 @@ final class ProjectsPageController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("ShowView", ShowContext(
+        return try await request.view.render("App.ProjectPage.ShowView", ShowContext(
             view: ViewMetadata(title: "Project"),
             item: ProjectModel.Output(entity: entity),
             route: RouteMetadata(route: route)))

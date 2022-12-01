@@ -18,7 +18,7 @@ final class ArticleAdminController {
             .page(index: id, with: 10)
             .map(ArticleModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.ArticleAdminPage.IndexView", IndexContext(
             view: ViewMetadata(title: "Show articles"),
             items: entities,
             identity: IdentityMetadata(user: user),
@@ -36,7 +36,7 @@ final class ArticleAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("CreateView", CreateContext(
+        return try await request.view.render("App.ArticleAdminPage.CreateView", CreateContext(
             view: ViewMetadata(title: "Create article"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
@@ -72,7 +72,7 @@ final class ArticleAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("EditView", EditContext(
+        return try await request.view.render("App.ArticleAdminPage.EditView", EditContext(
             view: ViewMetadata(title: "Edit article"),
             item: ArticleModel.Output(entity: entity),
             identity: IdentityMetadata(user: user),

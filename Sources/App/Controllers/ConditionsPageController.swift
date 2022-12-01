@@ -10,7 +10,7 @@ final class ConditionsPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.ConditionPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Conditions"),
             route: RouteMetadata(route: route)))
     }

@@ -1,30 +1,40 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ReportAdminTemplate {
+struct PrivacyPage {
+    
+    var views: [View] = [IndexView()]
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self) var context
-        
-        var body: AnyContent {
-            AreaViewContainer {
+        @TemplateValue(EmptyContext.self)
+        var context
+
+        public var body: AnyContent {
+            ViewContainer {
                 Header {
                     HStack {
-                        StackColumn(size: .six) {
+                        StackColumn(size: .twelve) {
                             Text {
                                 context.view.title
                             }
                             .fontSize(.medium)
-                            .fontWeight(.medium)
-                        }
-                        StackColumn(size: .six) {
+                            .foregroundColor(.white)
+                            Text {
+                                "Lorem ipsum"
+                            }
+                            .fontSize(.large)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
                         }
                     }
                 }
                 Section {
-                    VStack {
+                    HStack {
                         StackColumn(size: .twelve) {
+                            Text {
+                                "Lorem ipsum"
+                            }
                         }
                     }
                 }

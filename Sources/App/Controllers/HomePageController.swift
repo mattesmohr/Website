@@ -10,7 +10,7 @@ final class HomePageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.HomePage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Home"),
             route: RouteMetadata(route: route)))
     }

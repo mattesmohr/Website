@@ -18,7 +18,7 @@ final class AssetAdminController {
             .page(index: id, with: 10)
             .map(AssetModel.Output.init)
         
-        return try await request.view.render("IndexView", IndexContext(
+        return try await request.view.render("App.AssetAdminPage.IndexView", IndexContext(
             view: ViewMetadata(title: "Show assets"),
             items: entities,
             identity: IdentityMetadata(user: user),
@@ -36,7 +36,7 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("CreateView", CreateContext(
+        return try await request.view.render("App.AssetAdminPage.CreateView", CreateContext(
             view: ViewMetadata(title: "Create asset"),
             identity: IdentityMetadata(user: user),
             route: RouteMetadata(route: route)))
@@ -70,7 +70,7 @@ final class AssetAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("EditView", EditContext(
+        return try await request.view.render("App.AssetAdminPage.EditView", EditContext(
             view: ViewMetadata(title: "Edit asset"),
             item: entity,
             identity: IdentityMetadata(user: user),

@@ -1,11 +1,14 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum PrivacyPageTemplate {
+struct ImpressumPage {
+    
+    var views: [View] = [IndexView()]
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self) var context
+        @TemplateValue(EmptyContext.self)
+        var context
 
         public var body: AnyContent {
             ViewContainer {
@@ -32,6 +35,7 @@ enum PrivacyPageTemplate {
                             Text {
                                 "Lorem ipsum"
                             }
+                            .foregroundColor(.white)
                         }
                     }
                 }

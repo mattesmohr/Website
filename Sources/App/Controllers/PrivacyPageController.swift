@@ -10,7 +10,7 @@ final class PrivacyPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("IndexView", EmptyContext(
+        return try await request.view.render("App.PrivacyPage.IndexView", EmptyContext(
             view: ViewMetadata(title: "Privacy"),
             route: RouteMetadata(route: route)))
     }

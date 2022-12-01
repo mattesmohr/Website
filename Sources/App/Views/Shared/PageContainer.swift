@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-public struct PageContainer: Page {
+public struct PageContainer: View {
     
     public var content: [BodyElement]
     

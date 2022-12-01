@@ -1,11 +1,14 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ConnectPageTemplate {
+struct ConnectPage {
+    
+    var views: [View] = [IndexView()]
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self) var context
+        @TemplateValue(EmptyContext.self)
+        var context
 
         public var body: AnyContent {
             ViewContainer {
