@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ConnectPage {
-    
-    var views: [View] = [IndexView()]
+enum ConnectPage {
     
     struct IndexView: View {
+        
+        var context: EmptyContext
 
-        @TemplateValue(EmptyContext.self)
-        var context
-
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,12 +15,11 @@ struct ConnectPage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
+                            .font(.subheadline)
                             Text {
-                                "Lorem ipsum..."
+                                "Lorem ipsum"
                             }
-                            .fontSize(.large)
-                            .fontWeight(.bold)
+                            .font(.headline)
                         }
                     }
                 }
@@ -37,7 +33,7 @@ struct ConnectPage {
                     }
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 Header {
                                 }
                                 Section {
@@ -73,26 +69,13 @@ struct ConnectPage {
                                             .lineLimit(4)
                                         }
                                     }
-                                    HStack {
-                                        StackColumn(size: .six) {
-                                            CheckField(name: "name", value: "name")
-                                            FieldLabel(for: "name") {
-                                                "name"
-                                            }
-                                        }
-                                        StackColumn(size: .six) {
-                                            CheckField(name: "name", value: "name")
-                                            FieldLabel(for: "name") {
-                                                "name"
-                                            }
-                                        }
-                                    }
                                 }
                                 Footer {
-                                    SubmitButton {
+                                    Button(role: .submit) {
                                         "Submit"
                                     }
                                     .buttonStyle(.primary)
+                                    .borderShape(.smallrounded)
                                 }
                             }
                         }

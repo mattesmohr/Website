@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/articles]
@@ -14,10 +15,12 @@ final class ArticlesPageController {
             .page(index: id, with: 10)
             .map(ArticleModel.Output.init)
         
-        return try await request.view.render("App.ArticlePage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Articles"),
             items: entities,
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ArticlePage.IndexView(context: context))
     }
     
     // [/show]
@@ -31,10 +34,12 @@ final class ArticlesPageController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.ArticlePage.ShowView", ShowContext(
+        let context = ShowContext(
             view: ViewMetadata(title: "Article"),
             item: ArticleModel.Output(entity: entity),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ArticlePage.ShowView(context: context))
     }
 }
 

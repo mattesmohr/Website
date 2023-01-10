@@ -3,13 +3,13 @@ import HTMLKitComponents
 
 public struct ViewContainer: View {
     
-    public let content: AnyContent
+    public let content: [Content]
     
-    public init(@ContentBuilder<AnyContent> content: () -> AnyContent) {
+    public init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()
     }
 
-    public var body: AnyContent {
+    public var body: Content {
         PageContainer {
             Header {
                 HStack {
@@ -21,34 +21,32 @@ public struct ViewContainer: View {
                         .foregroundColor(.black)
                     }
                     StackColumn(size: .six, alignment: .right) {
-                            List(direction: .horizontal) {
-                                ListRow {
-                                    Link(destination: "/home/index") {
-                                        "Home"
-                                    }
-                                }
-                                ListRow {
-                                    Text {
-                                        "Explore"
-                                    }
-                                    .id("explore")
-                                    .onHover(perfom: .show("nav1"))
-                                }
-                                ListRow {
-                                    Text {
-                                        "Read"
-                                    }
-                                    .id("read")
-                                    .onHover(perfom: .show("nav2"))
-                                }
-                                ListRow {
-                                    Text {
-                                        "Connect"
-                                    }
-                                    .id("connect")
-                                    .onHover(perfom: .show("nav3"))
+                        List(direction: .horizontal) {
+                            ListRow {
+                                Link(destination: "/home/index") {
+                                    "Home"
                                 }
                             }
+                            ListRow {
+                                Text {
+                                    "Explore"
+                                }
+                                .id("explore")
+                                .onHover(perfom: .show("nav1"))
+                            }
+                            ListRow {
+                                Text {
+                                    "Read"
+                                }
+                                .id("read")
+                                .onHover(perfom: .show("nav2"))
+                            }
+                            ListRow {
+                                Link(destination: "/connect/index") {
+                                    "Connect"
+                                }
+                            }
+                        }
                     }
                 }
                 Navigation {
@@ -62,7 +60,7 @@ public struct ViewContainer: View {
                                     .fontSize(.small)
                                 }
                                 ListRow {
-                                    Link(destination: "/projects/index") {
+                                    Link(destination: "/projects/index/0") {
                                         "Projects"
                                     }
                                 }
@@ -84,6 +82,8 @@ public struct ViewContainer: View {
                             }
                         }
                     }
+                    .id("stack1")
+                    .onLeave(perfom: .hide("nav1"))
                 }
                 .id("nav1")
                 Navigation {
@@ -97,80 +97,17 @@ public struct ViewContainer: View {
                                     .fontSize(.small)
                                 }
                                 ListRow {
-                                    Link(destination: "/articles/index/") {
+                                    Link(destination: "/articles/index/0") {
                                         "Articles"
                                     }
                                 }
                             }
                         }
                     }
+                    .id("stack2")
+                    .onLeave(perfom: .hide("nav2"))
                 }
                 .id("nav2")
-                Navigation {
-                    HStack(alignment: .top) {
-                        StackColumn(size: .three, offset: .six) {
-                            List(direction: .vertical) {
-                                ListRow {
-                                    Text {
-                                        "Sites"
-                                    }
-                                    .fontSize(.small)
-                                }
-                                ListRow {
-                                    Link(destination: "/home/index") {
-                                        "Home"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/projects/index") {
-                                        "Projects"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/company/index") {
-                                        "Company"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/articles/index") {
-                                        "Articles"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/connect/index") {
-                                        "Connect"
-                                    }
-                                }
-                            }
-                        }
-                        StackColumn(size: .three) {
-                            List(direction: .vertical) {
-                                ListRow {
-                                    Text {
-                                        "Legal"
-                                    }
-                                    .fontSize(.small)
-                                }
-                                ListRow {
-                                    Link(destination: "/term/index") {
-                                        "Terms of use"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/privacy/index")  {
-                                        "Privacy policy"
-                                    }
-                                }
-                                ListRow {
-                                    Link(destination: "/impressum/index")  {
-                                        "Impressum"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                .id("nav3")
             }
             Main {
                 content
@@ -206,7 +143,7 @@ public struct ViewContainer: View {
                                 .fontSize(.small)
                             }
                             ListRow {
-                                Link(destination: "/projects/index") {
+                                Link(destination: "/projects/index/0") {
                                     "Explore solutions"
                                 }
                             }

@@ -1,4 +1,15 @@
 /**
+ divider component
+ */
+
+.divider {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    background-color: var(--dividerColor);
+}
+/**
  background component
  */
 
@@ -77,48 +88,49 @@
 .background\:secondary {
     background-color: var(--secondaryColor);
 }
-
 /**
- position component
+ grid component
  */
 
-zindex\:1 {
-    position: relative;
-    z-index: 1;
+.grid {
+    display: grid;
+    gap: var(--gridGapSize);
+    list-style-type: none;
 }
 
-zindex\:2 {
-    position: relative;
-    z-index: 2;
+.grid-item {
+    
+    padding-top: var(--gridItemPaddingY);
+    padding-right: var(--gridItemPaddingX);
+    padding-bottom: var(--gridItemPaddingY);
+    padding-left: var(--gridItemPaddingX);
+    border-width: var(--gridItemBorderWidth);
+    border-style: solid;
+    border-color: var(--gridItemBorderColor);
+    border-radius: var(--gridItemBorderRadius);
+    
+    overflow: hidden;
 }
 
-zindex\:3 {
-    position: relative;
-    z-index: 3;
+.grid.ratio\:50 {
+    grid-template-columns: repeat(2, 1fr);
 }
 
-zindex\:4 {
-    position: relative;
-    z-index: 4;
+.grid.ratio\:33 {
+    grid-template-columns: repeat(3, 1fr);
 }
 
-zindex\:5 {
-    position: relative;
-    z-index: 5;
+.grid.ratio\:25 {
+    grid-template-columns: repeat(4, 1fr);
 }
 
-/**
- divider component
- */
-
-.divider {
-    display: block;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 100%;
-    background-color: var(--dividerColor);
+.grid.ratio\:20 {
+    grid-template-columns: repeat(5, 1fr);
 }
 
+.grid.ratio\:15 {
+    grid-template-columns: repeat(6, 1fr);
+}
 /**
  list component
  */
@@ -165,7 +177,21 @@ zindex\:5 {
     padding-bottom: var(--listRowPaddingY);
     padding-left: var(--listRowPaddingX);
 }
+/**
+ card component
+ */
 
+.card {
+    padding-top: var(--cardPaddingY);
+    padding-right: var(--cardPaddingX);
+    padding-bottom: var(--cardPaddingY);
+    padding-left: var(--cardPaddingX);
+    border-width: var(--cardBorderWidth);
+    border-style: solid;
+    border-radius: var(--cardBorderRadius);
+    border-color: var(--cardBorderColor);
+    background-color: var(--cardBackgroundColor);
+}
 /**
  group component
  */
@@ -197,13 +223,11 @@ zindex\:5 {
 .group > * + .symbol {
     margin-left: 15px;
 }
-
 /**
  link component
  */
 
 .link {
-    
     font-family: var(--textFontFamily);
     font-size: var(--textFontSize);
     font-weight: var(--textFontHeight);
@@ -420,52 +444,38 @@ zindex\:5 {
     font-weight: 400;
     line-height: 1.75;
 }
-
 /**
- collection component
+ utils classes
  */
 
-.collection {
-    display: grid;
-    gap: var(--collectionGapSize);
+.display\:block {
+    display: block !important;
 }
 
-.collection-item {
-    overflow: hidden;
+zindex\:1 {
+    position: relative;
+    z-index: 1;
 }
 
-.collection.style\:grid > .collection-item {
-    
-    border-width: var(--collectionBorderWidth);
-    border-style: solid;
-    border-color: var(--collectionBorderColor);
-    border-radius: var(--collectionBorderRadius);
+zindex\:2 {
+    position: relative;
+    z-index: 2;
 }
 
-.collection.style\:carousel {
-    
+zindex\:3 {
+    position: relative;
+    z-index: 3;
 }
 
-.collection.ratio\:50 {
-    grid-template-columns: repeat(2, 1fr);
+zindex\:4 {
+    position: relative;
+    z-index: 4;
 }
 
-.collection.ratio\:33 {
-    grid-template-columns: repeat(3, 1fr);
+zindex\:5 {
+    position: relative;
+    z-index: 5;
 }
-
-.collection.ratio\:25 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.collection.ratio\:20 {
-    grid-template-columns: repeat(5, 1fr);
-}
-
-.collection.ratio\:15 {
-    grid-template-columns: repeat(6, 1fr);
-}
-
 /**
  symbol component
  */
@@ -566,7 +576,6 @@ zindex\:5 {
 .symbol.color\:secondary {
     color: var(--secondaryColor);
 }
-
 /**
  form component
  */
@@ -578,7 +587,6 @@ zindex\:5 {
 }
 
 .label {
-    
     display: inline-block;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -715,7 +723,6 @@ zindex\:5 {
     content: " *";
     color: var(--redColor);
 }
-
 /**
  snippet component
  */
@@ -754,7 +761,6 @@ zindex\:5 {
     color: var(--lineNumberFontColor);
     -webkit-user-select: none;
 }
-
 /**
  image component
  */
@@ -829,7 +835,24 @@ zindex\:5 {
 .image.shape\:circle {
     border-radius: 50%;
 }
+/**
+ modal component
+ */
 
+.modal {
+    
+    width: 45%;
+    margin: auto;
+    padding-top: var(--modalPaddingY);
+    padding-right: var(--modalPaddingX);
+    padding-bottom: var(--modalPaddingY);
+    padding-left: var(--modalPaddingX);
+    border-width: var(--modalBorderWidth);
+    border-style: solid;
+    border-radius: var(--modalBorderRadius);
+    border-color: var(--modalBorderColor);
+    background-color: var(--modalBackgroundColor);
+}
 /**
  text component
  */
@@ -872,7 +895,7 @@ zindex\:5 {
     font-weight: 400;
 }
 
-.text.weight\:semibold {
+.text.weight\:medium {
     font-weight: 500;
 }
 
@@ -1049,7 +1072,196 @@ zindex\:5 {
     font-weight: 400;
     line-height: 1.75;
 }
-
+:root {
+    
+    /**
+     neutral colors
+     
+     - black: #000000
+     - white: #FFFFFF
+     */
+    
+    --blackColor: hsla(0, 0%, 0%, 100%);
+    --whiteColor: hsla(0, 0%, 100%, 100%);
+    
+    /**
+     supporting colors
+     
+     - blue: #4098D7
+     - brown: #BF7140
+     - cyan: #38BEC9
+     - green: #57AE5B
+     - indigo: #647ACB
+     - mint: #91E697
+     - pink: #DA4A91
+     - purple: #724BB7
+     - red: #D64545
+     - teal: #3EBD93
+     - orange: #E67635
+     - yellow: #F7D070
+     - gray: #9E9E9E
+     - silver: #F7F7F7
+     */
+    
+    --blueColor: hsla(205, 65%, 55%, 100%);
+    --brownColor: hsla(23, 50%, 50%, 100%);
+    --cyanColor: hsla(185, 57%, 50%, 100%);
+    --greenColor: hsla(123, 35%, 51%, 100%);
+    --indigoColor: hsla(227, 50%, 59%, 100%);
+    --mintColor: hsla(124, 63%, 74%, 100%);
+    --pinkColor: hsla(330, 66%, 57%, 100%);
+    --purpleColor: hsla(262, 43%, 51%, 100%);
+    --redColor: hsla(0, 64%, 55%, 100%);
+    --tealColor: hsla(160, 51%, 49%, 100%);
+    --orangeColor: hsla(22, 78%, 55%, 100%);
+    --yellowColor: hsla(43, 89%, 70%, 100%);
+    --grayColor: hsla(0, 0%, 62%, 100%);
+    --silverColor: hsla(0, 0%, 97%, 100%);
+    
+    /**
+     custom colors
+     - primary: #007FFF
+     - secondary: #132F4E
+     **/
+    
+    --primaryColor: hsla(210, 100%, 50%, 100%);
+    --secondaryColor: hsla(211, 60%, 19%, 100%);
+    
+    /**
+     toggle variables
+     - background #E6E6E6
+     - active background: #77BF40
+     - toggle border: #DFE3E7
+     - toggle focus: #DFE3E7
+     - slider background: #FFFFFF
+     - slider border: #FFFFFF
+     */
+    
+    --toggleBackgroundColor: hsla(0, 0%, 90%, 100%);
+    --toggleActiveBackgroundColor: hsla(94, 50%, 50%, 100%);
+    --toggleBorderColor: hsla(210, 14%, 89%, 100%);
+    --toggleFocusColor: hsla(210, 14%, 89%, 40%);
+    --sliderBackgroundColor: hsla(0, 0%, 100%, 100%);
+    --sliderBorderColor: hsla(0, 0%, 100%, 100%);
+    
+    /**
+     text variables
+     */
+    
+    --textFontFamily: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --textFontSize: 100%;
+    --textFontWeight: 400;
+    --textLineHeight: 1.1em;
+    --smallFontSize: 0.8em;
+    --smallFontWeight: 600;
+    --smallLineHeight: 1.6em;
+    --normalFontSize: 1.4em;
+    --normalFontWeight: 600;
+    --normalLineHeight: 1.8em;
+    --mediumFontSize: 1.6em;
+    --mediumFontWeight: 600;
+    --mediumLineHeight: 2.0em;
+    --largeFontSize: 2.3em;
+    --largeFontWeight: 900;
+    --largeLineHeight: 2.7em;
+    
+    /**
+     snippet variables
+     */
+    
+    --snippetFontSize: 12px;
+    --snippetLineHeight: 20px;
+    --snippetBackgroundColor: #FFFFFF;
+    --snippetFontColor: #000000;
+    --lineNumberFontColor: #000000;
+    
+    /**
+     list variables
+     */
+    
+    --listRowPaddingY: 0px;
+    --listRowPaddingX: 15px;
+    --listGapSize: 15px;
+    --listBorderColor: hsla(210, 14%, 89%, 100%);
+    --listBorderWidth: 1px;
+    --listBorderRadius: 5px;
+    
+    /**
+     input variables
+     */
+    
+    --inputPaddingY: 12px;
+    --inputPaddingX: 16px;
+    --inputTextColor: var(--blackColor);
+    --inputBackgroundColor: var(--whiteColor);
+    --inputBorderColor: hsla(210, 14%, 89%, 100%);
+    --inputBorderWidth: 1px;
+    --inputBorderRadius: 5px;
+    --inputFocusColor: hsla(210, 14%, 89%, 40%);
+    
+    /**
+     slider variables
+     */
+    
+    --sliderBackgroundColor: var(--whiteColor);
+    --sliderBorderColor: var(--whiteColor);
+    --thumbBorderColor: var(--whiteColor);
+    --thumbBackgroundColor: var(--whiteColor);
+    
+    /**
+     divider variables
+     */
+    
+    --dividerColor: #FFFFFF;
+    
+    /**
+     button variables
+     */
+    
+    --buttonPaddingY: 12px;
+    --buttonPaddingX: 16px;
+    --buttonBorderWidth: 1px;
+    --buttonBorderRadius: 5px;
+    --buttonFontSize: 14px;
+    --buttonFontWeight: normal;
+    --buttonLineHeight: 1.2rem;
+    
+    
+    /**
+     modal variables
+     */
+    
+    --modalPaddingY: 12px;
+    --modalPaddingX: 16px;
+    --modalBorderWidth: 1px;
+    --modalBorderRadius: 5px;
+    --modalBorderColor: var(--grayColor);
+    --modalBackgroundColor: var(--whiteColor);
+    
+    /**
+     grid variables
+     */
+    
+    --gridGapSize: 15px;
+    --gridItemPaddingY: 12px;
+    --gridItemPaddingX: 16px;
+    --gridItemBorderWidth: 1px;
+    --gridItemBorderColor: var(--grayColor);
+    --gridItemBorderRadius: 5px;
+    --gridItemBackgroundColor: var(--whiteColor);
+    
+    
+    /**
+     grid variables
+     */
+    
+    --cardPaddingY: 12px;
+    --cardPaddingX: 16px;
+    --cardBorderWidth: 1px;
+    --cardBorderRadius: 15px;
+    --cardBorderColor: var(--grayColor);
+    --cardBackgroundColor: var(--whiteColor);
+}
 /**
  button component
  */
@@ -1133,7 +1345,6 @@ zindex\:5 {
 .button > * + .symbol {
     margin-left: 15px;
 }
-
 /**
  toggle component
  */
@@ -1186,7 +1397,6 @@ zindex\:5 {
 .toggle > input:checked + .toggle-slider::before {
     left: calc(100% - 26px);
 }
-
 /**
  stack component
  */
@@ -1378,173 +1588,3 @@ zindex\:5 {
 .stack-column.offset\:11 {
     margin-left: 91.6666666667%;
 }
-
-:root {
-    
-    /**
-     neutral colors
-     
-     - black: #000000
-     - white: #FFFFFF
-     */
-    
-    --blackColor: hsla(0, 0%, 0%, 100%);
-    --whiteColor: hsla(0, 0%, 100%, 100%);
-    
-    /**
-     supporting colors
-     
-     - blue: #4098D7
-     - brown: #BF7140
-     - cyan: #38BEC9
-     - green: #57AE5B
-     - indigo: #647ACB
-     - mint: #91E697
-     - pink: #DA4A91
-     - purple: #724BB7
-     - red: #D64545
-     - teal: #3EBD93
-     - orange: #E67635
-     - yellow: #F7D070
-     - gray: #9E9E9E
-     - silver: #F7F7F7
-     */
-    
-    --blueColor: hsla(205, 65%, 55%, 100%);
-    --brownColor: hsla(23, 50%, 50%, 100%);
-    --cyanColor: hsla(185, 57%, 50%, 100%);
-    --greenColor: hsla(123, 35%, 51%, 100%);
-    --indigoColor: hsla(227, 50%, 59%, 100%);
-    --mintColor: hsla(124, 63%, 74%, 100%);
-    --pinkColor: hsla(330, 66%, 57%, 100%);
-    --purpleColor: hsla(262, 43%, 51%, 100%);
-    --redColor: hsla(0, 64%, 55%, 100%);
-    --tealColor: hsla(160, 51%, 49%, 100%);
-    --orangeColor: hsla(22, 78%, 55%, 100%);
-    --yellowColor: hsla(43, 89%, 70%, 100%);
-    --grayColor: hsla(0, 0%, 62%, 100%);
-    --silverColor: hsla(0, 0%, 97%, 100%);
-    
-    /**
-     custom colors
-     - primary: #007FFF
-     - secondary: #132F4E
-     **/
-    
-    --primaryColor: hsla(210, 100%, 50%, 100%);
-    --secondaryColor: hsla(211, 60%, 19%, 100%);
-    
-    /**
-     toggle variables
-     - background #E6E6E6
-     - active background: #77BF40
-     - toggle border: #DFE3E7
-     - toggle focus: #DFE3E7
-     - slider background: #FFFFFF
-     - slider border: #FFFFFF
-     */
-    
-    --toggleBackgroundColor: hsla(0, 0%, 90%, 100%);
-    --toggleActiveBackgroundColor: hsla(94, 50%, 50%, 100%);
-    --toggleBorderColor: hsla(210, 14%, 89%, 100%);
-    --toggleFocusColor: hsla(210, 14%, 89%, 40%);
-    --sliderBackgroundColor: hsla(0, 0%, 100%, 100%);
-    --sliderBorderColor: hsla(0, 0%, 100%, 100%);
-    
-    /**
-     text variables
-     */
-    
-    --textFontFamily: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --textFontSize: 100%;
-    --textFontWeight: 400;
-    --textLineHeight: 1.1em;
-    --smallFontSize: 0.8em;
-    --smallFontWeight: 600;
-    --smallLineHeight: 1.6em;
-    --normalFontSize: 1.4em;
-    --normalFontWeight: 600;
-    --normalLineHeight: 1.8em;
-    --mediumFontSize: 1.6em;
-    --mediumFontWeight: 600;
-    --mediumLineHeight: 2.0em;
-    --largeFontSize: 2.3em;
-    --largeFontWeight: 900;
-    --largeLineHeight: 2.7em;
-    
-    /**
-     snippet variables
-     */
-    
-    --snippetFontSize: 12px;
-    --snippetLineHeight: 20px;
-    --snippetBackgroundColor: #FFFFFF;
-    --snippetFontColor: #000000;
-    --lineNumberFontColor: #000000;
-    
-    /**
-     list variables
-     */
-    
-    --listRowPaddingY: 0px;
-    --listRowPaddingX: 15px;
-    --listGapSize: 15px;
-    
-    /**
-     link variables
-     */
-    
-    /**
-     input variables
-     */
-    
-    --inputPaddingY: 12px;
-    --inputPaddingX: 16px;
-    --inputTextColor: var(--blackColor);
-    --inputBackgroundColor: var(--whiteColor);
-    --inputBorderColor: hsla(210, 14%, 89%, 100%);
-    --inputBorderWidth: 1px;
-    --inputBorderRadius: 5px;
-    --inputFocusColor: hsla(210, 14%, 89%, 40%);
-    
-    /**
-     slider variables
-     */
-    
-    --sliderBackgroundColor: var(--whiteColor);
-    --sliderBorderColor: var(--whiteColor);
-    --thumbBorderColor: var(--whiteColor);
-    --thumbBackgroundColor: var(--whiteColor);
-    
-    /**
-     divider variables
-     */
-    
-    --dividerColor: #FFFFFF;
-    
-    /**
-     collection variables
-     */
-    
-    /**
-     button variables
-     */
-    
-    --buttonPaddingY: 12px;
-    --buttonPaddingX: 16px;
-    --buttonBorderWidth: 1px;
-    --buttonBorderRadius: 5px;
-    --buttonFontSize: 14px;
-    --buttonFontWeight: normal;
-    --buttonLineHeight: 1.2rem;
-    
-    /**
-     list variables
-     */
-    
-    --listBorderColor: hsla(210, 14%, 89%, 100%);
-    --listBorderWidth: 1px;
-    --listBorderRadius: 5px;
-}
-
-

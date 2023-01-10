@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ProjectAdminPage {
-    
-    var views: [View] = [IndexView(), CreateView(), EditView()]
+enum ProjectAdminPage {
     
     struct IndexView: View {
 
-        @TemplateValue(IndexContext<ProjectModel.Output>.self)
-        var context
+        var context: IndexContext<ProjectModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -22,7 +19,7 @@ struct ProjectAdminPage {
                             .fontWeight(.medium)
                         }
                         StackColumn(size: .six) {
-                            ActionButton(destination: "/area/admin/projects/create") {
+                            LinkButton(destination: "/area/admin/projects/create") {
                                 Text {
                                     "Create"
                                 }
@@ -36,36 +33,7 @@ struct ProjectAdminPage {
                     VStack {
                         StackColumn(size: .twelve) {
                             List(direction: .vertical) {
-                                ListRow {
-                                    HStack {
-                                        StackColumn(size: .four) {
-                                            Text {
-                                                "Title"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Category"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Status"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Date"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Action"
-                                            }
-                                        }
-                                    }
-                                }
-                                ForEach(in: context.items) { item in
+                                for item in context.items {
                                     ListRow {
                                         HStack {
                                             StackColumn(size: .four) {
@@ -85,7 +53,7 @@ struct ProjectAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
                                                 }
                                             }
                                             StackColumn(size: .two) {
@@ -113,9 +81,9 @@ struct ProjectAdminPage {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext.self) var context
+        var context: CreateContext
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -131,7 +99,7 @@ struct ProjectAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -156,7 +124,7 @@ struct ProjectAdminPage {
                                             "Category"
                                         }
                                         SelectField(name: "category") {
-                                            ForEach(in: ProjectModel.Categories.allCases) { category in
+                                            for category in ProjectModel.Categories.allCases {
                                                 Option {
                                                     category.rawValue
                                                 }
@@ -169,7 +137,7 @@ struct ProjectAdminPage {
                                             "Status"
                                         }
                                         SelectField(name: "status") {
-                                            ForEach(in: ProjectModel.States.allCases) { state in
+                                            for state in ProjectModel.States.allCases {
                                                 Option {
                                                     state.rawValue
                                                 }
@@ -180,7 +148,7 @@ struct ProjectAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)
@@ -205,9 +173,9 @@ struct ProjectAdminPage {
     
     struct EditView: View {
      
-        @TemplateValue(EditContext<ProjectModel.Output>.self) var context
+        var context: EditContext<ProjectModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -223,7 +191,7 @@ struct ProjectAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -248,7 +216,7 @@ struct ProjectAdminPage {
                                             "Category"
                                         }
                                         SelectField(name: "category") {
-                                            ForEach(in: ProjectModel.Categories.allCases) { category in
+                                            for category in ProjectModel.Categories.allCases {
                                                 Option {
                                                     category.rawValue
                                                 }
@@ -260,7 +228,7 @@ struct ProjectAdminPage {
                                             "Status"
                                         }
                                         SelectField(name: "status") {
-                                            ForEach(in: ProjectModel.States.allCases) { state in
+                                            for state in ProjectModel.States.allCases {
                                                 Option {
                                                     state.rawValue
                                                 }
@@ -270,7 +238,7 @@ struct ProjectAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)

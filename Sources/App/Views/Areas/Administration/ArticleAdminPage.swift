@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ArticleAdminPage {
-    
-    var views: [View] = [IndexView(), CreateView(), EditView()]
+enum ArticleAdminPage {
     
     struct IndexView: View {
 
-        @TemplateValue(IndexContext<ArticleModel.Output>.self)
-        var context
+        var context: IndexContext<ArticleModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -22,7 +19,7 @@ struct ArticleAdminPage {
                             .fontWeight(.medium)
                         }
                         StackColumn(size: .six) {
-                            ActionButton(destination: "/area/admin/articles/create") {
+                            LinkButton(destination: "/area/admin/articles/create") {
                                 Text {
                                     "Create"
                                 }
@@ -36,36 +33,7 @@ struct ArticleAdminPage {
                     VStack {
                         StackColumn(size: .twelve) {
                             List(direction: .vertical) {
-                                ListRow {
-                                    HStack {
-                                        StackColumn(size: .four) {
-                                            Text {
-                                                "Title"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Category"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Status"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Date"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Action"
-                                            }
-                                        }
-                                    }
-                                }
-                                ForEach(in: context.items) { item in
+                                for item in context.items {
                                     ListRow {
                                         HStack {
                                             StackColumn(size: .four) {
@@ -85,11 +53,11 @@ struct ArticleAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
                                                 }
                                             }
                                             StackColumn(size: .two) {
-                                                Link(destination: "/area/admin/articles/edit") {
+                                                Link(destination: "/area/admin/articles/edit/\(item.id)") {
                                                     "Edit"
                                                 }
                                             }
@@ -115,9 +83,9 @@ struct ArticleAdminPage {
     
     struct CreateView: View {
      
-        @TemplateValue(CreateContext.self) var context
+        var context: CreateContext
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -133,7 +101,7 @@ struct ArticleAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -168,7 +136,7 @@ struct ArticleAdminPage {
                                             "Category"
                                         }
                                         SelectField(name: "category") {
-                                            ForEach(in: ArticleModel.Categories.allCases) { category in
+                                            for category in ArticleModel.Categories.allCases {
                                                 Option {
                                                     category.rawValue
                                                 }
@@ -180,7 +148,7 @@ struct ArticleAdminPage {
                                             "Status"
                                         }
                                         SelectField(name: "status") {
-                                            ForEach(in: ArticleModel.States.allCases) { state in
+                                            for state in ArticleModel.States.allCases {
                                                 Option {
                                                     state.rawValue
                                                 }
@@ -190,7 +158,7 @@ struct ArticleAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)
@@ -215,9 +183,9 @@ struct ArticleAdminPage {
     
     struct EditView: View {
         
-        @TemplateValue(EditContext<ArticleModel.Output>.self) var context
+        var context: EditContext<ArticleModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -233,13 +201,13 @@ struct ArticleAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title")
+                                        TextField(name: "title", value: context.item.title)
                                     }
                                 }
                                 HStack {
@@ -268,7 +236,7 @@ struct ArticleAdminPage {
                                             "Category"
                                         }
                                         SelectField(name: "category") {
-                                            ForEach(in: ArticleModel.Categories.allCases) { category in
+                                            for category in ArticleModel.Categories.allCases {
                                                 Option {
                                                     category.rawValue
                                                 }
@@ -280,7 +248,7 @@ struct ArticleAdminPage {
                                             "Status"
                                         }
                                         SelectField(name: "status") {
-                                            ForEach(in: ArticleModel.States.allCases) { state in
+                                            for state in ArticleModel.States.allCases {
                                                 Option {
                                                     state.rawValue
                                                 }
@@ -290,7 +258,7 @@ struct ArticleAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)

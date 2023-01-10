@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/projects]
@@ -14,10 +15,12 @@ final class ProjectsPageController {
             .page(index: id, with: 6)
             .map(ProjectModel.Output.init)
         
-        return try await request.view.render("App.ProjectPage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Projects"),
             items: entities,
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ProjectPage.IndexView(context: context))
     }
 
     // [/show/:id]
@@ -31,10 +34,12 @@ final class ProjectsPageController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.ProjectPage.ShowView", ShowContext(
+        let context = ShowContext(
             view: ViewMetadata(title: "Project"),
             item: ProjectModel.Output(entity: entity),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ProjectPage.ShowView(context: context))
     }
 }
 

@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct HomeAdminPage {
-    
-    var views: [View] = [IndexView()]
+enum HomeAdminPage {
     
     struct IndexView: View {
         
-        @TemplateValue(EmptyContext.self)
-        var context
+        var context: EmptyContext
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {

@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/impressum]
@@ -10,9 +11,11 @@ final class ImpressumPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.ImpressumPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Impressum"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ImpressumPage.IndexView(context: context))
     }
 }
 

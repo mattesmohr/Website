@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct PrivacyPage {
-    
-    var views: [View] = [IndexView()]
+enum PrivacyPage {
     
     struct IndexView: View {
+        
+        var context: EmptyContext
 
-        @TemplateValue(EmptyContext.self)
-        var context
-
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,14 +15,11 @@ struct PrivacyPage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
-                            .foregroundColor(.white)
+                            .font(.subheadline)
                             Text {
                                 "Lorem ipsum"
                             }
-                            .fontSize(.large)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .font(.headline)
                         }
                     }
                 }
@@ -35,6 +29,7 @@ struct PrivacyPage {
                             Text {
                                 "Lorem ipsum"
                             }
+                            .font(.body)
                         }
                     }
                 }

@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ArticlePage {
-    
-    var views: [View] = [IndexView(), ShowView()]
+enum ArticlePage {
     
     struct IndexView: View {
+        
+        var context: IndexContext<ArticleModel.Output>
 
-        @TemplateValue(IndexContext<ArticleModel.Output>.self)
-        var context
-
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,12 +15,11 @@ struct ArticlePage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
+                            .font(.subheadline)
                             Text {
-                                "Lorem ipsum..."
+                                "Lorem ipsum"
                             }
-                            .fontSize(.large)
-                            .bold()
+                            .font(.headline)
                         }
                     }
                 }
@@ -72,32 +68,18 @@ struct ArticlePage {
                     }
                     HStack {
                         StackColumn(size: .twelve) {
-                            Collection {
-                                ForEach(in: context.items) { item in
-                                    CollectionItem {
-                                        Division {
-                                            Division {
-                                                Text {
-                                                    item.modifiedAt.formatted(string: "EEEE, MMM d, yyyy")
-                                                }
-                                                Text {
-                                                    item.title
-                                                }
-                                                Text {
-                                                    item.content
-                                                }
-                                            }
-                                            .class("article-body")
-                                            Division {
-                                                Anchor {
-                                                    "Read it"
-                                                }
-                                                .reference("context.route.baseUrl/show/context.item.id")
-                                                .class("link forward-indicator")
-                                            }
-                                            .class("article-footer")
+                            Grid {
+                                for item in context.items {
+                                    GridItem {
+                                        Text {
+                                            item.modifiedAt.formatted(date: .complete, time: .complete)
                                         }
-                                        .class("article")
+                                        Text {
+                                            item.title
+                                        }
+                                        Text {
+                                            item.content
+                                        }
                                     }
                                 }
                             }
@@ -116,9 +98,9 @@ struct ArticlePage {
 
     struct ShowView: View {
 
-        @TemplateValue(ShowContext<ArticleModel.Output>.self) var context
+        var context: ShowContext<ArticleModel.Output>
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {

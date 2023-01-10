@@ -9,7 +9,7 @@ public struct AreaPageContainer: View {
         self.content = content()
     }
 
-    public var body: AnyContent {
+    public var body: Content {
         Document(.html5)
         Html {
             Head {
@@ -26,7 +26,10 @@ public struct AreaPageContainer: View {
                     .reference("/css/area.css")
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/components/all.css")
+                    .reference("/htmlkit/all.css")
+                Script {
+                }
+                .source("/htmlkit/all.js")
             }
             Body {
                 content

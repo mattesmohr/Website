@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct HomePage {
-    
-    var views: [View] = [IndexView()]
+enum HomePage {
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self)
-        var context
+        var context: EmptyContext
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,47 +15,13 @@ struct HomePage {
                             Text {
                                 "Welcome"
                             }
-                            .fontSize(.medium)
-                            .foregroundColor(.secondary)
-                            Text {
-                                "Bonjour, ça va?"
-                            }
-                            .fontSize(.large)
-                            .foregroundColor(.primary)
-                            .bold()
-                            Text {
-                                "Moi, c'est Mattes. Et toi?"
-                            }
-                            .fontSize(.large)
-                            .foregroundColor(.secondary)
-                            .bold()
+                            .font(.subheadline)
                         }
                     }
                 }
                 Section {
                     HStack {
                         StackColumn(size: .twelve) {
-                            Collection {
-                                CollectionItem {
-                                    VStack {
-                                        StackColumn(size: .twelve) {
-                                        }
-                                        StackColumn(size: .twelve) {
-                                            Text {
-                                                "Lorem ipsum"
-                                            }
-                                            .font(.headline)
-                                            .foregroundColor(.black)
-                                            Text {
-                                                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. "
-                                            }
-                                            .font(.body)
-                                            .foregroundColor(.black)
-                                        }
-                                    }
-                                }
-                            }
-                            .collectionStyle(.grid)
                         }
                     }
                 }

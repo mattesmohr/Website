@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/projects]
@@ -18,11 +19,13 @@ final class ProjectAdminController {
             .page(index: id, with: 10)
             .map(ProjectModel.Output.init)
         
-        return try await request.view.render("App.ProjectAdminPage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Show projects"),
             items: entities,
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ProjectAdminPage.IndexView(context: context))
     }
     
     // [/create]
@@ -36,10 +39,12 @@ final class ProjectAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.ProjectAdminPage.CreateView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Create project"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ProjectAdminPage.CreateView(context: context))
     }
     
     // [/create/:model]
@@ -71,11 +76,13 @@ final class ProjectAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.ProjectAdminPage.EditView", EditContext(
+        let context = EditContext(
             view: ViewMetadata(title: "Edit project"),
             item: ProjectModel.Output(entity: entity),
             identity:  IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ProjectAdminPage.EditView(context: context))
     }
     
     // [/edit/:model]

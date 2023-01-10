@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/connect]
@@ -10,9 +11,11 @@ final class ConnectPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.ConnectPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Connect"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ConnectPage.IndexView(context: context))
     }
     
     // [/index/:model]

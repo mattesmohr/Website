@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct UserAdminPage {
-    
-    var views: [View] = [IndexView(), CreateView(), EditView()]
+enum UserAdminPage {
     
     struct IndexView: View {
 
-        @TemplateValue(IndexContext<UserModel.Output>.self)
-        var context
+        var context: IndexContext<UserModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -22,7 +19,7 @@ struct UserAdminPage {
                             .fontWeight(.medium)
                         }
                         StackColumn(size: .six) {
-                            ActionButton(destination: "/area/admin/users/create") {
+                            LinkButton(destination: "/area/admin/users/create") {
                                 Text {
                                     "Create"
                                 }
@@ -36,36 +33,7 @@ struct UserAdminPage {
                     VStack {
                         StackColumn(size: .twelve) {
                             List(direction: .vertical) {
-                                ListRow {
-                                    HStack {
-                                        StackColumn(size: .four) {
-                                            Text {
-                                                "Email"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Firstname"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Lastname"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Date"
-                                            }
-                                        }
-                                        StackColumn(size: .two) {
-                                            Text {
-                                                "Action"
-                                            }
-                                        }
-                                    }
-                                }
-                                ForEach(in: context.items) { item in
+                                for item in context.items {
                                     ListRow {
                                         HStack {
                                             StackColumn(size: .four) {
@@ -85,11 +53,11 @@ struct UserAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.style(date: .short, time: .none)
+                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
                                                 }
                                             }
                                             StackColumn(size: .two) {
-                                                Link(destination: "/area/admin/users/edit") {
+                                                Link(destination: "/area/admin/users/edit/\(item.id)") {
                                                     "Edit"
                                                 }
                                             }
@@ -113,9 +81,9 @@ struct UserAdminPage {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext.self) var context
+        var context: CreateContext
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -131,7 +99,7 @@ struct UserAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "email") {
@@ -142,16 +110,16 @@ struct UserAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .six) {
-                                        FieldLabel(for: "firstname") {
+                                        FieldLabel(for: "firstName") {
                                             "Firstname"
                                         }
-                                        TextField(name: "firstname")
+                                        TextField(name: "firstName")
                                     }
                                     StackColumn(size: .six) {
-                                        FieldLabel(for: "lastname") {
+                                        FieldLabel(for: "lastName") {
                                             "Lastname"
                                         }
-                                        TextField(name: "lastname")
+                                        TextField(name: "lastName")
                                     }
                                 }
                                 HStack {
@@ -167,7 +135,7 @@ struct UserAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)
@@ -190,9 +158,9 @@ struct UserAdminPage {
     
     struct EditView: View {
         
-        @TemplateValue(EditContext<UserModel>.self) var context
+        var context: EditContext<UserModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -208,27 +176,27 @@ struct UserAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "email") {
                                             "Email"
                                         }
-                                        TextField(name: "email")
+                                        TextField(name: "email", value: context.item.email)
                                     }
                                 }
                                 HStack {
                                     StackColumn(size: .six) {
-                                        FieldLabel(for: "firstname") {
+                                        FieldLabel(for: "firstName") {
                                             "Firstname"
                                         }
-                                        TextField(name: "firstname")
+                                        TextField(name: "firstName", value: context.item.firstName)
                                     }
                                     StackColumn(size: .six) {
-                                        FieldLabel(for: "lastname") {
+                                        FieldLabel(for: "lastName") {
                                             "Lastname"
                                         }
-                                        TextField(name: "lastname")
+                                        TextField(name: "lastName", value: context.item.lastName)
                                     }
                                 }
                                 HStack {
@@ -243,7 +211,7 @@ struct UserAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)

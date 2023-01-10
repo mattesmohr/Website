@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/home]
@@ -10,9 +11,11 @@ final class HomePageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.HomePage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Home"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(HomePage.IndexView(context: context))
     }
 }
 

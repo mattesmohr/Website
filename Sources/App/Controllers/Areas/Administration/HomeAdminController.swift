@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/home]
@@ -14,10 +15,12 @@ final class HomeAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.HomeAdminPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Show home"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(HomeAdminPage.IndexView(context: context))
     }
 }
 

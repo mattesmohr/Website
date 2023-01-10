@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ProjectPage {
-    
-    var views: [View] = [IndexView(), ShowView()]
+enum ProjectPage {
     
     struct IndexView: View {
 
-        @TemplateValue(IndexContext<ProjectModel.Output>.self)
-        var context
+        var context: IndexContext<ProjectModel.Output>
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,12 +15,11 @@ struct ProjectPage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
+                            .font(.subheadline)
                             Text {
-                                "Lorem ipsum..."
+                                "Lorem ipsum"
                             }
-                            .fontSize(.large)
-                            .fontWeight(.bold)
+                            .font(.headline)
                         }
                     }
                 }
@@ -89,9 +85,9 @@ struct ProjectPage {
     
     struct ShowView: View {
 
-        @TemplateValue(ShowContext<ProjectModel.Output>.self) var context
+        var context: ShowContext<ProjectModel.Output>
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {

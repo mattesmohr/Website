@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ImpressumPage {
-    
-    var views: [View] = [IndexView()]
+enum ImpressumPage {
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self)
-        var context
+        var context: EmptyContext
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,14 +15,11 @@ struct ImpressumPage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
-                            .foregroundColor(.white)
+                            .font(.subheadline)
                             Text {
                                 "Lorem ipsum"
                             }
-                            .fontSize(.large)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
+                            .font(.headline)
                         }
                     }
                 }
@@ -33,9 +27,9 @@ struct ImpressumPage {
                     HStack {
                         StackColumn(size: .twelve) {
                             Text {
-                                "Lorem ipsum"
+                                "Lorem ipsum..."
                             }
-                            .foregroundColor(.white)
+                            .font(.body)
                         }
                     }
                 }

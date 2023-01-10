@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/login]
@@ -15,9 +16,11 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.LoginAreaPage.RegisterView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Register account"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(LoginAreaPage.RegisterView(context: context))
     }
     
     // [/register/:model]
@@ -42,9 +45,11 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.LoginAreaPage.LoginView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Register account"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(LoginAreaPage.LoginView(context: context))
     }
     
     // [/login/:model]
@@ -86,9 +91,11 @@ final class LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.LoginAreaPage.ResetView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Reset"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(LoginAreaPage.ResetView(context: context))
     }
     
     // [/reset/:model]

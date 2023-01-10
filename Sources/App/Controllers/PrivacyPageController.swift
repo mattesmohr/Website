@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/privacy]
@@ -10,9 +11,11 @@ final class PrivacyPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.PrivacyPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Privacy"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(PrivacyPage.IndexView(context: context))
     }
 }
 

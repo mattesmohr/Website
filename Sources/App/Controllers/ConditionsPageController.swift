@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/conditions]
@@ -10,9 +11,11 @@ final class ConditionsPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.ConditionPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Conditions"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ConditionPage.IndexView(context: context))
     }
 }
 

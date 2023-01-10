@@ -17,10 +17,6 @@ public func configure(_ app: Application) throws {
     app.sessions.use(.memory)
     
     app.passwords.use(.bcrypt)
-
-    app.views.use(.htmlkit)
-    
-    app.htmlkit.views.add(view: HomePage.IndexView())
     
     var tls = TLSConfiguration.makeClientConfiguration()
     tls.certificateVerification = .none

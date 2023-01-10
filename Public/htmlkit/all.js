@@ -17,6 +17,14 @@ var $ = (function () {
     /**
      * This function is for
      */
+    constructor.prototype.onLeave = function (callback) {
+        
+        this.elems[0].addEventListener("mouseleave", callback);
+    };
+    
+    /**
+     * This function is for
+     */
     constructor.prototype.onChange = function (callback) {
         
         this.elems[0].addEventListener("change", callback);
@@ -74,7 +82,7 @@ var $ = (function () {
      * This function is for
      */
     constructor.prototype.onSubmit = function (callback) {
-        
+
         this.elems[0].addEventListener("submit", callback);
     };
     
@@ -83,7 +91,13 @@ var $ = (function () {
      */
     constructor.prototype.show = function() {
         
-        this.elems[0].style.display = 'block';
+        const elements = document.getElementsByClassName("display:block");
+        
+        for (let element of elements){
+            element.classList.remove("display:block")
+        }
+        
+        this.elems[0].classList.add("display:block")
     };
     
     /**
@@ -91,7 +105,7 @@ var $ = (function () {
      */
     constructor.prototype.hide = function() {
         
-        this.elems[0].style.display = 'none';
+        this.elems[0].classList.remove("display:block")
     };
     
     /**
@@ -102,6 +116,22 @@ var $ = (function () {
         this.elems[0].animate({params}, speed);
     };
     
+    /**
+     * This function is for
+     */
+    constructor.prototype.open = function() {
+        
+        this.elems[0].showModal()
+    };
+    
+    /**
+     * This function is for
+     */
+    constructor.prototype.close = function() {
+        
+        this.elems[0].close()
+    };
+    
     var instantiate = function (selector) {
         return new constructor(selector);
     };
@@ -109,3 +139,4 @@ var $ = (function () {
     return instantiate;
 
 })();
+

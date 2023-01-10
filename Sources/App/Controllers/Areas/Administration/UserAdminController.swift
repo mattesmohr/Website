@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/users]
@@ -18,11 +19,13 @@ final class UserAdminController {
             .page(index: id, with: 10)
             .map(UserModel.Output.init)
         
-        return try await request.view.render("App.UserAdminPage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Show users"),
             items: entities,
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(UserAdminPage.IndexView(context: context))
     }
     
     // [/create]
@@ -36,10 +39,12 @@ final class UserAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.UserAdminPage.CreateView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Create user"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(UserAdminPage.CreateView(context: context))
     }
     
     // [/create/:model]
@@ -70,11 +75,13 @@ final class UserAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.UserAdminPage.EditView", EditContext(
+        let context = EditContext(
             view: ViewMetadata(title: "Edit user"),
-            item: entity,
+            item: UserModel.Output(entity: entity),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(UserAdminPage.EditView(context: context))
     }
     
     // [/edit/:model]

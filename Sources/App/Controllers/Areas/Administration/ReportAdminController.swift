@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/reports]
@@ -14,10 +15,12 @@ final class ReportAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.ReportAdminPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Show reports"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ReportAdminPage.IndexView(context: context))
     }
 }
 

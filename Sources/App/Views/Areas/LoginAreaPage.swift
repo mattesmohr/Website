@@ -1,20 +1,17 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct LoginAreaPage {
-    
-    var views: [View] = [LoginView(), RegisterView(), ResetView()]
+enum LoginAreaPage {
     
     struct LoginView: View {
 
-        @TemplateValue(EmptyContext.self)
-        var context
+        var context: EmptyContext
 
-        public var body: AnyContent {
+        public var body: Content {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        HTMLKitComponents.Form {
+                        Form(method: .post) {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -47,7 +44,7 @@ struct LoginAreaPage {
                             }
                             HStack {
                                 StackColumn(size: .twelve) {
-                                    SubmitButton {
+                                    Button(role: .submit) {
                                         "Sign in"
                                     }
                                     .buttonStyle(.primary)
@@ -57,7 +54,7 @@ struct LoginAreaPage {
                             }
                             HStack {
                                 StackColumn(size: .six) {
-                                    ActionButton(destination: "/area/login/register") {
+                                    LinkButton(destination: "/area/login/register") {
                                         "Sign up"
                                     }
                                     .buttonSize(.full)
@@ -65,7 +62,7 @@ struct LoginAreaPage {
                                     .borderShape(.smallrounded)
                                 }
                                 StackColumn(size: .six) {
-                                    ActionButton(destination: "/area/login/reset") {
+                                    LinkButton(destination: "/area/login/reset") {
                                         "Reset password"
                                     }
                                     .buttonSize(.full)
@@ -83,14 +80,13 @@ struct LoginAreaPage {
     
     struct RegisterView: View {
 
-        @TemplateValue(CreateContext.self)
-        var context
+        var context: CreateContext
 
-        public var body: AnyContent {
+        public var body: Content {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        HTMLKitComponents.Form {
+                        Form(method: .post) {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -131,14 +127,14 @@ struct LoginAreaPage {
                             }
                             HStack {
                                 StackColumn(size: .two) {
-                                    ActionButton(destination: "/area/login/login") {
+                                    LinkButton(destination: "/area/login/login") {
                                     }
                                     .buttonSize(.full)
                                     .buttonStyle(.secondary)
                                     .borderShape(.smallrounded)
                                 }
                                 StackColumn(size: .ten) {
-                                    SubmitButton {
+                                    Button(role: .submit) {
                                         "Submit"
                                     }
                                     .buttonSize(.full)
@@ -156,14 +152,13 @@ struct LoginAreaPage {
     
     struct ResetView: View {
 
-        @TemplateValue(CreateContext.self)
-        var context
+        var context: CreateContext
 
-        public var body: AnyContent {
+        public var body: Content {
             AreaPageContainer {
                 HStack {
                     StackColumn(size: .five) {
-                        HTMLKitComponents.Form {
+                        Form(method: .post) {
                             HStack {
                                 StackColumn(size: .twelve, alignment: .center) {
                                     Text {
@@ -188,14 +183,14 @@ struct LoginAreaPage {
                             }
                             HStack {
                                 StackColumn(size: .two) {
-                                    ActionButton(destination: "/area/login/login") {
+                                    LinkButton(destination: "/area/login/login") {
                                     }
                                     .buttonSize(.full)
                                     .buttonStyle(.secondary)
                                     .borderShape(.smallrounded)
                                 }
                                 StackColumn(size: .ten) {
-                                    SubmitButton {
+                                    Button(role: .submit) {
                                         "Submit"
                                     }
                                     .buttonSize(.full)

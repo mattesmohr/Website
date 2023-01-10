@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct AssetAdminPage {
-    
-    var views: [View] = [IndexView(), CreateView(), EditView()]
+enum AssetAdminPage {
     
     struct IndexView: View {
         
-        @TemplateValue(IndexContext<AssetModel.Output>.self)
-        var context
+        var context: IndexContext<AssetModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -22,7 +19,7 @@ struct AssetAdminPage {
                             .fontWeight(.medium)
                         }
                         StackColumn(size: .six) {
-                            ActionButton(destination: "/area/admin/assets/create") {
+                            LinkButton(destination: "/area/admin/assets/create") {
                                 Text {
                                     "Create"
                                 }
@@ -52,9 +49,9 @@ struct AssetAdminPage {
     
     struct CreateView: View {
         
-        @TemplateValue(CreateContext.self) var context
+        var context: CreateContext
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -70,7 +67,7 @@ struct AssetAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -81,7 +78,7 @@ struct AssetAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)
@@ -106,9 +103,9 @@ struct AssetAdminPage {
     
     struct EditView: View {
         
-        @TemplateValue(EditContext<AssetModel>.self) var context
+        var context: EditContext<AssetModel.Output>
         
-        var body: AnyContent {
+        var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
@@ -124,7 +121,7 @@ struct AssetAdminPage {
                 Section {
                     VStack {
                         StackColumn(size: .twelve) {
-                            HTMLKitComponents.Form {
+                            Form(method: .post) {
                                 HStack {
                                     StackColumn(size: .twelve) {
                                         FieldLabel(for: "title") {
@@ -135,7 +132,7 @@ struct AssetAdminPage {
                                 }
                                 HStack {
                                     StackColumn(size: .twelve) {
-                                        SubmitButton {
+                                        Button(role: .submit) {
                                             "Submit"
                                         }
                                         .buttonStyle(.primary)

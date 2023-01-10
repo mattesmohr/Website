@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/settings]
@@ -10,9 +11,12 @@ final class SettingsPageController {
             throw Abort(.badRequest)
         }
         
-        return try await request.view.render("App.SettingPage.IndexView", EmptyContext(
+        let context = EmptyContext(
             view: ViewMetadata(title: "Settings"),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route)
+        )
+        
+        return try await request.htmlkit.render(SettingPage.IndexView(context: context))
     }
 }
 

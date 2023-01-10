@@ -3,13 +3,16 @@ import HTMLKitComponents
 
 public struct AreaViewContainer: View {
     
-    public let content: AnyContent
+    public let content: [Content]
     
-    public init(@ContentBuilder<AnyContent> content: () -> AnyContent) {
+    public init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()
     }
+    
+    @EnvironmentObject(IdentityMetadata.self)
+    var object
 
-    public var body: AnyContent {
+    public var body: Content {
         AreaPageContainer {
             Header {
                 HStack {
@@ -29,6 +32,7 @@ public struct AreaViewContainer: View {
                         List(direction: .vertical) {
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/home/index") {
                                         "Home"
                                     }
@@ -36,6 +40,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/projects/index/0") {
                                         "Projects"
                                     }
@@ -43,6 +48,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/articles/index/0") {
                                         "Articles"
                                     }
@@ -50,6 +56,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/assets/index/0") {
                                         "Assets"
                                     }
@@ -57,6 +64,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/reports/index") {
                                         "Report"
                                     }
@@ -64,6 +72,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
+                                    Symbol(system: "folder")
                                     Link(destination: "/area/admin/users/index/0") {
                                         "Users"
                                     }

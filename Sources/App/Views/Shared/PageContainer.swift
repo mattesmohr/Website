@@ -9,7 +9,7 @@ public struct PageContainer: View {
         self.content = content()
     }
 
-    public var body: AnyContent {
+    public var body: Content {
         Document(.html5)
         Html {
             Head {
@@ -26,24 +26,14 @@ public struct PageContainer: View {
                     .reference("/css/page.css")
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/components/all.css")
+                    .reference("/htmlkit/all.css")
                 Script {
                 }
-                .source("/js/all.js")
+                .source("/htmlkit/all.js")
             }
             Body {
                 content
-                Script {
-                }
             }
         }
     }
-    
-    public var scripts: BodyElement {        
-        return [content.scripts]
-    }
 }
-
-extension Array: AnyElement where Element == AnyContent {}
-
-extension Array: BodyElement where Element == AnyContent {}

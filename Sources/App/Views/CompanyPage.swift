@@ -1,16 +1,13 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct CompanyPage {
-    
-    var views: [View] = [IndexView()]
+enum CompanyPage {
     
     struct IndexView: View {
 
-        @TemplateValue(EmptyContext.self)
-        var context
+        var context: EmptyContext
 
-        public var body: AnyContent {
+        public var body: Content {
             ViewContainer {
                 Header {
                     HStack {
@@ -18,7 +15,7 @@ struct CompanyPage {
                             Text {
                                 context.view.title
                             }
-                            .fontSize(.medium)
+                            .font(.subheadline)
                         }
                     }
                 }

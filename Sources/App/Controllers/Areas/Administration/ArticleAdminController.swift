@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/articles]
@@ -18,11 +19,13 @@ final class ArticleAdminController {
             .page(index: id, with: 10)
             .map(ArticleModel.Output.init)
         
-        return try await request.view.render("App.ArticleAdminPage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Show articles"),
             items: entities,
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ArticleAdminPage.IndexView(context: context))
     }
     
     // [/create]
@@ -36,10 +39,12 @@ final class ArticleAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.ArticleAdminPage.CreateView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Create article"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ArticleAdminPage.CreateView(context: context))
     }
     
     // [/create/:model]
@@ -72,11 +77,13 @@ final class ArticleAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.ArticleAdminPage.EditView", EditContext(
+        let context = EditContext(
             view: ViewMetadata(title: "Edit article"),
             item: ArticleModel.Output(entity: entity),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(ArticleAdminPage.EditView(context: context))
     }
     
     // [/edit/:model]

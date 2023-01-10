@@ -1,3 +1,4 @@
+import HTMLKitVapor
 import Vapor
 
 // [/area/admin/assets]
@@ -18,11 +19,13 @@ final class AssetAdminController {
             .page(index: id, with: 10)
             .map(AssetModel.Output.init)
         
-        return try await request.view.render("App.AssetAdminPage.IndexView", IndexContext(
+        let context = IndexContext(
             view: ViewMetadata(title: "Show assets"),
             items: entities,
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(AssetAdminPage.IndexView(context: context))
     }
     
     // [/create]
@@ -36,10 +39,12 @@ final class AssetAdminController {
             throw Abort(.unauthorized)
         }
         
-        return try await request.view.render("App.AssetAdminPage.CreateView", CreateContext(
+        let context = CreateContext(
             view: ViewMetadata(title: "Create asset"),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(AssetAdminPage.CreateView(context: context))
     }
     
     // [/create/:model]
@@ -70,11 +75,13 @@ final class AssetAdminController {
             throw Abort(.notFound)
         }
         
-        return try await request.view.render("App.AssetAdminPage.EditView", EditContext(
+        let context = EditContext(
             view: ViewMetadata(title: "Edit asset"),
-            item: entity,
+            item: AssetModel.Output(entity: entity),
             identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route)))
+            route: RouteMetadata(route: route))
+        
+        return try await request.htmlkit.render(AssetAdminPage.EditView(context: context))
     }
     
     // [/edit/:model]
