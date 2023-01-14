@@ -2,7 +2,7 @@ import Vapor
 
 struct UserSessionAuthenticator: AsyncSessionAuthenticator {
     
-    typealias User = App.UserModel.Output
+    typealias User = Website.UserModel.Output
     
     func authenticate(sessionID: String, for request: Request) async throws {
     

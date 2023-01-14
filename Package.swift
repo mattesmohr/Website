@@ -14,8 +14,8 @@ let package = Package(
         .package(url: "https://github.com/vapor-community/HTMLKit.git", branch: "main")
     ],
     targets: [
-        .target(
-            name: "App",
+        .executableTarget(
+            name: "Website",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentMySQLDriver", package: "fluent-mysql-driver"),
@@ -26,11 +26,8 @@ let package = Package(
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ]
         ),
-        .executableTarget(name: "Run", dependencies: [
-            .target(name: "App")
-        ]),
-        .testTarget(name: "AppTests", dependencies: [
-            .target(name: "App"),
+        .testTarget(name: "WebsiteTests", dependencies: [
+            .target(name: "Website"),
             .product(name: "XCTVapor", package: "vapor")
         ])
     ]
