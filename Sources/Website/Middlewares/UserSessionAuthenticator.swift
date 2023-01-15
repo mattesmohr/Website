@@ -8,7 +8,11 @@ struct UserSessionAuthenticator: AsyncSessionAuthenticator {
     
         if let entity = try await UserRepository(database: request.db).find(name: sessionID) {
             
-            request.auth.login(UserModel.Output(entity: entity))
+            let user = UserModel.Output(entity: entity)
+            
+            request.application.htmlkit.environment.add(object: IdentityMetadata(user: user))
+            
+            request.auth.login(user)
         }
     }
 }

@@ -53,13 +53,36 @@ enum UserAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
+                                                    item.modifiedAt.formatted(date: .numeric, time: .omitted)
                                                 }
                                             }
                                             StackColumn(size: .two) {
-                                                Link(destination: "/area/admin/users/edit/\(item.id)") {
-                                                    "Edit"
+                                                Dropdown {
+                                                    List(direction: .vertical) {
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/users/edit/\(item.id)") {
+                                                                    "Edit"
+                                                                }
+                                                            }
+                                                        }
+                                                        Divider()
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/users/delete/\(item.id)") {
+                                                                    "Delete"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Text {
+                                                        "Action"
+                                                    }
                                                 }
+
                                             }
                                         }
                                     }
@@ -68,6 +91,8 @@ enum UserAdminPage {
                             .listStyle(.grouped)
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -128,7 +153,6 @@ enum UserAdminPage {
                                             "Description"
                                         }
                                         TextEditor(name: "desription") {
-                                            
                                         }
                                         .lineLimit(4)
                                     }
@@ -145,6 +169,8 @@ enum UserAdminPage {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -204,7 +230,8 @@ enum UserAdminPage {
                                         FieldLabel(for: "description") {
                                             "Description"
                                         }
-                                        TextEditor(name: "desription") {
+                                        TextEditor(name: "description") {
+                                            context.item.description ?? ""
                                         }
                                         .lineLimit(4)
                                     }
@@ -221,6 +248,8 @@ enum UserAdminPage {
                             }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {

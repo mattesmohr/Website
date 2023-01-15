@@ -10,7 +10,7 @@ public struct AreaViewContainer: View {
     }
     
     @EnvironmentObject(IdentityMetadata.self)
-    var object
+    var identity
 
     public var body: Content {
         AreaPageContainer {
@@ -18,7 +18,7 @@ public struct AreaViewContainer: View {
                 HStack {
                     StackColumn(size: .twelve) {
                         Text {
-                            "mattesmohr"
+                            "Admin Panel"
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
@@ -81,8 +81,17 @@ public struct AreaViewContainer: View {
                         }
                     }
                     Footer {
-                        Link(destination: "/area/login/logout") {
-                            "Log out"
+                        HStack(alignment: .center) {
+                            StackColumn(size: .three) {
+                                Text {
+                                    identity.name
+                                }
+                            }
+                            StackColumn(size: .six, alignment: .right, offset: .three) {
+                                Link(destination: "/area/login/logout") {
+                                    "Log out"
+                                }
+                            }
                         }
                     }
                 }

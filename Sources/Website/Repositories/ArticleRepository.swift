@@ -63,8 +63,10 @@ final class ArticleRepository {
         try await ArticleEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
+            .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
+            .set(\.$status, to: entity.status)
             .update()
     }
     

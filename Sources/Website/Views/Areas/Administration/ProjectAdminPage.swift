@@ -53,12 +53,34 @@ enum ProjectAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
+                                                    item.modifiedAt.formatted(date: .numeric, time: .omitted)
                                                 }
                                             }
                                             StackColumn(size: .two) {
-                                                Link(destination: "/area/admin/projects/edit") {
-                                                    "Edit"
+                                                Dropdown {
+                                                    List(direction: .vertical) {
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/projects/edit/\(item.id)") {
+                                                                    "Edit"
+                                                                }
+                                                            }
+                                                        }
+                                                        Divider()
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/projects/delete/\(item.id)") {
+                                                                    "Delete"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Text {
+                                                        "Action"
+                                                    }
                                                 }
                                             }
                                         }
@@ -68,6 +90,8 @@ enum ProjectAdminPage {
                             .listStyle(.grouped)
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {
@@ -197,7 +221,7 @@ enum ProjectAdminPage {
                                         FieldLabel(for: "title") {
                                             "Title"
                                         }
-                                        TextField(name: "title")
+                                        TextField(name: "title", value: context.item.title)
                                     }
                                 }
                                 HStack {
@@ -206,6 +230,7 @@ enum ProjectAdminPage {
                                             "Content"
                                         }
                                         TextEditor(name: "content") {
+                                            context.item.content
                                         }
                                         .lineLimit(8)
                                     }

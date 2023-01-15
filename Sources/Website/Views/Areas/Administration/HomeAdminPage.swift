@@ -13,7 +13,7 @@ enum HomeAdminPage {
                     HStack {
                         StackColumn(size: .twelve) {
                             Text {
-                                context.view.title
+                                "Hello again!"
                             }
                             .fontSize(.medium)
                             .fontWeight(.medium)
@@ -21,10 +21,22 @@ enum HomeAdminPage {
                     }
                 }
                 Section {
-                    VStack {
-                        StackColumn(size: .twelve) {
+                    HStack(alignment: .top) {
+                        StackColumn(size: .four) {
+                            Card {
+                            }
+                        }
+                        StackColumn(size: .four) {
+                            Card {
+                            }
+                        }
+                        StackColumn(size: .four) {
+                            Card {
+                            }
                         }
                     }
+                }
+                Aside {
                 }
                 Footer {
                     HStack {

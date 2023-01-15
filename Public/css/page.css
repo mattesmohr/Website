@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:300,400,700,900');
 
+/*
+ override
+ */
+
+:root {
+}
+
 * {
     margin: 0;
     padding: 0;

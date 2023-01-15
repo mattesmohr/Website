@@ -23,10 +23,10 @@ public struct AreaPageContainer: View {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/area.css")
+                    .reference("/htmlkit/all.css")
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/htmlkit/all.css")
+                    .reference("/css/area.css")
                 Script {
                 }
                 .source("/htmlkit/all.js")

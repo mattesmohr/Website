@@ -53,12 +53,34 @@ enum ArticleAdminPage {
                                             }
                                             StackColumn(size: .two) {
                                                 Text {
-                                                    item.modifiedAt.formatted(date: .complete, time: .complete)
+                                                    item.modifiedAt.formatted(date: .numeric, time: .omitted)
                                                 }
                                             }
                                             StackColumn(size: .two) {
-                                                Link(destination: "/area/admin/articles/edit/\(item.id)") {
-                                                    "Edit"
+                                                Dropdown {
+                                                    List(direction: .vertical) {
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/articles/edit/\(item.id)") {
+                                                                    "Edit"
+                                                                }
+                                                            }
+                                                        }
+                                                        Divider()
+                                                        ListRow {
+                                                            HTMLKitComponents.Group {
+                                                                Symbol(system: "folder")
+                                                                Link(destination: "/area/admin/articles/delete/\(item.id)") {
+                                                                    "Delete"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Text {
+                                                        "Action"
+                                                    }
                                                 }
                                             }
                                         }
@@ -216,6 +238,7 @@ enum ArticleAdminPage {
                                             "Excerpt"
                                         }
                                         TextEditor(name: "excerpt") {
+                                            context.item.excerpt ?? ""
                                         }
                                         .lineLimit(4)
                                     }
@@ -226,6 +249,7 @@ enum ArticleAdminPage {
                                             "Content"
                                         }
                                         TextEditor(name: "content") {
+                                            context.item.content
                                         }
                                         .lineLimit(8)
                                     }

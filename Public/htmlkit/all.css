@@ -7,6 +7,8 @@
     margin-top: 5px;
     margin-bottom: 5px;
     width: 100%;
+    height: 1px;
+    border: 0;
     background-color: var(--dividerColor);
 }
 /**
@@ -1252,7 +1254,7 @@ zindex\:5 {
     
     
     /**
-     grid variables
+     card variables
      */
     
     --cardPaddingY: 12px;
@@ -1261,6 +1263,15 @@ zindex\:5 {
     --cardBorderRadius: 15px;
     --cardBorderColor: var(--grayColor);
     --cardBackgroundColor: var(--whiteColor);
+    
+    /**
+     dropdown variables
+     */
+    
+    --dropdownBorderRadius: 5px;
+    --dropdownBorderColor: var(--grayColor);
+    --dropdownHoverColor: var(--silverColor);
+    --dropdownBackgroundColor: var(--whiteColor);
 }
 /**
  button component
@@ -1587,4 +1598,40 @@ zindex\:5 {
 
 .stack-column.offset\:11 {
     margin-left: 91.6666666667%;
+}
+/**
+ dropdown component
+ */
+.dropdown {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+.dropdown-label {
+    display: inline-block;
+}
+
+.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 6px 0px;
+    width: 200px;
+    border: 1px solid var(--dropdownBorderColor);
+    border-radius: var(--dropdownBorderRadius);
+    background-color: var(--dropdownBackgroundColor);
+    z-index: 1;
+}
+
+.dropdown:focus .dropdown-content {
+    display: inline-block;
+}
+
+.dropdown .list .list-row:hover {
+    background-color: var(--dropdownHoverColor);
+}
+
+.dropdown .dropdown-content .list .list-row .link {
+    display: block;
 }

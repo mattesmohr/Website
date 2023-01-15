@@ -28,6 +28,8 @@ enum ReportAdminPage {
                         }
                     }
                 }
+                Aside {
+                }
                 Footer {
                     HStack {
                         StackColumn(size: .twelve) {

@@ -23,10 +23,10 @@ public struct PageContainer: View {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/css/page.css")
+                    .reference("/htmlkit/all.css")
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/htmlkit/all.css")
+                    .reference("/css/page.css")
                 Script {
                 }
                 .source("/htmlkit/all.js")

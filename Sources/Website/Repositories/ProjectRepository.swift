@@ -65,6 +65,7 @@ final class ProjectRepository {
             .set(\.$title, to: entity.title)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
+            .set(\.$status, to: entity.status)
             .update()
     }
     
