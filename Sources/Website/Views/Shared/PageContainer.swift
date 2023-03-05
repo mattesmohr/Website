@@ -33,6 +33,10 @@ public struct PageContainer: View {
             }
             Body {
                 content
+                Script {
+                    
+                }
+                .source("/js/page.js")
             }
         }
     }

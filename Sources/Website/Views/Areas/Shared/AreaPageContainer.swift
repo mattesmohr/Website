@@ -33,6 +33,10 @@ public struct AreaPageContainer: View {
             }
             Body {
                 content
+                Script {
+                    
+                }
+                .source("/js/area.js")
             }
         }
     }

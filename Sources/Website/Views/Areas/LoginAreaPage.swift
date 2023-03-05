@@ -54,6 +54,8 @@ enum LoginAreaPage {
                                     }
                                 }
                             }
+                            .id("login-form")
+                            .onSubmit(perfom: .valdiate("login-form", [Validator(field: "email", rule: .email), Validator(field: "password", rule: .value)]))
                         }
                     }
                 }
@@ -111,6 +113,8 @@ enum LoginAreaPage {
                                     }
                                 }
                             }
+                            .id("register-form")
+                            .onSubmit(perfom: .valdiate("register-form", [Validator(field: "email", rule: .email), Validator(field: "password", rule: .value), Validator(field: "confirmation", rule: .value)]))
                         }
                     }
                 }
@@ -156,6 +160,8 @@ enum LoginAreaPage {
                                     }
                                 }
                             }
+                            .id("reset-form")
+                            .onSubmit(perfom: .valdiate("reset-form", [Validator(field: "email", rule: .email)]))
                         }
                     }
                 }

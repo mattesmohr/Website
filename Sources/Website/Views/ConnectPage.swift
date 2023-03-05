@@ -78,6 +78,8 @@ enum ConnectPage {
                                     .borderShape(.smallrounded)
                                 }
                             }
+                            .id("contact-form")
+                            .onSubmit(perfom: .valdiate("contact-form", [Validator(field: "email", rule: .email), Validator(field: "message", rule: .value)]))
                         }
                     }
                 }

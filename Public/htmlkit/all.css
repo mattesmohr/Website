@@ -102,15 +102,6 @@
 
 .grid-item {
     
-    padding-top: var(--gridItemPaddingY);
-    padding-right: var(--gridItemPaddingX);
-    padding-bottom: var(--gridItemPaddingY);
-    padding-left: var(--gridItemPaddingX);
-    border-width: var(--gridItemBorderWidth);
-    border-style: solid;
-    border-color: var(--gridItemBorderColor);
-    border-radius: var(--gridItemBorderRadius);
-    
     overflow: hidden;
 }
 
@@ -184,15 +175,38 @@
  */
 
 .card {
-    padding-top: var(--cardPaddingY);
-    padding-right: var(--cardPaddingX);
-    padding-bottom: var(--cardPaddingY);
-    padding-left: var(--cardPaddingX);
+    
+    display: flex;
+    flex-direction: column;
     border-width: var(--cardBorderWidth);
     border-style: solid;
     border-radius: var(--cardBorderRadius);
     border-color: var(--cardBorderColor);
     background-color: var(--cardBackgroundColor);
+}
+
+.card .card-header {
+    
+    max-height: var(--cardHeaderHight);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    background-color: var(--cardHeaderBackgroundColor);
+    overflow: hidden;
+}
+
+.card .card-header .image {
+    
+    border-radius: inherit;
+}
+
+.card .card-body {
+    
+    padding-top: var(--cardPaddingY);
+    padding-right: var(--cardPaddingX);
+    padding-bottom: var(--cardPaddingY);
+    padding-left: var(--cardPaddingX);
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
 }
 /**
  group component
@@ -224,6 +238,111 @@
 
 .group > * + .symbol {
     margin-left: 15px;
+}
+
+.group.color\:black {
+    color: var(--blackColor);
+}
+
+.group.color\:blue {
+    color: var(--blueColor);
+}
+
+.group.color\:brown {
+    color: var(--brownColor);
+}
+
+.group.color\:cyan {
+    color: var(--cyanColor);
+}
+
+.group.color\:gray {
+    color: var(--grayColor);
+}
+
+.group.color\:green {
+    color: var(--greenColor);
+}
+
+.group.color\:indigo {
+    color: var(--indigoColor);
+}
+
+.group.color\:mint {
+    color: var(--mintColor);
+}
+
+.group.color\:orange {
+    color: var(--orangeColor);
+}
+
+.group.color\:pink {
+    color: var(--pinkColor);
+}
+
+.group.color\:purple {
+    color: var(--purpleColor);
+}
+
+.group.color\:red {
+    color: var(--redColor);
+}
+
+.group.color\:teal {
+    color: var(--tealColor);
+}
+
+.group.color\:white {
+    color: var(--whiteColor);
+}
+
+.group.color\:yellow {
+    color: var(--yellowColor);
+}
+
+.group.color\:silver {
+    color: var(--silverColor);
+}
+
+.group.color\:highlight {
+    color: var(--highlightColor);
+}
+
+.group.color\:primary {
+    color: var(--primaryColor);
+}
+
+.group.color\:secondary {
+    color: var(--secondaryColor);
+}
+/**
+ scrollview component
+ */
+
+.scrollview {
+    display: grid;
+    gap: var(--scrollViewGapSize);
+    background-color: var(--scrollViewBackgroundColor);
+}
+
+.scrollview::-webkit-scrollbar{
+    display: none;
+}
+
+.scrollview.direction\:horizontal {
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    height: inherit;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+}
+
+.scrollview.direction\:vertical {
+    grid-auto-flow: row;
+    grid-auto-rows: min-content;
+    height: inherit;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
 }
 /**
  link component
@@ -450,33 +569,46 @@
  utils classes
  */
 
-.display\:block {
-    display: block !important;
-}
-
-zindex\:1 {
+.zindex\:1 {
     position: relative;
     z-index: 1;
 }
 
-zindex\:2 {
+.zindex\:2 {
     position: relative;
     z-index: 2;
 }
 
-zindex\:3 {
+.zindex\:3 {
     position: relative;
     z-index: 3;
 }
 
-zindex\:4 {
+.zindex\:4 {
     position: relative;
     z-index: 4;
 }
 
-zindex\:5 {
+.zindex\:5 {
     position: relative;
     z-index: 5;
+}
+
+.state\:active {
+    border-color: var(--primaryColor) !important;
+    background-color: var(--primaryColor) !important;
+}
+
+.state\:disabled {
+    pointer-events: none !important;
+}
+
+.state\:hidden {
+    display: none !important;
+}
+
+.state\:visible {
+    display: block !important;
 }
 /**
  symbol component
@@ -484,7 +616,7 @@ zindex\:5 {
 
 .symbol {
     display: inline-block;
-    width: 1em;
+    width: 1.25em;
     height: 1em;
 }
 
@@ -577,6 +709,79 @@ zindex\:5 {
 
 .symbol.color\:secondary {
     color: var(--secondaryColor);
+}
+/**
+ carousel component
+ */
+
+.carousel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 400px;
+}
+
+.carousel-content {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    height: 350px;
+    border-width: var(--carouselBorderWidth);
+    border-style: solid;
+    border-color: var(--carouselBorderColor);
+    border-radius: var(--carouselBorderRadius);
+    background-color: var(--carouselBackgroundColor);
+    overflow: hidden;
+}
+
+.carousel-content::-webkit-scrollbar{
+    display: none;
+}
+
+.slide {
+    display: flex;
+    height: auto;
+    overflow: hidden;
+}
+
+.slide-thumbnail {
+    width: 60%;
+}
+
+.slide-thumbnail > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-caption {
+    width: 40%;
+    padding-block: 24px;
+    padding-inline: 24px;
+}
+
+.carousel-indication {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 50px;
+}
+
+.indicator {
+    width: 40px;
+    height: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--indicatorBorderColor);
+    border-radius: var(--indicatorBorderRadius);
+    background-color: var(--indicatorBackgroundColor);
+    cursor: pointer;
+}
+
+.indicator:hover {
+    border-color: var(--primaryColor);
+    background-color: var(--primaryColor);
 }
 /**
  form component
@@ -721,9 +926,8 @@ zindex\:5 {
     -webkit-appearance: none;
 }
 
-.required\:true:after {
-    content: " *";
-    color: var(--redColor);
+.input:invalid {
+    border-color: var(--redColor);
 }
 /**
  snippet component
@@ -1214,7 +1418,7 @@ zindex\:5 {
      divider variables
      */
     
-    --dividerColor: #FFFFFF;
+    --dividerColor: var(--grayColor);
     
     /**
      button variables
@@ -1245,13 +1449,6 @@ zindex\:5 {
      */
     
     --gridGapSize: 15px;
-    --gridItemPaddingY: 12px;
-    --gridItemPaddingX: 16px;
-    --gridItemBorderWidth: 1px;
-    --gridItemBorderColor: var(--grayColor);
-    --gridItemBorderRadius: 5px;
-    --gridItemBackgroundColor: var(--whiteColor);
-    
     
     /**
      card variables
@@ -1260,9 +1457,11 @@ zindex\:5 {
     --cardPaddingY: 12px;
     --cardPaddingX: 16px;
     --cardBorderWidth: 1px;
-    --cardBorderRadius: 15px;
+    --cardBorderRadius: 5px;
     --cardBorderColor: var(--grayColor);
     --cardBackgroundColor: var(--whiteColor);
+    --cardHeaderHight: 200px;
+    --cardHeaderBackgroundColor: var(--whiteColor);
     
     /**
      dropdown variables
@@ -1272,6 +1471,24 @@ zindex\:5 {
     --dropdownBorderColor: var(--grayColor);
     --dropdownHoverColor: var(--silverColor);
     --dropdownBackgroundColor: var(--whiteColor);
+    
+    /**
+     scrollview variables
+     */
+    
+    --scrollViewGapSize: 25px;
+    --scrollViewBackgroundColor: transparent;
+    
+    /**
+     carousel variables
+     */
+    --carouselBorderWidth: 1px;
+    --carouselBorderColor: #000000;
+    --carouselBorderRadius: 10px;
+    --carouselBackgroundColor: transparent;
+    --indicatorBorderRadius: 5px;
+    --indicatorBackgroundColor: transparent;
+    --indicatorBorderColor: #000000;
 }
 /**
  button component
@@ -1599,9 +1816,6 @@ zindex\:5 {
 .stack-column.offset\:11 {
     margin-left: 91.6666666667%;
 }
-/**
- dropdown component
- */
 .dropdown {
     display: inline-block;
     position: relative;
@@ -1632,6 +1846,77 @@ zindex\:5 {
     background-color: var(--dropdownHoverColor);
 }
 
-.dropdown .dropdown-content .list .list-row .link {
+.dropdown .list .list-row .link {
     display: block;
+}
+/**
+ textpad component
+ */
+.textpad {
+    display: flex;
+    flex-direction: column;
+}
+
+.textpad-toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    padding-top: var(--inputPaddingY);
+    padding-right: var(--inputPaddingX);
+    padding-bottom: var(--inputPaddingY);
+    padding-left: var(--inputPaddingX);
+    border-top: var(--inputBorderWidth);
+    border-left: var(--inputBorderWidth);
+    border-right: var(--inputBorderWidth);
+    border-bottom: var(--inputBorderWidth);
+    border-style: solid;
+    border-color: var(--inputBorderColor);
+    border-top-left-radius: var(--inputBorderRadius);
+    border-top-right-radius: var(--inputBorderRadius);
+    list-style: none;
+}
+
+.textpad-toolbar > .toolbar-tool {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.textpad-content {
+    display: block;
+    width: 100%;
+    min-height: 35px;
+    resize: none;
+    padding-top: var(--inputPaddingY);
+    padding-right: var(--inputPaddingX);
+    padding-bottom: var(--inputPaddingY);
+    padding-left: var(--inputPaddingX);
+    border-top: 0;
+    border-left: var(--inputBorderWidth);
+    border-right: var(--inputBorderWidth);
+    border-bottom: var(--inputBorderWidth);
+    border-style: solid;
+    border-color: var(--inputBorderColor);
+    border-bottom-left-radius: var(--inputBorderRadius);
+    border-bottom-right-radius: var(--inputBorderRadius);
+    font-size: 1.0rem;
+    font-weight: 400;
+    color: var(--inputTextColor);
+    background-color: var(--inputBackgroundColor);
+    outline: 0;
+}
+
+.textpad:focus-within {
+    border-radius: var(--inputBorderRadius);
+    box-shadow: 0 0 0 4px var(--inputFocusColor);
+}
+
+.textpad:has(textarea:invalid) .textpad-toolbar {
+    border-color: var(--redColor);
+}
+
+.textpad:has(textarea:invalid) .textpad-content {
+    border-color: var(--redColor);
 }

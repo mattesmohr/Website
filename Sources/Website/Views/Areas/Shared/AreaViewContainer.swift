@@ -32,7 +32,7 @@ public struct AreaViewContainer: View {
                         List(direction: .vertical) {
                             ListRow {
                                 HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
+                                    Symbol(system: "house")
                                     Link(destination: "/area/admin/home/index") {
                                         "Home"
                                     }
@@ -48,7 +48,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
+                                    Symbol(system: "file")
                                     Link(destination: "/area/admin/articles/index/0") {
                                         "Articles"
                                     }
@@ -56,7 +56,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
+                                    Symbol(system: "photo")
                                     Link(destination: "/area/admin/assets/index/0") {
                                         "Assets"
                                     }
@@ -64,7 +64,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
+                                    Symbol(system: "chart.pie")
                                     Link(destination: "/area/admin/reports/index") {
                                         "Report"
                                     }
@@ -72,7 +72,7 @@ public struct AreaViewContainer: View {
                             }
                             ListRow {
                                 HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
+                                    Symbol(system: "person")
                                     Link(destination: "/area/admin/users/index/0") {
                                         "Users"
                                     }

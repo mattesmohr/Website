@@ -152,7 +152,7 @@ enum UserAdminPage {
                                         FieldLabel(for: "description") {
                                             "Description"
                                         }
-                                        TextEditor(name: "desription") {
+                                        TextEditor(name: "description") {
                                         }
                                         .lineLimit(4)
                                     }
@@ -167,6 +167,8 @@ enum UserAdminPage {
                                     }
                                 }
                             }
+                            .id("create-form")
+                            .onSubmit(perfom: .valdiate("create-form", [Validator(field: "email", rule: .email), Validator(field: "firstName", rule: .value), Validator(field: "lastName", rule: .value)]))
                         }
                     }
                 }
@@ -246,6 +248,8 @@ enum UserAdminPage {
                                     }
                                 }
                             }
+                            .id("edit-form")
+                            .onSubmit(perfom: .valdiate("edit-form", [Validator(field: "email", rule: .email), Validator(field: "firstName", rule: .value), Validator(field: "lastName", rule: .value)]))
                         }
                     }
                 }

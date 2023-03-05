@@ -137,9 +137,8 @@ enum ProjectAdminPage {
                                         FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextEditor(name: "content") {
+                                        TextPad(name: "content") {
                                         }
-                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -180,6 +179,8 @@ enum ProjectAdminPage {
                                     }
                                 }
                             }
+                            .id("create-form")
+                            .onSubmit(perfom: .valdiate("create-form", [Validator(field: "title", rule: .value), Validator(field: "content", rule: .value)]))
                         }
                     }
                 }
@@ -229,10 +230,9 @@ enum ProjectAdminPage {
                                         FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextEditor(name: "content") {
+                                        TextPad(name: "content") {
                                             context.item.content
                                         }
-                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -271,6 +271,8 @@ enum ProjectAdminPage {
                                     }
                                 }
                             }
+                            .id("edit-form")
+                            .onSubmit(perfom: .valdiate("edit-form", [Validator(field: "title", rule: .value), Validator(field: "content", rule: .value)]))
                         }
                     }
                 }

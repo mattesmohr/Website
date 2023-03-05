@@ -147,9 +147,8 @@ enum ArticleAdminPage {
                                         FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextEditor(name: "content") {
+                                        TextPad(name: "content") {
                                         }
-                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -188,6 +187,8 @@ enum ArticleAdminPage {
                                     }
                                 }
                             }
+                            .id("create-form")
+                            .onSubmit(perfom: .valdiate("create-form", [Validator(field: "title", rule: .value), Validator(field: "content", rule: .value)]))
                         }
                     }
                 }
@@ -248,10 +249,9 @@ enum ArticleAdminPage {
                                         FieldLabel(for: "content") {
                                             "Content"
                                         }
-                                        TextEditor(name: "content") {
+                                        TextPad(name: "content") {
                                             context.item.content
                                         }
-                                        .lineLimit(8)
                                     }
                                 }
                                 HStack {
@@ -290,6 +290,8 @@ enum ArticleAdminPage {
                                     }
                                 }
                             }
+                            .id("edit-form")
+                            .onSubmit(perfom: .valdiate("edit-form", [Validator(field: "title", rule: .value), Validator(field: "content", rule: .value)]))
                         }
                     }
                 }
