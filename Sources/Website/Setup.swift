@@ -4,32 +4,29 @@ import HTMLKitVapor
 import Vapor
 
 @main
-public struct Setup {
+struct Setup {
     
-    public static func main() throws {
+    static func main() throws {
         
-        var env = try Environment.detect()
+        var environment = try Environment.detect()
         
-        try LoggingSystem.bootstrap(from: &env)
+        try LoggingSystem.bootstrap(from: &environment)
         
-        let app = Application(env)
+        let application = Application(environment)
         
-        defer { app.shutdown() }
+        defer { application.shutdown() }
         
-        app.http.server.configuration.hostname = "localhost"
-        app.http.server.configuration.port = 8080
+        application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
+        application.middleware.use(application.sessions.middleware)
         
-        app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
-        app.middleware.use(app.sessions.middleware)
+        application.sessions.use(.memory)
         
-        app.sessions.use(.memory)
-        
-        app.passwords.use(.bcrypt)
+        application.passwords.use(.bcrypt)
         
         var tls = TLSConfiguration.makeClientConfiguration()
         tls.certificateVerification = .none
         
-        app.databases.use(.mysql(
+        application.databases.use(.mysql(
             hostname: Environment.get("DB_HOSTNAME")!,
             username: Environment.get("DB_USERNAME")!,
             password: Environment.get("DB_PASSWORD")!,
@@ -37,23 +34,23 @@ public struct Setup {
             tlsConfiguration: tls
         ), as: .mysql)
         
-        try app.register(collection: HomePageController())
-        try app.register(collection: ArticlesPageController())
-        try app.register(collection: ProjectsPageController())
-        try app.register(collection: CompanyPageController())
-        try app.register(collection: ConnectPageController())
-        try app.register(collection: PrivacyPageController())
-        try app.register(collection: SettingsPageController())
-        try app.register(collection: ImpressumPageController())
-        try app.register(collection: ConditionsPageController())
+        try application.register(collection: HomePageController())
+        try application.register(collection: ArticlesPageController())
+        try application.register(collection: ProjectsPageController())
+        try application.register(collection: CompanyPageController())
+        try application.register(collection: ConnectPageController())
+        try application.register(collection: PrivacyPageController())
+        try application.register(collection: SettingsPageController())
+        try application.register(collection: ImpressumPageController())
+        try application.register(collection: ConditionsPageController())
         
-        try app.group("area") { routes in
+        try application.group("area") { routes in
         
             try routes.register(collection: LoginAreaController())
             
             try routes.group("admin") { routes in
                 
-                let group = routes.grouped(app.sessions.middleware, UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login/index"))
+                let group = routes.grouped(application.sessions.middleware, UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login/index"))
             
                 try group.register(collection: HomeAdminController())
                 try group.register(collection: ProjectAdminController())
@@ -64,20 +61,25 @@ public struct Setup {
             }
         }
         
-        app.migrations.add(AssetMigration())
-        app.migrations.add(CredentialMigration())
-        app.migrations.add(UserMigration())
-        app.migrations.add(ArticleMigration())
-        app.migrations.add(ProjectMigration())
-        app.migrations.add(CommentMigration())
-        app.migrations.add(ArticleAssetMigration())
-        app.migrations.add(ProjectAssetMigration())
-        app.migrations.add(ContactMigration())
-        app.migrations.add(ReportMigration())
-        app.migrations.add(LinkMigration())
+        application.migrations.add(AssetMigration())
+        application.migrations.add(CredentialMigration())
+        application.migrations.add(UserMigration())
+        application.migrations.add(ArticleMigration())
+        application.migrations.add(ProjectMigration())
+        application.migrations.add(CommentMigration())
+        application.migrations.add(ArticleAssetMigration())
+        application.migrations.add(ProjectAssetMigration())
+        application.migrations.add(ContactMigration())
+        application.migrations.add(ReportMigration())
+        application.migrations.add(LinkMigration())
         
-        try app.autoMigrate().wait()
+        try application.autoMigrate().wait()
         
-        try app.run()
+        let localizationPath = application.directory.workingDirectory + "Sources/Website/Localization"
+        
+        application.htmlkit.localization.set(source: URL(string: localizationPath)!)
+        application.htmlkit.localization.set(locale: "en-GB")
+        
+        try application.run()
     }
 }

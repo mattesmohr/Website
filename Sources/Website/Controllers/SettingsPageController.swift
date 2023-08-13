@@ -7,16 +7,9 @@ final class SettingsPageController {
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = SettingPageModel.IndexView()
         
-        let context = EmptyContext(
-            view: ViewMetadata(title: "Settings"),
-            route: RouteMetadata(route: route)
-        )
-        
-        return try await request.htmlkit.render(SettingPage.IndexView(context: context))
+        return try await request.htmlkit.render(SettingPage.IndexView(viewModel: viewModel))
     }
 }
 
@@ -24,10 +17,10 @@ extension SettingsPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("settings", configure: { routes in
+        routes.group("settings") { routes in
             
             routes.get("index", use: self.getIndex)
-        })
+        }
     }
 }
     

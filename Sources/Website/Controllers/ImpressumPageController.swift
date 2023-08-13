@@ -7,15 +7,9 @@ final class ImpressumPageController {
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = ImpressumPageModel.IndexView()
         
-        let context = EmptyContext(
-            view: ViewMetadata(title: "Impressum"),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(ImpressumPage.IndexView(context: context))
+        return try await request.htmlkit.render(ImpressumPage.IndexView(viewModel: viewModel))
     }
 }
 
@@ -23,10 +17,10 @@ extension ImpressumPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("impressum", configure: { routes in
+        routes.group("impressum") { routes in
             
             routes.get("index", use: self.getIndex)
-        })
+        }
     }
 }
     

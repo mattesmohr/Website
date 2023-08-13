@@ -1,97 +1,96 @@
 import HTMLKit
 import HTMLKitComponents
 
-public struct AreaViewContainer: View {
+struct AreaViewContainer: View {
     
-    public let content: [Content]
+    let content: [Content]
     
-    public init(@ContentBuilder<Content> content: () -> [Content]) {
+    init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()
     }
     
-    @EnvironmentObject(IdentityMetadata.self)
+    @EnvironmentObject(UserModel.Output.self)
     var identity
 
-    public var body: Content {
+    var body: Content {
         AreaPageContainer {
             Header {
                 HStack {
-                    StackColumn(size: .twelve) {
-                        Text {
-                            "Admin Panel"
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
-                        .foregroundColor(.black)
+                    Text {
+                        "Admin Panel"
                     }
+                    .fontSize(.medium)
+                    .fontWeight(.medium)
+                    .foregroundColor(.black)
                 }
             }
             Main {
                 Aside {
                     Section {
-                        List(direction: .vertical) {
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "house")
+                        Navigation {
+                            List(direction: .vertical) {
+                                ListRow {
                                     Link(destination: "/area/admin/home/index") {
-                                        "Home"
+                                        Symbol(system: "house")
+                                        Text {
+                                            "Home"
+                                        }
+                                    }
+                                    .fontSize(.extralarge)
+                                }
+                                ListRow {
+                                    Link(destination: "/area/admin/projects/index") {
+                                        Symbol(system: "folder")
+                                        Text("menu.projects")
+                                            .environment(key: \.locale)
                                     }
                                 }
-                            }
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "folder")
-                                    Link(destination: "/area/admin/projects/index/0") {
-                                        "Projects"
+                                ListRow {
+                                    Link(destination: "/area/admin/articles/index") {
+                                        Symbol(system: "file")
+                                        Text {
+                                            "Articles"
+                                        }
                                     }
                                 }
-                            }
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "file")
-                                    Link(destination: "/area/admin/articles/index/0") {
-                                        "Articles"
+                                ListRow {
+                                    Link(destination: "/area/admin/assets/index") {
+                                        Symbol(system: "photo")
+                                        Text {
+                                            "Assets"
+                                        }
                                     }
                                 }
-                            }
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "photo")
-                                    Link(destination: "/area/admin/assets/index/0") {
-                                        "Assets"
-                                    }
-                                }
-                            }
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "chart.pie")
+                                ListRow {
                                     Link(destination: "/area/admin/reports/index") {
-                                        "Report"
+                                        Symbol(system: "chart.pie")
+                                        Text {
+                                            "Report"
+                                        }
                                     }
                                 }
-                            }
-                            ListRow {
-                                HTMLKitComponents.Group {
-                                    Symbol(system: "person")
-                                    Link(destination: "/area/admin/users/index/0") {
-                                        "Users"
+                                ListRow {
+                                    Link(destination: "/area/admin/users/index") {
+                                        Symbol(system: "person")
+                                        Text {
+                                            "Users"
+                                        }
                                     }
                                 }
                             }
                         }
+                        .navigationStyle(.menu)
                     }
                     Footer {
-                        HStack(alignment: .center) {
-                            StackColumn(size: .three) {
-                                Text {
-                                    identity.name
-                                }
+                        HStack {
+                            Text {
+                                identity.firstName + identity.lastName
                             }
-                            StackColumn(size: .six, alignment: .right, offset: .three) {
-                                Link(destination: "/area/login/logout") {
-                                    "Log out"
-                                }
+                            .frame(width: .three)
+                            Link(destination: "/area/login/logout") {
+                                "Log out"
                             }
+                            .frame(width: .six, offset: .three)
                         }
                     }
                 }

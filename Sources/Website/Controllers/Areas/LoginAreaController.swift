@@ -11,16 +11,10 @@ final class LoginAreaController {
     
     // [/register]
     func getRegister(_ request: Request) async throws -> View {
+
+        let viewModel = LoginAreaPageModel.RegisterViewModel()
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
-        
-        let context = CreateContext(
-            view: ViewMetadata(title: "Register account"),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(LoginAreaPage.RegisterView(context: context))
+        return try await request.htmlkit.render(LoginAreaPage.RegisterView(viewModel: viewModel))
     }
     
     // [/register/:model]
@@ -41,15 +35,9 @@ final class LoginAreaController {
     // [/login]
     func getLogin(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = LoginAreaPageModel.LoginViewModel()
         
-        let context = EmptyContext(
-            view: ViewMetadata(title: "Register account"),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(LoginAreaPage.LoginView(context: context))
+        return try await request.htmlkit.render(LoginAreaPage.LoginView(viewModel: viewModel))
     }
     
     // [/login/:model]
@@ -87,15 +75,9 @@ final class LoginAreaController {
     // [/reset]
     func getReset(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = LoginAreaPageModel.ResetViewModel()
         
-        let context = CreateContext(
-            view: ViewMetadata(title: "Reset"),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(LoginAreaPage.ResetView(context: context))
+        return try await request.htmlkit.render(LoginAreaPage.ResetView(viewModel: viewModel))
     }
     
     // [/reset/:model]
@@ -108,7 +90,7 @@ extension LoginAreaController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("login", configure: { routes in
+        routes.group("login") { routes in
             
             routes.get("index", use: self.getIndex)
             routes.get("register", use: self.getRegister)
@@ -118,6 +100,6 @@ extension LoginAreaController: RouteCollection {
             routes.get("logout", use: self.getLogout)
             routes.get("reset", use: self.getReset)
             routes.post("reset", use: self.postReset)
-        })
+        }
     }
 }

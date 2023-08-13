@@ -1,6 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
-struct UserModel: Content {
+struct UserModel {
     
     var output: Output?
     
@@ -15,7 +16,15 @@ struct UserModel: Content {
         static func validations(_ validations: inout Validations) {
             
             validations.add("email", as: String.self, is: !.empty)
+            validations.add("firstName", as: String.self, is: !.empty)
+            validations.add("lastName", as: String.self, is: !.empty)
         }
+        
+        static let validators = [
+            Validator(field: "email", rule: .email),
+            Validator(field: "firstName", rule: .value),
+            Validator(field: "lastName", rule: .value)
+        ]
     }
     
     struct Output: Content, SessionAuthenticatable {

@@ -10,7 +10,7 @@ struct UserSessionAuthenticator: AsyncSessionAuthenticator {
             
             let user = UserModel.Output(entity: entity)
             
-            request.application.htmlkit.environment.add(object: IdentityMetadata(user: user))
+            request.application.htmlkit.environment.upsert(user, for: \UserModel.Output.self)
             
             request.auth.login(user)
         }

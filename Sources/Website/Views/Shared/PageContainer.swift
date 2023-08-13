@@ -1,15 +1,15 @@
 import HTMLKit
 import HTMLKitComponents
 
-public struct PageContainer: View {
+struct PageContainer: View {
     
-    public var content: [BodyElement]
+    var content: [BodyElement]
     
-    public init(@ContentBuilder<BodyElement> content: () -> [BodyElement]) {
+    init(@ContentBuilder<BodyElement> content: () -> [BodyElement]) {
         self.content = content()
     }
 
-    public var body: Content {
+    var body: Content {
         Document(.html5)
         Html {
             Head {
@@ -29,14 +29,13 @@ public struct PageContainer: View {
                     .reference("/css/page.css")
                 Script {
                 }
-                .source("/htmlkit/all.js")
+                .source("/htmlkit/query.js")
             }
             Body {
                 content
                 Script {
-                    
                 }
-                .source("/js/page.js")
+                .source("/htmlkit/all.js")
             }
         }
     }

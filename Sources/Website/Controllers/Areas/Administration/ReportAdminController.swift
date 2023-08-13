@@ -6,21 +6,10 @@ final class ReportAdminController {
     
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
-            
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
+        let viewModel = ReportAdminPageModel.IndexView()
         
-        let context = EmptyContext(
-            view: ViewMetadata(title: "Show reports"),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(ReportAdminPage.IndexView(context: context))
+        return try await request.htmlkit.render(ReportAdminPage.IndexView(viewModel: viewModel))
     }
 }
 
@@ -28,9 +17,9 @@ extension ReportAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("reports", configure: { routes in
+        routes.group("reports") { routes in
             
             routes.get("index", use: self.getIndex)
-        })
+        }
     }
 }

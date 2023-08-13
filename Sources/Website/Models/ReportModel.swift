@@ -1,6 +1,6 @@
 import Vapor
 
-struct ReportModel: Content {
+struct ReportModel {
     
     struct Input: Content, Validatable {
         

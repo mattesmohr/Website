@@ -41,6 +41,7 @@ body {
  */
 
 body > header {
+    min-height: 50px;
     height: 10%;
     padding: 10px 25px;
     background-color: #FFFFFF;
@@ -63,6 +64,7 @@ body > main {
  */
 
 body > main > aside {
+    min-width: 200px;
     width: 15%;
     display: flex;
     flex-direction: column;
@@ -76,7 +78,7 @@ body > main > aside {
 
 body > main > aside > section {
     flex-grow: 1;
-    padding: 10px 25px;
+    padding: 10px 15px;
 }
 
 /*

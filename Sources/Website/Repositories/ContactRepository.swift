@@ -24,16 +24,6 @@ final class ContactRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [ContactEntity] {
-        
-        return try await ContactEntity.query(on: database)
-            .paginate(PageRequest(page: index, per: items))
-            .map { page in
-                return page.items
-            }
-            .get()
-    }
-    
     func insert(entity: ContactEntity) async throws {
         try await entity.create(on: database)
     }

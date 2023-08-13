@@ -32,20 +32,6 @@ final class ProjectRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [ProjectEntity] {
-        
-        return try await ProjectEntity.query(on: database)
-            .with(\.$thumbnail)
-            .with(\.$author)
-            .with(\.$links)
-            .with(\.$assets)
-            .paginate(PageRequest(page: index, per: items))
-            .map { page in
-                return page.items
-            }
-            .get()
-    }
-    
     func insert(entity: ProjectEntity) async throws {
         try await entity.create(on: database)
     }

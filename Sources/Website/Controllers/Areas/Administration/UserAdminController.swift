@@ -4,47 +4,27 @@ import Vapor
 // [/area/admin/users]
 final class UserAdminController {
     
-    // [/index/:id]
+    // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let page: Int = request.query["page"] ?? 1
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
-        let entities = try await UserRepository(database: request.db)
-            .page(index: id, with: 10)
+        let pagination = try await UserRepository(database: request.db)
+            .find()
             .map(UserModel.Output.init)
+            .page(page: page, per: 10)
         
-        let context = IndexContext(
-            view: ViewMetadata(title: "Show users"),
-            items: entities,
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
+        let viewModel = UserAdminPageModel.IndexView(pagination: pagination)
         
-        return try await request.htmlkit.render(UserAdminPage.IndexView(context: context))
+        return try await request.htmlkit.render(UserAdminPage.IndexView(viewModel: viewModel))
     }
     
     // [/create]
     func getCreate(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = UserAdminPageModel.CreateView()
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
-        let context = CreateContext(
-            view: ViewMetadata(title: "Create user"),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(UserAdminPage.CreateView(context: context))
+        return try await request.htmlkit.render(UserAdminPage.CreateView(viewModel: viewModel))
     }
     
     // [/create/:model]
@@ -57,48 +37,41 @@ final class UserAdminController {
         try await UserRepository(database: request.db)
             .insert(entity: UserEntity(input: model))
         
-        return request.redirect(to: "/area/admin/users/index/0")
+        return request.redirect(to: "/area/admin/users/index")
     }
     
     // [/edit/:id]
     func getEdit(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
-        guard let entity = try await UserRepository(database: request.db).find(id: id) else {
+        guard let entity = try await UserRepository(database: request.db)
+            .find(id: id) else {
             throw Abort(.notFound)
         }
         
-        let context = EditContext(
-            view: ViewMetadata(title: "Edit user"),
-            item: UserModel.Output(entity: entity),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
+        let viewModel = UserAdminPageModel.EditView(user: UserModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(UserAdminPage.EditView(context: context))
+        return try await request.htmlkit.render(UserAdminPage.EditView(viewModel: viewModel))
     }
     
     // [/edit/:model]
     func postEdit(_ request: Request) async throws -> Response {
         
-        try UserModel.Input.validate(content: request)
-        
         guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
+        
+        try UserModel.Input.validate(content: request)
         
         let model = try request.content.decode(UserModel.Input.self)
         
         try await UserRepository(database: request.db)
             .update(entity: UserEntity(input: model), on: id)
         
-        return request.redirect(to: "/area/admin/users/index/0")
+        return request.redirect(to: "/area/admin/users/index")
     }
     
     // [/delete/:id]
@@ -111,7 +84,7 @@ final class UserAdminController {
         try await UserRepository(database: request.db)
             .delete(id: id)
         
-        return request.redirect(to: "/area/admin/users/index/0")
+        return request.redirect(to: "/area/admin/users/index")
     }
 }
 
@@ -119,14 +92,14 @@ extension UserAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("users", configure: { routes in
+        routes.group("users") { routes in
             
-            routes.get("index", ":id", use: self.getIndex)
+            routes.get("index", use: self.getIndex)
             routes.get("create", use: self.getCreate)
             routes.post("create", use: self.postCreate)
             routes.get("edit", ":id", use: self.getEdit)
             routes.post("edit", ":id", use: self.postEdit)
             routes.get("delete", ":id", use: self.getDelete)
-        })
+        }
     }
 }

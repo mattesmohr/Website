@@ -1,6 +1,6 @@
 import Vapor
 
-struct LinkModel: Content {
+struct LinkModel {
     
     struct Input: Content, Validatable {
         

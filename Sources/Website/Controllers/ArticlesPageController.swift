@@ -4,42 +4,37 @@ import Vapor
 // [/articles]
 final class ArticlesPageController {
     
-    // [/index/:id]
+    // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let page: Int = request.query["page"] ?? 1
         
-        let entities = try await ArticleRepository(database: request.db)
-            .page(index: id, with: 10)
+        let articles = try await ArticleRepository(database: request.db)
+            .find()
             .map(ArticleModel.Output.init)
+            .page(page: page, per: 10)
         
-        let context = IndexContext(
-            view: ViewMetadata(title: "Articles"),
-            items: entities,
-            route: RouteMetadata(route: route))
         
-        return try await request.htmlkit.render(ArticlePage.IndexView(context: context))
+        let viewModel = ArticlePageModel.IndexView(pagination: articles)
+        
+        return try await request.htmlkit.render(ArticlePage.IndexView(viewModel: viewModel))
     }
     
     // [/show]
     func getShow(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ArticleRepository(database: request.db).find(id: id) else {
+        guard let entity = try await ArticleRepository(database: request.db)
+            .find(id: id) else {
             throw Abort(.notFound)
         }
         
-        let context = ShowContext(
-            view: ViewMetadata(title: "Article"),
-            item: ArticleModel.Output(entity: entity),
-            route: RouteMetadata(route: route))
+        let viewModel = ArticlePageModel.ShowView(article: ArticleModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(ArticlePage.ShowView(context: context))
+        return try await request.htmlkit.render(ArticlePage.ShowView(viewModel: viewModel))
     }
 }
 
@@ -47,11 +42,11 @@ extension ArticlesPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
     
-        routes.group("articles", configure: { routes in
+        routes.group("articles") { routes in
             
-            routes.get("index", ":id", use: self.getIndex)
+            routes.get("index", use: self.getIndex)
             routes.get("show", ":id", use: self.getShow)
-        })
+        }
     }
 }
     

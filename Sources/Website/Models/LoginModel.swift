@@ -1,6 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
-struct LoginModel: Content {
+struct LoginModel {
     
     struct Input: Content, Validatable {
         
@@ -18,5 +19,10 @@ struct LoginModel: Content {
             validations.add("email", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }
+        
+        static let validators = [
+            Validator(field: "email", rule: .email),
+            Validator(field: "password", rule: .value)
+        ]
     }
 }

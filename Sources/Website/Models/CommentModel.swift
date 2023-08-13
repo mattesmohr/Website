@@ -1,6 +1,6 @@
 import Vapor
 
-struct CommentModel: Content {
+struct CommentModel {
     
     struct Input: Content, Validatable {
         

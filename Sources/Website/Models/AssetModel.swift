@@ -1,6 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
-struct AssetModel: Content {
+struct AssetModel {
     
     var output: Output?
     
@@ -12,6 +13,12 @@ struct AssetModel: Content {
             
             validations.add("title", as: String.self, is: !.empty)
         }
+        
+        static let validators = [
+            Validator(field: "email", rule: .email),
+            Validator(field: "firstName", rule: .value),
+            Validator(field: "lastName", rule: .value)
+        ]
     }
     
     struct Output: Content {

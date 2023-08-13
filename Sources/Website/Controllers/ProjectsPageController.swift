@@ -4,42 +4,36 @@ import Vapor
 // [/projects]
 final class ProjectsPageController {
     
-    // [/index:/id]
+    // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let page: Int = request.query["page"] ?? 1
         
-        let entities = try await ProjectRepository(database: request.db)
-            .page(index: id, with: 6)
+        let projects = try await ProjectRepository(database: request.db)
+            .find()
             .map(ProjectModel.Output.init)
+            .page(page: page, per: 10)
         
-        let context = IndexContext(
-            view: ViewMetadata(title: "Projects"),
-            items: entities,
-            route: RouteMetadata(route: route))
+        let viewModel = ProjectPageModel.IndexView(pagination: projects)
         
-        return try await request.htmlkit.render(ProjectPage.IndexView(context: context))
+        return try await request.htmlkit.render(ProjectPage.IndexView(viewModel: viewModel))
     }
 
     // [/show/:id]
     func getShow(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ProjectRepository(database: request.db).find(id: id) else {
+        guard let entity = try await ProjectRepository(database: request.db)
+            .find(id: id) else {
             throw Abort(.notFound)
         }
         
-        let context = ShowContext(
-            view: ViewMetadata(title: "Project"),
-            item: ProjectModel.Output(entity: entity),
-            route: RouteMetadata(route: route))
+        let viewModel = ProjectPageModel.ShowView(project: ProjectModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(ProjectPage.ShowView(context: context))
+        return try await request.htmlkit.render(ProjectPage.ShowView(viewModel: viewModel))
     }
 }
 
@@ -47,10 +41,10 @@ extension ProjectsPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("projects", configure: { routes in
+        routes.group("projects") { routes in
             
-            routes.get("index", ":id", use: self.getIndex)
+            routes.get("index", use: self.getIndex)
             routes.get("show", ":id", use: self.getShow)
-        })
+        }
     }
 }

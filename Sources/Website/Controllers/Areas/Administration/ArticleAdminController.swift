@@ -4,47 +4,27 @@ import Vapor
 // [/area/admin/articles]
 final class ArticleAdminController {
 
-    // [/index/:id]
+    // [/index]
     func getIndex(_ request: Request) async throws -> View {
 
-        guard let id = request.parameters.get("id", as: Int.self), let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let page: Int = request.query["page"] ?? 1
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
-        let entities = try await ArticleRepository(database: request.db)
-            .page(index: id, with: 10)
+        let pagination = try await ArticleRepository(database: request.db)
+            .find()
             .map(ArticleModel.Output.init)
+            .page(page: page, per: 10)
         
-        let context = IndexContext(
-            view: ViewMetadata(title: "Show articles"),
-            items: entities,
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
+        let viewModel = ArticleAdminPageModel.IndexView(pagination: pagination)
         
-        return try await request.htmlkit.render(ArticleAdminPage.IndexView(context: context))
+        return try await request.htmlkit.render(ArticleAdminPage.IndexView(viewModel: viewModel))
     }
     
     // [/create]
     func getCreate(_ request: Request) async throws -> View {
         
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
+        let viewModel = ArticleAdminPageModel.CreateView()
         
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
-        }
-        
-        let context = CreateContext(
-            view: ViewMetadata(title: "Create article"),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
-        
-        return try await request.htmlkit.render(ArticleAdminPage.CreateView(context: context))
+        return try await request.htmlkit.render(ArticleAdminPage.CreateView(viewModel: viewModel))
     }
     
     // [/create/:model]
@@ -58,18 +38,14 @@ final class ArticleAdminController {
         try await ArticleRepository(database: request.db)
             .insert(entity: ArticleEntity(input: model))
         
-        return request.redirect(to: "/area/admin/articles/index/0")
+        return request.redirect(to: "/area/admin/articles/index")
     }
     
     // [/edit/:id]
     func getEdit(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self), let route = request.route else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
-        }
-        
-        guard let user = request.auth.get(UserModel.Output.self) else {
-            throw Abort(.unauthorized)
         }
         
         guard let entity = try await ArticleRepository(database: request.db)
@@ -77,23 +53,19 @@ final class ArticleAdminController {
             throw Abort(.notFound)
         }
         
-        let context = EditContext(
-            view: ViewMetadata(title: "Edit article"),
-            item: ArticleModel.Output(entity: entity),
-            identity: IdentityMetadata(user: user),
-            route: RouteMetadata(route: route))
+        let viewModel = ArticleAdminPageModel.EditView(article: ArticleModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(ArticleAdminPage.EditView(context: context))
+        return try await request.htmlkit.render(ArticleAdminPage.EditView(viewModel: viewModel))
     }
     
     // [/edit/:model]
     func postEdit(_ request: Request) async throws -> Response {
         
-        try ArticleModel.Input.validate(content: request)
-        
         guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
+        
+        try ArticleModel.Input.validate(content: request)
 
         var model = try request.content.decode(ArticleModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
@@ -101,7 +73,7 @@ final class ArticleAdminController {
         try await ArticleRepository(database: request.db)
             .update(entity: ArticleEntity(input: model), on: id)
         
-        return request.redirect(to: "/area/admin/articles/index/0")
+        return request.redirect(to: "/area/admin/articles/index")
     }
     
     // [/delete/:id]
@@ -114,7 +86,7 @@ final class ArticleAdminController {
         try await ArticleRepository(database: request.db)
             .delete(id: id)
         
-        return request.redirect(to: "/area/admin/articles/index/0")
+        return request.redirect(to: "/area/admin/articles/index")
     }
 }
 
@@ -122,15 +94,15 @@ extension ArticleAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
     
-        routes.group("articles", configure: { routes in
+        routes.group("articles") { routes in
             
-            routes.get("index", ":id", use: self.getIndex)
+            routes.get("index", use: self.getIndex)
             routes.get("create", use: self.getCreate)
             routes.post("create", use: self.postCreate)
             routes.get("edit", ":id", use: self.getEdit)
             routes.post("edit", ":id", use: self.postEdit)
             routes.get("delete", ":id", use: self.getDelete)
-        })
+        }
     }
 }
 

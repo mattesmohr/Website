@@ -8,7 +8,7 @@ struct ProjectMigration: AsyncMigration {
             .id()
             .field("thumbnail_id", .uuid, .references("assets", "id"))
             .field("title", .string, .required)
-            .field("content", .string, .required)
+            .field("content", .custom("text"), .required)
             .field("status", .string, .required)
             .field("published_on", .datetime)
             .field("category", .string, .required)

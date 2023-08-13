@@ -1,6 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
-struct ProjectModel: Content {
+struct ProjectModel {
     
     enum Categories: String, Codable, CaseIterable {
         
@@ -33,6 +34,13 @@ struct ProjectModel: Content {
             validations.add("category", as: String.self, is: !.empty)
             validations.add("status", as: String.self, is: !.empty)
         }
+        
+        static let validators = [
+            Validator(field: "title", rule: .value),
+            Validator(field: "content", rule: .value),
+            Validator(field: "category", rule: .value),
+            Validator(field: "status", rule: .value)
+        ]
     }
     
     struct Output: Content {

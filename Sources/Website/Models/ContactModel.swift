@@ -1,6 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
-struct ContactModel: Content {
+struct ContactModel {
     
     struct Input: Content, Validatable {
         
@@ -16,6 +17,13 @@ struct ContactModel: Content {
             validations.add("email", as: String.self, is: .email)
             validations.add("message", as: String.self, is: !.empty)
         }
+        
+        static let validators = [
+            Validator(field: "firstName", rule: .value),
+            Validator(field: "lastName", rule: .value),
+            Validator(field: "email", rule: .email),
+            Validator(field: "message", rule: .value)
+        ]
     }
     
     struct Output: Content {

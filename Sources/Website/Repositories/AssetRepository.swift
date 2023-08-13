@@ -24,16 +24,6 @@ final class AssetRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [AssetEntity] {
-        
-        return try await AssetEntity.query(on: database)
-            .paginate(PageRequest(page: index, per: items))
-            .map { page in
-                return page.items
-            }
-            .get()
-    }
-    
     func insert(entity: AssetEntity) async throws {
         try await entity.create(on: database)
     }

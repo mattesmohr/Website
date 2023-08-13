@@ -33,16 +33,6 @@ final class UserRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [UserEntity] {
-        
-        return try await UserEntity.query(on: database)
-            .paginate(PageRequest(page: index, per: items))
-            .map { page in
-                return page.items
-            }
-            .get()
-    }
-    
     func insert(entity: UserEntity) async throws {
         try await entity.create(on: database)
     }

@@ -31,16 +31,6 @@ final class ReportRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [ReportEntity] {
-        
-        return try await ReportEntity.query(on: database)
-            .paginate(PageRequest(page: index, per: items))
-            .map { page in
-                return page.items
-            }
-            .get()
-    }
-    
     func insert(entity: ReportEntity) async throws {
         try await entity.create(on: database)
     }

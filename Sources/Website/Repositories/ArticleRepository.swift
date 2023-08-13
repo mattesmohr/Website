@@ -32,20 +32,6 @@ final class ArticleRepository {
             .all()
     }
     
-    func page(index: Int, with items: Int) async throws -> [ArticleEntity] {
-        
-        return try await ArticleEntity.query(on: database)
-            .with(\.$thumbnail)
-            .with(\.$assets)
-            .with(\.$author)
-            .with(\.$comments)
-            .paginate(PageRequest(page: index, per: items))
-            .map {
-                return $0.items
-            }
-            .get()
-    }
-    
     func insert(entity: ArticleEntity) async throws {
         try await entity.create(on: database)
     }

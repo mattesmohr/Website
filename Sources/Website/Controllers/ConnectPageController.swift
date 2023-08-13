@@ -6,16 +6,10 @@ final class ConnectPageController {
     
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
-       
-        guard let route = request.route else {
-            throw Abort(.badRequest)
-        }
         
-        let context = EmptyContext(
-            view: ViewMetadata(title: "Connect"),
-            route: RouteMetadata(route: route))
+        let viewModel = ConnectPageModel.IndexView()
         
-        return try await request.htmlkit.render(ConnectPage.IndexView(context: context))
+        return try await request.htmlkit.render(ConnectPage.IndexView(viewModel: viewModel))
     }
     
     // [/index/:model]
@@ -36,10 +30,10 @@ extension ConnectPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("connect", configure: { routes in
+        routes.group("connect") { routes in
             
             routes.get("index", use: self.getIndex)
             routes.post("index", use: self.postIndex)
-        })
+        }
     }
 }

@@ -1,111 +1,114 @@
 import HTMLKit
 import HTMLKitComponents
 
-public struct ViewContainer: View {
+struct ViewContainer: View {
     
-    public let content: [Content]
+    let content: [Content]
     
-    public init(@ContentBuilder<Content> content: () -> [Content]) {
+    init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()
     }
 
-    public var body: Content {
+    var body: Content {
         PageContainer {
             Header {
                 HStack {
-                    StackColumn(size: .six) {
-                        Text {
-                            "mattesmohr"
-                        }
-                        .fontSize(.medium)
-                        .foregroundColor(.black)
+                    Text {
+                        "mattesmohr"
                     }
-                    StackColumn(size: .six, alignment: .right) {
-                        List(direction: .horizontal) {
-                            ListRow {
-                                Link(destination: "/home/index") {
-                                    "Home"
-                                }
-                            }
-                            ListRow {
-                                Text {
-                                    "Explore"
-                                }
-                                .id("explore")
-                                .onHover(perfom: .show("nav1"))
-                            }
-                            ListRow {
-                                Text {
-                                    "Read"
-                                }
-                                .id("read")
-                                .onHover(perfom: .show("nav2"))
-                            }
-                            ListRow {
-                                Link(destination: "/connect/index") {
-                                    "Connect"
-                                }
+                    .fontSize(.medium)
+                    .foregroundColor(.black)
+                    .frame(width: .six)
+                    List(direction: .horizontal) {
+                        ListRow {
+                            Link(destination: "/home/index") {
+                                "Home"
                             }
                         }
+                        ListRow {
+                            Text {
+                                "Explore"
+                            }
+                            .tag("explore")
+                            .onHover { text in
+                                text.show("nav1")
+                            }
+                        }
+                        ListRow {
+                            Text {
+                                "Read"
+                            }
+                            .tag("read")
+                            .onHover { text in
+                                text.show("nav2")
+                            }
+                        }
+                        ListRow {
+                            Link(destination: "/connect/index") {
+                                "Connect"
+                            }
+                        }
                     }
+                    .frame(width: .six)
                 }
                 Navigation {
                     HStack(alignment: .top) {
-                        StackColumn(size: .three, offset: .six) {
-                            List(direction: .vertical) {
-                                ListRow {
-                                    Text {
-                                        "Code"
-                                    }
-                                    .fontSize(.small)
+                        List(direction: .vertical) {
+                            ListRow {
+                                Text {
+                                    "Code"
                                 }
-                                ListRow {
-                                    Link(destination: "/projects/index/0") {
-                                        "Projects"
-                                    }
+                                .fontSize(.small)
+                            }
+                            ListRow {
+                                Link(destination: "/projects/index") {
+                                    "Projects"
                                 }
                             }
                         }
-                        StackColumn(size: .three) {
-                            List(direction: .vertical) {
-                                ListRow {
-                                    Text {
-                                        "Company"
-                                    }
-                                    .fontSize(.small)
+                        .frame(width: .three, offset: .six)
+                        List(direction: .vertical) {
+                            ListRow {
+                                Text {
+                                    "Company"
                                 }
-                                ListRow {
-                                    Link(destination: "/company/index") {
-                                        "Company"
-                                    }
+                                .fontSize(.small)
+                            }
+                            ListRow {
+                                Link(destination: "/company/index") {
+                                    "Company"
                                 }
                             }
                         }
+                        .frame(width: .three, offset: .six)
                     }
-                    .id("stack1")
-                    .onLeave(perfom: .hide("nav1"))
+                    .tag("stack1")
+                    .onLeave { stack in
+                        stack.hide("nav1")
+                    }
                 }
                 .id("nav1")
                 Navigation {
                     HStack(alignment: .top) {
-                        StackColumn(size: .three, offset: .nine) {
-                            List(direction: .vertical) {
-                                ListRow {
-                                    Text {
-                                        "About"
-                                    }
-                                    .fontSize(.small)
+                        List(direction: .vertical) {
+                            ListRow {
+                                Text {
+                                    "About"
                                 }
-                                ListRow {
-                                    Link(destination: "/articles/index/0") {
-                                        "Articles"
-                                    }
+                                .fontSize(.small)
+                            }
+                            ListRow {
+                                Link(destination: "/articles/index") {
+                                    "Articles"
                                 }
                             }
                         }
+                        .frame(width: .three, offset: .nine)
                     }
-                    .id("stack2")
-                    .onLeave(perfom: .hide("nav2"))
+                    .tag("stack2")
+                    .onLeave { stack in
+                        stack.hide("nav2")
+                    }
                 }
                 .id("nav2")
             }
@@ -114,84 +117,79 @@ public struct ViewContainer: View {
             }
             Footer {
                 HStack(alignment: .top) {
-                    StackColumn(size: .four) {
-                        List(direction: .vertical) {
-                            ListRow {
-                                Text {
-                                    "Languages"
-                                }
-                                .fontSize(.small)
+                    List(direction: .vertical) {
+                        ListRow {
+                            Text {
+                                "Languages"
                             }
-                            ListRow {
-                                Link(destination: "#") {
-                                    "German"
-                                }
+                            .fontSize(.small)
+                        }
+                        ListRow {
+                            Link(destination: "#") {
+                                "German"
                             }
-                            ListRow {
-                                Link(destination: "#") {
-                                    "English"
-                                }
+                        }
+                        ListRow {
+                            Link(destination: "#") {
+                                "English"
                             }
                         }
                     }
-                    StackColumn(size: .four) {
-                        List(direction: .vertical) {
-                            ListRow {
-                                Text {
-                                    "Sitemap"
-                                }
-                                .fontSize(.small)
+                    .frame(width: .four)
+                    List(direction: .vertical) {
+                        ListRow {
+                            Text {
+                                "Sitemap"
                             }
-                            ListRow {
-                                Link(destination: "/projects/index/0") {
-                                    "Explore solutions"
-                                }
+                            .fontSize(.small)
+                        }
+                        ListRow {
+                            Link(destination: "/projects/index") {
+                                "Explore solutions"
                             }
-                            ListRow {
-                                Link(destination: "/company/index") {
-                                    "Read about company"
-                                }
+                        }
+                        ListRow {
+                            Link(destination: "/company/index") {
+                                "Read about company"
                             }
-                            ListRow {
-                                Link(destination: "/connect/index") {
-                                    "Get in touch"
-                                }
+                        }
+                        ListRow {
+                            Link(destination: "/connect/index") {
+                                "Get in touch"
                             }
                         }
                     }
-                    StackColumn(size: .four) {
-                        List(direction: .vertical) {
-                            ListRow {
-                                Text {
-                                    "Resources"
-                                }
-                                .fontSize(.small)
+                    .frame(width: .four)
+                    List(direction: .vertical) {
+                        ListRow {
+                            Text {
+                                "Resources"
                             }
-                            ListRow {
-                                Link(destination: "/downloads/index") {
-                                    "Downloads"
-                                }
+                            .fontSize(.small)
+                        }
+                        ListRow {
+                            Link(destination: "/downloads/index") {
+                                "Downloads"
                             }
                         }
                     }
+                    .frame(width: .four)
                 }
                 HStack {
-                    StackColumn(size: .four, offset: .eight) {
-                        List(direction: .horizontal) {
-                            ListRow {
-                                Link(destination: "/settings/index") {
-                                    "Settings"
-                                }
+                    List(direction: .horizontal) {
+                        ListRow {
+                            Link(destination: "/settings/index") {
+                                "Settings"
                             }
-                            ListRow {
-                                Link(destination: "/conditions/index") {
-                                    "Conditions"
-                                }
+                        }
+                        ListRow {
+                            Link(destination: "/conditions/index") {
+                                "Conditions"
                             }
-                            ListRow {
-                                Link(destination: "/impressum/index") {
-                                    "Impressum"
-                                }
+                        }
+                        ListRow {
+                            Link(destination: "/impressum/index") {
+                                "Impressum"
                             }
                         }
                     }

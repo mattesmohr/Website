@@ -1,6 +1,6 @@
 import Vapor
 
-struct CredentialModel: Content {
+struct CredentialModel {
     
     enum Roles: String, Codable, CaseIterable {
         
