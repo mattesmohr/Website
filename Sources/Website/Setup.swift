@@ -1,12 +1,14 @@
+import Fluent
 import FluentMySQLDriver
 import Foundation
 import HTMLKitVapor
 import Vapor
+import Logging
 
 @main
 struct Setup {
     
-    static func main() throws {
+    static func main() async throws {
         
         var environment = try Environment.detect()
         
@@ -18,21 +20,26 @@ struct Setup {
         
         application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
         application.middleware.use(application.sessions.middleware)
-        
         application.sessions.use(.memory)
-        
         application.passwords.use(.bcrypt)
         
-        var tls = TLSConfiguration.makeClientConfiguration()
-        tls.certificateVerification = .none
+        do {
+    
+            try await routes(application)
+            try await tables(application)
+            try await services(application)
+            
+        } catch {
+            
+            application.logger.report(error: error)
+            
+            throw error
+        }
         
-        application.databases.use(.mysql(
-            hostname: Environment.get("DB_HOSTNAME")!,
-            username: Environment.get("DB_USERNAME")!,
-            password: Environment.get("DB_PASSWORD")!,
-            database: Environment.get("DB")!,
-            tlsConfiguration: tls
-        ), as: .mysql)
+        try await application.runFromAsyncMainEntrypoint()
+    }
+    
+    static func routes(_ application: Application) async throws {
         
         try application.register(collection: HomePageController())
         try application.register(collection: ArticlesPageController())
@@ -59,6 +66,22 @@ struct Setup {
             }
         }
         
+    }
+    
+    static func tables(_ application: Application) async throws {
+        
+        var tls = TLSConfiguration.makeClientConfiguration()
+        tls.certificateVerification = .none
+        
+        application.databases.use(.mysql(
+            hostname: Environment.get("DB_HOSTNAME")!,
+            username: Environment.get("DB_USERNAME")!,
+            password: Environment.get("DB_PASSWORD")!,
+            database: Environment.get("DB")!,
+            tlsConfiguration: tls
+        ), as: .mysql)
+        
+        application.migrations.add(SessionRecord.migration)
         application.migrations.add(AssetMigration())
         application.migrations.add(CredentialMigration())
         application.migrations.add(UserMigration())
@@ -71,13 +94,14 @@ struct Setup {
         application.migrations.add(ReportMigration())
         application.migrations.add(LinkMigration())
         
-        try application.autoMigrate().wait()
+        try await application.autoMigrate()
+    }
+    
+    static func services(_ application: Application) async throws {
         
         let localizationPath = application.directory.workingDirectory + "Sources/Website/Localization"
         
         application.htmlkit.localization.set(source: URL(string: localizationPath)!)
         application.htmlkit.localization.set(locale: "en-GB")
-        
-        try application.run()
     }
 }
