@@ -18,10 +18,11 @@ struct Setup {
         
         defer { application.shutdown() }
         
+        application.passwords.use(.bcrypt)
+        application.sessions.use(.fluent(.mysql))
+        
         application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
         application.middleware.use(application.sessions.middleware)
-        application.sessions.use(.memory)
-        application.passwords.use(.bcrypt)
         
         do {
     
@@ -55,7 +56,8 @@ struct Setup {
             
             try routes.group("admin") { routes in
                 
-                let group = routes.grouped(application.sessions.middleware, UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login/index"))
+                let group = routes.grouped(UserSessionAuthenticator(),
+                                           UserModel.Output.redirectMiddleware(path: "/area/login/index"))
             
                 try group.register(collection: HomeAdminController())
                 try group.register(collection: ProjectAdminController())

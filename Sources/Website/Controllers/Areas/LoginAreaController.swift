@@ -53,9 +53,7 @@ final class LoginAreaController {
         
         if try! request.password.verify(model.password, created: entity.credential!.password) {
         
-            let model = UserModel.Output(entity: entity)
-        
-            request.session.authenticate(model)
+            request.session.authenticate(UserModel.Output(entity: entity))
     
             return request.redirect(to: "/area/admin/home/index")
         }
