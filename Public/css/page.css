@@ -1,10 +1,8 @@
+@import url('thumbnails.css');
 @import url('https://fonts.googleapis.com/css?family=Inter:300,400,700,900');
 
-/*
- override
- */
-
 :root {
+    --fontFamily: Inter, sans-serif;
 }
 
 * {
@@ -13,8 +11,7 @@
     box-sizing: border-box
 }
 
-html {
-}
+html {}
 
 /*
  page
@@ -24,6 +21,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: #FFFFFF;
 }
 
@@ -32,10 +30,11 @@ body {
  */
 
 body > header {
+    width: 70%;
+    padding: 10px 25px;
     height: 10%;
     padding: 10px 25px;
     background-color: #FFFFFF;
-    border-bottom: 1px solid #E5F0F5;
 }
 
 /*
@@ -43,7 +42,7 @@ body > header {
  */
 
 body > main {
-    padding: 10px 150px;
+    width: 70%;
     display: flex;
     flex-direction: column;
     flex-grow: 1
@@ -55,7 +54,7 @@ body > main > header {
 }
 
 body > main > section {
-    padding: 10px 25px;
+    padding: 50px 25px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -70,12 +69,44 @@ body > main > footer {
  */
 
 body > footer {
+    width: 70%;
     padding: 10px 25px;
-    color: #9CA7B2;
-    background-color: #FAFCFD;
-    border-top: 1px solid #E5F0F5;
 }
 
-#nav1, #nav2, #nav3 {
-    display: none;
+.thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 250px;
+    border: 1px solid #E5F0F5;
+    border-radius: 5px;
+    background-color: #FAFCFD;
+    text-align: center;
+    overflow: hidden;
+}
+
+.sticker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #E5F0F5;
+    border-radius: 5px;
+    background-color: #FAFCFD;
+    text-align: center;
+    overflow: hidden;
+}
+
+#projects .link {
+    width: 400px;
+}
+
+.background\:aliceblue {
+    --backgroundColor: 200, 43%, 99%;
+}
+
+.border\:electricblue {
+    --borderColor: 199, 44%, 93%;
 }

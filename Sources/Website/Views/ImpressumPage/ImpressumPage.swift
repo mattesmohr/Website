@@ -10,24 +10,20 @@ enum ImpressumPage {
         var body: Content {
             ViewContainer {
                 Header {
-                    VStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .font(.subheadline)
-                        Text {
-                            "Lorem ipsum"
-                        }
-                        .font(.headline)
+                    Text {
+                        viewModel.title
                     }
+                    .font(.subheadline)
+                    Text {
+                        "Lorem ipsum"
+                    }
+                    .font(.headline)
                 }
                 Section {
-                    HStack {
-                        Text {
-                            "Lorem ipsum..."
-                        }
-                        .font(.body)
+                    Text {
+                        "Lorem ipsum..."
                     }
+                    .font(.body)
                 }
             }
         }

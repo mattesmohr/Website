@@ -56,6 +56,7 @@ enum ProjectAdminPage {
                                 }
                             }
                         }
+                        .navigationStyle(.pagination)
                         .borderShape(.smallrounded)
                         Text {
                             "Seite \(viewModel.pagination.currentPage) von \(viewModel.pagination.totalPages)"

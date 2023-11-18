@@ -32,6 +32,8 @@ enum HomeAdminPage {
                     }
                     .contentSpace(.small)
                 }
+                Section {
+                }
             }
         }
     }

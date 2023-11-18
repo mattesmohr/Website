@@ -4,6 +4,6 @@ enum ImpressumPageModel {
     
     struct IndexView {
         
-        var title: String?
+        var title: String = "Impressum"
     }
 }

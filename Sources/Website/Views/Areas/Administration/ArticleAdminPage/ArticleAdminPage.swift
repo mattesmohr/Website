@@ -56,6 +56,7 @@ enum ArticleAdminPage {
                                 }
                             }
                         }
+                        .navigationStyle(.pagination)
                         .borderShape(.smallrounded)
                         Text {
                             "Seite \(viewModel.pagination.currentPage) von \(viewModel.pagination.totalPages)"

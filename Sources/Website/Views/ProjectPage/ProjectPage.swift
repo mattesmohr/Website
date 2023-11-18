@@ -10,62 +10,42 @@ enum ProjectPage {
         var body: Content {
             ViewContainer {
                 Header {
-                    HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .font(.subheadline)
-                        Text {
-                            "Lorem ipsum"
-                        }
-                        .font(.headline)
+                    Text {
+                        viewModel.title
                     }
+                    .font(.subheadline)
+                    Text {
+                        "Explore, what I do in my free time."
+                    }
+                    .font(.headline)
                 }
                 Section {
-                    HStack {
-                        Text {
-                            "Lorem ipsum..."
-                        }
-                    }
-                    HStack {
-                        List(direction: .horizontal) {
-                            ListRow {
-                                Italic {
+                    Grid(ratio: .half) {
+                        for project in viewModel.pagination.items {
+                            Link(destination: "/projects/show/\(project.id)") {
+                                VStack {
+                                    Thumbnail {
+                                        SafariIcon()
+                                    }
+                                    Text {
+                                        project.category
+                                    }
+                                    .fontSize(.small)
+                                    .foregroundColor(.blue)
+                                    .bold()
+                                    Text {
+                                        project.title
+                                    }
+                                    .bold()
+                                    Text {
+                                        project.content
+                                    }
                                 }
-                                .class("fas fa-search")
-                            }
-                            ListRow {
-                                Text {
-                                    "All"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "iPhone"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "iPad"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "Mac"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "Safari"
-                                }
-                                .fontTransformation(.uppercase)
+                                .contentSpace(.small)
                             }
                         }
                     }
+                    .contentSpace(.small)
                 }
             }
         }
@@ -78,50 +58,25 @@ enum ProjectPage {
         var body: Content {
             ViewContainer {
                 Header {
-                    HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        Text {
-                            "Lorem ipsum..."
-                        }
-                        .fontSize(.large)
-                        .fontWeight(.bold)
-                        List(direction: .horizontal) {
-                            ListRow {
-                                Link(destination: "#overview") {
-                                    "Overview"
-                                }
-                            }
-                            ListRow {
-                                Link(destination: "#features") {
-                                    "Features"
-                                }
-                            }
-                            ListRow {
-                                Link(destination: "#download") {
-                                    "Download"
-                                }
-                            }
-                        }
+                    Text {
+                        viewModel.title
                     }
+                    .font(.subheadline)
+                    Text {
+                        viewModel.project.title
+                    }
+                    .font(.headline)
                 }
                 Section {
                     VStack {
+                        Thumbnail {
+                            SafariIcon()
+                        }
                         Text {
                             viewModel.project.content
                         }
-                        Text {
-                            "Overview"
-                        }
-                        Text {
-                            "Features"
-                        }
-                        Text {
-                            "Download"
-                        }
                     }
+                    .contentSpace(.small)
                 }
             }
         }

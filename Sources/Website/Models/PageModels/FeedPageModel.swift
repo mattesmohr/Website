@@ -1,9 +1,9 @@
 import HTMLKitComponents
 
-enum SettingPageModel {
+enum FeedPageModel {
     
     struct IndexView {
         
-        var title: String?
+        var title: String = "Feed"
     }
 }

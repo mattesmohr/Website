@@ -10,60 +10,38 @@ enum ArticlePage {
         var body: Content {
             ViewContainer {
                 Header {
-                    VStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .font(.subheadline)
-                        Text {
-                            "Lorem ipsum"
-                        }
-                        .font(.headline)
+                    Text {
+                        viewModel.title
                     }
+                    .font(.subheadline)
                 }
                 Section {
-                    HStack {
-                        Text {
-                            "Lorem ipsum..."
-                        }
-                    }
-                    HStack {
-                        List(direction: .horizontal) {
-                            ListRow {
-                                Italic {
+                    Grid(ratio: .half) {
+                        for article in viewModel.pagination.items {
+                            Link(destination: "/articles/show/\(article.id)") {
+                                VStack {
+                                    Thumbnail {
+                                        SafariIcon()
+                                    }
+                                    Text {
+                                        article.category
+                                    }
+                                    .fontSize(.small)
+                                    .foregroundColor(.blue)
+                                    .bold()
+                                    Text {
+                                        article.title
+                                    }
+                                    .bold()
+                                    Text {
+                                        article.excerpt
+                                    }
                                 }
-                                .class("fas fa-search")
-                            }
-                            ListRow {
-                                Text {
-                                    "All"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "Identity"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "Coding"
-                                }
-                                .fontTransformation(.uppercase)
-                            }
-                            ListRow {
-                                Text {
-                                    "Ui/Ux"
-                                }
-                                .fontTransformation(.uppercase)
+                                .contentSpace(.small)
                             }
                         }
-                        .frame(width: .twelve)
                     }
-                    HStack {
-                        ArticleGrid(articles: viewModel.pagination.items)
-                    }
+                    .contentSpace(.small)
                 }
             }
         }
@@ -76,14 +54,46 @@ enum ArticlePage {
         var body: Content {
             ViewContainer {
                 Header {
-                    VStack {
-                        Text {
-                            viewModel.title
-                        }
+                    Text {
+                        viewModel.title
                     }
+                    .font(.subheadline)
+                    Text {
+                        viewModel.article.title
+                    }
+                    .font(.headline)
                 }
                 Section {
-                    HStack {
+                    HStack(alignment: .top) {
+                        VStack {
+                            Thumbnail {
+                                SafariIcon()
+                            }
+                            Text {
+                                viewModel.article.content
+                            }
+                        }
+                        .frame(width: .eight)
+                        .contentSpace(.small)
+                        VStack {
+                            Text {
+                                "Related Topcis"
+                            }
+                            .bold()
+                            HStack {
+                                Thumbnail {
+                                    SafariIcon()
+                                }
+                                Text {
+                                    "Headline"
+                                }
+                                .bold()
+                                Text {
+                                    "This is a subheadline"
+                                }
+                            }
+                        }
+                        .frame(width: .four)
                     }
                 }
             }

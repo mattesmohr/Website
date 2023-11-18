@@ -37,10 +37,8 @@ struct Setup {
         try application.register(collection: HomePageController())
         try application.register(collection: ArticlesPageController())
         try application.register(collection: ProjectsPageController())
-        try application.register(collection: CompanyPageController())
-        try application.register(collection: ConnectPageController())
+        try application.register(collection: FeedPageController())
         try application.register(collection: PrivacyPageController())
-        try application.register(collection: SettingsPageController())
         try application.register(collection: ImpressumPageController())
         try application.register(collection: ConditionsPageController())
         

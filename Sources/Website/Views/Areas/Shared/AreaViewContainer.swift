@@ -41,8 +41,9 @@ struct AreaViewContainer: View {
                                 ListRow {
                                     Link(destination: "/area/admin/projects/index") {
                                         Symbol(system: "folder")
-                                        Text("menu.projects")
-                                            .environment(key: \.locale)
+                                        Text {
+                                            "Projects"
+                                        }
                                     }
                                 }
                                 ListRow {
