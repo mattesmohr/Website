@@ -32,50 +32,38 @@ struct AreaViewContainer: View {
                                 ListRow {
                                     Link(destination: "/area/admin/home/index") {
                                         Symbol(system: "house")
-                                        Text {
-                                            "Home"
-                                        }
+                                        Text("menu.home")
                                     }
                                     .fontSize(.extralarge)
                                 }
                                 ListRow {
                                     Link(destination: "/area/admin/projects/index") {
                                         Symbol(system: "folder")
-                                        Text {
-                                            "Projects"
-                                        }
+                                        Text("menu.projects")
                                     }
                                 }
                                 ListRow {
                                     Link(destination: "/area/admin/articles/index") {
                                         Symbol(system: "file")
-                                        Text {
-                                            "Articles"
-                                        }
+                                        Text("menu.articles")
                                     }
                                 }
                                 ListRow {
                                     Link(destination: "/area/admin/assets/index") {
                                         Symbol(system: "photo")
-                                        Text {
-                                            "Assets"
-                                        }
+                                        Text("menu.assets")
                                     }
                                 }
                                 ListRow {
                                     Link(destination: "/area/admin/reports/index") {
                                         Symbol(system: "chart.pie")
-                                        Text {
-                                            "Report"
-                                        }
+                                        Text("menu.reports")
                                     }
                                 }
                                 ListRow {
                                     Link(destination: "/area/admin/users/index") {
                                         Symbol(system: "person")
-                                        Text {
-                                            "Users"
-                                        }
+                                        Text("menu.users")
                                     }
                                 }
                             }

@@ -69,12 +69,12 @@ struct ViewContainer: View {
                     List(direction: .horizontal) {
                         ListRow {
                             Link(destination: "/impressum/index") {
-                                "Impressum"
+                                Text("menu.legal")
                             }
                         }
                         ListRow {
                             Link(destination: "/privacy/index") {
-                                "Privacy"
+                                Text("menu.privacy")
                             }
                         }
                     }

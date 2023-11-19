@@ -1,2 +1,13 @@
-/* A friendly greeting. */
+/* menu */
+"menu.home" = "Übersicht";
 "menu.projects" = "Projekte";
+"menu.articles" = "Beiträge";
+"menu.assets" = "Mediathek";
+"menu.reports" = "Berichte";
+"menu.users" = "Benutzer";
+"menu.legal" = "Impressum";
+"menu.privacy" = "Datenschutz";
+
+/* headlines */
+"headline.about" = "Über mich";
+"headline.projects" = "Projekte";

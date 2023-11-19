@@ -1,2 +1,13 @@
-/* A friendly greeting. */
+/* menu */
+"menu.home" = "Home";
 "menu.projects" = "Projects";
+"menu.articles" = "Articles";
+"menu.assets" = "Assets";
+"menu.reports" = "Reports";
+"menu.users" = "Users";
+"menu.legal" = "Legal";
+"menu.privacy" = "Privacy";
+
+/* headlines */
+"headline.about" = "About";
+"headline.projects" = "Projects";

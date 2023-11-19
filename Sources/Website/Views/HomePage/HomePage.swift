@@ -40,10 +40,8 @@ enum HomePage {
                 }
                 Section {
                     HStack {
-                        Text {
-                            "About"
-                        }
-                        .font(.subheadline)
+                        Text("headline.about")
+                            .font(.subheadline)
                     }
                     .contentSpace(.around)
                     HStack {
@@ -63,10 +61,8 @@ enum HomePage {
                 }
                 Section {
                     HStack {
-                        Text {
-                            "Projects"
-                        }
-                        .font(.subheadline)
+                        Text("headline.projects")
+                            .font(.subheadline)
                     }
                     .contentSpace(.around)
                     HStack {
