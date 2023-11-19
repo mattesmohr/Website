@@ -15,10 +15,10 @@ enum LoginAreaPage {
                             Card {
                                 Form(method: .post) {
                                     VStack {
-                                        FieldLabel(for: "email") {
-                                            "Email"
+                                        FieldLabel(for: "username") {
+                                            "Username"
                                         }
-                                        TextField(name: "email")
+                                        TextField(name: "username")
                                             .borderShape(.smallrounded)
                                     }
                                     VStack {
@@ -38,21 +38,6 @@ enum LoginAreaPage {
                                         .buttonSize(.full)
                                     }
                                     .margin(insets: .bottom, length: .small)
-                                    HStack {
-                                        LinkButton(destination: "/area/login/register") {
-                                            "Sign up"
-                                        }
-                                        .buttonSize(.full)
-                                        .buttonStyle(.secondary)
-                                        .borderShape(.smallrounded)
-                                        LinkButton(destination: "/area/login/reset") {
-                                            "Reset password"
-                                        }
-                                        .buttonSize(.full)
-                                        .buttonStyle(.secondary)
-                                        .borderShape(.smallrounded)
-                                    }
-                                    .contentSpace(.small)
                                 }
                                 .tag("login-form")
                                 .onSubmit { form in

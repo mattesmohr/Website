@@ -24,6 +24,10 @@ struct UserList: View {
                             }
                             .frame(width: .two)
                             Text {
+                                user.role.capitalized
+                            }
+                            .frame(width: .two)
+                            Text {
                                 user.modifiedAt.formatted(date: .short, time: .none)
                             }
                             .frame(width: .two)

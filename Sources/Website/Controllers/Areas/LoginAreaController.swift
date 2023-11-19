@@ -24,13 +24,42 @@ final class LoginAreaController {
         
         let model = try request.content.decode(LoginModel.Input.self)
         
-        if let entity = try await UserRepository(database: request.db).find(name: model.email) {
-
-            if try await request.password.async.verify(model.password, created: entity.credential!.password) {
+        if let entity = try await CredentialRepository(database: request.db).find(name: model.username) {
             
-                request.session.authenticate(UserModel.Output(entity: entity))
-        
-                return request.redirect(to: "/area/admin/home/index")
+            switch entity.status {
+            case "locked", "deactivated", "new":
+                // Do nothing yet...
+                break
+                
+            default:
+                
+                if try await request.password.async.verify(model.password, created: entity.password) {
+                    // The attempt was successfull, lets reset the counter...
+                    if entity.attempt > 0 {
+                        // Reset the counter...
+                        try await CredentialRepository(database: request.db)
+                            .patch(field: \.$attempt, to: 0, for: entity.requireID())
+                    }
+                    
+                    if let entity = try await UserRepository(database: request.db).find(name: model.username) {
+                        request.session.authenticate(UserModel.Output(entity: entity))
+                    }
+                    
+                    return request.redirect(to: "/area/admin/home/index")
+                    
+                } else {
+                    // Count the attempt. If it reached the limit, lock up the account...
+                    if entity.attempt < 4 {
+                        // Increment the attempt...
+                        try await CredentialRepository(database: request.db)
+                            .patch(field: \.$attempt, to: (entity.attempt + 1), for: entity.requireID())
+                        
+                    } else {
+                        // Otherwise set the status to lock up the account...
+                        try await CredentialRepository(database: request.db)
+                            .patch(field: \.$status, to: "locked", for: entity.requireID())
+                    }
+                }
             }
         }
         

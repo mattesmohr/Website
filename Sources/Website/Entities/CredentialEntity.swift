@@ -8,17 +8,17 @@ final class CredentialEntity: Model {
     @ID(key: "id")
     var id: UUID?
     
+    @Field(key: "username")
+    var username: String
+    
     @Field(key: "password")
     var password: String
-    
-    @Field(key: "role")
-    var role: String
     
     @Field(key: "status")
     var status: String
     
-    @OptionalChild(for: \.$credential)
-    var user: UserEntity?
+    @Field(key: "attempt")
+    var attempt: Int
     
     @Timestamp(key: "created_at", on: .create)
     var createdAt: Date?
@@ -28,19 +28,19 @@ final class CredentialEntity: Model {
     
     init() {}
     
-    init(id: UUID? = nil, password: String, role: String, status: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, username: String, password: String, status: String, attempt: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
+        self.username = username
         self.password = password
-        self.role = role
         self.status = status
+        self.attempt = attempt
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
     }
     
     convenience init(input: CredentialModel.Input) {
         
-        self.init(password: input.password, role: input.role, status: input.status)
+        self.init(username: input.username, password: input.password, status: input.status, attempt: input.attempt)
     }
 }
-

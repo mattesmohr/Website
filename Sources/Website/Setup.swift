@@ -56,8 +56,7 @@ struct Setup {
             
             try routes.group("admin") { routes in
                 
-                let group = routes.grouped(UserSessionAuthenticator(),
-                                           UserModel.Output.redirectMiddleware(path: "/area/login/index"))
+                let group = routes.grouped(UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login/index"))
             
                 try group.register(collection: HomeAdminController())
                 try group.register(collection: ProjectAdminController())

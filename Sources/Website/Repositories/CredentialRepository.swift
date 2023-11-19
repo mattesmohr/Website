@@ -13,8 +13,14 @@ final class CredentialRepository {
     func find(id: UUID) async throws -> CredentialEntity? {
         
        return try await CredentialEntity.query(on: database)
-            .with(\.$user)
             .filter(\.$id == id)
+            .first()
+    }
+    
+    func find(name: String) async throws -> CredentialEntity? {
+        
+       return try await CredentialEntity.query(on: database)
+            .filter(\.$username == name)
             .first()
     }
     
@@ -29,13 +35,6 @@ final class CredentialRepository {
         try await entity.create(on: database)
     }
     
-    func insert(entity: CredentialEntity, with child: UserEntity) async throws {
-        
-        try await entity.create(on: database)
-        
-        _ = try await entity.$user.create(child, on: self.database)
-    }
-    
     func patch<Field: QueryableProperty>(field: KeyPath<CredentialEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == CredentialEntity {
         
         try await CredentialEntity.query(on: database)
@@ -48,9 +47,10 @@ final class CredentialRepository {
         
         try await CredentialEntity.query(on: database)
             .filter(\.$id == id)
+            .set(\.$username, to: entity.username)
             .set(\.$password, to: entity.password)
-            .set(\.$role, to: entity.role)
             .set(\.$status, to: entity.status)
+            .set(\.$attempt, to: entity.attempt)
             .update()
     }
     

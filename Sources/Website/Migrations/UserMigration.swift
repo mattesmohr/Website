@@ -11,7 +11,7 @@ struct UserMigration: AsyncMigration {
             .field("first_name", .string)
             .field("last_name", .string)
             .field("description", .string)
-            .field("credential_id", .uuid, .references("credentials", "id"))
+            .field("role", .string)
             .field("created_at", .datetime)
             .field("modified_at", .datetime)
             .create()

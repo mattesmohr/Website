@@ -3,6 +3,13 @@ import HTMLKitComponents
 
 struct UserModel {
     
+    enum Roles: String, Codable, CaseIterable {
+        
+        case administrator
+        case moderator
+        case customer
+    }
+    
     var output: Output?
     
     struct Input: Content, Validatable {
@@ -12,6 +19,7 @@ struct UserModel {
         var firstName: String?
         var lastName: String?
         var description: String?
+        var role: String
         
         static func validations(_ validations: inout Validations) {
             
@@ -35,14 +43,14 @@ struct UserModel {
         var firstName: String?
         var lastName: String?
         var description: String?
-        var credential: CredentialModel.Output?
+        var role: String
         var createdAt: Date
         var modifiedAt: Date
         var sessionID: String {
             self.email
         }
         
-        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, credential: CredentialModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, role: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar
@@ -50,21 +58,17 @@ struct UserModel {
             self.firstName = firstName
             self.lastName = lastName
             self.description = description
-            self.credential = credential
+            self.role = role
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
         }
         
         init(entity: UserEntity) {
             
-            self.init(id: entity.id!, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, description: entity.description, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, description: entity.description, role: entity.role, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             
             if let avatar = entity.avatar {
                 self.avatar = AssetModel.Output(entity: avatar)
-            }
-            
-            if let credential = entity.credential {
-                self.credential = CredentialModel.Output(entity: credential)
             }
         }
     }

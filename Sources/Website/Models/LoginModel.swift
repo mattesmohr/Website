@@ -5,23 +5,23 @@ struct LoginModel {
     
     struct Input: Content, Validatable {
         
-        var email: String
+        var username: String
         var password: String
         
-        init(email: String, password: String) {
+        init(username: String, password: String) {
             
-            self.email = email
+            self.username = username
             self.password = password
         }
         
         static func validations(_ validations: inout Validations) {
             
-            validations.add("email", as: String.self, is: .email)
+            validations.add("username", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }
         
         static let validators = [
-            Validator(field: "email", rule: .email),
+            Validator(field: "username", rule: .email),
             Validator(field: "password", rule: .value)
         ]
     }

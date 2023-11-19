@@ -1,13 +1,7 @@
 import Vapor
+import HTMLKitComponents
 
 struct CredentialModel {
-    
-    enum Roles: String, Codable, CaseIterable {
-        
-        case administrator
-        case moderator
-        case customer
-    }
 
     enum States: String, Codable, CaseIterable {
         
@@ -21,38 +15,47 @@ struct CredentialModel {
     
     struct Input: Content, Validatable {
         
+        var username: String
         var password: String
-        var role: String
         var status: String
+        var attempt: Int
         
         static func validations(_ validations: inout Validations) {
             
-            validations.add("password", as: String.self, is: !.empty)
+            validations.add("username", as: String.self, is: .email)
+            validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }
+        
+        static let validators = [
+            Validator(field: "username", rule: .email),
+            Validator(field: "password", rule: .value)
+        ]
     }
     
     struct Output: Content {
         
         var id: UUID
+        var username: String
         var password: String
-        var role: String?
         var status: String?
+        var attempt: Int
         var createdAt: Date
         var modifiedAt: Date
         
-        init(id: UUID, password: String, role: String? = nil, status: String? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, username: String, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
+            self.username = username
             self.password = password
-            self.role = role
             self.status = status
+            self.attempt = attempt
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
         }
         
         init(entity: CredentialEntity) {
             
-            self.init(id: entity.id!, password: entity.password, role: entity.role, status: entity.status, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, username: entity.username, password: entity.password, status: entity.status, attempt: entity.attempt, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }
     }
 }

@@ -59,7 +59,7 @@ enum UserAdminPage {
                         .navigationStyle(.pagination)
                         .borderShape(.smallrounded)
                         Text {
-                            "Seite \(viewModel.pagination.currentPage) von \(viewModel.pagination.totalPages)"
+                            "Page \(viewModel.pagination.currentPage) of \(viewModel.pagination.totalPages)"
                         }
                     }
                     .contentSpace(.between)
@@ -123,6 +123,19 @@ enum UserAdminPage {
                                 TextEditor(name: "description") {
                                 }
                                 .lineLimit(4)
+                                .borderShape(.smallrounded)
+                            }
+                            VStack {
+                                FieldLabel(for: "role") {
+                                    "Role"
+                                }
+                                SelectField(name: "role") {
+                                    for role in UserModel.Roles.allCases {
+                                        RadioSelect(value: role.rawValue) {
+                                            role.rawValue.capitalized
+                                        }
+                                    }
+                                }
                                 .borderShape(.smallrounded)
                             }
                             HStack {
@@ -193,6 +206,19 @@ enum UserAdminPage {
                                     viewModel.user.description ?? ""
                                 }
                                 .lineLimit(4)
+                                .borderShape(.smallrounded)
+                            }
+                            VStack {
+                                FieldLabel(for: "role") {
+                                    "Role"
+                                }
+                                SelectField(name: "role", selection: viewModel.user.role) {
+                                    for role in UserModel.Roles.allCases {
+                                        RadioSelect(value: role.rawValue) {
+                                            role.rawValue.capitalized
+                                        }
+                                    }
+                                }
                                 .borderShape(.smallrounded)
                             }
                             HStack {
