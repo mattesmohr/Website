@@ -28,39 +28,7 @@ enum ProjectAdminPage {
                 Section {
                     ProjectList(projects: viewModel.pagination.items)
                     HStack {
-                        Navigation {
-                            List(direction: .horizontal) {
-                                ListRow {
-                                    if let previousPage = viewModel.pagination.previousPage {
-                                        Link(destination: "?page=\(previousPage)") {
-                                            "Vorwärts"
-                                        }
-                                    } else {
-                                        Link(destination: "") {
-                                            "Vorwärts"
-                                        }
-                                        .foregroundColor(.gray)
-                                    }
-                                }
-                                ListRow {
-                                    if let nextPage = viewModel.pagination.nextPage {
-                                        Link(destination: "?page=\(nextPage)") {
-                                            "Nächstes"
-                                        }
-                                    } else {
-                                        Link(destination: "") {
-                                            "Nächstes"
-                                        }
-                                        .foregroundColor(.gray)
-                                    }
-                                }
-                            }
-                        }
-                        .navigationStyle(.pagination)
-                        .borderShape(.smallrounded)
-                        Text {
-                            "Seite \(viewModel.pagination.currentPage) von \(viewModel.pagination.totalPages)"
-                        }
+                        PagePagination(meta: viewModel.pagination.meta)
                     }
                     .contentSpace(.between)
                 }

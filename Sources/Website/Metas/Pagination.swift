@@ -2,41 +2,52 @@ import Foundation
 
 struct Pagination<T: Sequence> {
     
+    struct Meta {
+        
+        var previousPage: Int? {
+            
+            if currentPage > 1 {
+                return currentPage - 1
+            }
+            
+            return nil
+        }
+        
+        var nextPage: Int? {
+            
+            if currentPage < totalPages {
+                return currentPage + 1
+            }
+            
+            return nil
+        }
+        
+        var totalPages: Int {
+            return Int(ceil(Double(totalItems) / Double(pageSize)))
+        }
+        
+        var currentPage: Int
+        
+        var pageSize: Int
+        
+        var totalItems: Int
+        
+        init(currentPage: Int, pageSize: Int, totalItems: Int) {
+            
+            self.currentPage = currentPage
+            self.pageSize = pageSize
+            self.totalItems = totalItems
+        }
+    }
+    
     var items: T
     
-    var currentPage: Int
+    var meta: Meta
     
-    var pageSize: Int
     
-    var totalItems: Int
-    
-    var totalPages: Int {
-        return Int(ceil(Double(totalItems) / Double(pageSize)))
-    }
-    
-    var previousPage: Int? {
-        
-        if currentPage > 1 {
-            return currentPage - 1
-        }
-        
-        return nil
-    }
-    
-    var nextPage: Int? {
-        
-        if currentPage < totalPages {
-            return currentPage + 1
-        }
-        
-        return nil
-    }
-    
-    init(items: T, current: Int = 1, size: Int = 1, total: Int) {
+    init(items: T, currentPage: Int = 1, pageSize: Int = 1, totalItems: Int) {
         
         self.items = items
-        self.currentPage = current
-        self.pageSize = size
-        self.totalItems = total
+        self.meta = Meta(currentPage: currentPage, pageSize: pageSize, totalItems: totalItems)
     }
 }
