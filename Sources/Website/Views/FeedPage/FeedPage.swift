@@ -16,16 +16,12 @@ enum FeedPage {
                     .font(.subheadline)
                 }
                 Section {
-                    Grid(ratio: .sixth) {
-                        Thumbnail {
-                        }
-                        Thumbnail {
-                        }
-                        Thumbnail {
-                        }
-                        Thumbnail {
-                        }
-                        Thumbnail {
+                    Grid(ratio: .custom("masonary")) {
+                        for feed in viewModel.pagination.items {
+                            Card {
+                                feed.message
+                            }
+                            .borderShape(.smallrounded)
                         }
                     }
                     .contentSpace(.small)

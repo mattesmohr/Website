@@ -6,7 +6,17 @@ final class FeedPageController {
     
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
-        return try await request.htmlkit.render(FeedPage.IndexView(viewModel: .init()))
+        
+        let page: Int = request.query["page"] ?? 1
+        
+        let feeds = try await FeedRepository(database: request.db)
+            .find()
+            .map(FeedModel.Output.init)
+            .page(page: page, per: 10)
+        
+        let viewModel = FeedPageModel.IndexView(pagination: feeds)
+        
+        return try await request.htmlkit.render(FeedPage.IndexView(viewModel: viewModel))
     }
 }
 

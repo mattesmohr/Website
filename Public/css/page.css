@@ -110,3 +110,7 @@ body > footer {
 .border\:electricblue {
     --borderColor: 199, 44%, 93%;
 }
+
+.grid.ratio\:masonary {
+    grid-template-rows: masonry;
+}

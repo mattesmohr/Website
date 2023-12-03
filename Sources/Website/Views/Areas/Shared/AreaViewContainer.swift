@@ -49,6 +49,12 @@ struct AreaViewContainer: View {
                                     }
                                 }
                                 ListRow {
+                                    Link(destination: "/area/admin/feed/index") {
+                                        Symbol(system: "photo")
+                                        Text("menu.feed")
+                                    }
+                                }
+                                ListRow {
                                     Link(destination: "/area/admin/assets/index") {
                                         Symbol(system: "photo")
                                         Text("menu.assets")

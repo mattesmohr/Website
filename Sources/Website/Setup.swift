@@ -63,6 +63,7 @@ struct Setup {
                 try group.register(collection: ArticleAdminController())
                 try group.register(collection: AssetAdminController())
                 try group.register(collection: UserAdminController())
+                try group.register(collection: FeedAdminController())
                 try group.register(collection: ReportAdminController())
             }
         }
@@ -94,6 +95,7 @@ struct Setup {
         application.migrations.add(ContactMigration())
         application.migrations.add(ReportMigration())
         application.migrations.add(LinkMigration())
+        application.migrations.add(FeedMigration())
         
         try await application.autoMigrate()
     }
