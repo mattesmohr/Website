@@ -59,65 +59,7 @@ enum UserAdminPage {
                 }
                 Section {
                     VStack {
-                        Form(method: .post) {
-                            VStack {
-                                FieldLabel(for: "email") {
-                                    "Email"
-                                }
-                                TextField(name: "email")
-                                    .borderShape(.smallrounded)
-                            }
-                            HStack {
-                                VStack {
-                                    FieldLabel(for: "firstName") {
-                                        "Firstname"
-                                    }
-                                    TextField(name: "firstName")
-                                        .borderShape(.smallrounded)
-                                }
-                                VStack {
-                                    FieldLabel(for: "lastName") {
-                                        "Lastname"
-                                    }
-                                    TextField(name: "lastName")
-                                        .borderShape(.smallrounded)
-                                }
-                            }
-                            .contentSpace(.small)
-                            VStack {
-                                FieldLabel(for: "description") {
-                                    "Description"
-                                }
-                                TextEditor(name: "description") {
-                                }
-                                .lineLimit(4)
-                                .borderShape(.smallrounded)
-                            }
-                            VStack {
-                                FieldLabel(for: "role") {
-                                    "Role"
-                                }
-                                SelectField(name: "role") {
-                                    for role in UserModel.Roles.allCases {
-                                        RadioSelect(value: role.rawValue) {
-                                            role.rawValue.capitalized
-                                        }
-                                    }
-                                }
-                                .borderShape(.smallrounded)
-                            }
-                            HStack {
-                                Button(role: .submit) {
-                                    "Submit"
-                                }
-                                .buttonStyle(.primary)
-                                .borderShape(.smallrounded)
-                            }
-                        }
-                        .tag("create-form")
-                        .onSubmit { form in
-                            form.validate("create-form", UserModel.Input.validators)
-                        }
+                        UserAdminPage.CreateForm()
                     }
                 }
             }
@@ -141,66 +83,7 @@ enum UserAdminPage {
                 }
                 Section {
                     VStack {
-                        Form(method: .post) {
-                            VStack {
-                                FieldLabel(for: "email") {
-                                    "Email"
-                                }
-                                TextField(name: "email", value: viewModel.user.email)
-                                    .borderShape(.smallrounded)
-                            }
-                            HStack {
-                                VStack {
-                                    FieldLabel(for: "firstName") {
-                                        "Firstname"
-                                    }
-                                    TextField(name: "firstName", value: viewModel.user.firstName)
-                                        .borderShape(.smallrounded)
-                                }
-                                VStack {
-                                    FieldLabel(for: "lastName") {
-                                        "Lastname"
-                                    }
-                                    TextField(name: "lastName", value: viewModel.user.lastName)
-                                        .borderShape(.smallrounded)
-                                }
-                            }
-                            .contentSpace(.small)
-                            VStack {
-                                FieldLabel(for: "description") {
-                                    "Description"
-                                }
-                                TextEditor(name: "description") {
-                                    viewModel.user.description ?? ""
-                                }
-                                .lineLimit(4)
-                                .borderShape(.smallrounded)
-                            }
-                            VStack {
-                                FieldLabel(for: "role") {
-                                    "Role"
-                                }
-                                SelectField(name: "role", selection: viewModel.user.role) {
-                                    for role in UserModel.Roles.allCases {
-                                        RadioSelect(value: role.rawValue) {
-                                            role.rawValue.capitalized
-                                        }
-                                    }
-                                }
-                                .borderShape(.smallrounded)
-                            }
-                            HStack {
-                                Button(role: .submit) {
-                                    "Submit"
-                                }
-                                .buttonStyle(.primary)
-                                .borderShape(.smallrounded)
-                            }
-                        }
-                        .tag("edit-form")
-                        .onSubmit { form in
-                            form.validate("edit-form", UserModel.Input.validators)
-                        }
+                        UserAdminPage.EditForm(user: viewModel.user)
                     }
                 }
             }
