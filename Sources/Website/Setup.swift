@@ -37,7 +37,7 @@ struct Setup {
             throw error
         }
         
-        try await application.runFromAsyncMainEntrypoint()
+        try await application.execute()
     }
     
     static func routes(_ application: Application) async throws {
