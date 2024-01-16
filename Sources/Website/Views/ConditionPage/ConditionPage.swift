@@ -14,26 +14,20 @@ enum ConditionPage {
                         Text {
                             viewModel.title
                         }
-                        .font(.subheadline)
+                        .textStyle(.subheadline)
                         Text {
                             "Lorem ipsum"
                         }
-                        .font(.headline)
+                        .textStyle(.headline)
                         List(direction: .horizontal) {
-                            ListRow {
-                                Link(destination: "#terms") {
-                                    "Terms of use"
-                                }
+                            Link(destination: "#terms") {
+                                "Terms of use"
                             }
-                            ListRow {
-                                Link(destination: "#privacy") {
-                                    "Privacy policy"
-                                }
+                            Link(destination: "#privacy") {
+                                "Privacy policy"
                             }
-                            ListRow {
-                                Link(destination: "#links") {
-                                    "Links"
-                                }
+                            Link(destination: "#links") {
+                                "Links"
                             }
                         }
                     }

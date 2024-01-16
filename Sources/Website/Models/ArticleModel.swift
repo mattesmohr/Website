@@ -5,16 +5,52 @@ struct ArticleModel {
     
     enum Categories: String, Codable, CaseIterable {
         
-        case macOS
-        case iOS
+        case macos
+        case ios
+        case server
+        
+        var description: String {
+            
+            switch rawValue {
+            case "macos":
+                return "macOS"
+                
+            case "ios":
+                return "iOS"
+                
+            case "server":
+                return "Swift on server"
+                
+            default:
+                return "Choose"
+            }
+        }
     }
     
-    enum States: String, Codable, CaseIterable {
+    enum States: String, CaseIterable {
         
         case published
         case draft
         case archived
+        
+        var description: String {
+            
+            switch rawValue {
+            case "published":
+                return "Published"
+                
+            case "archived":
+                return "Archived"
+                
+            case "draft":
+                return "Draft"
+                
+            default:
+                return "Unkown"
+            }
+        }
     }
+    
     
     var output: Self.Output?
     
@@ -22,7 +58,6 @@ struct ArticleModel {
         
         var thumbnailId: String?
         var title: String
-        var excerpt: String?
         var content: String
         var category: String
         var status: String
@@ -50,7 +85,6 @@ struct ArticleModel {
         var id: UUID
         var thumbnail: AssetModel.Output?
         var title: String
-        var excerpt: String?
         var content: String
         var category: String
         var status: String
@@ -61,12 +95,11 @@ struct ArticleModel {
         var createdAt: Date
         var modifiedAt: Date
         
-        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String? = nil, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.thumbnail = thumbnail
             self.title = title
-            self.excerpt = excerpt
             self.content = content
             self.category = category
             self.status = status
@@ -80,7 +113,7 @@ struct ArticleModel {
         
         init(entity: ArticleEntity) {
             
-            self.init(id: entity.id!, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, title: entity.title, content: entity.content, category: entity.category, status: entity.status, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)

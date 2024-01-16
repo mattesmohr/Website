@@ -34,6 +34,10 @@ final class AssetAdminController {
         
         let model = try request.content.decode(AssetModel.Input.self)
         
+        let path = request.application.directory.publicDirectory + "/assets/\(model.asset.filename)"
+        
+        try await request.fileio.writeFile(model.asset.data, at: path)
+        
         try await AssetRepository(database: request.db)
             .insert(entity: AssetEntity(input: model))
         

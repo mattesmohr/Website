@@ -7,7 +7,10 @@ final class ReportAdminController {
     // [/index]
     func getIndex(_ request: Request) async throws -> View {
         
-        let viewModel = ReportAdminPageModel.IndexView()
+        let projects = try await ProjectRepository(database: request.db)
+            .group(column: "category")
+        
+        let viewModel = ReportAdminPageModel.IndexView(projects: projects)
         
         return try await request.htmlkit.render(ReportAdminPage.IndexView(viewModel: viewModel))
     }

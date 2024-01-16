@@ -10,8 +10,8 @@ enum LoginAreaPage {
         var body: Content {
             AreaPageContainer {
                 Main {
-                    HStack {
-                        VStack {
+                    HStack(spacing: .around) {
+                        VStack(spacing: .around) {
                             Card {
                                 Form(method: .post) {
                                     VStack {
@@ -33,9 +33,8 @@ enum LoginAreaPage {
                                         Button(role: .submit) {
                                             "Sign in"
                                         }
-                                        .buttonStyle(.primary)
-                                        .borderShape(.smallrounded)
-                                        .buttonSize(.full)
+                                        .buttonStyle(PrimaryButton())
+                                        .controlSize(.full)
                                     }
                                     .margin(insets: .bottom, length: .small)
                                 }
@@ -48,9 +47,7 @@ enum LoginAreaPage {
                             .frame(width: .twelve)
                         }
                         .frame(width: .three)
-                        .contentSpace(.around)
                     }
-                    .contentSpace(.around)
                 }
             }
         }

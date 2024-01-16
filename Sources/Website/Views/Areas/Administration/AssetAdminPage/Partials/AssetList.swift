@@ -1,42 +1,33 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct ArticleList: View {
+struct AssetList: View {
     
-    var articles: [ArticleModel.Output]
+    var assets: [AssetModel.Output]
     
     var body: Content {
         Card {
             List(direction: .vertical) {
-                for article in articles {
+                for asset in assets {
                     HStack {
                         Text {
-                            article.title
+                            asset.title
                         }
                         .frame(width: .four)
                         .lineLimit(.one)
                         Text {
-                            if let category = ArticleModel.Categories(rawValue: article.category) {
-                                category.description
-                            }
+                            asset.filePath ?? "-"
                         }
-                        .frame(width: .two)
+                        .frame(width: .four)
                         .lineLimit(.one)
                         Text {
-                            if let state = ArticleModel.States(rawValue: article.status) {
-                                state.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
-                        Text {
-                            article.modifiedAt.formatted(date: .short, time: .none)
+                            asset.fileSize ?? "0 MB"
                         }
                         .frame(width: .two)
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/articles/edit/\(article.id)") {
+                                Link(destination: "/area/admin/assets/edit/\(asset.id)") {
                                     Symbol(system: .pencil)
                                     Text {
                                         "Edit"

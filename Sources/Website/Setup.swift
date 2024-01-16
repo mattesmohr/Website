@@ -42,6 +42,8 @@ struct Setup {
     
     static func routes(_ application: Application) async throws {
         
+        application.routes.defaultMaxBodySize = "10mb";
+        
         try application.register(collection: HomePageController())
         try application.register(collection: ArticlesPageController())
         try application.register(collection: ProjectsPageController())

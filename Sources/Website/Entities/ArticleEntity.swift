@@ -14,9 +14,6 @@ final class ArticleEntity: Model {
     @Field(key: "title")
     var title: String
     
-    @OptionalField(key: "excerpt")
-    var excerpt: String?
-    
     @Field(key: "content")
     var content: String
     
@@ -46,12 +43,11 @@ final class ArticleEntity: Model {
     
     init() {}
     
-    init(id: UUID? = nil, thumbnailId: UUID? = nil, title: String, excerpt: String? = nil, content: String, category: String, status: String, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, thumbnailId: UUID? = nil, title: String, content: String, category: String, status: String, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
     
         self.id = id
         self.$thumbnail.id = thumbnailId
         self.title = title
-        self.excerpt = excerpt
         self.content = content
         self.category = category
         self.status = status
@@ -63,7 +59,7 @@ final class ArticleEntity: Model {
     
     convenience init(input: ArticleModel.Input) {
         
-        self.init(title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, publishedOn: input.publishedOn, authorId: input.authorId!)
+        self.init(title: input.title, content: input.content, category: input.category, status: input.status, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
             self.$thumbnail.id = UUID(uuidString: thumbnailId)

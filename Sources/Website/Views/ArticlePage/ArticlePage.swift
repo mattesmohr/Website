@@ -13,18 +13,20 @@ enum ArticlePage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
+                    .textStyle(.subheadline)
                 }
                 Section {
-                    Grid(ratio: .half) {
+                    Grid(ratio: .half, spacing: .small) {
                         for article in viewModel.pagination.items {
                             Link(destination: "/articles/show/\(article.id)") {
-                                VStack {
+                                VStack(spacing: .small) {
                                     Thumbnail {
-                                        SafariIcon()
+                                        MacIcon()
                                     }
                                     Text {
-                                        article.category
+                                        if let category = ArticleModel.Categories(rawValue: article.category) {
+                                            category.description
+                                        }
                                     }
                                     .fontSize(.small)
                                     .foregroundColor(.blue)
@@ -32,16 +34,16 @@ enum ArticlePage {
                                     Text {
                                         article.title
                                     }
-                                    .bold()
+                                    .fontSize(.medium)
                                     Text {
-                                        article.excerpt
+                                        article.content
                                     }
+                                    .foregroundColor(.gray)
+                                    .lineLimit(.three)
                                 }
-                                .contentSpace(.small)
                             }
                         }
                     }
-                    .contentSpace(.small)
                 }
             }
         }
@@ -57,43 +59,21 @@ enum ArticlePage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
-                    Text {
-                        viewModel.article.title
-                    }
-                    .font(.headline)
+                    .textStyle(.subheadline)
                 }
                 Section {
-                    HStack(alignment: .top) {
-                        VStack {
-                            Thumbnail {
-                                SafariIcon()
-                            }
-                            Text {
-                                viewModel.article.content
-                            }
+                    VStack(spacing: .small) {
+                        Thumbnail {
+                            SafariIcon()
                         }
-                        .frame(width: .eight)
-                        .contentSpace(.small)
-                        VStack {
-                            Text {
-                                "Related Topcis"
-                            }
-                            .bold()
-                            HStack {
-                                Thumbnail {
-                                    SafariIcon()
-                                }
-                                Text {
-                                    "Headline"
-                                }
-                                .bold()
-                                Text {
-                                    "This is a subheadline"
-                                }
-                            }
+                        Text {
+                            viewModel.article.title
                         }
-                        .frame(width: .four)
+                        .fontSize(.large)
+                        Text {
+                            viewModel.article.content
+                        }
+                        .foregroundColor(.gray)
                     }
                 }
             }

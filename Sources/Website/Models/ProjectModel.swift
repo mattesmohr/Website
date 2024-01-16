@@ -3,16 +3,52 @@ import HTMLKitComponents
 
 struct ProjectModel {
     
-    enum Categories: String, Codable, CaseIterable {
+    enum Categories: String, CaseIterable {
         
-        case macOS
-        case iOS
+        case macos
+        case ios
+        case server
+        
+        var description: String {
+            
+            switch rawValue {
+            case "macos":
+                return "macOS"
+                
+            case "ios":
+                return "iOS"
+                
+            case "server":
+                return "Swift on Server"
+                
+            default:
+                return "Unkown"
+            }
+        }
     }
     
-    enum States: String, Codable, CaseIterable {
+    enum States: String, CaseIterable {
         
         case published
         case confidential
+        case draft
+        
+        var description: String {
+            
+            switch rawValue {
+            case "published":
+                return "Published"
+                
+            case "confidential":
+                return "Confidential"
+                
+            case "draft":
+                return "Draft"
+                
+            default:
+                return "Unkown"
+            }
+        }
     }
     
     var output: Output?

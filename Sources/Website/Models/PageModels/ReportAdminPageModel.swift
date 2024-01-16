@@ -4,6 +4,7 @@ enum ReportAdminPageModel {
     
     struct IndexView {
         
-        var title: String = "Show reports"
+        let title: String = "Show reports"
+        let projects: [StatisticEntity]
     }
 }

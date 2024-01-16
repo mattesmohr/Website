@@ -13,78 +13,69 @@ enum HomePage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
+                    .textStyle(.subheadline)
                     .backgroundColor(.red)
                 }
                 Section {
                     Carousel {
                         Slide {
-                            VStack(alignment: .center) {
+                            VStack(alignment: .center, spacing: .around) {
                                 MacIcon()
                             }
-                            .contentSpace(.around)
                         }
-                        .backgroundColor(.custom("aliceblue"))
+                        .backgroundColor(.system)
                         .tag("slide1")
                         Slide {
-                            VStack(alignment: .center) {
+                            VStack(alignment: .center, spacing: .around) {
                                 SafariIcon()
                             }
-                            .contentSpace(.around)
                         }
-                        .backgroundColor(.custom("aliceblue"))
+                        .backgroundColor(.system)
                         .tag("slide2")
                     }
-                    .borderColor(.custom("electricblue"))
                     .borderShape(.smallrounded)
                 }
                 Section {
-                    HStack {
+                    HStack(spacing: .around) {
                         Text("headline.about")
-                            .font(.subheadline)
+                            .textStyle(.subheadline)
                     }
-                    .contentSpace(.around)
-                    HStack {
+                    HStack(spacing: .around) {
                         Text {
                             "Work. Life. Balance."
                         }
-                        .font(.headline)
+                        .textStyle(.headline)
                     }
-                    .contentSpace(.around)
-                    HStack {
+                    HStack(spacing: .around) {
                         Text {
                             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
                         }
                         .foregroundColor(.gray)
                     }
-                    .contentSpace(.around)
                 }
                 Section {
-                    HStack {
+                    HStack(spacing: .around) {
                         Text("headline.projects")
-                            .font(.subheadline)
+                            .textStyle(.subheadline)
                     }
-                    .contentSpace(.around)
-                    HStack {
+                    HStack(spacing: .around) {
                         Text {
                             "Experience. Knowledge. Skill."
                         }
-                        .font(.headline)
+                        .textStyle(.headline)
                     }
-                    .contentSpace(.around)
-                    HStack {
+                    HStack(spacing: .around) {
                         Text {
                             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
                         }
                         .foregroundColor(.gray)
                     }
-                    .contentSpace(.around)
-                    VStack {
-                        ScrollView(direction: .horizontal) {
-                            HStack(alignment: .top) {
+                    VStack(spacing: .large) {
+                        Scroll {
+                            HStack(alignment: .top, spacing: .small) {
                                 for project in viewModel.pagination.items {
                                     Link(destination: "/projects/show/\(project.id)") {
-                                        VStack {
+                                        VStack(spacing: .small) {
                                             Thumbnail {
                                                 switch project.category {
                                                 case "macOS":
@@ -94,7 +85,9 @@ enum HomePage {
                                                 }
                                             }
                                             Text {
-                                                project.category
+                                                if let category = ProjectModel.Categories(rawValue: project.category) {
+                                                    category.description
+                                                }
                                             }
                                             .fontSize(.small)
                                             .foregroundColor(.blue)
@@ -102,19 +95,18 @@ enum HomePage {
                                             Text {
                                                 project.title
                                             }
-                                            .bold()
+                                            .fontSize(.medium)
                                             Text {
                                                 project.content
                                             }
                                             .foregroundColor(.gray)
+                                            .lineLimit(.three)
                                         }
-                                        .contentSpace(.small)
                                     }
                                 }
                             }
                             .tag("projects")
                             .frame(width: .twelve)
-                            .contentSpace(.small)
                         }
                         HStack {
                             Link(destination: "/projects/index") {
@@ -124,7 +116,6 @@ enum HomePage {
                             .bold()
                         }
                     }
-                    .contentSpace(.large)
                 }
             }
         }

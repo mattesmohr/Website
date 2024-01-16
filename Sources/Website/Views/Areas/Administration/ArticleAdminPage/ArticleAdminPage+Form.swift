@@ -11,36 +11,27 @@ extension ArticleAdminPage {
                     FieldLabel(for: "title") {
                         "Title"
                     }
-                    TextField(name: "title")
+                    TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
-                }
-                VStack {
-                    FieldLabel(for: "excerpt") {
-                        "Excerpt"
-                    }
-                    TextEditor(name: "excerpt") {
-                    }
-                    .lineLimit(2)
-                    .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
-                    TextPad(name: "content") {
+                    TextPad(name: "content", prompt: "Content") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
                             "Category"
                         }
-                        SelectField(name: "category") {
+                        SelectField(name: "category", prompt: "macOS") {
                             for category in ArticleModel.Categories.allCases {
                                 RadioSelect(value: category.rawValue) {
-                                    category.rawValue
+                                    category.description
                                 }
                             }
                         }
@@ -50,24 +41,22 @@ extension ArticleAdminPage {
                         FieldLabel(for: "status") {
                             "Status"
                         }
-                        SelectField(name: "status") {
+                        SelectField(name: "status", prompt: "Published") {
                             for state in ArticleModel.States.allCases {
                                 RadioSelect(value: state.rawValue) {
-                                    state.rawValue.capitalized
+                                    state.description
                                 }
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -86,38 +75,28 @@ extension ArticleAdminPage {
                     FieldLabel(for: "title") {
                         "Title"
                     }
-                    TextField(name: "title", value: article.title)
+                    TextField(name: "title", prompt: "Title", value: article.title)
                         .borderShape(.smallrounded)
-                }
-                VStack {
-                    FieldLabel(for: "excerpt") {
-                        "Excerpt"
-                    }
-                    TextEditor(name: "excerpt") {
-                        article.excerpt
-                    }
-                    .lineLimit(2)
-                    .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
-                    TextPad(name: "content") {
+                    TextPad(name: "content", prompt: "Content") {
                         article.content
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
                             "Category"
                         }
-                        SelectField(name: "category", selection: article.category) {
+                        SelectField(name: "category", prompt: "macOS", selection: article.category) {
                             for category in ArticleModel.Categories.allCases {
                                 RadioSelect(value: category.rawValue) {
-                                    category.rawValue
+                                    category.description
                                 }
                             }
                         }
@@ -127,24 +106,22 @@ extension ArticleAdminPage {
                         FieldLabel(for: "status") {
                             "Status"
                         }
-                        SelectField(name: "status", selection: article.status) {
+                        SelectField(name: "status", prompt: "Published", selection: article.status) {
                             for state in ArticleModel.States.allCases {
                                 RadioSelect(value: state.rawValue) {
-                                    state.rawValue.capitalized
+                                    state.description
                                 }
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

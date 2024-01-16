@@ -3,6 +3,8 @@
 
 :root {
     --fontFamily: Inter, sans-serif;
+    --systemBorderColor: 199, 44%, 93%;
+    --systemBackgroundColor: 200, 43%, 99%;
 }
 
 * {
@@ -101,16 +103,4 @@ body > footer {
 
 #projects .link {
     width: 400px;
-}
-
-.background\:aliceblue {
-    --backgroundColor: 200, 43%, 99%;
-}
-
-.border\:electricblue {
-    --borderColor: 199, 44%, 93%;
-}
-
-.grid.ratio\:masonary {
-    grid-template-rows: masonry;
 }

@@ -10,13 +10,14 @@ enum ProjectAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/projects/create") {
+                            Symbol(system: .folder)
                             Text {
                                 "Create"
                             }
@@ -27,10 +28,9 @@ enum ProjectAdminPage {
                 }
                 Section {
                     ProjectList(projects: viewModel.pagination.items)
-                    HStack {
+                    HStack(spacing: .between) {
                         PagePagination(meta: viewModel.pagination.meta)
                     }
-                    .contentSpace(.between)
                 }
             }
         }
@@ -67,12 +67,34 @@ enum ProjectAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Grouping {
+                                    Symbol(system: .trash)
+                                    Text {
+                                        "Delete"
+                                    }
+                                    .tag("delete")
+                                    .onClick { action in
+                                        action.open("delete-modal")
+                                    }
+                                }
+                                .foregroundColor(.red)
+                            }
+                        } label: {
+                            Button(role: .button) {
+                                Symbol(system: .ellipsis(.vertical))
+                            }
+                            .buttonStyle(ControlButton())
+                        }
+                        .borderShape(.smallrounded)
+
                     }
                 }
                 Section {
@@ -80,6 +102,7 @@ enum ProjectAdminPage {
                         ProjectAdminPage.EditForm(project: viewModel.project)
                     }
                 }
+                ProjectAdminPage.DeleteModal(id: viewModel.project.id)
             }
         }
     }

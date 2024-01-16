@@ -8,7 +8,6 @@ struct ArticleMigration: AsyncMigration {
             .id()
             .field("thumbnail_id", .uuid, .references("assets", "id"))
             .field("title", .string, .required)
-            .field("excerpt", .custom("text"))
             .field("content", .custom("text"), .required)
             .field("category", .string, .required)
             .field("status", .string, .required)

@@ -13,18 +13,21 @@ enum FeedPage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
+                    .textStyle(.subheadline)
                 }
                 Section {
-                    Grid(ratio: .custom("masonary")) {
+                    Grid(ratio: .third, spacing: .small) {
                         for feed in viewModel.pagination.items {
                             Card {
-                                feed.message
+                                Text {
+                                    feed.message
+                                }
+                            } header: {
+                                Image(source: "/assets/mattes-mohr.png")
                             }
                             .borderShape(.smallrounded)
                         }
                     }
-                    .contentSpace(.small)
                 }
             }
         }

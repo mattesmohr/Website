@@ -9,56 +9,48 @@ struct UserList: View {
         Card {
             List(direction: .vertical) {
                 for user in users {
-                    ListRow {
-                        HStack {
-                            Text {
-                                user.email
-                            }
-                            .frame(width: .four)
-                            Text {
-                                user.firstName
-                            }
-                            .frame(width: .two)
-                            Text {
-                                user.lastName
-                            }
-                            .frame(width: .two)
-                            Text {
-                                user.role.capitalized
-                            }
-                            .frame(width: .two)
-                            Text {
-                                user.modifiedAt.formatted(date: .short, time: .none)
-                            }
-                            .frame(width: .two)
-                            Dropdown {
-                                List(direction: .vertical) {
-                                    ListRow {
-                                        Link(destination: "/area/admin/users/edit/\(user.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Edit"
-                                            }
-                                        }
-                                    }
-                                    Divider()
-                                    ListRow {
-                                        Link(destination: "/area/admin/users/delete/\(user.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Delete"
-                                            }
-                                        }
-                                    }
-                                }
-                            } label: {
-                                Text {
-                                    "\u{2981}\u{2981}\u{2981}"
-                                }
-                            }
-                            .frame(width: .two)
-                            .borderShape(.smallrounded)
+                    HStack {
+                        Text {
+                            user.email
                         }
+                        .frame(width: .four)
+                        .lineLimit(.one)
+                        Text {
+                            user.firstName
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Text {
+                            user.lastName
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Text {
+                            if let role = UserModel.Roles(rawValue: user.role) {
+                                role.description
+                            }
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Text {
+                            user.modifiedAt.formatted(date: .short, time: .none)
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Link(destination: "/area/admin/users/edit/\(user.id)") {
+                                    Symbol(system: .pencil)
+                                    Text {
+                                        "Edit"
+                                    }
+                                }
+                            }
+                        } label: {
+                            Symbol(system: .ellipsis(.horizontal))
+                        }
+                        .frame(width: .two)
+                        .borderShape(.smallrounded)
                     }
                     .padding(insets: .vertical, length: .small)
                 }

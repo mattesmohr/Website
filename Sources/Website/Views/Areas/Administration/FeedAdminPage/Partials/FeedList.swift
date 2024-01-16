@@ -9,31 +9,26 @@ struct FeedList: View {
         Card {
             List(direction: .vertical) {
                 for feed in feeds {
-                    ListRow {
-                        HStack {
-                            Text {
-                                feed.message
-                            }
-                            .frame(width: .ten)
-                            Dropdown {
-                                List(direction: .vertical) {
-                                    ListRow {
-                                        Link(destination: "/area/admin/feed/edit/\(feed.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Edit"
-                                            }
-                                        }
+                    HStack {
+                        Text {
+                            feed.message
+                        }
+                        .frame(width: .ten)
+                        .lineLimit(.one)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Link(destination: "/area/admin/feed/edit/\(feed.id)") {
+                                    Symbol(system: .pencil)
+                                    Text {
+                                        "Edit"
                                     }
                                 }
-                            } label: {
-                                Text {
-                                    "\u{2981}\u{2981}\u{2981}"
-                                }
                             }
-                            .frame(width: .two)
-                            .borderShape(.smallrounded)
+                        } label: {
+                            Symbol(system: .ellipsis(.horizontal))
                         }
+                        .frame(width: .two)
+                        .borderShape(.smallrounded)
                     }
                     .padding(insets: .vertical, length: .small)
                 }

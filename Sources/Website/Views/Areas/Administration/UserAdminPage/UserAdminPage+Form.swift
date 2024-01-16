@@ -11,31 +11,30 @@ extension UserAdminPage {
                     FieldLabel(for: "email") {
                         "Email"
                     }
-                    TextField(name: "email")
+                    TextField(name: "email", prompt: "john.doe@provider.com")
                         .borderShape(.smallrounded)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "firstName") {
                             "Firstname"
                         }
-                        TextField(name: "firstName")
+                        TextField(name: "firstName", prompt: "John")
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "lastName") {
                             "Lastname"
                         }
-                        TextField(name: "lastName")
+                        TextField(name: "lastName", prompt: "Doe")
                             .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
                 VStack {
                     FieldLabel(for: "description") {
                         "Description"
                     }
-                    TextEditor(name: "description") {
+                    TextEditor(name: "description", prompt: "Description") {
                     }
                     .lineLimit(4)
                     .borderShape(.smallrounded)
@@ -44,22 +43,21 @@ extension UserAdminPage {
                     FieldLabel(for: "role") {
                         "Role"
                     }
-                    SelectField(name: "role") {
+                    SelectField(name: "role", prompt: "Administrator") {
                         for role in UserModel.Roles.allCases {
                             RadioSelect(value: role.rawValue) {
-                                role.rawValue.capitalized
+                                role.description
                             }
                         }
                     }
                     .borderShape(.smallrounded)
                 }
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -78,31 +76,30 @@ extension UserAdminPage {
                     FieldLabel(for: "email") {
                         "Email"
                     }
-                    TextField(name: "email", value: user.email)
+                    TextField(name: "email", prompt: "john.doe@provider.com", value: user.email)
                         .borderShape(.smallrounded)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "firstName") {
                             "Firstname"
                         }
-                        TextField(name: "firstName", value: user.firstName)
+                        TextField(name: "firstName", prompt: "John", value: user.firstName)
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "lastName") {
                             "Lastname"
                         }
-                        TextField(name: "lastName", value: user.lastName)
+                        TextField(name: "lastName", prompt: "Doe", value: user.lastName)
                             .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
                 VStack {
                     FieldLabel(for: "description") {
                         "Description"
                     }
-                    TextEditor(name: "description") {
+                    TextEditor(name: "description", prompt: "Description") {
                         user.description
                     }
                     .lineLimit(4)
@@ -112,22 +109,21 @@ extension UserAdminPage {
                     FieldLabel(for: "role") {
                         "Role"
                     }
-                    SelectField(name: "role", selection: user.role) {
+                    SelectField(name: "role", prompt: "Administrator", selection: user.role) {
                         for role in UserModel.Roles.allCases {
                             RadioSelect(value: role.rawValue) {
-                                role.rawValue.capitalized
+                                role.description
                             }
                         }
                     }
                     .borderShape(.smallrounded)
                 }
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

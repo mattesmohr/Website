@@ -13,29 +13,25 @@ struct PagePagination<T: Sequence>: View {
     var body: Content {
         Navigation {
             List(direction: .horizontal) {
-                ListRow {
-                    if let previousPage = meta.previousPage {
-                        Link(destination: "?page=\(previousPage)") {
-                            "Previous"
-                        }
-                    } else {
-                        Link(destination: "") {
-                            "Previous"
-                        }
-                        .foregroundColor(.gray)
+                if let previousPage = meta.previousPage {
+                    Link(destination: "?page=\(previousPage)") {
+                        Symbol(system: .chevron(.left))
                     }
+                } else {
+                    Link(destination: "") {
+                        Symbol(system: .chevron(.left))
+                    }
+                    .foregroundColor(.gray)
                 }
-                ListRow {
-                    if let nextPage = meta.nextPage {
-                        Link(destination: "?page=\(nextPage)") {
-                            "Next"
-                        }
-                    } else {
-                        Link(destination: "") {
-                            "Next"
-                        }
-                        .foregroundColor(.gray)
+                if let nextPage = meta.nextPage {
+                    Link(destination: "?page=\(nextPage)") {
+                        Symbol(system: .chevron(.right))
                     }
+                } else {
+                    Link(destination: "") {
+                        Symbol(system: .chevron(.right))
+                    }
+                    .foregroundColor(.gray)
                 }
             }
         }

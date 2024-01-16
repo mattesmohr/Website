@@ -13,17 +13,17 @@ enum PrivacyPage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
+                    .textStyle(.subheadline)
                     Text {
                         "Lorem ipsum"
                     }
-                    .font(.headline)
+                    .textStyle(.headline)
                 }
                 Section {
                     Text {
                         "Lorem ipsum"
                     }
-                    .font(.body)
+                    .textStyle(.body)
                 }
             }
         }

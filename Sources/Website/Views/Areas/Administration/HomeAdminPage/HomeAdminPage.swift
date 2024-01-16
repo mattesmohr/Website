@@ -19,7 +19,7 @@ enum HomeAdminPage {
                     }
                 }
                 Section {
-                    Grid(ratio: .third) {
+                    Grid(ratio: .third, spacing: .small) {
                         Card {
                         }
                         .borderShape(.smallrounded)
@@ -30,7 +30,6 @@ enum HomeAdminPage {
                         }
                         .borderShape(.smallrounded)
                     }
-                    .contentSpace(.small)
                 }
                 Section {
                 }

@@ -10,13 +10,14 @@ enum UserAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/users/create") {
+                            Symbol(system: .person)
                             Text {
                                 "Create"
                             }
@@ -27,10 +28,9 @@ enum UserAdminPage {
                 }
                 Section {
                     UserList(users: viewModel.pagination.items)
-                    HStack {
+                    HStack(spacing: .between) {
                         PagePagination(meta: viewModel.pagination.meta)
                     }
-                    .contentSpace(.between)
                 }
                 Aside {
                 }
@@ -73,12 +73,33 @@ enum UserAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Grouping {
+                                    Symbol(system: .trash)
+                                    Text {
+                                        "Delete"
+                                    }
+                                    .tag("delete")
+                                    .onClick { action in
+                                        action.open("delete-modal")
+                                    }
+                                }
+                                .foregroundColor(.red)
+                            }
+                        } label: {
+                            Button(role: .button) {
+                                Symbol(system: .ellipsis(.vertical))
+                            }
+                            .buttonStyle(ControlButton())
+                        }
+                        .borderShape(.smallrounded)
                     }
                 }
                 Section {
@@ -86,6 +107,7 @@ enum UserAdminPage {
                         UserAdminPage.EditForm(user: viewModel.user)
                     }
                 }
+                UserAdminPage.DeleteModal(id: viewModel.user.id)
             }
         }
     }

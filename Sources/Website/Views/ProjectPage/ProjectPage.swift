@@ -13,22 +13,24 @@ enum ProjectPage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
+                    .textStyle(.subheadline)
                     Text {
                         "Explore, what I do in my free time."
                     }
-                    .font(.headline)
+                    .textStyle(.headline)
                 }
                 Section {
-                    Grid(ratio: .half) {
+                    Grid(ratio: .half, spacing: .small) {
                         for project in viewModel.pagination.items {
                             Link(destination: "/projects/show/\(project.id)") {
-                                VStack {
+                                VStack(spacing: .small) {
                                     Thumbnail {
                                         SafariIcon()
                                     }
                                     Text {
-                                        project.category
+                                        if let category = ProjectModel.Categories(rawValue: project.category) {
+                                            category.description
+                                        }
                                     }
                                     .fontSize(.small)
                                     .foregroundColor(.blue)
@@ -36,16 +38,16 @@ enum ProjectPage {
                                     Text {
                                         project.title
                                     }
-                                    .bold()
+                                    .fontSize(.medium)
                                     Text {
                                         project.content
                                     }
+                                    .foregroundColor(.gray)
+                                    .lineLimit(.three)
                                 }
-                                .contentSpace(.small)
                             }
                         }
                     }
-                    .contentSpace(.small)
                 }
             }
         }
@@ -61,22 +63,22 @@ enum ProjectPage {
                     Text {
                         viewModel.title
                     }
-                    .font(.subheadline)
-                    Text {
-                        viewModel.project.title
-                    }
-                    .font(.headline)
+                    .textStyle(.subheadline)
                 }
                 Section {
-                    VStack {
+                    VStack(spacing: .small) {
                         Thumbnail {
                             SafariIcon()
                         }
                         Text {
+                            viewModel.project.title
+                        }
+                        .fontSize(.large)
+                        Text {
                             viewModel.project.content
                         }
+                        .foregroundColor(.gray)
                     }
-                    .contentSpace(.small)
                 }
             }
         }

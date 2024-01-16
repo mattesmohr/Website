@@ -10,13 +10,14 @@ enum ArticleAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/articles/create") {
+                            Symbol(system: .file)
                             Text {
                                 "Create"
                             }
@@ -27,10 +28,9 @@ enum ArticleAdminPage {
                 }
                 Section {
                     ArticleList(articles: viewModel.pagination.items)
-                    HStack {
+                    HStack(spacing: .between) {
                         PagePagination(meta: viewModel.pagination.meta)
                     }
-                    .contentSpace(.between)
                 }
             }
         }
@@ -67,12 +67,33 @@ enum ArticleAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Grouping {
+                                    Symbol(system: .trash)
+                                    Text {
+                                        "Delete"
+                                    }
+                                    .tag("delete")
+                                    .onClick { action in
+                                        action.open("delete-modal")
+                                    }
+                                }
+                                .foregroundColor(.red)
+                            }
+                        } label: {
+                            Button(role: .button) {
+                                Symbol(system: .ellipsis(.vertical))
+                            }
+                            .buttonStyle(ControlButton())
+                        }
+                        .borderShape(.smallrounded)
                     }
                 }
                 Section {
@@ -80,6 +101,7 @@ enum ArticleAdminPage {
                         ArticleAdminPage.EditForm(article: viewModel.article)
                     }
                 }
+                ArticleAdminPage.DeleteModal(id: viewModel.article.id)
             }
         }
     }

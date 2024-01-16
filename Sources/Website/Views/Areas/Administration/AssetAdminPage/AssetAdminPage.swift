@@ -10,19 +10,26 @@ enum AssetAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/assets/create") {
+                            Symbol(system: .photo)
                             Text {
                                 "Create"
                             }
                         }
                         .buttonStyle(.primary)
                         .borderShape(.smallrounded)
+                    }
+                }
+                Section {
+                    AssetList(assets: viewModel.pagination.items)
+                    HStack(spacing: .between) {
+                        PagePagination(meta: viewModel.pagination.meta)
                     }
                 }
             }
@@ -60,12 +67,33 @@ enum AssetAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         .fontWeight(.medium)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Grouping {
+                                    Symbol(system: .trash)
+                                    Text {
+                                        "Delete"
+                                    }
+                                    .tag("delete")
+                                    .onClick { action in
+                                        action.open("delete-modal")
+                                    }
+                                }
+                                .foregroundColor(.red)
+                            }
+                        } label: {
+                            Button(role: .button) {
+                                Symbol(system: .ellipsis(.vertical))
+                            }
+                            .buttonStyle(ControlButton())
+                        }
+                        .borderShape(.smallrounded)
                     }
                 }
                 Section {
@@ -73,6 +101,7 @@ enum AssetAdminPage {
                         AssetAdminPage.EditForm(asset: viewModel.asset)
                     }
                 }
+                AssetAdminPage.DeleteModal(id: viewModel.asset.id)
             }
         }
     }

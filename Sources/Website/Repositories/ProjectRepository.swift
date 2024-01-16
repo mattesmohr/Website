@@ -1,4 +1,5 @@
 import Fluent
+import FluentSQL
 import Foundation
 
 final class ProjectRepository {
@@ -66,5 +67,23 @@ final class ProjectRepository {
         
         return try await ProjectEntity.query(on: database)
             .count()
+    }
+    
+    func group(column: String) async throws -> [StatisticEntity] {
+
+        if let database = database as? SQLDatabase {
+            
+            let query = database.select()
+                .column(column, as: "name")
+                .column(SQLAlias(SQLFunction("COUNT", args: SQLDistinct("title")), as:  SQLIdentifier("count")))
+                .from(ProjectEntity.schema)
+                .groupBy(column)
+                .limit(5)
+                .orderBy("count", .descending)
+            
+            return try await query.all(decoding: StatisticEntity.self)
+        }
+        
+        return []
     }
 }

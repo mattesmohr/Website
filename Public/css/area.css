@@ -1,3 +1,7 @@
+:root {
+    --systemBorderColor: 199, 44%, 93%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -26,8 +30,6 @@ body {
  */
 
 body > header {
-    min-height: 50px;
-    height: 10%;
     padding: 10px 25px;
     background-color: #FFFFFF;
     border-bottom: 1px solid #E5F0F5;

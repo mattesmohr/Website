@@ -8,6 +8,23 @@ struct UserModel {
         case administrator
         case moderator
         case customer
+        
+        var description: String {
+            
+            switch rawValue {
+            case "administrator":
+                return "Administrator"
+                
+            case "moderator":
+                return "Moderator"
+                
+            case "customer":
+                return "Customer"
+                
+            default:
+                return "Unkown"
+            }
+        }
     }
     
     var output: Output?
@@ -48,6 +65,14 @@ struct UserModel {
         var modifiedAt: Date
         var sessionID: String {
             self.email
+        }
+        var fullname: String? {
+            
+            if let firstName, let lastName {
+                return firstName + " " + lastName
+            }
+            
+            return nil
         }
         
         init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, role: String, createdAt: Date, modifiedAt: Date) {

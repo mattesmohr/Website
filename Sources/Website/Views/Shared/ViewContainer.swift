@@ -20,30 +20,23 @@ struct ViewContainer: View {
                     .foregroundColor(.black)
                     .frame(width: .eight)
                     List(direction: .horizontal) {
-                        ListRow {
-                            Link(destination: "/home/index") {
-                                "Home"
-                            }
+                        Link(destination: "/home/index") {
+                            "Home"
                         }
-                        ListRow {
-                            Link(destination: "/feed/index") {
-                                "Feed"
-                            }
+                        Link(destination: "/feed/index") {
+                            "Feed"
                         }
-                        ListRow {
-                            Link(destination: "/articles/index") {
-                                "Blog"
-                            }
+                        Link(destination: "/articles/index") {
+                            "Blog"
                         }
-                        ListRow {
-                            Link(destination: "https://github.com/mattesmohr", target: .blank) {
-                                Image(source: "/assets/github.svg")
-                            }
+                        Link(destination: "https://github.com/mattesmohr", target: .blank) {
+                            Image(source: "/assets/github.svg")
                         }
-                        ListRow {
-                            Link(destination: "https://iosdev.space/@mattesmohr", target: .blank) {
-                                Image(source: "/assets/mastodon.svg")
-                            }
+                        Link(destination: "https://iosdev.space/@mattesmohr", target: .blank) {
+                            Image(source: "/assets/mastodon.svg")
+                        }
+                        Link(destination: "https://www.linkedin.com/mattesmohr", target: .blank) {
+                            Image(source: "/assets/linkedin.svg")
                         }
                     }
                     .frame(width: .four)
@@ -53,33 +46,24 @@ struct ViewContainer: View {
                 content
             }
             Footer {
-                HStack {
+                HStack(spacing: .between) {
                     List(direction: .horizontal) {
-                        ListRow {
-                            Link(destination: "/home/index") {
-                                "DE"
-                            }
+                        Link(destination: "/home/index") {
+                            "DE"
                         }
-                        ListRow {
-                            Link(destination: "/home/index") {
-                                "EN"
-                            }
+                        Link(destination: "/home/index") {
+                            "EN"
                         }
                     }
                     List(direction: .horizontal) {
-                        ListRow {
-                            Link(destination: "/impressum/index") {
-                                Text("menu.legal")
-                            }
+                        Link(destination: "/impressum/index") {
+                            Text("menu.legal")
                         }
-                        ListRow {
-                            Link(destination: "/privacy/index") {
-                                Text("menu.privacy")
-                            }
+                        Link(destination: "/privacy/index") {
+                            Text("menu.privacy")
                         }
                     }
                 }
-                .contentSpace(.between)
             }
         }
     }

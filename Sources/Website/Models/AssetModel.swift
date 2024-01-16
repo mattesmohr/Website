@@ -8,6 +8,7 @@ struct AssetModel {
     struct Input: Content, Validatable {
         
         var title: String
+        var asset: File
         
         static func validations(_ validations: inout Validations) {
             
@@ -15,9 +16,7 @@ struct AssetModel {
         }
         
         static let validators = [
-            Validator(field: "email", rule: .email),
-            Validator(field: "firstName", rule: .value),
-            Validator(field: "lastName", rule: .value)
+            Validator(field: "title", rule: .value),
         ]
     }
     
@@ -29,11 +28,11 @@ struct AssetModel {
         var fileFullName: String?
         var filePath: String?
         var fileExtension: String?
-        var fileSize: Double?
+        var fileSize: String?
         var createdAt: Date
         var modifiedAt: Date
         
-        init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Double? = nil, modifiedAt: Date, createdAt: Date) {
+        init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Int? = nil, modifiedAt: Date, createdAt: Date) {
 
             self.id = id
             self.title = title
@@ -41,9 +40,16 @@ struct AssetModel {
             self.fileFullName = fileFullName
             self.filePath = filePath
             self.fileExtension = fileExtension
-            self.fileSize = fileSize
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
+            
+            let formatter = ByteCountFormatter()
+            formatter.countStyle = .file
+            formatter.allowedUnits = [.useMB]
+            
+            if let size = fileSize {
+                self.fileSize = formatter.string(for: size)
+            }
         }
         
         init(entity: AssetEntity) {

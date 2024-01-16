@@ -11,27 +11,27 @@ extension ProjectAdminPage {
                     FieldLabel(for: "title") {
                         "Title"
                     }
-                    TextField(name: "title")
+                    TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
-                    TextPad(name: "content") {
+                    TextPad(name: "content", prompt: "Content") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
                             "Category"
                         }
-                        SelectField(name: "category") {
+                        SelectField(name: "category", prompt: "macOS") {
                             for category in ProjectModel.Categories.allCases {
                                 RadioSelect(value: category.rawValue) {
-                                    category.rawValue.capitalized
+                                    category.description
                                 }
                             }
                         }
@@ -41,24 +41,22 @@ extension ProjectAdminPage {
                         FieldLabel(for: "status") {
                             "Status"
                         }
-                        SelectField(name: "status") {
+                        SelectField(name: "status", prompt: "Published") {
                             for state in ProjectModel.States.allCases {
                                 RadioSelect(value: state.rawValue) {
-                                    state.rawValue.capitalized
+                                    state.description
                                 }
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -77,28 +75,28 @@ extension ProjectAdminPage {
                     FieldLabel(for: "title") {
                         "Title"
                     }
-                    TextField(name: "title", value: project.title)
+                    TextField(name: "title", prompt: "Title", value: project.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
-                    TextPad(name: "content") {
+                    TextPad(name: "content", prompt: "Content") {
                         project.content
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
                 }
-                HStack {
+                HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
                             "Category"
                         }
-                        SelectField(name: "category", selection: project.category) {
+                        SelectField(name: "category", prompt: "macOS", selection: project.category) {
                             for category in ProjectModel.Categories.allCases {
                                 RadioSelect(value: category.rawValue) {
-                                    category.rawValue.capitalized
+                                    category.description
                                 }
                             }
                         }
@@ -108,24 +106,22 @@ extension ProjectAdminPage {
                         FieldLabel(for: "status") {
                             "Status"
                         }
-                        SelectField(name: "status", selection: project.status) {
+                        SelectField(name: "status", prompt: "Published", selection: project.status) {
                             for state in ProjectModel.States.allCases {
                                 RadioSelect(value: state.rawValue) {
-                                    state.rawValue.capitalized
+                                    state.description
                                 }
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
-                .contentSpace(.small)
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

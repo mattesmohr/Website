@@ -10,12 +10,13 @@ enum FeedAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    HStack {
+                    HStack(spacing: .between) {
                         Text {
                             viewModel.title
                         }
                         .fontSize(.medium)
                         LinkButton(destination: "/area/admin/feed/create") {
+                            Symbol(system: .photo)
                             Text {
                                 "Create"
                             }
@@ -26,10 +27,9 @@ enum FeedAdminPage {
                 }
                 Section {
                     FeedList(feeds: viewModel.pagination.items)
-                    HStack {
+                    HStack(spacing: .between) {
                         PagePagination(meta: viewModel.pagination.meta)
                     }
-                    .contentSpace(.between)
                 }
             }
         }
@@ -62,15 +62,39 @@ enum FeedAdminPage {
         var body: Content {
             AreaViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
+                    HStack(spacing: .between) {
+                        Text {
+                            viewModel.title
+                        }
+                        .fontSize(.medium)
+                        .fontWeight(.medium)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Grouping {
+                                    Symbol(system: .trash)
+                                    Text {
+                                        "Delete"
+                                    }
+                                    .tag("delete")
+                                    .onClick { action in
+                                        action.open("delete-modal")
+                                    }
+                                }
+                                .foregroundColor(.red)
+                            }
+                        } label: {
+                            Button(role: .button) {
+                                Symbol(system: .ellipsis(.vertical))
+                            }
+                            .buttonStyle(ControlButton())
+                        }
+                        .borderShape(.smallrounded)
                     }
-                    .fontSize(.medium)
-                    .fontWeight(.medium)
                 }
                 Section {
                     FeedAdminPage.EditForm(feed: viewModel.feed)
                 }
+                FeedAdminPage.DeleteModal(id: viewModel.feed.id)
             }
         }
     }

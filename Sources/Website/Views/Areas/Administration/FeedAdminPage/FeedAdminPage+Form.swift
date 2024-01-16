@@ -11,18 +11,17 @@ extension FeedAdminPage {
                     FieldLabel(for: "message") {
                         "Message"
                     }
-                    TextEditor(name: "message") {
+                    TextEditor(name: "message", prompt: "Message") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(8)
                 }
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -41,19 +40,18 @@ extension FeedAdminPage {
                     FieldLabel(for: "message") {
                         "Message"
                     }
-                    TextEditor(name: "message") {
+                    TextEditor(name: "message", prompt: "Message") {
                         feed.message
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(8)
                 }
-                HStack {
-                    Button(role: .submit) {
-                        "Submit"
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                .margin(insets: .bottom, length: .large)
+                Button(role: .submit) {
+                    "Submit"
                 }
+                .buttonStyle(.primary)
+                .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

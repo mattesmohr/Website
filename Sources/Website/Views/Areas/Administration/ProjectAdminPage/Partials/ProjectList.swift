@@ -9,60 +9,45 @@ struct ProjectList: View {
         Card {
             List(direction: .vertical) {
                 for project in projects {
-                    ListRow {
-                        HStack {
-                            Text {
-                                project.title
-                            }
-                            .frame(width: .four)
-                            Text {
-                                project.category
-                            }
-                            .frame(width: .two)
-                            Text {
-                                project.status
-                            }
-                            .frame(width: .two)
-                            Text {
-                                project.modifiedAt.formatted(date: .short, time: .none)
-                            }
-                            .frame(width: .two)
-                            Dropdown {
-                                List(direction: .vertical) {
-                                    ListRow {
-                                        Link(destination: "/area/admin/projects/edit/\(project.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Show"
-                                            }
-                                        }
-                                    }
-                                    ListRow {
-                                        Link(destination: "/area/admin/projects/edit/\(project.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Edit"
-                                            }
-                                        }
-                                    }
-                                    Divider()
-                                    ListRow {
-                                        Link(destination: "/area/admin/projects/delete/\(project.id)") {
-                                            Symbol(system: "folder")
-                                            Text {
-                                                "Delete"
-                                            }
-                                        }
-                                    }
-                                }
-                            } label: {
-                                Text {
-                                    "\u{2981}\u{2981}\u{2981}"
-                                }
-                            }
-                            .frame(width: .two)
-                            .borderShape(.smallrounded)
+                    HStack {
+                        Text {
+                            project.title
                         }
+                        .frame(width: .four)
+                        .lineLimit(.one)
+                        Text {
+                            if let category = ProjectModel.Categories(rawValue: project.category) {
+                                category.description
+                            }
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Text {
+                            if let state = ProjectModel.States(rawValue: project.status) {
+                                state.description
+                            }
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Text {
+                            project.modifiedAt.formatted(date: .short, time: .none)
+                        }
+                        .frame(width: .two)
+                        .lineLimit(.one)
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Link(destination: "/area/admin/projects/edit/\(project.id)") {
+                                    Symbol(system: .pencil)
+                                    Text {
+                                        "Edit"
+                                    }
+                                }
+                            }
+                        } label: {
+                            Symbol(system: .ellipsis(.horizontal))
+                        }
+                        .frame(width: .two)
+                        .borderShape(.smallrounded)
                     }
                     .padding(insets: .vertical, length: .small)
                 }

@@ -24,7 +24,7 @@ final class AssetEntity: Model {
     var fileExtension: String?
     
     @OptionalField(key: "fileSize")
-    var fileSize: Double?
+    var fileSize: Int?
     
     @OptionalChild(for: \.$thumbnail)
     var article: ArticleEntity?
@@ -49,7 +49,7 @@ final class AssetEntity: Model {
     
     init() {}
     
-    init(id: UUID? = nil, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Double? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Int? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.title = title
@@ -63,7 +63,7 @@ final class AssetEntity: Model {
     }
     
     convenience init(input: AssetModel.Input) {
-        
-        self.init(title: input.title)
+    
+        self.init(title: input.title, fileName: input.asset.name, fileFullName: input.asset.filename, filePath: "/assets/\(input.asset.filename)", fileExtension: input.asset.extension, fileSize: input.asset.data.readableBytes)
     }
 }
