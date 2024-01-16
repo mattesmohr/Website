@@ -21,6 +21,8 @@ struct Setup {
         application.passwords.use(.bcrypt)
         application.sessions.use(.fluent(.mysql))
         
+        application.middleware = .init()
+        application.middleware.use(ErrorMiddleware())
         application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
         application.middleware.use(application.sessions.middleware)
         
