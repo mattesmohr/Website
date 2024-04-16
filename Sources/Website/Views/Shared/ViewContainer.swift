@@ -12,22 +12,27 @@ struct ViewContainer: View {
     var body: Content {
         PageContainer {
             Header {
-                HStack {
-                    Text {
-                        "mattesmohr"
+                HStack(spacing: .between) {
+                    Link(destination: "/home") {
+                        Text {
+                            "mattesmohr"
+                        }
+                        .fontSize(.medium)
+                        .foregroundColor(.black)
                     }
-                    .fontSize(.medium)
-                    .foregroundColor(.black)
-                    .frame(width: .eight)
+                    .frame(width: .minimum)
                     List(direction: .horizontal) {
-                        Link(destination: "/home/index") {
-                            "Home"
+                        Link(destination: "/home/#about") {
+                            Text("menu.about")
                         }
-                        Link(destination: "/feed/index") {
-                            "Feed"
+                        Link(destination: "/projects") {
+                            Text("menu.projects")
                         }
-                        Link(destination: "/articles/index") {
-                            "Blog"
+                        Link(destination: "/feed") {
+                            Text("menu.feed")
+                        }
+                        Link(destination: "/articles") {
+                            Text("menu.blog")
                         }
                         Link(destination: "https://github.com/mattesmohr", target: .blank) {
                             Image(source: "/assets/github.svg")
@@ -39,7 +44,8 @@ struct ViewContainer: View {
                             Image(source: "/assets/linkedin.svg")
                         }
                     }
-                    .frame(width: .four)
+                    .listSpacing(.large)
+                    .frame(width: .minimum)
                 }
             }
             Main {
@@ -49,20 +55,26 @@ struct ViewContainer: View {
                 HStack(spacing: .between) {
                     List(direction: .horizontal) {
                         Link(destination: "/home/index") {
-                            "DE"
+                            Text {
+                                "DE"
+                            }
                         }
                         Link(destination: "/home/index") {
-                            "EN"
+                            Text {
+                                "EN"
+                            }
                         }
                     }
+                    .listSpacing(.small)
                     List(direction: .horizontal) {
-                        Link(destination: "/impressum/index") {
+                        Link(destination: "/impressum") {
                             Text("menu.legal")
                         }
-                        Link(destination: "/privacy/index") {
+                        Link(destination: "/privacy") {
                             Text("menu.privacy")
                         }
                     }
+                    .listSpacing(.small)
                 }
             }
         }

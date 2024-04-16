@@ -19,7 +19,7 @@ extension PrivacyPageController: RouteCollection {
         
         routes.group("privacy") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

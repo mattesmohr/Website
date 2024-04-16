@@ -10,7 +10,7 @@ final class ArticlesPageController {
         let page: Int = request.query["page"] ?? 1
         
         let articles = try await ArticleRepository(database: request.db)
-            .find()
+            .find(status: "published")
             .map(ArticleModel.Output.init)
             .page(page: page, per: 10)
         
@@ -23,12 +23,12 @@ final class ArticlesPageController {
     // [/show]
     func getShow(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let slug = request.parameters.get("slug", as: String.self) else {
             throw Abort(.badRequest)
         }
         
         guard let entity = try await ArticleRepository(database: request.db)
-            .find(id: id) else {
+            .find(slug: slug) else {
             throw Abort(.notFound)
         }
         
@@ -44,8 +44,8 @@ extension ArticlesPageController: RouteCollection {
     
         routes.group("articles") { routes in
             
-            routes.get("index", use: self.getIndex)
-            routes.get("show", ":id", use: self.getShow)
+            routes.get("", use: self.getIndex)
+            routes.get(":slug", use: self.getShow)
         }
     }
 }

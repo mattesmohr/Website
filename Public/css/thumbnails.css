@@ -81,7 +81,7 @@
     transition: all .5s ease-out;
 }
 
-.thumbnail:hover .loadingbar {
+div:has(.thumbnail):hover > .thumbnail .loadingbar {
     background-position: left bottom;
 }
 
@@ -218,6 +218,6 @@
     60% {transform: translateY(-5px);}
 }
 
-.thumbnail:hover .app:nth-child(4) {
+div:has(.thumbnail):hover > .thumbnail .app:nth-child(4) {
     animation: bounce 2s ease infinite;
 }

@@ -8,7 +8,14 @@
 "menu.users" = "Users";
 "menu.legal" = "Legal";
 "menu.privacy" = "Privacy";
+"menu.blog" = "Blog";
+"menu.about" = "About";
 
 /* headlines */
 "headline.about" = "About";
 "headline.projects" = "Projects";
+
+"detail.category" = "Category";
+"detail.repository" = "Repository";
+"detail.documentation" = "Documentation";
+"detail.date" = "Date";

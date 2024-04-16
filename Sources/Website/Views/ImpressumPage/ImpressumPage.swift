@@ -14,16 +14,32 @@ enum ImpressumPage {
                         viewModel.title
                     }
                     .textStyle(.subheadline)
-                    Text {
-                        "Lorem ipsum"
-                    }
-                    .textStyle(.headline)
                 }
                 Section {
-                    Text {
-                        "Lorem ipsum..."
+                    VStack(spacing: .large) {
+                        Text {
+                            "This website represents me as a person and has no commercial use! Feel free to reach me via"
+                        }
+                        .fontSize(.medium)
+                        VStack {
+                            Text {
+                                "Matthias Mohr"
+                            }
+                            .fontSize(.medium)
+                            Text {
+                                "Bamberg, Bavaria"
+                            }
+                            .fontSize(.medium)
+                            Text {
+                                "Germany"
+                            }
+                            .fontSize(.medium)
+                            Text {
+                                "mail@mattesmohr.de"
+                            }
+                            .fontSize(.medium)
+                        }
                     }
-                    .textStyle(.body)
                 }
             }
         }

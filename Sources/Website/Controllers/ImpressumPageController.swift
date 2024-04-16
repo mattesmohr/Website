@@ -19,7 +19,7 @@ extension ImpressumPageController: RouteCollection {
         
         routes.group("impressum") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

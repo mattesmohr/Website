@@ -70,6 +70,10 @@ final class ArticleAdminController {
         var model = try request.content.decode(ArticleModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
+        if model.status == "published" {
+            model.publishedOn = Date.now
+        }
+        
         try await ArticleRepository(database: request.db)
             .update(entity: ArticleEntity(input: model), on: id)
         

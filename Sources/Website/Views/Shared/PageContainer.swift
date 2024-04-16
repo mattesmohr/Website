@@ -38,5 +38,6 @@ struct PageContainer: View {
                 .source("/htmlkit/all.js")
             }
         }
+        .language(.english)
     }
 }

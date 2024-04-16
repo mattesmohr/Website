@@ -22,7 +22,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #FFFFFF;
+    background-color: hsla(var(--whiteColor), 1.0);
 }
 
 /*
@@ -31,8 +31,8 @@ body {
 
 body > header {
     padding: 10px 25px;
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #E5F0F5;
+    background-color: hsla(var(--whiteColor), 1.0);
+    border-bottom: 1px solid hsla(var(--systemBorderColor), 1.0);
 }
 
 /*
@@ -40,10 +40,11 @@ body > header {
  */
 
 body > main {
+    flex-grow: 1;
+    
     height: 90%;
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
 }
 
 /*
@@ -56,7 +57,7 @@ body > main > aside {
     display: flex;
     flex-direction: column;
     background-color: #FAFCFD;
-    border-right: 1px solid #E5F0F5;
+    border-right: 1px solid hsla(var(--systemBorderColor), 1.0);
 }
 
 /*
@@ -65,6 +66,7 @@ body > main > aside {
 
 body > main > aside > section {
     flex-grow: 1;
+    
     padding: 10px 15px;
 }
 
@@ -74,7 +76,7 @@ body > main > aside > section {
 
 body > main > aside > footer {
     padding: 10px 25px;
-    border-top: 1px solid #E5F0F5;
+    border-top: 1px solid hsla(var(--systemBorderColor), 1.0);
 }
 
 /*
@@ -99,6 +101,7 @@ body > main > section {
 
 body > main > section > header {
     grid-area: header;
+    
     padding: 10px 25px;
 }
 
@@ -108,6 +111,7 @@ body > main > section > header {
 
 body > main > section > section {
     grid-area: section;
+    
     padding: 10px 25px;
 }
 
@@ -117,8 +121,9 @@ body > main > section > section {
 
 body > main > section > aside {
     grid-area: aside;
+    
     padding: 10px 25px;
-    border-left: 1px solid #E5F0F5;
+    border-left: 1px solid hsla(var(--systemBorderColor), 1.0);
 }
 
 /*
@@ -127,5 +132,6 @@ body > main > section > aside {
 
 body > main > section > footer {
     grid-area: footer;
+    
     padding: 10px 25px;
 }

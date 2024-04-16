@@ -6,7 +6,10 @@ struct FeedMigration: AsyncMigration {
         
         try await  database.schema("feeds")
             .id()
-            .field("message", .string, .required)
+            .field("thumbnail_id", .uuid, .references("assets", "id"))
+            .field("message", .custom("text"), .required)
+            .field("tags", .string)
+            .field("status", .string, .required)
             .field("created_at", .datetime)
             .field("modified_at", .datetime)
             .create()

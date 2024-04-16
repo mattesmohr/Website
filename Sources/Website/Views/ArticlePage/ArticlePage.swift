@@ -10,15 +10,23 @@ enum ArticlePage {
         var body: Content {
             ViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
+                    VStack(spacing: .medium) {
+                        Text {
+                            viewModel.title
+                        }
+                        .textStyle(.subheadline)
+                        Text {
+                            MarkdownString {
+                                "I am absolutly in love with the **Swift** language. Especially since its debut on the **Server-side**. So expect to read a lot about the language itself, the projects I'm involved in and the insights I encounter along the way."
+                            }
+                        }
+                        .fontSize(.medium)
                     }
-                    .textStyle(.subheadline)
                 }
                 Section {
                     Grid(ratio: .half, spacing: .small) {
                         for article in viewModel.pagination.items {
-                            Link(destination: "/articles/show/\(article.id)") {
+                            Link(destination: "/articles/\(article.slug)") {
                                 VStack(spacing: .small) {
                                     Thumbnail {
                                         MacIcon()
@@ -36,9 +44,8 @@ enum ArticlePage {
                                     }
                                     .fontSize(.medium)
                                     Text {
-                                        article.content
+                                        article.excerpt
                                     }
-                                    .foregroundColor(.gray)
                                     .lineLimit(.three)
                                 }
                             }
@@ -62,18 +69,44 @@ enum ArticlePage {
                     .textStyle(.subheadline)
                 }
                 Section {
-                    VStack(spacing: .small) {
+                    VStack(spacing: .large) {
                         Thumbnail {
                             SafariIcon()
                         }
-                        Text {
-                            viewModel.article.title
+                        HStack(alignment: .top, spacing: .large) {
+                            VStack(spacing: .small) {
+                                Text {
+                                    viewModel.article.title
+                                }
+                                .fontSize(.large)
+                                Text {
+                                    MarkdownString(viewModel.article.content)
+                                }
+                                .fontSize(.medium)
+                            }
+                            .frame(width: .nine)
+                            VStack(spacing: .large) {
+                                VStack {
+                                    Text("detail.category")
+                                    Text {
+                                        if let category = ProjectModel.Categories(rawValue: viewModel.article.category) {
+                                            category.description
+                                        }
+                                    }
+                                    .bold()
+                                }
+                                if let publishedOn = viewModel.article.publishedOn {
+                                    VStack {
+                                        Text("detail.date")
+                                        Text {
+                                            publishedOn.formatted(date: .long, time: .none)
+                                        }
+                                        .bold()
+                                    }
+                                }
+                            }
+                            .frame(width: .three)
                         }
-                        .fontSize(.large)
-                        Text {
-                            viewModel.article.content
-                        }
-                        .foregroundColor(.gray)
                     }
                 }
             }

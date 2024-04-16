@@ -16,7 +16,6 @@ final class ProjectRepository {
        return try await ProjectEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$author)
-            .with(\.$links)
             .with(\.$assets)
             .filter(\.$id == id)
             .first()
@@ -27,8 +26,28 @@ final class ProjectRepository {
         return try await ProjectEntity.query(on: database)
             .with(\.$thumbnail)
             .with(\.$author)
-            .with(\.$links)
             .with(\.$assets)
+            .sort(\.$modifiedAt, .descending)
+            .all()
+    }
+    
+    func find(slug: String) async throws -> ProjectEntity? {
+        
+       return try await ProjectEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$author)
+            .with(\.$assets)
+            .filter(\.$slug == slug)
+            .first()
+    }
+    
+    func find(status: String) async throws -> [ProjectEntity] {
+        
+        return try await ProjectEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$author)
+            .with(\.$assets)
+            .filter(\.$status == status)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
@@ -50,9 +69,12 @@ final class ProjectRepository {
         try await ProjectEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
+            .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
             .set(\.$status, to: entity.status)
+            .set(\.$repository, to: entity.repository)
+            .set(\.$documentation, to: entity.documentation)
             .update()
     }
     

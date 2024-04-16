@@ -15,6 +15,15 @@ extension ArticleAdminPage {
                         .borderShape(.smallrounded)
                 }
                 VStack {
+                    FieldLabel(for: "excerpt") {
+                        "Excerpt"
+                    }
+                    TextEditor(name: "excerpt", prompt: "Excerpt") {
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(5)
+                }
+                VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
@@ -77,6 +86,16 @@ extension ArticleAdminPage {
                     }
                     TextField(name: "title", prompt: "Title", value: article.title)
                         .borderShape(.smallrounded)
+                }
+                VStack {
+                    FieldLabel(for: "excerpt") {
+                        "Excerpt"
+                    }
+                    TextEditor(name: "excerpt", prompt: "Excerpt") {
+                        article.excerpt
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(5)
                 }
                 VStack {
                     FieldLabel(for: "content") {

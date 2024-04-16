@@ -19,26 +19,42 @@ enum ReportAdminPage {
                     }
                 }
                 Section {
-                    Card {
-                        List(direction: .vertical) {
-                            for project in viewModel.projects {
-                                HStack {
-                                    Text {
-                                        project.name
+                    HStack {
+                        Card {
+                            Tabs(direction: .horizontal) {
+                                Pane {
+                                    Chart {
+                                        for project in viewModel.projects {
+                                            SectorMark(value: project.count, label: project.name)
+                                                .foregroundColor(.random)
+                                        }
                                     }
-                                    .frame(width: .eleven)
+                                    .innerRadius(.large)
+                                } label: {
                                     Text {
-                                        "\(project.count)"
+                                        "Pie"
                                     }
-                                    .frame(width: .one)
                                 }
-                                .padding(insets: .vertical, length: .small)
+                                .tag("piechart")
+                                Pane {
+                                    Chart {
+                                        for project in viewModel.projects {
+                                            BarMark(value: project.count, label: project.name)
+                                                .foregroundColor(.random)
+                                        }
+                                    }
+                                } label: {
+                                    Text {
+                                        "Bar"
+                                    }
+                                }
+                                .tag("barchart")
+
                             }
                         }
-                        .listStyle(.listgroup)
+                        .frame(width: .twelve)
+                        .borderShape(.smallrounded)
                     }
-                    .frame(width: .four)
-                    .borderShape(.smallrounded)
                 }
             }
         }

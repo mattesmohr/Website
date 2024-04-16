@@ -24,6 +24,14 @@ final class FeedRepository {
             .all()
     }
     
+    func find(status: String) async throws -> [FeedEntity] {
+        
+        return try await FeedEntity.query(on: database)
+            .filter(\.$status == status)
+            .sort(\.$modifiedAt, .descending)
+            .all()
+    }
+    
     func insert(entity: FeedEntity) async throws {
         try await entity.create(on: database)
     }
@@ -41,6 +49,8 @@ final class FeedRepository {
         try await FeedEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$message, to: entity.message)
+            .set(\.$tags, to: entity.tags)
+            .set(\.$status, to: entity.status)
             .update()
     }
     

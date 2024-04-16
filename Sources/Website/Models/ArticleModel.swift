@@ -58,15 +58,21 @@ struct ArticleModel {
         
         var thumbnailId: String?
         var title: String
+        var excerpt: String
         var content: String
         var category: String
         var status: String
         var publishedOn: Date?
         var authorId: UUID?
         
+        var slug: String {
+            return title.replacingOccurrences(of: "", with: "-").lowercased()
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("title", as: String.self, is: !.empty)
+            validations.add("excerpt", as: String.self, is: !.empty)
             validations.add("content", as: String.self, is: !.empty)
             validations.add("category", as: String.self, is: !.empty)
             validations.add("status", as: String.self, is: !.empty)
@@ -74,6 +80,7 @@ struct ArticleModel {
         
         static let validators = [
             Validator(field: "title", rule: .value),
+            Validator(field: "excerpt", rule: .value),
             Validator(field: "content", rule: .value),
             Validator(field: "category", rule: .value),
             Validator(field: "status", rule: .value)
@@ -83,8 +90,10 @@ struct ArticleModel {
     struct Output: Content {
         
         var id: UUID
+        var slug: String
         var thumbnail: AssetModel.Output?
         var title: String
+        var excerpt: String
         var content: String
         var category: String
         var status: String
@@ -95,11 +104,13 @@ struct ArticleModel {
         var createdAt: Date
         var modifiedAt: Date
         
-        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
+            self.slug = slug
             self.thumbnail = thumbnail
             self.title = title
+            self.excerpt = excerpt
             self.content = content
             self.category = category
             self.status = status
@@ -113,7 +124,7 @@ struct ArticleModel {
         
         init(entity: ArticleEntity) {
             
-            self.init(id: entity.id!, title: entity.title, content: entity.content, category: entity.category, status: entity.status, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, slug: entity.slug, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)

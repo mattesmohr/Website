@@ -10,7 +10,7 @@ final class FeedPageController {
         let page: Int = request.query["page"] ?? 1
         
         let feeds = try await FeedRepository(database: request.db)
-            .find()
+            .find(status: "published")
             .map(FeedModel.Output.init)
             .page(page: page, per: 10)
         
@@ -26,7 +26,7 @@ extension FeedPageController: RouteCollection {
         
         routes.group("feed") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

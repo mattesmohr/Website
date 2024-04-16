@@ -15,6 +15,15 @@ extension ProjectAdminPage {
                         .borderShape(.smallrounded)
                 }
                 VStack {
+                    FieldLabel(for: "excerpt") {
+                        "Excerpt"
+                    }
+                    TextEditor(name: "excerpt", prompt: "Excerpt") {
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(5)
+                }
+                VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
@@ -22,6 +31,22 @@ extension ProjectAdminPage {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
+                }
+                HStack(spacing: .small) {
+                    VStack {
+                        FieldLabel(for: "repository") {
+                            "Repository"
+                        }
+                        TextField(name: "repository", prompt: "Repository")
+                            .borderShape(.smallrounded)
+                    }
+                    VStack {
+                        FieldLabel(for: "documentation") {
+                            "Documentation"
+                        }
+                        TextField(name: "documentation", prompt: "Documentation")
+                            .borderShape(.smallrounded)
+                    }
                 }
                 HStack(spacing: .small) {
                     VStack {
@@ -79,6 +104,16 @@ extension ProjectAdminPage {
                         .borderShape(.smallrounded)
                 }
                 VStack {
+                    FieldLabel(for: "excerpt") {
+                        "Excerpt"
+                    }
+                    TextEditor(name: "excerpt", prompt: "Excerpt") {
+                        project.excerpt
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(5)
+                }
+                VStack {
                     FieldLabel(for: "content") {
                         "Content"
                     }
@@ -87,6 +122,22 @@ extension ProjectAdminPage {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(15)
+                }
+                HStack(spacing: .small) {
+                    VStack {
+                        FieldLabel(for: "repository") {
+                            "Repository"
+                        }
+                        TextField(name: "repository", prompt: "Repository", value: project.repository)
+                            .borderShape(.smallrounded)
+                    }
+                    VStack {
+                        FieldLabel(for: "documentation") {
+                            "Documentation"
+                        }
+                        TextField(name: "documentation", prompt: "Documentation", value: project.documentation)
+                            .borderShape(.smallrounded)
+                    }
                 }
                 HStack(spacing: .small) {
                     VStack {

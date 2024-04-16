@@ -8,7 +8,7 @@ final class HomePageController {
     func getIndex(_ request: Request) async throws -> View {
         
         let projects = try await ProjectRepository(database: request.db)
-            .find()
+            .find(status: "published")
             .map(ProjectModel.Output.init)
             .page(page: 1, per: 10)
         
@@ -24,7 +24,7 @@ extension HomePageController: RouteCollection {
         
         routes.group("home") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

@@ -6,8 +6,10 @@ struct ArticleMigration: AsyncMigration {
         
         try await database.schema("articles")
             .id()
+            .field("slug", .string, .required)
             .field("thumbnail_id", .uuid, .references("assets", "id"))
             .field("title", .string, .required)
+            .field("excerpt", .string, .required)
             .field("content", .custom("text"), .required)
             .field("category", .string, .required)
             .field("status", .string, .required)

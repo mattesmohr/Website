@@ -57,15 +57,21 @@ struct ProjectModel {
         
         var thumbnailId: String?
         var title: String
+        var excerpt: String
         var content: String
         var category: String
         var status: String
-        var publishedOn: Date?
+        var repository: String?
+        var documentation: String?
         var authorId: UUID?
+        var slug: String {
+            return title.replacingOccurrences(of: " ", with: "-").lowercased()
+        }
         
         static func validations(_ validations: inout Validations) {
             
             validations.add("title", as: String.self, is: !.empty)
+            validations.add("excerpt", as: String.self, is: !.empty)
             validations.add("content", as: String.self, is: !.empty)
             validations.add("category", as: String.self, is: !.empty)
             validations.add("status", as: String.self, is: !.empty)
@@ -73,6 +79,7 @@ struct ProjectModel {
         
         static let validators = [
             Validator(field: "title", rule: .value),
+            Validator(field: "excerpt", rule: .value),
             Validator(field: "content", rule: .value),
             Validator(field: "category", rule: .value),
             Validator(field: "status", rule: .value)
@@ -82,29 +89,33 @@ struct ProjectModel {
     struct Output: Content {
         
         var id: UUID
+        var slug: String
         var thumbnail: AssetModel.Output?
         var title: String
+        var excerpt: String
         var content: String
         var category: String
         var status: String
-        var publishedOn: Date?
         var author: UserModel.Output?
-        var links: [LinkModel.Output]?
+        var repository: String?
+        var documentation: String?
         var assets: [AssetModel.Output]?
         var createdAt: Date
         var modifiedAt: Date
         
-        init(id: UUID, thumbnail: AssetModel.Output? = nil, title: String, content: String, category: String, status: String, publishedOn: Date? = nil, author: UserModel.Output? = nil, links: [LinkModel.Output]? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, author: UserModel.Output? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
+            self.slug = slug
             self.thumbnail = thumbnail
             self.title = title
+            self.excerpt = excerpt
             self.content = content
             self.category = category
             self.status = status
-            self.publishedOn = publishedOn
             self.author = author
-            self.links = links
+            self.repository = repository
+            self.documentation = documentation
             self.assets = assets
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
@@ -112,16 +123,11 @@ struct ProjectModel {
         
         init(entity: ProjectEntity) {
             
-            self.init(id: entity.id!, title: entity.title, content: entity.content, category: entity.category, status: entity.status, publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, slug: entity.slug, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, repository: entity.repository, documentation: entity.documentation, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)
             }
-            
-            self.links = entity.links
-                .map { entity in
-                    return LinkModel.Output(entity: entity)
-                }
             
             self.assets = entity.assets
                 .map { entity in

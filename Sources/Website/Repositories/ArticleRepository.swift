@@ -21,6 +21,17 @@ final class ArticleRepository {
             .first()
     }
     
+    func find(slug: String) async throws -> ArticleEntity? {
+       
+        return try await ArticleEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$assets)
+            .with(\.$author)
+            .with(\.$comments)
+            .filter(\.$slug == slug)
+            .first()
+    }
+    
     func find() async throws -> [ArticleEntity] {
         
         return try await ArticleEntity.query(on: database)
@@ -28,6 +39,18 @@ final class ArticleRepository {
             .with(\.$assets)
             .with(\.$author)
             .with(\.$comments)
+            .sort(\.$modifiedAt, .descending)
+            .all()
+    }
+    
+    func find(status: String) async throws -> [ArticleEntity] {
+        
+        return try await ArticleEntity.query(on: database)
+            .with(\.$thumbnail)
+            .with(\.$assets)
+            .with(\.$author)
+            .with(\.$comments)
+            .filter(\.$status == status)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
@@ -49,9 +72,11 @@ final class ArticleRepository {
         try await ArticleEntity.query(on: database)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
+            .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
             .set(\.$status, to: entity.status)
+            .set(\.$publishedOn, to: entity.publishedOn)
             .update()
     }
     

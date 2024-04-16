@@ -52,7 +52,6 @@ struct Setup {
         try application.register(collection: FeedPageController())
         try application.register(collection: PrivacyPageController())
         try application.register(collection: ImpressumPageController())
-        try application.register(collection: ConditionsPageController())
         
         try application.group("area") { routes in
         
@@ -98,7 +97,6 @@ struct Setup {
         application.migrations.add(ProjectAssetMigration())
         application.migrations.add(ContactMigration())
         application.migrations.add(ReportMigration())
-        application.migrations.add(LinkMigration())
         application.migrations.add(FeedMigration())
         
         try await application.autoMigrate()
@@ -110,5 +108,6 @@ struct Setup {
         
         application.htmlkit.localization.set(source: URL(string: localizationPath)!)
         application.htmlkit.localization.set(locale: "en-GB")
+        application.htmlkit.features = [.markdown]
     }
 }

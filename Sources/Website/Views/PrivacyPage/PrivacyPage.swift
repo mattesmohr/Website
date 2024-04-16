@@ -14,16 +14,14 @@ enum PrivacyPage {
                         viewModel.title
                     }
                     .textStyle(.subheadline)
-                    Text {
-                        "Lorem ipsum"
-                    }
-                    .textStyle(.headline)
                 }
                 Section {
-                    Text {
-                        "Lorem ipsum"
+                    VStack(spacing: .large) {
+                        Text {
+                            "Lorem ipsum"
+                        }
+                        .fontSize(.medium)
                     }
-                    .textStyle(.body)
                 }
             }
         }

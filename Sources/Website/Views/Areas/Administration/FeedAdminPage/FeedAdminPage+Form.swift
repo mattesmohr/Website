@@ -16,6 +16,28 @@ extension FeedAdminPage {
                     .borderShape(.smallrounded)
                     .lineLimit(8)
                 }
+                VStack {
+                    FieldLabel(for: "tags") {
+                        "Tags"
+                    }
+                    TextEditor(name: "tags", prompt: "Tags") {
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(4)
+                }
+                VStack {
+                    FieldLabel(for: "status") {
+                        "Status"
+                    }
+                    SelectField(name: "status", prompt: "Published") {
+                        for state in ArticleModel.States.allCases {
+                            RadioSelect(value: state.rawValue) {
+                                state.description
+                            }
+                        }
+                    }
+                    .borderShape(.smallrounded)
+                }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
                     "Submit"
@@ -45,6 +67,29 @@ extension FeedAdminPage {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(8)
+                }
+                VStack {
+                    FieldLabel(for: "tags") {
+                        "Tags"
+                    }
+                    TextEditor(name: "tags", prompt: "Tags") {
+                        feed.tags
+                    }
+                    .borderShape(.smallrounded)
+                    .lineLimit(4)
+                }
+                VStack {
+                    FieldLabel(for: "status") {
+                        "Status"
+                    }
+                    SelectField(name: "status", prompt: "Published", selection: feed.status) {
+                        for state in ArticleModel.States.allCases {
+                            RadioSelect(value: state.rawValue) {
+                                state.description
+                            }
+                        }
+                    }
+                    .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {

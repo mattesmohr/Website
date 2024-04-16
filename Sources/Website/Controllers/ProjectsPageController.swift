@@ -10,7 +10,7 @@ final class ProjectsPageController {
         let page: Int = request.query["page"] ?? 1
         
         let projects = try await ProjectRepository(database: request.db)
-            .find()
+            .find(status: "published")
             .map(ProjectModel.Output.init)
             .page(page: page, per: 10)
         
@@ -22,12 +22,12 @@ final class ProjectsPageController {
     // [/show/:id]
     func getShow(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let slug = request.parameters.get("slug", as: String.self) else {
             throw Abort(.badRequest)
         }
         
         guard let entity = try await ProjectRepository(database: request.db)
-            .find(id: id) else {
+            .find(slug: slug) else {
             throw Abort(.notFound)
         }
         
@@ -43,8 +43,8 @@ extension ProjectsPageController: RouteCollection {
         
         routes.group("projects") { routes in
             
-            routes.get("index", use: self.getIndex)
-            routes.get("show", ":id", use: self.getShow)
+            routes.get("", use: self.getIndex)
+            routes.get(":slug", use: self.getShow)
         }
     }
 }
