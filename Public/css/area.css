@@ -9,129 +9,98 @@
 }
 
 html {
-    width: 100vw;
-    height: 100vh;
+    inline-size: 100vw;
+    block-size: 100vh;
     overflow: hidden;
-}
 
-/*
- page
- */
+    body {
+        block-size: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: hsla(var(--whiteColor), 1.0);
 
-body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: hsla(var(--whiteColor), 1.0);
-}
+        > header {
+            padding-block: 10px;
+            padding-inline: 25px;
+            background-color: hsla(var(--whiteColor), 1.0);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: hsla(var(--systemBorderColor), 1.0);
+        }
 
-/*
- page header
- */
+        > main {
+            flex-grow: 1;
 
-body > header {
-    padding: 10px 25px;
-    background-color: hsla(var(--whiteColor), 1.0);
-    border-bottom: 1px solid hsla(var(--systemBorderColor), 1.0);
-}
+            block-size: 90%;
+            display: flex;
+            flex-direction: row;
 
-/*
- page content
- */
-
-body > main {
-    flex-grow: 1;
-    
-    height: 90%;
-    display: flex;
-    flex-direction: row;
-}
-
-/*
- page aside
- */
-
-body > main > aside {
-    min-width: 200px;
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    background-color: #FAFCFD;
-    border-right: 1px solid hsla(var(--systemBorderColor), 1.0);
-}
-
-/*
- aside content
- */
-
-body > main > aside > section {
-    flex-grow: 1;
-    
-    padding: 10px 15px;
-}
-
-/*
- aside footer
- */
-
-body > main > aside > footer {
-    padding: 10px 25px;
-    border-top: 1px solid hsla(var(--systemBorderColor), 1.0);
-}
-
-/*
- content
- */
-
-body > main > section {
-    width: 85%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 77% 23%;
-    grid-template-areas: "header aside"
+            > section {
+                inline-size: 85%;
+                block-size: 100%;
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                grid-template-columns: 77% 23%;
+                grid-template-areas: "header aside"
                          "section aside"
                          "footer aside";
-    overflow-y: scroll;
-}
+                overflow-block: scroll;
 
-/*
- content header
- */
+                > header {
+                    grid-area: header;
 
-body > main > section > header {
-    grid-area: header;
-    
-    padding: 10px 25px;
-}
+                    padding-block: 10px;
+                    padding-inline: 25px;
+                }
 
-/*
- content content
- */
+                > section {
+                    grid-area: section;
 
-body > main > section > section {
-    grid-area: section;
-    
-    padding: 10px 25px;
-}
+                    padding-block: 10px;
+                    padding-inline: 25px;
+                }
 
-/*
- content aside
- */
+                > aside {
+                    grid-area: aside;
 
-body > main > section > aside {
-    grid-area: aside;
-    
-    padding: 10px 25px;
-    border-left: 1px solid hsla(var(--systemBorderColor), 1.0);
-}
+                    padding-block: 10px;
+                    padding-inline: 25px;
+                    border-left: 1px solid hsla(var(--systemBorderColor), 1.0);
+                }
 
-/*
- content footer
- */
+                > footer {
+                    grid-area: footer;
 
-body > main > section > footer {
-    grid-area: footer;
-    
-    padding: 10px 25px;
+                    padding-block: 10px;
+                    padding-inline: 25px;
+                }
+            }
+
+            > aside {
+                min-inline-size: 200px;
+                inline-size: 15%;
+                display: flex;
+                flex-direction: column;
+                background-color: #FAFCFD;
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-right-color: hsla(var(--systemBorderColor), 1.0);
+
+                > section {
+                    flex-grow: 1;
+
+                    padding-block: 10px;
+                    padding-inline: 15px;
+                }
+
+                > footer {
+                    padding-block: 10px;
+                    padding-inline: 25px;
+                    border-top-width: 1px;
+                    border-top-style: solid;
+                    border-top-color: hsla(var(--systemBorderColor), 1.0);
+                }
+            }
+        }
+    }
 }
