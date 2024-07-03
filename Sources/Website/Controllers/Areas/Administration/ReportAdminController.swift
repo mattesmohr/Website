@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/area/admin/reports]
-final class ReportAdminController {
+struct ReportAdminController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let projects = try await ProjectRepository(database: request.db)

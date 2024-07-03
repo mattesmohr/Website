@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/area/admin/users]
-final class UserAdminController {
+struct UserAdminController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -20,6 +21,7 @@ final class UserAdminController {
     }
     
     // [/create]
+    @Sendable
     func getCreate(_ request: Request) async throws -> View {
         
         let viewModel = UserAdminPageModel.CreateView()
@@ -28,6 +30,7 @@ final class UserAdminController {
     }
     
     // [/create/:model]
+    @Sendable
     func postCreate(_ request: Request) async throws -> Response {
         
         try UserModel.Input.validate(content: request)
@@ -41,6 +44,7 @@ final class UserAdminController {
     }
     
     // [/edit/:id]
+    @Sendable
     func getEdit(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -58,6 +62,7 @@ final class UserAdminController {
     }
     
     // [/:id/edit/:model]
+    @Sendable
     func postEdit(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -75,6 +80,7 @@ final class UserAdminController {
     }
     
     // [/:id/delete]
+    @Sendable
     func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {

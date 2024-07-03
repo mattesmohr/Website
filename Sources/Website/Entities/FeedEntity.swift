@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class FeedEntity: Model {
+final class FeedEntity: Model, @unchecked Sendable {
     
     static let schema = "feeds"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @OptionalParent(key: "thumbnail_id")

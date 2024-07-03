@@ -2,14 +2,16 @@ import HTMLKitVapor
 import Vapor
 
 // [/area/login]
-final class LoginAreaController {
+struct LoginAreaController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> Response {
         return request.redirect(to: "/area/login/login")
     }
     
     // [/login]
+    @Sendable
     func getLogin(_ request: Request) async throws -> View {
         
         let viewModel = LoginAreaPageModel.LoginViewModel()
@@ -18,6 +20,7 @@ final class LoginAreaController {
     }
     
     // [/login/:model]
+    @Sendable
     func postLogin(_ request: Request) async throws -> Response {
         
         try LoginModel.Input.validate(content: request)
@@ -67,6 +70,7 @@ final class LoginAreaController {
     }
     
     // [/logout]
+    @Sendable
     func getLogout(_ request: Request) async throws -> Response {
         
         request.auth.logout(UserModel.Output.self)

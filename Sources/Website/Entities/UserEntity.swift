@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class UserEntity: Model {
+final class UserEntity: Model, @unchecked Sendable {
     
     static let schema = "users"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @OptionalParent(key: "avatar_id")

@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class ArticleAsset: Model {
+final class ArticleAsset: Model, @unchecked Sendable {
  
     static let schema = "article+asset"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @Parent(key: "article_id")

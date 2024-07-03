@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class ReportEntity: Model {
+final class ReportEntity: Model, @unchecked Sendable {
     
     static let schema = "reports"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @Field(key: "uri")

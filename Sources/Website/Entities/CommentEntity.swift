@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class CommentEntity: Model {
+final class CommentEntity: Model, @unchecked Sendable {
     
     static let schema = "comments"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @OptionalParent(key: "avatar_id")

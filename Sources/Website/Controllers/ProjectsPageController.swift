@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/projects]
-final class ProjectsPageController {
+struct ProjectsPageController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -20,6 +21,7 @@ final class ProjectsPageController {
     }
 
     // [/:slug]
+    @Sendable
     func getShow(_ request: Request) async throws -> View {
         
         guard let slug = request.parameters.get("slug", as: String.self) else {

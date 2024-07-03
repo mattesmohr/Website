@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/feed]
-final class FeedPageController {
+struct FeedPageController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1

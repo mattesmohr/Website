@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/home]
-final class HomePageController {
+struct HomePageController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let projects = try await ProjectRepository(database: request.db)

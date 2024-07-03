@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/area/admin/assets]
-final class AssetAdminController {
+struct AssetAdminController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -20,6 +21,7 @@ final class AssetAdminController {
     }
     
     // [/create]
+    @Sendable
     func getCreate(_ request: Request) async throws -> View {
         
         let viewModel = AssetAdminPageModel.CreateView()
@@ -28,6 +30,7 @@ final class AssetAdminController {
     }
     
     // [/create/:model]
+    @Sendable
     func postCreate(_ request: Request) async throws -> Response {
         
         try AssetModel.Input.validate(content: request)
@@ -45,6 +48,7 @@ final class AssetAdminController {
     }
     
     // [/:id/edit]
+    @Sendable
     func getEdit(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -61,6 +65,7 @@ final class AssetAdminController {
     }
     
     // [/:id/edit/:model]
+    @Sendable
     func postEdit(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -78,6 +83,7 @@ final class AssetAdminController {
     }
     
     // [/:id/delete]
+    @Sendable
     func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {

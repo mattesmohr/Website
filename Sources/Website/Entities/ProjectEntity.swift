@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class ProjectEntity: Model {
+final class ProjectEntity: Model, @unchecked Sendable {
     
     static let schema = "projects"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @Field(key: "slug")

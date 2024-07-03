@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class CredentialEntity: Model {
+final class CredentialEntity: Model, @unchecked Sendable {
     
     static let schema = "credentials"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @Field(key: "username")

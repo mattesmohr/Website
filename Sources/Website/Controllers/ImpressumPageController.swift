@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/impressum]
-final class ImpressumPageController {
+struct ImpressumPageController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let viewModel = ImpressumPageModel.IndexView()

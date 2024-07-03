@@ -1,11 +1,11 @@
 import Fluent
 import Foundation
 
-final class ContactEntity: Model {
+final class ContactEntity: Model, @unchecked Sendable {
     
     static let schema = "contacts"
     
-    @ID(key: "id")
+    @ID
     var id: UUID?
     
     @Field(key: "first_name")

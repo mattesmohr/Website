@@ -2,9 +2,10 @@ import HTMLKitVapor
 import Vapor
 
 // [/area/admin/home]
-final class HomeAdminController {
+struct HomeAdminController {
     
     // [/]
+    @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let viewModel = HomeAdminPageModel.IndexView()

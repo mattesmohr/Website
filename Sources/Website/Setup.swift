@@ -6,7 +6,7 @@ import Vapor
 import Logging
 
 @main
-struct Setup {
+enum Setup {
     
     static func main() async throws {
         
@@ -14,20 +14,14 @@ struct Setup {
         
         try LoggingSystem.bootstrap(from: &environment)
         
-        let application = Application(environment)
-        
-        defer { application.shutdown() }
+        let application = try await Application.make(environment)
         
         application.passwords.use(.bcrypt)
         application.sessions.use(.fluent(.mysql))
         
-        application.middleware = .init()
-        application.middleware.use(ErrorMiddleware())
-        application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
-        application.middleware.use(application.sessions.middleware)
-        
         do {
     
+            try await middlwares(application)
             try await routes(application)
             try await tables(application)
             try await services(application)
@@ -36,10 +30,21 @@ struct Setup {
             
             application.logger.report(error: error)
             
+            try? await application.asyncShutdown()
+            
             throw error
         }
         
         try await application.execute()
+        try await application.asyncShutdown()
+    }
+    
+    static func middlwares(_ application: Application) async throws {
+        
+        application.middleware = .init()
+        application.middleware.use(ErrorMiddleware())
+        application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
+        application.middleware.use(application.sessions.middleware)
     }
     
     static func routes(_ application: Application) async throws {
