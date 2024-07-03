@@ -4,7 +4,7 @@ import Vapor
 // [/privacy]
 final class PrivacyPageController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let viewModel = PrivacyPageModel.IndexView()

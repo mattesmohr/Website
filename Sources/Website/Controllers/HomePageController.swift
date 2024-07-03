@@ -4,7 +4,7 @@ import Vapor
 // [/home]
 final class HomePageController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let projects = try await ProjectRepository(database: request.db)

@@ -15,7 +15,7 @@ extension ArticleAdminPage {
                         "Do you really want to delete it? It cannot be undone."
                     }
                     HStack(spacing: .small) {
-                        LinkButton(destination: "/area/admin/articles/delete/\(id)") {
+                        LinkButton(destination: "/area/admin/articles/\(id)/delete") {
                             "Delete"
                         }
                         .borderShape(.smallrounded)

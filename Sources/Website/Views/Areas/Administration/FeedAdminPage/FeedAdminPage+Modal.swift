@@ -15,7 +15,7 @@ extension FeedAdminPage {
                         "Do you really want to delete it? It cannot be undone."
                     }
                     HStack(spacing: .small) {
-                        LinkButton(destination: "/area/admin/feed/delete/\(id)") {
+                        LinkButton(destination: "/area/admin/feed/\(id)/delete") {
                             "Delete"
                         }
                         .borderShape(.smallrounded)

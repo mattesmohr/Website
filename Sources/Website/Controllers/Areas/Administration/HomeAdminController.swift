@@ -4,7 +4,7 @@ import Vapor
 // [/area/admin/home]
 final class HomeAdminController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let viewModel = HomeAdminPageModel.IndexView()
@@ -19,7 +19,7 @@ extension HomeAdminController: RouteCollection {
         
         routes.group("home") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

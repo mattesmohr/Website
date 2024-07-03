@@ -66,7 +66,12 @@ struct ArticleModel {
         var authorId: UUID?
         
         var slug: String {
-            return title.replacingOccurrences(of: "", with: "-").lowercased()
+            return title.replacingOccurrences(of: "", with: "-")
+                .replacingOccurrences(of: "ä", with: "ae")
+                .replacingOccurrences(of: "ö", with: "oe")
+                .replacingOccurrences(of: "ü", with: "ue")
+                .replacingOccurrences(of: "ß", with: "ss")
+                .lowercased()
         }
         
         static func validations(_ validations: inout Validations) {

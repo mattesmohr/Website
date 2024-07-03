@@ -4,7 +4,7 @@ import Vapor
 // [/area/admin/feed]
 final class FeedAdminController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -37,10 +37,10 @@ final class FeedAdminController {
         try await FeedRepository(database: request.db)
             .insert(entity: FeedEntity(input: model))
         
-        return request.redirect(to: "/area/admin/feed/index")
+        return request.redirect(to: "/area/admin/feed")
     }
     
-    // [/edit/:id]
+    // [/:id/edit]
     func getEdit(_ request: Request) async throws -> View {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -57,7 +57,7 @@ final class FeedAdminController {
         return try await request.htmlkit.render(FeedAdminPage.EditView(viewModel: viewModel))
     }
     
-    // [/edit/:model]
+    // [/:id/edit/:model]
     func postEdit(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -71,10 +71,10 @@ final class FeedAdminController {
         try await FeedRepository(database: request.db)
             .update(entity: FeedEntity(input: model), on: id)
         
-        return request.redirect(to: "/area/admin/feed/index")
+        return request.redirect(to: "/area/admin/feed")
     }
     
-    // [/delete/:id]
+    // [/:id/delete]
     func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -84,7 +84,7 @@ final class FeedAdminController {
         try await FeedRepository(database: request.db)
             .delete(id: id)
         
-        return request.redirect(to: "/area/admin/feed/index")
+        return request.redirect(to: "/area/admin/feed")
     }
 }
 
@@ -94,12 +94,12 @@ extension FeedAdminController: RouteCollection {
         
         routes.group("feed") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
             routes.get("create", use: self.getCreate)
             routes.post("create", use: self.postCreate)
-            routes.get("edit", ":id", use: self.getEdit)
-            routes.post("edit", ":id", use: self.postEdit)
-            routes.get("delete", ":id", use: self.getDelete)
+            routes.get(":id", "edit", use: self.getEdit)
+            routes.post(":id", "edit", use: self.postEdit)
+            routes.get(":id", "delete", use: self.getDelete)
         }
     }
 }

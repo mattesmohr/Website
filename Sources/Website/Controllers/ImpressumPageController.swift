@@ -4,7 +4,7 @@ import Vapor
 // [/impressum]
 final class ImpressumPageController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let viewModel = ImpressumPageModel.IndexView()

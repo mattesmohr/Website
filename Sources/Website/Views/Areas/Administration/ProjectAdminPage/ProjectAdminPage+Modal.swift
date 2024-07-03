@@ -15,7 +15,7 @@ extension ProjectAdminPage {
                         "Do you really want to delete it? It cannot be undone."
                     }
                     HStack(spacing: .small) {
-                        LinkButton(destination: "/area/admin/projects/delete/\(id)") {
+                        LinkButton(destination: "/area/admin/projects/\(id)/delete") {
                             "Delete"
                         }
                         .borderShape(.smallrounded)

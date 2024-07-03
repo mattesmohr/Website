@@ -17,7 +17,7 @@ struct FeedList: View {
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/feed/edit/\(feed.id)") {
+                                Link(destination: "/area/admin/feed/\(feed.id)/edit") {
                                     Symbol(system: .pencil)
                                     Text {
                                         "Edit"

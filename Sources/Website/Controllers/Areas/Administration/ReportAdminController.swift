@@ -4,7 +4,7 @@ import Vapor
 // [/area/admin/reports]
 final class ReportAdminController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let projects = try await ProjectRepository(database: request.db)
@@ -22,7 +22,7 @@ extension ReportAdminController: RouteCollection {
         
         routes.group("reports") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
         }
     }
 }

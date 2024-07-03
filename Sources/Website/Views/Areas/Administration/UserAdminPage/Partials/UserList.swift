@@ -39,7 +39,7 @@ struct UserList: View {
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/users/edit/\(user.id)") {
+                                Link(destination: "/area/admin/users/\(user.id)/edit") {
                                     Symbol(system: .pencil)
                                     Text {
                                         "Edit"

@@ -4,7 +4,7 @@ import Vapor
 // [/area/admin/users]
 final class UserAdminController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -37,7 +37,7 @@ final class UserAdminController {
         try await UserRepository(database: request.db)
             .insert(entity: UserEntity(input: model))
         
-        return request.redirect(to: "/area/admin/users/index")
+        return request.redirect(to: "/area/admin/users")
     }
     
     // [/edit/:id]
@@ -57,7 +57,7 @@ final class UserAdminController {
         return try await request.htmlkit.render(UserAdminPage.EditView(viewModel: viewModel))
     }
     
-    // [/edit/:model]
+    // [/:id/edit/:model]
     func postEdit(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -71,10 +71,10 @@ final class UserAdminController {
         try await UserRepository(database: request.db)
             .update(entity: UserEntity(input: model), on: id)
         
-        return request.redirect(to: "/area/admin/users/index")
+        return request.redirect(to: "/area/admin/users")
     }
     
-    // [/delete/:id]
+    // [/:id/delete]
     func getDelete(_ request: Request) async throws -> Response {
         
         guard let id = request.parameters.get("id", as: UUID.self) else {
@@ -84,7 +84,7 @@ final class UserAdminController {
         try await UserRepository(database: request.db)
             .delete(id: id)
         
-        return request.redirect(to: "/area/admin/users/index")
+        return request.redirect(to: "/area/admin/users")
     }
 }
 
@@ -94,12 +94,12 @@ extension UserAdminController: RouteCollection {
         
         routes.group("users") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
             routes.get("create", use: self.getCreate)
             routes.post("create", use: self.postCreate)
-            routes.get("edit", ":id", use: self.getEdit)
-            routes.post("edit", ":id", use: self.postEdit)
-            routes.get("delete", ":id", use: self.getDelete)
+            routes.get(":id", "edit", use: self.getEdit)
+            routes.post(":id", "edit", use: self.postEdit)
+            routes.get(":id", "delete", use: self.getDelete)
         }
     }
 }

@@ -59,32 +59,32 @@ struct AreaViewContainer: View {
                     Section {
                         Navigation {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/home/index") {
+                                Link(destination: "/area/admin/home") {
                                     Symbol(system: .house)
                                     Text("menu.home")
                                 }
                                 .fontSize(.extralarge)
-                                Link(destination: "/area/admin/projects/index") {
+                                Link(destination: "/area/admin/projects") {
                                     Symbol(system: .folder)
                                     Text("menu.projects")
                                 }
-                                Link(destination: "/area/admin/articles/index") {
+                                Link(destination: "/area/admin/articles") {
                                     Symbol(system: .file)
                                     Text("menu.articles")
                                 }
-                                Link(destination: "/area/admin/feed/index") {
+                                Link(destination: "/area/admin/feed") {
                                     Symbol(system: .scope)
                                     Text("menu.feed")
                                 }
-                                Link(destination: "/area/admin/assets/index") {
+                                Link(destination: "/area/admin/assets") {
                                     Symbol(system: .photo)
                                     Text("menu.assets")
                                 }
-                                Link(destination: "/area/admin/reports/index") {
+                                Link(destination: "/area/admin/reports") {
                                     Symbol(system: .chart(.pie))
                                     Text("menu.reports")
                                 }
-                                Link(destination: "/area/admin/users/index") {
+                                Link(destination: "/area/admin/users") {
                                     Symbol(system: .person)
                                     Text("menu.users")
                                 }

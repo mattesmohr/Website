@@ -15,7 +15,7 @@ extension AssetAdminPage {
                         "Do you really want to delete it? It cannot be undone."
                     }
                     HStack(spacing: .small) {
-                        LinkButton(destination: "/area/admin/assets/delete/\(id)") {
+                        LinkButton(destination: "/area/admin/assets/\(id)/delete") {
                             "Delete"
                         }
                         .borderShape(.smallrounded)

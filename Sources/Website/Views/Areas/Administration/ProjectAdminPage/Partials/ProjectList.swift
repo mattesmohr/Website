@@ -36,7 +36,7 @@ struct ProjectList: View {
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/projects/edit/\(project.id)") {
+                                Link(destination: "/area/admin/projects/\(project.id)/edit") {
                                     Symbol(system: .pencil)
                                     Text {
                                         "Edit"

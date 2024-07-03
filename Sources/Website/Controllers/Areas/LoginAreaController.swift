@@ -4,8 +4,8 @@ import Vapor
 // [/area/login]
 final class LoginAreaController {
     
-    // [/index]
-    func getIndex(_ request: Request) async throws -> Response {        
+    // [/]
+    func getIndex(_ request: Request) async throws -> Response {
         return request.redirect(to: "/area/login/login")
     }
     
@@ -45,7 +45,7 @@ final class LoginAreaController {
                         request.session.authenticate(UserModel.Output(entity: entity))
                     }
                     
-                    return request.redirect(to: "/area/admin/home/index")
+                    return request.redirect(to: "/area/admin/home")
                     
                 } else {
                     // Count the attempt. If it reached the limit, lock up the account...
@@ -72,7 +72,7 @@ final class LoginAreaController {
         request.auth.logout(UserModel.Output.self)
         request.session.unauthenticate(UserModel.Output.self)
         
-        return request.redirect(to: "/area/login/index")
+        return request.redirect(to: "/area/login")
     }
 }
 
@@ -82,7 +82,7 @@ extension LoginAreaController: RouteCollection {
         
         routes.group("login") { routes in
             
-            routes.get("index", use: self.getIndex)
+            routes.get("", use: self.getIndex)
             routes.get("login", use: self.getLogin)
             routes.post("login", use: self.postLogin)
             routes.get("logout", use: self.getLogout)

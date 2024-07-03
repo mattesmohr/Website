@@ -4,7 +4,7 @@ import Vapor
 // [/articles]
 final class ArticlesPageController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
@@ -20,7 +20,7 @@ final class ArticlesPageController {
         return try await request.htmlkit.render(ArticlePage.IndexView(viewModel: viewModel))
     }
     
-    // [/show]
+    // [/:slug]
     func getShow(_ request: Request) async throws -> View {
         
         guard let slug = request.parameters.get("slug", as: String.self) else {

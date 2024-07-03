@@ -4,7 +4,7 @@ import Vapor
 // [/feed]
 final class FeedPageController {
     
-    // [/index]
+    // [/]
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
