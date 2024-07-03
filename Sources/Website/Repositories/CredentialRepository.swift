@@ -12,40 +12,47 @@ final class CredentialRepository {
     
     func find(id: UUID) async throws -> CredentialEntity? {
         
-       return try await CredentialEntity.query(on: database)
+       return try await database.query(CredentialEntity.self)
             .filter(\.$id == id)
             .first()
     }
     
     func find(name: String) async throws -> CredentialEntity? {
         
-       return try await CredentialEntity.query(on: database)
+        return try await database.query(CredentialEntity.self)
             .filter(\.$username == name)
             .first()
     }
     
     func find() async throws -> [CredentialEntity] {
         
-        return try await CredentialEntity.query(on: database)
+        return try await database.query(CredentialEntity.self)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
     
     func insert(entity: CredentialEntity) async throws {
-        try await entity.create(on: database)
+        
+        try await database.query(CredentialEntity.self)
+            .set(\.$id, to: UUID())
+            .set(\.$username, to: entity.username)
+            .set(\.$password, to: entity.password)
+            .set(\.$status, to: entity.status)
+            .set(\.$attempt, to: entity.attempt)
+            .create()
     }
     
     func patch<Field: QueryableProperty>(field: KeyPath<CredentialEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == CredentialEntity {
         
-        try await CredentialEntity.query(on: database)
+        try await database.query(CredentialEntity.self)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
-        
+
     func update(entity: CredentialEntity, on id: UUID) async throws {
         
-        try await CredentialEntity.query(on: database)
+        try await database.query(CredentialEntity.self)
             .filter(\.$id == id)
             .set(\.$username, to: entity.username)
             .set(\.$password, to: entity.password)
@@ -56,14 +63,14 @@ final class CredentialRepository {
     
     func delete(id: UUID) async throws {
         
-        try await CredentialEntity.query(on: database)
+        try await database.query(CredentialEntity.self)
             .filter(\.$id == id)
             .delete()
     }
     
     func count() async throws -> Int {
         
-        return try await CredentialEntity.query(on: database)
+        return try await database.query(CredentialEntity.self)
             .count()
     }
 }

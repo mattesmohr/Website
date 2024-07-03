@@ -12,32 +12,37 @@ final class ReportRepository {
     
     func find(id: UUID) async throws -> ReportEntity? {
         
-       return try await ReportEntity.query(on: database)
+       return try await database.query(ReportEntity.self)
             .filter(\.$id == id)
             .first()
     }
     
     func find(uri: String) async throws -> ReportEntity? {
         
-        return try await ReportEntity.query(on: database)
+        return try await database.query(ReportEntity.self)
             .filter(\.$uri == uri)
             .first()
     }
     
     func find() async throws -> [ReportEntity] {
         
-        return try await ReportEntity.query(on: database)
+        return try await database.query(ReportEntity.self)
             .sort(\.$modifiedAt, .descending)
             .all()
     }
     
     func insert(entity: ReportEntity) async throws {
-        try await entity.create(on: database)
+        
+        try await database.query(ReportEntity.self)
+            .set(\.$id, to: UUID())
+            .set(\.$uri, to: entity.uri)
+            .set(\.$count, to: entity.count)
+            .create()
     }
     
     func patch<Field: QueryableProperty>(field: KeyPath<ReportEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ReportEntity {
         
-        try await ReportEntity.query(on: database)
+        try await database.query(ReportEntity.self)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
@@ -45,7 +50,7 @@ final class ReportRepository {
     
     func update(entity: ReportEntity, on id: UUID) async throws {
         
-        try await ReportEntity.query(on: database)
+        try await database.query(ReportEntity.self)
             .filter(\.$id == id)
             .set(\.$uri, to: entity.uri)
             .set(\.$count, to: entity.count)
@@ -54,14 +59,14 @@ final class ReportRepository {
     
     func delete(id: UUID) async throws {
         
-        try await ReportEntity.query(on: database)
+        try await database.query(ReportEntity.self)
             .filter(\.$id == id)
             .delete()
     }
     
     func count() async throws -> Int {
         
-        return try await ReportEntity.query(on: database)
+        return try await database.query(ReportEntity.self)
             .count()
     }
 }

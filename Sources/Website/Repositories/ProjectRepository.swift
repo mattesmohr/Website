@@ -13,7 +13,7 @@ final class ProjectRepository {
     
     func find(id: UUID) async throws -> ProjectEntity? {
         
-       return try await ProjectEntity.query(on: database)
+       return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$assets)
@@ -23,7 +23,7 @@ final class ProjectRepository {
     
     func find() async throws -> [ProjectEntity] {
         
-        return try await ProjectEntity.query(on: database)
+        return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$assets)
@@ -33,7 +33,7 @@ final class ProjectRepository {
     
     func find(slug: String) async throws -> ProjectEntity? {
         
-       return try await ProjectEntity.query(on: database)
+        return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$assets)
@@ -43,7 +43,7 @@ final class ProjectRepository {
     
     func find(status: String) async throws -> [ProjectEntity] {
         
-        return try await ProjectEntity.query(on: database)
+        return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author)
             .with(\.$assets)
@@ -53,12 +53,22 @@ final class ProjectRepository {
     }
     
     func insert(entity: ProjectEntity) async throws {
-        try await entity.create(on: database)
+        
+        try await database.query(ProjectEntity.self)
+            .set(\.$id, to: UUID())
+            .set(\.$title, to: entity.title)
+            .set(\.$excerpt, to: entity.excerpt)
+            .set(\.$content, to: entity.content)
+            .set(\.$category, to: entity.category)
+            .set(\.$status, to: entity.status)
+            .set(\.$repository, to: entity.repository)
+            .set(\.$documentation, to: entity.documentation)
+            .create()
     }
     
     func patch<Field: QueryableProperty>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ProjectEntity {
         
-        try await ProjectEntity.query(on: database)
+        try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
@@ -66,7 +76,7 @@ final class ProjectRepository {
     
     func update(entity: ProjectEntity, on id: UUID) async throws {
         
-        try await ProjectEntity.query(on: database)
+        try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
@@ -80,14 +90,14 @@ final class ProjectRepository {
     
     func delete(id: UUID) async throws {
         
-        try await ProjectEntity.query(on: database)
+        try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
             .delete()
     }
     
     func count() async throws -> Int {
         
-        return try await ProjectEntity.query(on: database)
+        return try await database.query(ProjectEntity.self)
             .count()
     }
     
