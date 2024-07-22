@@ -4,6 +4,8 @@ import Foundation
 import HTMLKitVapor
 import Vapor
 import Logging
+import NIOCore
+import NIOPosix
 
 @main
 enum Setup {
@@ -15,6 +17,10 @@ enum Setup {
         try LoggingSystem.bootstrap(from: &environment)
         
         let application = try await Application.make(environment)
+        
+        let executorTakeoverSuccess = NIOSingletons.unsafeTryInstallSingletonPosixEventLoopGroupAsConcurrencyGlobalExecutor()
+        
+        application.logger.debug("Running with \(executorTakeoverSuccess ? "SwiftNIO" : "standard") Swift Concurrency default executor")
         
         application.passwords.use(.bcrypt)
         application.sessions.use(.fluent(.mysql))

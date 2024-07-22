@@ -1,17 +1,17 @@
-// swift-tools-version:5.8
+// swift-tools-version:5.10
 
 import PackageDescription
 
 let package = Package(
     name: "Website",
     platforms: [
-       .macOS(.v12)
+       .macOS(.v13)
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.102.0"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.102.1"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.11.0"),
         .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.6.0"),
-        .package(url: "https://github.com/vapor-community/HTMLKit.git", branch: "upgrade/htmlkit-3.0-10")
+        .package(url: "https://github.com/vapor-community/HTMLKit.git", branch: "main")
     ],
     targets: [
         .executableTarget(
@@ -23,12 +23,20 @@ let package = Package(
                 .product(name: "HTMLKit", package: "HTMLKit")
             ],
             swiftSettings: [
-                .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
+                .enableUpcomingFeature("DisableOutwardActorInference"),
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
-        .testTarget(name: "WebsiteTests", dependencies: [
-            .target(name: "Website"),
-            .product(name: "XCTVapor", package: "vapor")
-        ])
+        .testTarget(
+            name: "WebsiteTests",
+            dependencies: [
+                .target(name: "Website"),
+                .product(name: "XCTVapor", package: "vapor")
+            ],
+            swiftSettings: [
+                .enableUpcomingFeature("DisableOutwardActorInference"),
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
+        )
     ]
 )
