@@ -22,6 +22,7 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "HTMLKit", package: "HTMLKit")
             ],
+            exclude:["Localization"],
             swiftSettings: [
                 .enableUpcomingFeature("DisableOutwardActorInference"),
                 .enableExperimentalFeature("StrictConcurrency")
