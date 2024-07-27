@@ -115,9 +115,11 @@ enum Setup {
     
     static func services(_ application: Application) async throws {
         
-        let localizationPath = application.directory.workingDirectory + "Sources/Website/Localization"
+        guard let localeSourcePath = Bundle.module.url(forResource: "Localization", withExtension: nil) else {
+            throw Abort(.internalServerError)
+        }
         
-        application.htmlkit.localization.set(source: URL(string: localizationPath)!)
+        application.htmlkit.localization.set(source: localeSourcePath)
         application.htmlkit.localization.set(locale: "en-GB")
         application.htmlkit.features = [.markdown]
     }
