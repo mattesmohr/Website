@@ -1,11 +1,11 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ImpressumPage {
+enum LegalPage {
     
     struct IndexView: View {
 
-        var viewModel: ImpressumPageModel.IndexView
+        var viewModel: LegalPageModel.IndexView
 
         var body: Content {
             ViewContainer {
@@ -18,10 +18,15 @@ enum ImpressumPage {
                 Section {
                     VStack(spacing: .large) {
                         Text {
-                            "This website represents me as a person and has no commercial use! Feel free to reach me via"
+                            "This website represents me as a person and has no commercial use!"
                         }
                         .fontSize(.medium)
                         VStack {
+                            Text {
+                                "Responsible for the content"
+                            }
+                            .bold()
+                            .fontSize(.medium)
                             Text {
                                 "Matthias Mohr"
                             }

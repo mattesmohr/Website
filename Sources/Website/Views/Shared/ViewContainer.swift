@@ -67,7 +67,7 @@ struct ViewContainer: View {
                     }
                     .listSpacing(.small)
                     List(direction: .horizontal) {
-                        Link(destination: "/impressum") {
+                        Link(destination: "/legal") {
                             Text("menu.legal")
                         }
                         Link(destination: "/privacy") {

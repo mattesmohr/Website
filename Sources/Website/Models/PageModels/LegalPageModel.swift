@@ -1,9 +1,9 @@
 import HTMLKitComponents
 
-enum ImpressumPageModel {
+enum LegalPageModel {
     
     struct IndexView {
         
-        var title: String = "Impressum"
+        var title: String = "Legal notice"
     }
 }

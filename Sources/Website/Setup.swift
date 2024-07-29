@@ -62,7 +62,7 @@ enum Setup {
         try application.register(collection: ProjectsPageController())
         try application.register(collection: FeedPageController())
         try application.register(collection: PrivacyPageController())
-        try application.register(collection: ImpressumPageController())
+        try application.register(collection: LegalPageController())
         
         try application.group("area") { routes in
         
