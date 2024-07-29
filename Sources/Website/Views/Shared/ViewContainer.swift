@@ -54,12 +54,12 @@ struct ViewContainer: View {
             Footer {
                 HStack(spacing: .between) {
                     List(direction: .horizontal) {
-                        Link(destination: "/home/index") {
+                        Link(destination: "/home") {
                             Text {
                                 "DE"
                             }
                         }
-                        Link(destination: "/home/index") {
+                        Link(destination: "/home") {
                             Text {
                                 "EN"
                             }

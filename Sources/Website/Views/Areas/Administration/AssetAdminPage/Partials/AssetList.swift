@@ -27,7 +27,7 @@ struct AssetList: View {
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/assets/edit/\(asset.id)") {
+                                Link(destination: "/area/admin/assets/\(asset.id)/edit") {
                                     Symbol(system: .pencil)
                                     Text {
                                         "Edit"

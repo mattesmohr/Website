@@ -76,7 +76,7 @@ struct LoginAreaController {
         request.auth.logout(UserModel.Output.self)
         request.session.unauthenticate(UserModel.Output.self)
         
-        return request.redirect(to: "/area/login")
+        return request.redirect(to: "/area/login/login")
     }
 }
 

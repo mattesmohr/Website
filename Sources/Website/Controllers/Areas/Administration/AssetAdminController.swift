@@ -44,7 +44,7 @@ struct AssetAdminController {
         try await AssetRepository(database: request.db)
             .insert(entity: AssetEntity(input: model))
         
-        return request.redirect(to: "/area/admin/assets/index")
+        return request.redirect(to: "/area/admin/assets")
     }
     
     // [/:id/edit]
