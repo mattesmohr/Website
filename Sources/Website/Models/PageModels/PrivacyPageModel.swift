@@ -4,6 +4,6 @@ enum PrivacyPageModel {
     
     struct IndexView {
      
-        var title: String = "Privacy"
+        var title: String = "Privacy policy"
     }
 }
