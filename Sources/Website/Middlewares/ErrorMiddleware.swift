@@ -11,8 +11,13 @@ struct ErrorMiddleware: AsyncMiddleware {
             
             request.logger.report(error: error)
             
-            return try await request.htmlkit.render(ErrorPage.ErrorView(message: error.localizedDescription))
-                .encodeResponse(for: request)
+            if let _ = request.session.authenticated(UserModel.Output.self) {
+                
+                return try await request.htmlkit.render(ErrorPage.ErrorView(message: error.localizedDescription))
+                    .encodeResponse(for: request)
+            }
+            
+            return Response(status: .badRequest)
         }
     }
 }
