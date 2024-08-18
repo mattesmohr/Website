@@ -1,4 +1,13 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
+    --fontFamily: 'Inter';
     --systemBorderColor: 199, 44%, 93%;
 }
 
