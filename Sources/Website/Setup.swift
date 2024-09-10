@@ -48,6 +48,7 @@ enum Setup {
     static func middlwares(_ application: Application) async throws {
         
         application.middleware = .init()
+        application.middleware.use(RouteLoggingMiddleware(logLevel: .info))
         application.middleware.use(ErrorMiddleware())
         application.middleware.use(FileMiddleware(publicDirectory: application.directory.publicDirectory))
         application.middleware.use(application.sessions.middleware)
