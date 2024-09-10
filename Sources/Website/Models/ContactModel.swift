@@ -24,6 +24,15 @@ struct ContactModel {
             Validator(field: "email", rule: .email),
             Validator(field: "message", rule: .value)
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.firstName = firstName.sanitize()
+            self.lastName = lastName.sanitize()
+            self.email = email.sanitize()
+            self.message = message.sanitize()
+        }
     }
     
     struct Output: Content {

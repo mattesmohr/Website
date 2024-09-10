@@ -24,5 +24,12 @@ struct LoginModel {
             Validator(field: "username", rule: .email),
             Validator(field: "password", rule: .value)
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.username = username.sanitize()
+            self.password = password.sanitize()
+        }
     }
 }

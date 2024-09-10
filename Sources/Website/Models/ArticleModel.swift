@@ -90,6 +90,14 @@ struct ArticleModel {
             Validator(field: "category", rule: .value),
             Validator(field: "status", rule: .value)
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.title = title.sanitize()
+            self.excerpt = excerpt.sanitize()
+            self.content = content.sanitize()
+        }
     }
     
     struct Output: Content {

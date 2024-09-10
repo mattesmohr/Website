@@ -18,6 +18,12 @@ struct FeedModel {
         static let validators = [
             Validator(field: "message", rule: .value)
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.message = message.sanitize()
+        }
     }
     
     struct Output: Content {

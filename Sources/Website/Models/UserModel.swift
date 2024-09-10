@@ -50,6 +50,15 @@ struct UserModel {
             Validator(field: "firstName", rule: .value),
             Validator(field: "lastName", rule: .value)
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.email = email.sanitize()
+            self.firstName = firstName?.sanitize()
+            self.lastName = lastName?.sanitize()
+            self.description = description?.sanitize()
+        }
     }
     
     struct Output: Content, SessionAuthenticatable {

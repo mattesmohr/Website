@@ -12,6 +12,13 @@ struct CommentModel {
             validations.add("name", as: String.self, is: !.empty)
             validations.add("content", as: String.self, is: !.empty)
         }
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.name = name.sanitize()
+            self.content = content.sanitize()
+        }
     }
     
     struct Output: Content {

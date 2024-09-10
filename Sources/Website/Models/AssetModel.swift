@@ -18,6 +18,12 @@ struct AssetModel {
         static let validators = [
             Validator(field: "title", rule: .value),
         ]
+        
+        /// Sanitize the input before it is processed any further
+        mutating func afterDecode() throws {
+            
+            self.title = title.sanitize()
+        }
     }
     
     struct Output: Content {
