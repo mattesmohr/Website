@@ -53,3 +53,10 @@ struct ContactModel {
         }
     }
 }
+
+extension ContactModel.Output: Equatable {
+    
+    public static func == (lhs: ContactModel.Output, rhs: ContactModel.Output) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
