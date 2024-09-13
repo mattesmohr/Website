@@ -3,13 +3,16 @@ import Foundation
 
 final class ContactRepository {
     
+    /// The database instance used by the repository for e. g. querying
     let database: Database
     
+    /// Initializes the repository with the given database
     init(database: Database) {
         
         self.database = database
     }
     
+    /// Finds the first matching contact entity by the given identifier
     func find(id: UUID) async throws -> ContactEntity? {
         
        return try await database.query(ContactEntity.self)
@@ -17,6 +20,7 @@ final class ContactRepository {
             .first()
     }
     
+    /// Finds all contact entities
     func find() async throws -> [ContactEntity] {
         
         return try await database.query(ContactEntity.self)
@@ -24,6 +28,7 @@ final class ContactRepository {
             .all()
     }
     
+    /// Inserts a new contact entity
     func insert(entity: ContactEntity) async throws {
 
         try await database.query(ContactEntity.self)
@@ -35,6 +40,7 @@ final class ContactRepository {
             .create()
     }
     
+    /// Updates a specific field of the contact entity
     func patch<Field: QueryableProperty>(field: KeyPath<ContactEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ContactEntity {
         
         try await database.query(ContactEntity.self)
@@ -43,6 +49,7 @@ final class ContactRepository {
             .update()
     }
         
+    /// Updates all fields of the contact entity.
     func update(entity: ContactEntity, on id: UUID) async throws {
         
         try await database.query(ContactEntity.self)
@@ -54,6 +61,7 @@ final class ContactRepository {
             .update()
     }
     
+    /// Deletes an contact entity.
     func delete(id: UUID) async throws {
         
         try await database.query(ContactEntity.self)
@@ -61,6 +69,7 @@ final class ContactRepository {
             .delete()
     }
     
+    /// Counts all contact entities.
     func count() async throws -> Int {
         
         return try await database.query(ContactEntity.self)

@@ -31,10 +31,10 @@ extension UserAdminPage {
                     }
                 }
                 VStack {
-                    FieldLabel(for: "description") {
+                    FieldLabel(for: "biography") {
                         "Description"
                     }
-                    TextEditor(name: "description", prompt: "Description") {
+                    TextEditor(name: "biography", prompt: "Biography") {
                     }
                     .lineLimit(4)
                     .borderShape(.smallrounded)
@@ -96,11 +96,11 @@ extension UserAdminPage {
                     }
                 }
                 VStack {
-                    FieldLabel(for: "description") {
+                    FieldLabel(for: "biography") {
                         "Description"
                     }
-                    TextEditor(name: "description", prompt: "Description") {
-                        user.description
+                    TextEditor(name: "biography", prompt: "Biography") {
+                        user.biography
                     }
                     .lineLimit(4)
                     .borderShape(.smallrounded)

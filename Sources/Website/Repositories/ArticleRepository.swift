@@ -3,13 +3,16 @@ import Foundation
 
 final class ArticleRepository {
     
+    /// The database instance used by the repository for e. g. querying
     let database: Database
     
+    /// Initializes the repository with the given database
     init(database: Database) {
         
         self.database = database
     }
     
+    /// Finds the first matching activity entity by the given identifier
     func find(id: UUID) async throws -> ArticleEntity? {
        
         return try await database.query(ArticleEntity.self)
@@ -21,6 +24,7 @@ final class ArticleRepository {
             .first()
     }
     
+    /// Finds the first activity entity by its slug
     func find(slug: String) async throws -> ArticleEntity? {
        
         return try await database.query(ArticleEntity.self)
@@ -32,6 +36,7 @@ final class ArticleRepository {
             .first()
     }
     
+    /// Finds all article entities
     func find() async throws -> [ArticleEntity] {
         
         return try await database.query(ArticleEntity.self)
@@ -43,6 +48,7 @@ final class ArticleRepository {
             .all()
     }
     
+    /// Finds article entities by their status
     func find(status: String) async throws -> [ArticleEntity] {
         
         return try await database.query(ArticleEntity.self)
@@ -55,7 +61,7 @@ final class ArticleRepository {
             .all()
     }
     
-    ///
+    /// Inserts a new article entity
     func insert(entity: ArticleEntity) async throws {
         
         try await database.query(ArticleEntity.self)
@@ -69,6 +75,7 @@ final class ArticleRepository {
             .create()
     }
     
+    /// Updates a specific field of the article entity
     func patch<Field: QueryableProperty>(field: KeyPath<ArticleEntity, Field>, to value: Field.Value, on id: UUID) async throws where Field.Model == ArticleEntity {
         
         try await database.query(ArticleEntity.self)
@@ -76,7 +83,8 @@ final class ArticleRepository {
             .set(field, to: value)
             .update()
     }
-        
+    
+    /// Updates all fields of the article entity.
     func update(entity: ArticleEntity, on id: UUID) async throws {
         
         try await database.query(ArticleEntity.self)
@@ -90,6 +98,7 @@ final class ArticleRepository {
             .update()
     }
     
+    /// Deletes an article entity.
     func delete(id: UUID) async throws {
         
         try await database.query(ArticleEntity.self)
@@ -97,6 +106,7 @@ final class ArticleRepository {
             .delete()
     }
     
+    /// Counts all article entities.
     func count() async throws -> Int {
         
         return try await database.query(ArticleEntity.self)

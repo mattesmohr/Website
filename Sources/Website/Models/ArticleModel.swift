@@ -51,20 +51,34 @@ struct ArticleModel {
         }
     }
     
-    
-    var output: Self.Output?
-    
+    /// The data transfer object for the article input
     struct Input: Content, Validatable {
         
+        /// The identifier of the thumbnail image
         var thumbnailId: String?
+        
+        /// The title for the article
         var title: String
+        
+        /// A brief excerpt for the article
         var excerpt: String
+        
+        /// The full content for the article
         var content: String
-        var category: String
-        var status: String
+        
+        /// The category under which the article should be classified
+        let category: String
+        
+        /// The publication status for the article
+        let status: String
+        
+        /// The timestamp when the article should be published
         var publishedOn: Date?
+        
+        /// The author for the article
         var authorId: UUID?
         
+        /// The slug representation of the article
         var slug: String {
             return title.replacingOccurrences(of: "", with: "-")
                 .replacingOccurrences(of: "ä", with: "ae")
@@ -100,22 +114,50 @@ struct ArticleModel {
         }
     }
     
+    /// The data transfer object for the article entity
     struct Output: Content {
         
-        var id: UUID
-        var slug: String
+        /// The unique identifier of the article
+        let id: UUID
+        
+        /// The slug representation of the article
+        let slug: String
+        
+        /// The thumbnail image associated with the article
         var thumbnail: AssetModel.Output?
-        var title: String
-        var excerpt: String
-        var content: String
-        var category: String
-        var status: String
+        
+        /// The title of the article
+        let title: String
+        
+        /// A brief excerpt of the article
+        let excerpt: String
+        
+        /// The full content of the article
+        let content: String
+        
+        /// The category  under which the category is classified
+        let category: String
+        
+        /// The publication status of the article
+        let status: String
+        
+        /// The timestamp when the article was published
         var publishedOn: Date?
+        
+        /// A list of assets related to the article
         var assets: [AssetModel.Output]?
+        
+        /// A list of comments associated with the article
         var comments: [CommentModel.Output]?
+        
+        /// The author of the article
         var author: UserModel.Output?
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The timestamp when the article was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the article was last updated
+        let modifiedAt: Date
         
         init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             

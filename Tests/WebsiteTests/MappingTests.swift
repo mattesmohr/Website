@@ -9,6 +9,7 @@ final class MappingTests: XCTestCase {
             email: "Email",
             firstName: "Firstname",
             lastName: "Lastname",
+            biography: "Biography",
             role: "Role"
          )
         
@@ -16,6 +17,7 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(input.firstName, "Firstname")
         XCTAssertEqual(input.lastName, "Lastname")
         XCTAssertEqual(input.role, "Role")
+        XCTAssertEqual(input.biography, "Biography")
 
         let entity = UserEntity(input: input)
 
@@ -23,6 +25,7 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(entity.firstName, "Firstname")
         XCTAssertEqual(entity.lastName, "Lastname")
         XCTAssertEqual(entity.role, "Role")
+        XCTAssertEqual(entity.biography, "Biography")
     }
     
     func testArticleMapping() {

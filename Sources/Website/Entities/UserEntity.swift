@@ -20,8 +20,8 @@ final class UserEntity: Model, @unchecked Sendable {
     @OptionalField(key: "last_name")
     var lastName: String?
     
-    @OptionalField(key: "description")
-    var description: String?
+    @OptionalField(key: "biography")
+    var biography: String?
     
     @Field(key: "role")
     var role: String
@@ -37,14 +37,14 @@ final class UserEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, avatarID: UUID? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, role: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, avatarID: UUID? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.$avatar.id = avatarID
         self.email = email
         self.firstName = firstName
         self.lastName = lastName
-        self.description = description
+        self.biography = biography
         self.role = role
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
@@ -52,7 +52,7 @@ final class UserEntity: Model, @unchecked Sendable {
     
     convenience init(input: UserModel.Input) {
         
-        self.init(email: input.email, firstName: input.firstName, lastName: input.lastName, description: input.description, role: input.role)
+        self.init(email: input.email, firstName: input.firstName, lastName: input.lastName, biography: input.biography, role: input.role)
         
         if let avatarId = input.avatarId {
             self.$avatar.id = UUID(uuidString: avatarId)

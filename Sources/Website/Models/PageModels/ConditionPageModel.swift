@@ -4,6 +4,6 @@ enum ConditionPageModel {
     
     struct IndexView {
         
-        var title: String = "Condition"
+        let title: String = "Condition"
     }
 }

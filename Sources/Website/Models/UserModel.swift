@@ -27,16 +27,26 @@ struct UserModel {
         }
     }
     
-    var output: Output?
-    
+    /// The data transfer object for the user input
     struct Input: Content, Validatable {
         
+        /// The identifier of the user avatar
         var avatarId: String?
+        
+        /// The email for the user
         var email: String
+        
+        /// The first name for the user
         var firstName: String?
+        
+        /// The last name for the user
         var lastName: String?
-        var description: String?
-        var role: String
+        
+        /// A textual description of the user
+        var biography: String?
+        
+        /// A permission role for the user
+        let role: String
         
         static func validations(_ validations: inout Validations) {
             
@@ -57,24 +67,46 @@ struct UserModel {
             self.email = email.sanitize()
             self.firstName = firstName?.sanitize()
             self.lastName = lastName?.sanitize()
-            self.description = description?.sanitize()
+            self.biography = biography?.sanitize()
         }
     }
     
+    /// The data transfer object for the user entity
     struct Output: Content, SessionAuthenticatable {
         
-        var id: UUID
+        /// The unique identifier of the user
+        let id: UUID
+        
+        /// The file name of the avatar
         var avatar: AssetModel.Output?
-        var email: String
+        
+        /// The email address of the user
+        let email: String
+        
+        /// The first name of the user
         var firstName: String?
+        
+        /// The last name of the user
         var lastName: String?
-        var description: String?
-        var role: String
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// A textual description of the user
+        var biography: String?
+        
+        /// The permission role of the user
+        let role: String
+        
+        /// The timestamp when the user was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the user was last updated
+        let modifiedAt: Date
+        
+        /// The identifier for the user session
         var sessionID: String {
             self.email
         }
+        
+        /// A representation of the full name with the last name appearing first.
         var fullname: String? {
             
             if let firstName, let lastName {
@@ -84,14 +116,14 @@ struct UserModel {
             return nil
         }
         
-        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, description: String? = nil, role: String, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar
             self.email = email
             self.firstName = firstName
             self.lastName = lastName
-            self.description = description
+            self.biography = biography
             self.role = role
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
@@ -99,7 +131,7 @@ struct UserModel {
         
         init(entity: UserEntity) {
             
-            self.init(id: entity.id!, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, description: entity.description, role: entity.role, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, email: entity.email, firstName: entity.firstName, lastName: entity.lastName, biography: entity.biography, role: entity.role, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             
             if let avatar = entity.avatar {
                 self.avatar = AssetModel.Output(entity: avatar)

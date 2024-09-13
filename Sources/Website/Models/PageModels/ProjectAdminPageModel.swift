@@ -4,18 +4,18 @@ enum ProjectAdminPageModel {
     
     struct IndexView {
         
-        var title: String = "Show projects"
+        let title: String = "Show projects"
         let pagination: Pagination<[ProjectModel.Output]>
     }
     
     struct CreateView {
         
-        var title: String = "Create project"
+        let title: String = "Create project"
     }
     
     struct EditView {
         
-        var title: String = "Edit project"
+        let title: String = "Edit project"
         let project: ProjectModel.Output
     }
 }

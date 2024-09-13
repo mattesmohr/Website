@@ -3,11 +3,19 @@ import HTMLKitComponents
 
 struct ContactModel {
     
+    /// The data transfer object for the contact input
     struct Input: Content, Validatable {
         
+        /// The first name for the contact
         var firstName: String
+        
+        /// The last name for the contact
         var lastName: String
+        
+        /// The email address for the contact
         var email: String
+        
+        /// A message about the contact
         var message: String
         
         static func validations(_ validations: inout Validations) {
@@ -35,15 +43,29 @@ struct ContactModel {
         }
     }
     
+    /// The data transfer object for the contact entity
     struct Output: Content {
         
-        var id: UUID
-        var firstName: String
-        var lastName: String
-        var email: String
-        var message: String
-        var createdAt: Date
-        var modifiedAt: Date
+        /// The  unique identifier of the contact
+        let id: UUID
+        
+        /// The first name of the contact
+        let firstName: String
+        
+        /// The last name of the contact
+        let lastName: String
+        
+        /// The email address of the contact
+        let email: String
+        
+        /// A message about the contact
+        let message: String
+        
+        /// The timestamp when the article was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the article was last updated
+        let modifiedAt: Date
         
         init(id: UUID, firstName: String, lastName: String, email: String, message: String, createdAt: Date, modifiedAt: Date) {
             

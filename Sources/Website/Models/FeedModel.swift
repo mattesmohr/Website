@@ -3,12 +3,19 @@ import HTMLKitComponents
 
 struct FeedModel {
     
+    /// The data transfer object for the credential input
     struct Input: Content, Validatable {
         
         var thumbnailId: String?
+        
+        /// The feed message
         var message: String
-        var tags: String
-        var status: String
+        
+        /// The tags for the feed
+        let tags: String
+        
+        /// The publication status for the feed
+        let status: String
         
         static func validations(_ validations: inout Validations) {
             
@@ -26,15 +33,27 @@ struct FeedModel {
         }
     }
     
+    /// The data transfer object for the feed entity
     struct Output: Content {
         
+        /// The unique identifier of the feed
         var id: UUID
         var thumbnail: AssetModel.Output?
-        var message: String
+        
+        /// The feed message
+        let message: String
+        
+        /// The tags of the feed
         var tags: String?
-        var status: String
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The publication status of the feed
+        let status: String
+        
+        /// The timestamp when the feed was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the feed was last updated
+        let modifiedAt: Date
         
         init(id: UUID, thumbnail: AssetModel.Output? = nil, message: String, tags: String? = nil, status: String, createdAt: Date, modifiedAt: Date) {
             

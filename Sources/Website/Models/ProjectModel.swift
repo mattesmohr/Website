@@ -51,19 +51,37 @@ struct ProjectModel {
         }
     }
     
-    var output: Output?
-    
+    /// The data transfer object for the project input
     struct Input: Content, Validatable {
         
+        /// The identifier of the thumbnail image
         var thumbnailId: String?
+        
+        /// The title for the project
         var title: String
+        
+        /// A brief excerpt for the project
         var excerpt: String
+        
+        /// The full content for the project
         var content: String
-        var category: String
-        var status: String
+        
+        /// The category under which the project should be classified
+        let category: String
+        
+        /// The publication status for the project
+        let status: String
+        
+        /// A link to the git repository
         var repository: String?
+        
+        /// A link to the documentation
         var documentation: String?
+        
+        /// The author for the article
         var authorId: UUID?
+        
+        /// The slug representation of the project
         var slug: String {
             return title.replacingOccurrences(of: " ", with: "-").lowercased()
         }
@@ -96,22 +114,50 @@ struct ProjectModel {
         }
     }
     
+    /// The data transfer object for the project entity
     struct Output: Content {
         
-        var id: UUID
-        var slug: String
+        /// The unique identifier of the project
+        let id: UUID
+        
+        /// The slug representation of the project
+        let slug: String
+        
+        /// The thumbnail image associated with the project
         var thumbnail: AssetModel.Output?
-        var title: String
-        var excerpt: String
-        var content: String
-        var category: String
-        var status: String
+        
+        /// The title of the project
+        let title: String
+        
+        /// A brief excerpt of the project
+        let excerpt: String
+        
+        /// The full content of the project
+        let content: String
+        
+        /// The category under which the project was classified
+        let category: String
+        
+        /// The publication status of the project
+        let status: String
+        
+        /// The author of the project
         var author: UserModel.Output?
+        
+        /// A link to the git repository
         var repository: String?
+        
+        /// A link to the documentation
         var documentation: String?
+        
+        /// A list of assets related to the article
         var assets: [AssetModel.Output]?
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The timestamp when the article was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the article was last updated
+        let modifiedAt: Date
         
         init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, author: UserModel.Output? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
             

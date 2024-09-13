@@ -4,13 +4,16 @@ import Foundation
 
 final class ProjectRepository {
     
+    /// The database instance used by the repository for e. g. querying
     let database: Database
     
+    /// Initializes the repository with the given database
     init(database: Database) {
         
         self.database = database
     }
     
+    /// Finds the first matching project entity by the given identifier
     func find(id: UUID) async throws -> ProjectEntity? {
         
        return try await database.query(ProjectEntity.self)
@@ -21,6 +24,7 @@ final class ProjectRepository {
             .first()
     }
     
+    /// Finds all project entities
     func find() async throws -> [ProjectEntity] {
         
         return try await database.query(ProjectEntity.self)
@@ -41,6 +45,7 @@ final class ProjectRepository {
             .first()
     }
     
+    /// Finds project entities by their status
     func find(status: String) async throws -> [ProjectEntity] {
         
         return try await database.query(ProjectEntity.self)
@@ -52,6 +57,7 @@ final class ProjectRepository {
             .all()
     }
     
+    /// Inserts a new project entity
     func insert(entity: ProjectEntity) async throws {
         
         try await database.query(ProjectEntity.self)
@@ -66,6 +72,7 @@ final class ProjectRepository {
             .create()
     }
     
+    /// Updates a specific field of the project entity
     func patch<Field: QueryableProperty>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ProjectEntity {
         
         try await database.query(ProjectEntity.self)
@@ -74,6 +81,7 @@ final class ProjectRepository {
             .update()
     }
     
+    /// Updates all fields of the project entity.
     func update(entity: ProjectEntity, on id: UUID) async throws {
         
         try await database.query(ProjectEntity.self)
@@ -88,6 +96,7 @@ final class ProjectRepository {
             .update()
     }
     
+    /// Deletes an project entity.
     func delete(id: UUID) async throws {
         
         try await database.query(ProjectEntity.self)
@@ -95,6 +104,7 @@ final class ProjectRepository {
             .delete()
     }
     
+    /// Counts all project entities.
     func count() async throws -> Int {
         
         return try await database.query(ProjectEntity.self)

@@ -2,9 +2,13 @@ import Vapor
 
 struct CommentModel {
     
+    /// The data transfer object for the comment input
     struct Input: Content, Validatable {
         
+        /// The name of the comment author
         var name: String
+        
+        /// The content of the comment
         var content: String
         
         static func validations(_ validations: inout Validations) {
@@ -21,14 +25,26 @@ struct CommentModel {
         }
     }
     
+    /// The data transfer object for the comment entity
     struct Output: Content {
         
-        var id: UUID
+        /// The unique identifier of the comment
+        let id: UUID
+        
+        /// The avatar image of the comment author
         var avatar: AssetModel.Output?
-        var name: String
-        var content: String
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The name of the comment author
+        let name: String
+        
+        /// The full content of the comment
+        let content: String
+        
+        /// The timestamp when the comment was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the comment was last updated
+        let modifiedAt: Date
         
         init(id: UUID, avatar: AssetModel.Output? = nil, name: String, content: String, createdAt: Date, modifiedAt: Date) {
             

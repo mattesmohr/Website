@@ -5,14 +5,11 @@ struct LoginModel {
     
     struct Input: Content, Validatable {
         
+        /// The username for the login
         var username: String
-        var password: String
         
-        init(username: String, password: String) {
-            
-            self.username = username
-            self.password = password
-        }
+        /// The plaintext password for the login
+        var password: String
         
         static func validations(_ validations: inout Validations) {
             

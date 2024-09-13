@@ -3,12 +3,14 @@ import HTMLKitComponents
 
 struct AssetModel {
     
-    var output: Output?
-    
+    /// The data transfer object for the asset input
     struct Input: Content, Validatable {
         
+        /// The title for the asset
         var title: String
-        var asset: File
+        
+        /// The asset file
+        let asset: File
         
         static func validations(_ validations: inout Validations) {
             
@@ -26,17 +28,35 @@ struct AssetModel {
         }
     }
     
+    /// The data transfer object for the asset entity
     struct Output: Content {
         
-        var id: UUID
-        var title: String
+        /// The unique identifier of the asset
+        let id: UUID
+        
+        /// The title of the asset
+        let title: String
+        
+        /// The file name of the asset
         var fileName: String?
+        
+        /// The file name with file extension of the asset
         var fileFullName: String?
+        
+        /// The full path of the asset
         var filePath: String?
+        
+        /// The file extension of the asset
         var fileExtension: String?
+        
+        /// The file size of the asset
         var fileSize: String?
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The timestamp when the asset was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the asset was last updated
+        let modifiedAt: Date
         
         init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Int? = nil, modifiedAt: Date, createdAt: Date) {
 

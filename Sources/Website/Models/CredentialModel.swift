@@ -11,14 +11,17 @@ struct CredentialModel {
         case unlocked
     }
     
-    var output: Output?
-    
+    /// The data transfer object for the credential input
     struct Input: Content, Validatable {
         
         var username: String
-        var password: String
-        var status: String
-        var attempt: Int
+        
+        /// The plaintext version of the password
+        let password: String
+        
+        let status: String
+        
+        let attempt: Int
         
         static func validations(_ validations: inout Validations) {
             
@@ -32,15 +35,28 @@ struct CredentialModel {
         ]
     }
     
+    /// The data transfer object for the credential entity
     struct Output: Content {
         
-        var id: UUID
+        /// The unique identifier of the credential
+        let id: UUID
+    
         var username: String
-        var password: String
+        
+        /// The hashed version of the password
+        let password: String
+        
+        /// The current status of the credential, such as  locked or deactivated
         var status: String?
-        var attempt: Int
-        var createdAt: Date
-        var modifiedAt: Date
+        
+        /// The number of failed attempts using the credential
+        let attempt: Int
+        
+        /// The timestamp when the credential was first stored
+        let createdAt: Date
+        
+        /// The timestamp when the credential was last updated
+        let modifiedAt: Date
         
         init(id: UUID, username: String, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
             
