@@ -92,6 +92,72 @@ struct UserAdminController {
         
         return request.redirect(to: "/area/admin/users")
     }
+    
+    // MARK: [/:id/deactivate]
+    @Sendable
+    func getDeactivate(_ request: Request) async throws -> Response {
+        
+        guard let id = request.parameters.get("id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let user = try await UserRepository(database: request.db)
+            .find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        if let credential = user.credential {
+            
+            try await CredentialRepository(database: request.db)
+                .patch(field: \.$status, to: "deactivated", for: credential.requireID())
+        }
+        
+        return request.redirect(to: "/area/admin/users/\(id)/edit")
+    }
+    
+    // MARK: [/:id/unlock]
+    @Sendable
+    func getUnlock(_ request: Request) async throws -> Response {
+        
+        guard let id = request.parameters.get("id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let user = try await UserRepository(database: request.db)
+            .find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        if let credential = user.credential {
+            
+            try await CredentialRepository(database: request.db)
+                .patch(field: \.$status, to: "unlocked", for: credential.requireID())
+        }
+        
+        return request.redirect(to: "/area/admin/users/\(id)/edit")
+    }
+    
+    // MARK: [/:id/reset]
+    @Sendable
+    func getReset(_ request: Request) async throws -> Response {
+        
+        guard let id = request.parameters.get("id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let user = try await UserRepository(database: request.db)
+            .find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        if let credential = user.credential {
+            
+            try await CredentialRepository(database: request.db)
+                .patch(field: \.$status, to: "reseted", for: credential.requireID())
+        }
+        
+        return request.redirect(to: "/area/admin/users/\(id)/edit")
+    }
 }
 
 extension UserAdminController: RouteCollection {
@@ -106,6 +172,9 @@ extension UserAdminController: RouteCollection {
             routes.get(":id", "edit", use: self.getEdit)
             routes.post(":id", "edit", use: self.postEdit)
             routes.get(":id", "delete", use: self.getDelete)
+            routes.get(":id", "deactivate", use: self.getDeactivate)
+            routes.get(":id", "unlock", use: self.getUnlock)
+            routes.get(":id", "reset", use: self.getReset)
         }
     }
 }

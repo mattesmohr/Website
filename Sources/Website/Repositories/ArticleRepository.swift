@@ -18,7 +18,9 @@ final class ArticleRepository {
         return try await database.query(ArticleEntity.self)
             .with(\.$thumbnail)
             .with(\.$assets)
-            .with(\.$author)
+            .with(\.$author) { user in
+                user.with(\.$credential)
+            }
             .with(\.$comments)
             .filter(\.$id == id)
             .first()
@@ -30,7 +32,9 @@ final class ArticleRepository {
         return try await database.query(ArticleEntity.self)
             .with(\.$thumbnail)
             .with(\.$assets)
-            .with(\.$author)
+            .with(\.$author) { user in
+                user.with(\.$credential)
+            }
             .with(\.$comments)
             .filter(\.$slug == slug)
             .first()
@@ -42,7 +46,9 @@ final class ArticleRepository {
         return try await database.query(ArticleEntity.self)
             .with(\.$thumbnail)
             .with(\.$assets)
-            .with(\.$author)
+            .with(\.$author) { user in
+                user.with(\.$credential)
+            }
             .with(\.$comments)
             .sort(\.$modifiedAt, .descending)
             .all()
@@ -54,7 +60,9 @@ final class ArticleRepository {
         return try await database.query(ArticleEntity.self)
             .with(\.$thumbnail)
             .with(\.$assets)
-            .with(\.$author)
+            .with(\.$author) { user in
+                user.with(\.$credential)
+            }
             .with(\.$comments)
             .filter(\.$status == status)
             .sort(\.$modifiedAt, .descending)

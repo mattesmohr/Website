@@ -95,6 +95,9 @@ struct UserModel {
         /// The permission role of the user
         let role: String
         
+        /// The credential related the user
+        var credential: CredentialModel.Output?
+        
         /// The timestamp when the user was first stored
         let createdAt: Date
         
@@ -116,7 +119,7 @@ struct UserModel {
             return nil
         }
         
-        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, credential: CredentialModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar
@@ -125,6 +128,7 @@ struct UserModel {
             self.lastName = lastName
             self.biography = biography
             self.role = role
+            self.credential = credential
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
         }
@@ -135,6 +139,10 @@ struct UserModel {
             
             if let avatar = entity.avatar {
                 self.avatar = AssetModel.Output(entity: avatar)
+            }
+            
+            if let credential = entity.credential {
+                self.credential = CredentialModel.Output(entity: credential)
             }
         }
     }

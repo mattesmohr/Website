@@ -16,15 +16,17 @@ final class UserRepository {
     func find(id: UUID) async throws -> UserEntity? {
         
        return try await database.query(UserEntity.self)
+            .with(\.$credential)
             .filter(\.$id == id)
             .first()
     }
     
-    /// Finds the first matching user entity by the given name
-    func find(name: String) async throws -> UserEntity? {
+    /// Finds the first matching user entity by the given email address
+    func find(email: String) async throws -> UserEntity? {
         
         return try await database.query(UserEntity.self)
-            .filter(\.$email == name)
+            .with(\.$credential)
+            .filter(\.$email == email)
             .first()
     }
     
@@ -32,6 +34,7 @@ final class UserRepository {
     func find() async throws -> [UserEntity] {
         
         return try await database.query(UserEntity.self)
+            .with(\.$credential)
             .sort(\.$modifiedAt, .descending)
             .all()
     }

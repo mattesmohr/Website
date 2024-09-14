@@ -35,6 +35,9 @@ final class UserEntity: Model, @unchecked Sendable {
     @Children(for: \.$author)
     var articles: [ArticleEntity]
     
+    @OptionalChild(for: \.$user)
+    var credential: CredentialEntity?
+    
     init() {}
     
     init(id: UUID? = nil, avatarID: UUID? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {

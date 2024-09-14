@@ -14,14 +14,8 @@ struct CredentialModel {
     /// The data transfer object for the credential input
     struct Input: Content, Validatable {
         
-        var username: String
-        
         /// The plaintext version of the password
         let password: String
-        
-        let status: String
-        
-        let attempt: Int
         
         static func validations(_ validations: inout Validations) {
             
@@ -40,8 +34,6 @@ struct CredentialModel {
         
         /// The unique identifier of the credential
         let id: UUID
-    
-        var username: String
         
         /// The hashed version of the password
         let password: String
@@ -58,10 +50,9 @@ struct CredentialModel {
         /// The timestamp when the credential was last updated
         let modifiedAt: Date
         
-        init(id: UUID, username: String, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
-            self.username = username
             self.password = password
             self.status = status
             self.attempt = attempt
@@ -71,7 +62,7 @@ struct CredentialModel {
         
         init(entity: CredentialEntity) {
             
-            self.init(id: entity.id!, username: entity.username, password: entity.password, status: entity.status, attempt: entity.attempt, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, password: entity.password, status: entity.status, attempt: entity.attempt, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }
     }
 }

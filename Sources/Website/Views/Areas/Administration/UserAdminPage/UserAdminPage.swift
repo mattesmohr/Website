@@ -81,6 +81,14 @@ enum UserAdminPage {
                         .fontWeight(.medium)
                         Dropdown {
                             List(direction: .vertical) {
+                                Link(destination: "/area/admin/users/\(viewModel.user.id)/unlock/") {
+                                    Symbol(system: .key)
+                                    Text("action.unlock")
+                                }
+                                Link(destination: "/area/admin/users/\(viewModel.user.id)/reset/") {
+                                    Symbol(system: .key)
+                                    Text("action.reset")
+                                }
                                 Grouping {
                                     Symbol(system: .trash)
                                     Text {

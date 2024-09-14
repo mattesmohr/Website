@@ -8,9 +8,6 @@ final class CredentialEntity: Model, @unchecked Sendable {
     @ID
     var id: UUID?
     
-    @Field(key: "username")
-    var username: String
-    
     @Field(key: "password")
     var password: String
     
@@ -26,21 +23,19 @@ final class CredentialEntity: Model, @unchecked Sendable {
     @Timestamp(key: "modified_at", on: .update)
     var modifiedAt: Date?
     
+    @Parent(key: "user_id")
+    var user: UserEntity
+    
     init() {}
     
-    init(id: UUID? = nil, username: String, password: String, status: String, attempt: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, password: String, status: String, attempt: Int, userId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
-        self.username = username
         self.password = password
         self.status = status
         self.attempt = attempt
+        self.$user.id = userId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
-    }
-    
-    convenience init(input: CredentialModel.Input) {
-        
-        self.init(username: input.username, password: input.password, status: input.status, attempt: input.attempt)
     }
 }

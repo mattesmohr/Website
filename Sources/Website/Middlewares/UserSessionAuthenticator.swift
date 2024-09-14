@@ -6,7 +6,7 @@ struct UserSessionAuthenticator: AsyncSessionAuthenticator {
     
     func authenticate(sessionID: String, for request: Request) async throws {
         
-        if let entity = try await UserRepository(database: request.db).find(name: sessionID) {
+        if let entity = try await UserRepository(database: request.db).find(email: sessionID) {
             
             let user = UserModel.Output(entity: entity)
             

@@ -20,23 +20,15 @@ final class CredentialRepository {
             .first()
     }
     
-    /// Finds the first matching credential entity by the given name
-    func find(name: String) async throws -> CredentialEntity? {
-        
-        return try await database.query(CredentialEntity.self)
-            .filter(\.$username == name)
-            .first()
-    }
-    
     /// Inserts a new credential entity
     func insert(entity: CredentialEntity) async throws {
         
         try await database.query(CredentialEntity.self)
             .set(\.$id, to: UUID())
-            .set(\.$username, to: entity.username)
             .set(\.$password, to: entity.password)
             .set(\.$status, to: entity.status)
             .set(\.$attempt, to: entity.attempt)
+            .set(\.$user.$id, to: entity.$user.id)
             .create()
     }
     
@@ -54,7 +46,6 @@ final class CredentialRepository {
         
         try await database.query(CredentialEntity.self)
             .filter(\.$id == id)
-            .set(\.$username, to: entity.username)
             .set(\.$password, to: entity.password)
             .set(\.$status, to: entity.status)
             .set(\.$attempt, to: entity.attempt)
