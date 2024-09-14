@@ -5,6 +5,9 @@ extension LoginAreaPage {
     
     struct LoginForm: View {
         
+        @EnvironmentObject(Nonce.self)
+        var nonce
+        
         var body: Content {
             Form(method: .post) {
                 VStack {
@@ -22,13 +25,15 @@ extension LoginAreaPage {
                         .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .small)
-                HStack {
-                    Button(role: .submit) {
-                        "Sign in"
-                    }
-                    .buttonStyle(PrimaryButton())
-                    .controlSize(.full)
+                HTMLKit.Input()
+                    .type(.hidden)
+                    .name("nonce")
+                    .custom(key: "value", value: nonce.value)
+                Button(role: .submit) {
+                    "Sign in"
                 }
+                .buttonStyle(PrimaryButton())
+                .controlSize(.full)
                 .margin(insets: .bottom, length: .small)
             }
             .tag("login-form")
@@ -39,6 +44,9 @@ extension LoginAreaPage {
     }
     
     struct ResetForm: View {
+        
+        @EnvironmentObject(Nonce.self)
+        var nonce
         
         var body: Content {
             Form(method: .post) {
@@ -57,11 +65,16 @@ extension LoginAreaPage {
                         .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .small)
+                HTMLKit.Input()
+                    .type(.hidden)
+                    .name("nonce")
+                    .custom(key: "value", value: nonce.value)
                 Button(role: .submit) {
                     "Reset"
                 }
                 .buttonStyle(PrimaryButton())
                 .controlSize(.full)
+                .margin(insets: .bottom, length: .small)
             }
             .tag("reset-form")
             .onSubmit { form in

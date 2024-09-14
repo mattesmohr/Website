@@ -12,6 +12,9 @@ struct ResetModel: Content {
         /// The password confirmation of the password
         var confirmation: String
         
+        /// A unique token to verify the forms origin
+        var nonce: String
+        
         /// Validate the input
         static func validations(_ validations: inout Validations) {
             

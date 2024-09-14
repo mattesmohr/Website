@@ -14,6 +14,9 @@ struct LoginAreaController {
     @Sendable
     func getLogin(_ request: Request) async throws -> View {
         
+        // Create form token and store it to verify it in the post request
+        request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
+        
         let viewModel = LoginAreaPageModel.LoginViewModel()
         
         return try await request.htmlkit.render(LoginAreaPage.LoginView(viewModel: viewModel))
@@ -26,6 +29,12 @@ struct LoginAreaController {
         try LoginModel.Input.validate(content: request)
         
         let login = try request.content.decode(LoginModel.Input.self)
+        
+        guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
+            throw Abort(.internalServerError)
+        }
+        
+        try nonce.verify(nonce: login.nonce)
         
         guard let user = try await UserRepository(database: request.db)
             .find(email: login.email) else {
@@ -94,6 +103,24 @@ struct LoginAreaController {
     // [:id/register]
     @Sendable
     func getRegister(_ request: Request) async throws -> View {
+        
+        guard let id = request.parameters.get("id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let user = try await UserRepository(database: request.db)
+            .find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        if let _ = user.credential {
+            // The user is already registered, therefore abort the request
+            throw Abort(.badRequest)
+        }
+        
+        // Create form token and store it to verify it in the post request
+        request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
+        
         return try await request.htmlkit.render(LoginAreaPage.RegisterView())
     }
     
@@ -101,13 +128,19 @@ struct LoginAreaController {
     @Sendable
     func postRegister(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("user", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
         try ResetModel.Input.validate(content: request)
         
         let reset = try request.content.decode(ResetModel.Input.self)
+        
+        guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
+            throw Abort(.internalServerError)
+        }
+        
+        try nonce.verify(nonce: reset.nonce)
         
         let digest = try await request.password.async.hash(reset.password)
         
@@ -120,6 +153,27 @@ struct LoginAreaController {
     // [:id/reset]
     @Sendable
     func getReset(_ request: Request) async throws -> View {
+        
+        guard let id = request.parameters.get("id", as: UUID.self) else {
+            throw Abort(.badRequest)
+        }
+        
+        guard let user = try await UserRepository(database: request.db)
+            .find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        if let credential = user.credential {
+            
+            if credential.status != "reseted" {
+                // The reset was not initiated, therefore abort the request
+                throw Abort(.badRequest)
+            }
+        }
+        
+        // Create form token and store it to verify it in the post request
+        request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
+        
         return try await request.htmlkit.render(LoginAreaPage.ResetView())
     }
     
@@ -127,13 +181,19 @@ struct LoginAreaController {
     @Sendable
     func postReset(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("user", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
         
         try ResetModel.Input.validate(content: request)
         
         let reset = try request.content.decode(ResetModel.Input.self)
+        
+        guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
+            throw Abort(.internalServerError)
+        }
+        
+        try nonce.verify(nonce: reset.nonce)
         
         guard let user = try await UserRepository(database: request.db)
             .find(id: id) else {
@@ -163,10 +223,10 @@ extension LoginAreaController: RouteCollection {
             routes.get("login", use: self.getLogin)
             routes.post("login", use: self.postLogin)
             routes.get("logout", use: self.getLogout)
-            routes.get(":user", "register", use: self.getRegister)
-            routes.post(":user", "register", use: self.postRegister)
-            routes.get(":user", "reset", use: self.getReset)
-            routes.post(":user", "reset", use: self.postReset)
+            routes.get(":id", "register", use: self.getRegister)
+            routes.post(":id", "register", use: self.postRegister)
+            routes.get(":id", "reset", use: self.getReset)
+            routes.post(":id", "reset", use: self.postReset)
         }
     }
 }

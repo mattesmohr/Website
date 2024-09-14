@@ -11,6 +11,9 @@ struct LoginModel {
         /// The plaintext password for the login
         var password: String
         
+        /// A unique token to verify the forms origin
+        let nonce: String
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("email", as: String.self, is: .email)
