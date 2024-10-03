@@ -7,7 +7,7 @@ struct ReportMigration: AsyncMigration {
         try await database.schema("reports")
             .id()
             .field("uri", .string, .required)
-            .field("count", .string, .required)
+            .field("count", .int, .required)
             .field("created_at", .datetime)
             .field("modified_at", .datetime)
             .create()

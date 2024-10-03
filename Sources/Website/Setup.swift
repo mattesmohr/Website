@@ -58,12 +58,14 @@ enum Setup {
         
         application.routes.defaultMaxBodySize = "10mb";
         
-        try application.register(collection: HomePageController())
-        try application.register(collection: ArticlesPageController())
-        try application.register(collection: ProjectsPageController())
-        try application.register(collection: FeedPageController())
-        try application.register(collection: PrivacyPageController())
-        try application.register(collection: LegalPageController())
+        let tracked = application.routes.grouped(PageRequestTracker())
+        
+        try tracked.register(collection: HomePageController())
+        try tracked.register(collection: ArticlesPageController())
+        try tracked.register(collection: ProjectsPageController())
+        try tracked.register(collection: FeedPageController())
+        try tracked.register(collection: PrivacyPageController())
+        try tracked.register(collection: LegalPageController())
         
         try application.group("area") { routes in
         
@@ -71,15 +73,15 @@ enum Setup {
             
             try routes.group("admin") { routes in
                 
-                let group = routes.grouped(UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login"))
+                let restricted = routes.grouped(UserSessionAuthenticator(), UserModel.Output.redirectMiddleware(path: "/area/login"))
             
-                try group.register(collection: HomeAdminController())
-                try group.register(collection: ProjectAdminController())
-                try group.register(collection: ArticleAdminController())
-                try group.register(collection: AssetAdminController())
-                try group.register(collection: UserAdminController())
-                try group.register(collection: FeedAdminController())
-                try group.register(collection: ReportAdminController())
+                try restricted.register(collection: HomeAdminController())
+                try restricted.register(collection: ProjectAdminController())
+                try restricted.register(collection: ArticleAdminController())
+                try restricted.register(collection: AssetAdminController())
+                try restricted.register(collection: UserAdminController())
+                try restricted.register(collection: FeedAdminController())
+                try restricted.register(collection: ReportAdminController())
             }
         }
         

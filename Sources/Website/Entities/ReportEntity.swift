@@ -11,8 +11,8 @@ final class ReportEntity: Model, @unchecked Sendable {
     @Field(key: "uri")
     var uri: String
     
-    @OptionalField(key: "count")
-    var count: Int?
+    @Field(key: "count")
+    var count: Int
     
     @Timestamp(key: "created_at", on: .create)
     var createdAt: Date?
@@ -32,7 +32,6 @@ final class ReportEntity: Model, @unchecked Sendable {
     }
     
     convenience init(input: ReportModel.Input) {
-        
         self.init(uri: input.uri, count: input.count!)
     }
 }
