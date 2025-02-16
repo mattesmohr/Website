@@ -15,13 +15,7 @@ struct AreaViewContainer: View {
     var body: Content {
         AreaPageContainer {
             Header {
-                HStack {
-                    Text {
-                        "Admin Panel"
-                    }
-                    .fontSize(.medium)
-                    .fontWeight(.medium)
-                    .foregroundColor(.black)
+                Section {
                     HStack(spacing: .medium) {
                         Dropdown {
                             List(direction: .vertical) {
@@ -46,7 +40,7 @@ struct AreaViewContainer: View {
                         }
                         .borderShape(.smallrounded)
                     }
-                    .frame(width: .minimum)
+                    .frame(width: .maximum)
                     .margin(insets: .leading, length: .auto)
                 }
             }
@@ -85,6 +79,7 @@ struct AreaViewContainer: View {
                                     Text("Users")
                                 }
                             }
+                            .listSpacing(.small)
                         }
                         .navigationStyle(.menu)
                     }

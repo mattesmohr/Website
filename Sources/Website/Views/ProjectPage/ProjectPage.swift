@@ -17,7 +17,7 @@ enum ProjectPage {
                         .textStyle(.subheadline)
                         Text {
                             MarkdownString {
-                                "To do what I love, I rely on software and the individuals behind that craft. Contributing to a **community** is my means of expressing gratitude and **giving back**. Explore the projects I'm involved with."
+                                "To do what I love, I rely on software and the individuals behind that craft. Contributing to a \(bold: "community") is my means of expressing gratitude and \(bold: "giving back"). Explore the projects I'm involved with."
                             }
                         }
                         .fontSize(.medium)
@@ -26,7 +26,7 @@ enum ProjectPage {
                 Section {
                     Tabs(direction: .horizontal) {
                         Pane {
-                            Grid(ratio: .half, horizontalSpacing: .medium, verticalSpacing: .large) {
+                            Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
                                 for project in viewModel.pagination.items {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
@@ -39,7 +39,7 @@ enum ProjectPage {
                                                 }
                                             }
                                             .fontSize(.small)
-                                            .foregroundColor(.blue)
+                                            .foregroundColor(.accent)
                                             .bold()
                                             Text {
                                                 project.title
@@ -59,7 +59,7 @@ enum ProjectPage {
                         .badge(viewModel.pagination.items.count)
                         .tag("all")
                         Pane {
-                            Grid(ratio: .half, horizontalSpacing: .medium, verticalSpacing: .large) {
+                            Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
                                 for project in viewModel.pagination.items.filter({$0.category == "ios"}) {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
@@ -72,7 +72,7 @@ enum ProjectPage {
                                                 }
                                             }
                                             .fontSize(.small)
-                                            .foregroundColor(.blue)
+                                            .foregroundColor(.accent)
                                             .bold()
                                             Text {
                                                 project.title
@@ -92,6 +92,74 @@ enum ProjectPage {
                             }
                         }
                         .tag("ios")
+                        Pane {
+                            Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
+                                for project in viewModel.pagination.items.filter({$0.category == "macos"}) {
+                                    Link(destination: "/projects/\(project.slug)") {
+                                        VStack(spacing: .small) {
+                                            Thumbnail {
+                                                SafariIcon()
+                                            }
+                                            Text {
+                                                if let category = ProjectModel.Categories(rawValue: project.category) {
+                                                    category.description
+                                                }
+                                            }
+                                            .fontSize(.small)
+                                            .foregroundColor(.accent)
+                                            .bold()
+                                            Text {
+                                                project.title
+                                            }
+                                            .fontSize(.medium)
+                                            Text {
+                                                project.excerpt
+                                            }
+                                            .lineLimit(.three)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            Text {
+                                "macOS"
+                            }
+                        }
+                        .tag("macos")
+                        Pane {
+                            Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
+                                for project in viewModel.pagination.items.filter({$0.category == "swiftserver"}) {
+                                    Link(destination: "/projects/\(project.slug)") {
+                                        VStack(spacing: .small) {
+                                            Thumbnail {
+                                                SafariIcon()
+                                            }
+                                            Text {
+                                                if let category = ProjectModel.Categories(rawValue: project.category) {
+                                                    category.description
+                                                }
+                                            }
+                                            .fontSize(.small)
+                                            .foregroundColor(.accent)
+                                            .bold()
+                                            Text {
+                                                project.title
+                                            }
+                                            .fontSize(.medium)
+                                            Text {
+                                                project.excerpt
+                                            }
+                                            .lineLimit(.three)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            Text {
+                                "Swift on Server"
+                            }
+                        }
+                        .tag("swiftserver")
                     }
                 }
             }

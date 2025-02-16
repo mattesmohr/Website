@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct PagePagination<T: Sequence>: View {
+struct PagePagination<T: Swift.Sequence>: View {
     
     let meta: Pagination<T>.Meta
     

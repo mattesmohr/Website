@@ -1,7 +1,6 @@
 import HTMLKit
-import HTMLKitComponents
 
-struct Thumbnail: View {
+struct Feed: View {
     
     var content: [Content]
     
@@ -11,8 +10,13 @@ struct Thumbnail: View {
 
     var body: Content {
         Division {
-            content
+            for item in content {
+                Article {
+                    item
+                }
+                .class("article")
+            }
         }
-        .class("thumbnail")
+        .class("feed")
     }
 }

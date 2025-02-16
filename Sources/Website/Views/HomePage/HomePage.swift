@@ -44,7 +44,7 @@ enum HomePage {
                         .textStyle(.headline)
                         Text {
                             MarkdownString {
-                                "Hi there, I am **Mattes**. A developer from **Bavaria, Germany**. I am building websites for living."
+                                "Hi there, I am \(bold: "Mattes"). A developer from \(bold: "Bavaria, Germany"). I am building websites for living."
                             }
                         }
                         .fontSize(.medium)
@@ -62,7 +62,7 @@ enum HomePage {
                         .textStyle(.headline)
                         Text {
                             MarkdownString {
-                                "The majority of my spare time is dedicated to **open source** contributions."
+                                "The majority of my spare time is dedicated to \(bold: "open source") contributions."
                             }
                         }
                         .fontSize(.medium)
@@ -77,6 +77,8 @@ enum HomePage {
                                                     switch project.category {
                                                     case "macos":
                                                         MacIcon()
+                                                    case "ios":
+                                                        PadIcon()
                                                     default:
                                                         SafariIcon()
                                                     }
@@ -87,7 +89,7 @@ enum HomePage {
                                                     }
                                                 }
                                                 .fontSize(.small)
-                                                .foregroundColor(.blue)
+                                                .foregroundColor(.accent)
                                                 .bold()
                                                 Text {
                                                     project.title
@@ -107,7 +109,7 @@ enum HomePage {
                                 Link(destination: "/projects") {
                                     LocalizedString(key: "View all")
                                 }
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accent)
                                 .bold()
                             }
                         }

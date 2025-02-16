@@ -35,6 +35,9 @@ struct AreaPageContainer: View {
                 content
                 Script {
                 }
+                .source("/js/area.js")
+                Script {
+                }
                 .source("/htmlkit/all.js")
             }
         }

@@ -8,9 +8,36 @@ struct ViewContainer: View {
     init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()
     }
+    
+    @EnvironmentObject(UserModel.Output.self)
+    var identity
 
     var body: Content {
         PageContainer {
+            Environment.unwrap(identity.fullname) { fullname in
+                Aside {
+                    HStack(spacing: .between) {
+                        Link(destination: "/area/admin/home") {
+                            Text("Back to the backend")
+                        }
+                        Dropdown {
+                            List(direction: .vertical) {
+                                Link(destination: "/area/login/logout") {
+                                    Symbol(system: .trash)
+                                    Text("Log out")
+                                }
+                            }
+                        } label: {
+                            Text {
+                                fullname
+                            }
+                            .foregroundColor(.white)
+                        }
+                        .backgroundColor(.black)
+                        .border(.black)
+                    }
+                }
+            }
             Header {
                 HStack(spacing: .between) {
                     Link(destination: "/home") {
@@ -45,9 +72,8 @@ struct ViewContainer: View {
                                 Image(source: "/assets/linkedin.svg")
                             }
                         }
+                        .listSpacing(.large)
                     }
-                    .listSpacing(.large)
-                    .frame(width: .minimum)
                 }
             }
             Main {

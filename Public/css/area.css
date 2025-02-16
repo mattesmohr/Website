@@ -8,7 +8,12 @@
 
 :root {
     --fontFamily: 'Inter';
+    --containerSize: 60%;
     --systemBorderColor: 199, 44%, 93%;
+
+    @media (min-width: 768px) {
+        --containerSize: 90%;
+    }
 }
 
 * {
@@ -26,21 +31,29 @@ html {
         block-size: 100%;
         display: flex;
         flex-direction: column;
-        background-color: hsla(var(--whiteColor), 1.0);
+        background-color: #FAFCFD;
 
         > header {
-            padding-block: 10px;
-            padding-inline: 25px;
-            background-color: hsla(var(--whiteColor), 1.0);
             border-bottom-width: 1px;
             border-bottom-style: solid;
             border-bottom-color: hsla(var(--systemBorderColor), 1.0);
+            background-color: hsla(var(--whiteColor), 1.0);
+
+            section {
+                margin-inline: auto;
+                padding-block: 25px;
+                padding-inline: 25px;
+                inline-size: var(--containerSize);
+            }
         }
 
         > main {
             flex-grow: 1;
 
-            block-size: 90%;
+            margin-inline: auto;
+            padding-block: 25px;
+            padding-inline: 25px;
+            inline-size: var(--containerSize);
             display: flex;
             flex-direction: row;
 
@@ -49,11 +62,8 @@ html {
                 block-size: 100%;
                 display: grid;
                 grid-template-rows: auto 1fr auto;
-                grid-template-columns: 77% 23%;
-                grid-template-areas: "header aside"
-                         "section aside"
-                         "footer aside";
-                overflow-block: scroll;
+                grid-template-columns: 1fr;
+                grid-template-areas: "header" "section" "footer";
 
                 > header {
                     grid-area: header;
@@ -69,14 +79,6 @@ html {
                     padding-inline: 25px;
                 }
 
-                > aside {
-                    grid-area: aside;
-
-                    padding-block: 10px;
-                    padding-inline: 25px;
-                    border-left: 1px solid hsla(var(--systemBorderColor), 1.0);
-                }
-
                 > footer {
                     grid-area: footer;
 
@@ -90,10 +92,6 @@ html {
                 inline-size: 15%;
                 display: flex;
                 flex-direction: column;
-                background-color: #FAFCFD;
-                border-right-width: 1px;
-                border-right-style: solid;
-                border-right-color: hsla(var(--systemBorderColor), 1.0);
 
                 > section {
                     flex-grow: 1;
@@ -111,5 +109,17 @@ html {
                 }
             }
         }
+    }
+}
+
+.state\:active {
+    background-color: hsla(var(--accentColor), 0.1) !important;
+
+    p {
+        color: hsla(var(--blackColor), 1.0) !important;
+    }
+
+    svg {
+        fill: hsla(var(--accentColor), 1.0) !important;
     }
 }

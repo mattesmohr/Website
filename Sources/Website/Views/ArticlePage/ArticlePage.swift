@@ -17,14 +17,14 @@ enum ArticlePage {
                         .textStyle(.subheadline)
                         Text {
                             MarkdownString {
-                                "I am absolutly in love with the **Swift** language. Especially since its debut on the **Server-side**. So expect to read a lot about the language itself, the projects I'm involved in and the insights I encounter along the way."
+                                "I am absolutly in love with the \(bold: "Swift") language. Especially since its debut on the \(bold: "Server-side"). So expect to read a lot about the language itself, the projects I'm involved in and the insights I encounter along the way."
                             }
                         }
                         .fontSize(.medium)
                     }
                 }
                 Section {
-                    Grid(ratio: .half, spacing: .small) {
+                    Grid(ratio: .third, spacing: .small) {
                         for article in viewModel.pagination.items {
                             Link(destination: "/articles/\(article.slug)") {
                                 VStack(spacing: .small) {
@@ -37,7 +37,7 @@ enum ArticlePage {
                                         }
                                     }
                                     .fontSize(.small)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.accent)
                                     .bold()
                                     Text {
                                         article.title

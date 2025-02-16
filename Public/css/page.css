@@ -1,5 +1,8 @@
-@import url('thumbnails.css');
+@import url('reset.css');
 @import url('utilities.css');
+@import url('thumbnails.css');
+@import url('components/feed.css');
+@import url('components/gallery.css');
 
 @font-face {
   font-family: 'Mona Sans';
@@ -19,13 +22,12 @@
     --fontFamily: 'Hubot Sans';
     --systemBorderColor: 199, 44%, 93%;
     --systemBackgroundColor: 200, 43%, 99%;
-    --containerSize: 70%;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
+    --containerSize: 90%;
+    --accentColor: 3, 100%, 68%;
+    
+    @media (min-width: 768px) {
+        --containerSize: 60%;
+    }
 }
 
 html {
@@ -37,13 +39,22 @@ html {
         flex-direction: column;
         align-items: center;
         background-color: hsla(var(--whiteColor), 1.0);
+        
+        > aside {
+            position: fixed;
+            z-index: 99;
+            padding-block: 10px;
+            padding-inline: 25px;
+            width: 100%;
+            color: hsla(var(--whiteColor), 1.0);
+            background-color: hsla(var(--blackColor), 1.0);
+        }
 
         > header {
             padding-block: 50px;
             padding-inline: 25px;
             inline-size: var(--containerSize);
             block-size: 10%;
-            background-color: hsla(var(--whiteColor), 1.0);
         }
 
         > main {
@@ -100,33 +111,18 @@ a {
     overflow: hidden;
 }
 
-.gallery {
-    inline-size: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
+.tabs-tabs {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #E5F0F5;
 
-    .item {
-        block-size: 50px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: #E5F0F5;
-        border-radius: 5px;
-        background-color: #FAFCFD;
-        overflow: hidden;
-        cursor: pointer;
-    }
-}
-
-.feed {
-    inline-size: 100%;
-    -webkit-columns: 3;
-    column-count: 3;
-    -webkit-column-gap: 1rem;
-    column-gap: 2.25rem;
-
-    .article {
-        margin-bottom: 1rem;
-        break-inside: avoid;
+    .tabs-tab {
+        .tab-badge {
+            padding-inline: 5px;
+            font-size: 14px;
+            color: hsla(var(--accentColor), 1.0);
+            border-radius: 5px;
+            background-color: hsla(var(--accentColor), 0.1) !important;
+        }
     }
 }
