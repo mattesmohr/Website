@@ -8,8 +8,7 @@ struct ReportAdminController {
     @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
-        let projects = try await ProjectRepository(database: request.db)
-            .group(column: "category")
+        let projects = try await request.unit.project.group(column: "category")
         
         let viewModel = ReportAdminPageModel.IndexView(projects: projects)
         

@@ -10,8 +10,7 @@ struct AssetAdminController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let pagination = try await AssetRepository(database: request.db)
-            .find()
+        let pagination = try await request.unit.asset.find()
             .map(AssetModel.Output.init)
             .page(page: page, per: 10)
         
@@ -41,8 +40,7 @@ struct AssetAdminController {
         
         try await request.fileio.writeFile(model.asset.data, at: path)
         
-        try await AssetRepository(database: request.db)
-            .insert(entity: AssetEntity(input: model))
+        try await request.unit.asset.insert(entity: AssetEntity(input: model))
         
         return request.redirect(to: "/area/admin/assets")
     }
@@ -55,7 +53,7 @@ struct AssetAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await AssetRepository(database: request.db).find(id: id) else {
+        guard let entity = try await request.unit.asset.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -76,8 +74,7 @@ struct AssetAdminController {
         
         let model = try request.content.decode(AssetModel.Input.self)
         
-        try await AssetRepository(database: request.db)
-            .update(entity: AssetEntity(input: model), on: id)
+        try await request.unit.asset.update(entity: AssetEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/assets")
     }
@@ -90,8 +87,7 @@ struct AssetAdminController {
             throw Abort(.badRequest)
         }
         
-        try await AssetRepository(database: request.db)
-            .delete(id: id)
+        try await request.unit.asset.delete(id: id)
         
         return request.redirect(to: "/area/admin/assets")
     }

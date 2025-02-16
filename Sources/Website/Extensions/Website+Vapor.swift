@@ -14,3 +14,19 @@ extension File {
         }
     }
 }
+
+extension Request {
+    
+    /// Access to the unit of work through Vapor's request object
+    var unit: UnitOfWork {
+        return .init(database: self.db)
+    }
+}
+
+extension Application {
+    
+    /// Access to the unit of work through Vapor's application object
+    var unit: UnitOfWork {
+        return .init(database: self.db)
+    }
+}

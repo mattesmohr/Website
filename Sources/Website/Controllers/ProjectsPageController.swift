@@ -10,8 +10,7 @@ struct ProjectsPageController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let projects = try await ProjectRepository(database: request.db)
-            .find(status: "published")
+        let projects = try await request.unit.project.find(status: "published")
             .map(ProjectModel.Output.init)
             .page(page: page, per: 10)
         
@@ -28,8 +27,7 @@ struct ProjectsPageController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ProjectRepository(database: request.db)
-            .find(slug: slug) else {
+        guard let entity = try await request.unit.project.find(slug: slug) else {
             throw Abort(.notFound)
         }
         

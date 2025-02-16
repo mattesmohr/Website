@@ -10,8 +10,7 @@ struct ProjectAdminController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let pagination = try await ProjectRepository(database: request.db)
-            .find()
+        let pagination = try await request.unit.project.find()
             .map(ProjectModel.Output.init)
             .page(page: page, per: 10)
         
@@ -38,8 +37,7 @@ struct ProjectAdminController {
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
-        try await ProjectRepository(database: request.db)
-            .insert(entity: ProjectEntity(input: model))
+        try await request.unit.project.insert(entity: ProjectEntity(input: model))
         
         return request.redirect(to: "/area/admin/projects")
     }
@@ -52,8 +50,7 @@ struct ProjectAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ProjectRepository(database: request.db)
-            .find(id: id) else {
+        guard let entity = try await request.unit.project.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -75,8 +72,7 @@ struct ProjectAdminController {
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
-        try await ProjectRepository(database: request.db)
-            .update(entity: ProjectEntity(input: model), on: id)
+        try await request.unit.project.update(entity: ProjectEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/projects")
     }
@@ -89,8 +85,7 @@ struct ProjectAdminController {
             throw Abort(.badRequest)
         }
         
-        try await ProjectRepository(database: request.db)
-            .delete(id: id)
+        try await request.unit.project.delete(id: id)
         
         return request.redirect(to: "/area/admin/projects")
     }

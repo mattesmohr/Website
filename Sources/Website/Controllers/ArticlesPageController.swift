@@ -10,8 +10,7 @@ struct ArticlesPageController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let articles = try await ArticleRepository(database: request.db)
-            .find(status: "published")
+        let articles = try await request.unit.article.find(status: "published")
             .map(ArticleModel.Output.init)
             .page(page: page, per: 10)
         
@@ -29,8 +28,7 @@ struct ArticlesPageController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ArticleRepository(database: request.db)
-            .find(slug: slug) else {
+        guard let entity = try await request.unit.article.find(slug: slug) else {
             throw Abort(.notFound)
         }
         

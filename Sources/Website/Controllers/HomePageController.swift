@@ -8,8 +8,7 @@ struct HomePageController {
     @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
-        let projects = try await ProjectRepository(database: request.db)
-            .find(status: "published")
+        let projects = try await request.unit.project.find(status: "published")
             .map(ProjectModel.Output.init)
             .page(page: 1, per: 10)
         

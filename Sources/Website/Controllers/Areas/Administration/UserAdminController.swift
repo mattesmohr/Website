@@ -10,8 +10,7 @@ struct UserAdminController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let pagination = try await UserRepository(database: request.db)
-            .find()
+        let pagination = try await request.unit.user.find()
             .map(UserModel.Output.init)
             .page(page: page, per: 10)
         
@@ -37,8 +36,7 @@ struct UserAdminController {
         
         let model = try request.content.decode(UserModel.Input.self)
         
-        try await UserRepository(database: request.db)
-            .insert(entity: UserEntity(input: model))
+        try await request.unit.user.insert(entity: UserEntity(input: model))
         
         return request.redirect(to: "/area/admin/users")
     }
@@ -51,8 +49,7 @@ struct UserAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let entity = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -73,8 +70,7 @@ struct UserAdminController {
         
         let model = try request.content.decode(UserModel.Input.self)
         
-        try await UserRepository(database: request.db)
-            .update(entity: UserEntity(input: model), on: id)
+        try await request.unit.user.update(entity: UserEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/users")
     }
@@ -87,8 +83,7 @@ struct UserAdminController {
             throw Abort(.badRequest)
         }
         
-        try await UserRepository(database: request.db)
-            .delete(id: id)
+        try await request.unit.user.delete(id: id)
         
         return request.redirect(to: "/area/admin/users")
     }
@@ -101,15 +96,12 @@ struct UserAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
         if let credential = user.credential {
-            
-            try await CredentialRepository(database: request.db)
-                .patch(field: \.$status, to: "deactivated", for: credential.requireID())
+            try await request.unit.credential.patch(field: \.$status, to: "deactivated", for: credential.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")
@@ -123,15 +115,12 @@ struct UserAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
         if let credential = user.credential {
-            
-            try await CredentialRepository(database: request.db)
-                .patch(field: \.$status, to: "unlocked", for: credential.requireID())
+            try await request.unit.credential.patch(field: \.$status, to: "unlocked", for: credential.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")
@@ -145,15 +134,12 @@ struct UserAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
         if let credential = user.credential {
-            
-            try await CredentialRepository(database: request.db)
-                .patch(field: \.$status, to: "reseted", for: credential.requireID())
+            try await request.unit.credential.patch(field: \.$status, to: "reseted", for: credential.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")

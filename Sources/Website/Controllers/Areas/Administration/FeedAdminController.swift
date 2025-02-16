@@ -10,8 +10,7 @@ struct FeedAdminController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let pagination = try await FeedRepository(database: request.db)
-            .find()
+        let pagination = try await request.unit.feed.find()
             .map(FeedModel.Output.init)
             .page(page: page, per: 10)
         
@@ -37,8 +36,7 @@ struct FeedAdminController {
         
         let model = try request.content.decode(FeedModel.Input.self)
         
-        try await FeedRepository(database: request.db)
-            .insert(entity: FeedEntity(input: model))
+        try await request.unit.feed.insert(entity: FeedEntity(input: model))
         
         return request.redirect(to: "/area/admin/feed")
     }
@@ -51,8 +49,7 @@ struct FeedAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await FeedRepository(database: request.db)
-            .find(id: id) else {
+        guard let entity = try await request.unit.feed.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -73,8 +70,7 @@ struct FeedAdminController {
         
         let model = try request.content.decode(FeedModel.Input.self)
         
-        try await FeedRepository(database: request.db)
-            .update(entity: FeedEntity(input: model), on: id)
+        try await request.unit.feed.update(entity: FeedEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/feed")
     }
@@ -87,8 +83,7 @@ struct FeedAdminController {
             throw Abort(.badRequest)
         }
         
-        try await FeedRepository(database: request.db)
-            .delete(id: id)
+        try await request.unit.feed.delete(id: id)
         
         return request.redirect(to: "/area/admin/feed")
     }

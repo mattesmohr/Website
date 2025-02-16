@@ -36,8 +36,7 @@ struct LoginAreaController {
         
         try nonce.verify(nonce: login.nonce)
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(email: login.email) else {
+        guard let user = try await request.unit.user.find(email: login.email) else {
             return request.redirect(to: "/area/login/login")
         }
         
@@ -46,6 +45,7 @@ struct LoginAreaController {
             
             switch credential.status {
             case "deactivated", "locked":
+                
                 // Do nothing
                 break
                 
@@ -60,9 +60,9 @@ struct LoginAreaController {
                     
                     // The attempt was successful, let's reset the counter
                     if credential.attempt > 0 {
+                        
                         // Reset the counter
-                        try await CredentialRepository(database: request.db)
-                            .patch(field: \.$attempt, to: 0, for: credential.requireID())
+                        try await request.unit.credential.patch(field: \.$attempt, to: 0, for: credential.requireID())
                     }
             
                     return request.redirect(to: "/area/admin/home")
@@ -71,14 +71,14 @@ struct LoginAreaController {
                     
                     // Track the attempt. If the maximum number of attempts is reached, lock the account
                     if credential.attempt < 4 {
+                        
                         // Increment the attempt count
-                        try await CredentialRepository(database: request.db)
-                            .patch(field: \.$attempt, to: (credential.attempt + 1), for: credential.requireID())
+                        try await request.unit.credential.patch(field: \.$attempt, to: (credential.attempt + 1), for: credential.requireID())
                         
                     } else {
+                        
                         // Otherwise lock the account
-                        try await CredentialRepository(database: request.db)
-                            .patch(field: \.$status, to: "locked", for: credential.requireID())
+                        try await request.unit.credential.patch(field: \.$status, to: "locked", for: credential.requireID())
                     }
                 }
             }
@@ -108,12 +108,12 @@ struct LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
         if let _ = user.credential {
+            
             // The user is already registered, therefore abort the request
             throw Abort(.badRequest)
         }
@@ -144,8 +144,7 @@ struct LoginAreaController {
         
         let digest = try await request.password.async.hash(reset.password)
         
-        try await CredentialRepository(database: request.db)
-            .insert(entity: CredentialEntity(password: digest, status: "unlocked", attempt: 0, userId: id))
+        try await request.unit.credential.insert(entity: CredentialEntity(password: digest, status: "unlocked", attempt: 0, userId: id))
         
         return request.redirect(to: "/area/login/login")
     }
@@ -158,14 +157,14 @@ struct LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
         if let credential = user.credential {
             
             if credential.status != "reseted" {
+                
                 // The reset was not initiated, therefore abort the request
                 throw Abort(.badRequest)
             }
@@ -195,8 +194,7 @@ struct LoginAreaController {
         
         try nonce.verify(nonce: reset.nonce)
         
-        guard let user = try await UserRepository(database: request.db)
-            .find(id: id) else {
+        guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -205,8 +203,7 @@ struct LoginAreaController {
             credential.password = try await request.password.async.hash(reset.password)
             credential.status = "unlocked"
             
-            try await CredentialRepository(database: request.db)
-                .update(entity: credential, on: credential.requireID())
+            try await request.unit.credential.update(entity: credential, on: credential.requireID())
         }
         
         return request.redirect(to: "/area/login/login")

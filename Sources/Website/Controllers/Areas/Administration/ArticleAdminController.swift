@@ -10,8 +10,7 @@ struct ArticleAdminController {
 
         let page: Int = request.query["page"] ?? 1
         
-        let pagination = try await ArticleRepository(database: request.db)
-            .find()
+        let pagination = try await request.unit.article.find()
             .map(ArticleModel.Output.init)
             .page(page: page, per: 10)
         
@@ -38,8 +37,7 @@ struct ArticleAdminController {
         var model = try request.content.decode(ArticleModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
-        try await ArticleRepository(database: request.db)
-            .insert(entity: ArticleEntity(input: model))
+        try await request.unit.article.insert(entity: ArticleEntity(input: model))
         
         return request.redirect(to: "/area/admin/articles")
     }
@@ -52,8 +50,7 @@ struct ArticleAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await ArticleRepository(database: request.db)
-            .find(id: id) else {
+        guard let entity = try await request.unit.article.find(id: id) else {
             throw Abort(.notFound)
         }
         
@@ -79,8 +76,7 @@ struct ArticleAdminController {
             model.publishedOn = Date.now
         }
         
-        try await ArticleRepository(database: request.db)
-            .update(entity: ArticleEntity(input: model), on: id)
+        try await request.unit.article.update(entity: ArticleEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/articles")
     }
@@ -93,8 +89,7 @@ struct ArticleAdminController {
             throw Abort(.badRequest)
         }
         
-        try await ArticleRepository(database: request.db)
-            .delete(id: id)
+        try await request.unit.article.delete(id: id)
         
         return request.redirect(to: "/area/admin/articles")
     }

@@ -10,8 +10,7 @@ struct FeedPageController {
         
         let page: Int = request.query["page"] ?? 1
         
-        let feeds = try await FeedRepository(database: request.db)
-            .find(status: "published")
+        let feeds = try await request.unit.feed.find(status: "published")
             .map(FeedModel.Output.init)
             .page(page: page, per: 10)
         
