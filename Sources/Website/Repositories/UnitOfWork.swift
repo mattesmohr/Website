@@ -47,6 +47,11 @@ struct UnitOfWork {
         return .init(database: database)
     }
     
+    /// Access to the setting repository
+    var setting: SettingRepository {
+        return .init(database: database)
+    }
+    
     /// Creates the unit of work
     ///
     /// - Parameter database: The database to work on

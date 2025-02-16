@@ -78,6 +78,10 @@ struct AreaViewContainer: View {
                                     Symbol(system: .person)
                                     Text("Users")
                                 }
+                                Link(destination: "/area/admin/setting") {
+                                    Symbol(system: .tresor)
+                                    Text("Setting")
+                                }
                             }
                             .listSpacing(.small)
                         }

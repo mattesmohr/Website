@@ -82,6 +82,7 @@ enum Setup {
                 try restricted.register(collection: UserAdminController())
                 try restricted.register(collection: FeedAdminController())
                 try restricted.register(collection: ReportAdminController())
+                try restricted.register(collection: SettingAdminController())
             }
         }
         
@@ -112,6 +113,7 @@ enum Setup {
         application.migrations.add(ContactMigration())
         application.migrations.add(ReportMigration())
         application.migrations.add(FeedMigration())
+        application.migrations.add(SettingMigration())
         
         try await application.autoMigrate()
     }

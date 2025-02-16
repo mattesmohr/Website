@@ -23,6 +23,7 @@
 "Firstname" = "Vorname";
 "Gallery" = "Gallerie";
 "Home" = "Startseite";
+"Hostname" = "Hostname";
 "Lastname" = "Nachname";
 "Legal" = "Impressum";
 "Legal notice" = "Impressum";
@@ -30,6 +31,7 @@
 "Message" = "Nachricht";
 "Page %lld of %lld" = "Seite %lld von %lld";
 "Password" = "Passwort";
+"Port" = "Port";
 "Privacy" = "Datenschutz";
 "Privacy policy" = "Datenschutzerklärung";
 "Project"= "Projekt";
@@ -38,11 +40,17 @@
 "Reports" = "Berichte";
 "Reset" = "Zurücksetzen";
 "Role" = "Rolle";
+"Security" = "Verschlüsselung";
+"Setting" = "Einstellung";
+"Settings" = "Einstellungen";
 "Sign in" = "Anmelden";
+"Site description" = "Seitenbeschreibung";
+"Site title" = "Seitentitel";
 "Status" = "Status";
 "Submit" = "Speichern";
 "Title" = "Titel";
 "Tags" = "Tags";
+"Username" = "Benutzername";
 "Unlock" = "Entsperren";
 "Users" = "Benutzer";
 "View all" = "Alle anzeigen";
