@@ -15,9 +15,7 @@ enum ErrorPage {
                             "Ooops!"
                         }
                         .textStyle(.headline)
-                        Text {
-                            "Something went wrong (\(message)). Sorry for the inconvenience!"
-                        }
+                        Text("Something went wrong (\(message)). Sorry for the inconvenience!")
                     }
                 }
             }

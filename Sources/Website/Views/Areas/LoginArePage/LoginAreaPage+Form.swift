@@ -12,14 +12,14 @@ extension LoginAreaPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "email") {
-                        "Email"
+                        LocalizedString(key: "Email")
                     }
                     TextField(name: "email")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "password") {
-                        "Password"
+                        LocalizedString(key: "Password")
                     }
                     SecureField(name: "password")
                         .borderShape(.smallrounded)
@@ -30,7 +30,7 @@ extension LoginAreaPage {
                     .name("nonce")
                     .custom(key: "value", value: nonce.value)
                 Button(role: .submit) {
-                    "Sign in"
+                    LocalizedString(key: "Sign in")
                 }
                 .buttonStyle(PrimaryButton())
                 .controlSize(.full)
@@ -52,14 +52,14 @@ extension LoginAreaPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "password") {
-                        "Password"
+                        LocalizedString(key: "Password")
                     }
                     SecureField(name: "password", prompt: "Passwort")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "confirmation") {
-                        "Confirmation"
+                        LocalizedString(key: "Confirmation")
                     }
                     SecureField(name: "confirmation", prompt: "Passwort")
                         .borderShape(.smallrounded)
@@ -70,7 +70,7 @@ extension LoginAreaPage {
                     .name("nonce")
                     .custom(key: "value", value: nonce.value)
                 Button(role: .submit) {
-                    "Reset"
+                    LocalizedString(key: "Reset")
                 }
                 .buttonStyle(PrimaryButton())
                 .controlSize(.full)

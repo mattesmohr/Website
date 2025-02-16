@@ -1,9 +1,10 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum HomeAdminPageModel {
     
     struct IndexView {
         
-        let title: String = "Show overview"
+        let title = LocalizedString(key: "Dashboard")
     }
 }

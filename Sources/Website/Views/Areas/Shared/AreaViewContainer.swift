@@ -25,9 +25,7 @@ struct AreaViewContainer: View {
                     HStack(spacing: .medium) {
                         Dropdown {
                             List(direction: .vertical) {
-                                Text {
-                                    "No notifications yet."
-                                }
+                                Text("No notifications")
                             }
                             .listStyle(.listgroup)
                         } label: {
@@ -38,9 +36,7 @@ struct AreaViewContainer: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/login/logout") {
                                     Symbol(system: .trash)
-                                    Text {
-                                        "Log out"
-                                    }
+                                    Text("Log out")
                                 }
                             }
                         } label: {
@@ -61,32 +57,32 @@ struct AreaViewContainer: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/home") {
                                     Symbol(system: .house)
-                                    Text("menu.home")
+                                    Text("Dashboard")
                                 }
                                 .fontSize(.extralarge)
                                 Link(destination: "/area/admin/projects") {
                                     Symbol(system: .folder)
-                                    Text("menu.projects")
+                                    Text("Projects")
                                 }
                                 Link(destination: "/area/admin/articles") {
                                     Symbol(system: .file)
-                                    Text("menu.articles")
+                                    Text("Articles")
                                 }
                                 Link(destination: "/area/admin/feed") {
                                     Symbol(system: .scope)
-                                    Text("menu.feed")
+                                    Text("Feed")
                                 }
                                 Link(destination: "/area/admin/assets") {
                                     Symbol(system: .photo)
-                                    Text("menu.assets")
+                                    Text("Assets")
                                 }
                                 Link(destination: "/area/admin/reports") {
                                     Symbol(system: .chart(.pie))
-                                    Text("menu.reports")
+                                    Text("Reports")
                                 }
                                 Link(destination: "/area/admin/users") {
                                     Symbol(system: .person)
-                                    Text("menu.users")
+                                    Text("Users")
                                 }
                             }
                         }

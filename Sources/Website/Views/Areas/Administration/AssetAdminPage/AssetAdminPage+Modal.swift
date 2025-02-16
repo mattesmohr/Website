@@ -11,17 +11,15 @@ extension AssetAdminPage {
         var body: Content {
             Modal {
                 VStack(spacing: .small) {
-                    Text {
-                        "Do you really want to delete it? It cannot be undone."
-                    }
+                    Text("Do you really want to delete it? It cannot be undone.")
                     HStack(spacing: .small) {
                         LinkButton(destination: "/area/admin/assets/\(id)/delete") {
-                            "Delete"
+                            LocalizedString(key: "Delete")
                         }
                         .borderShape(.smallrounded)
                         .buttonStyle(.primary)
                         Button(role: .button) {
-                            "Cancel"
+                            LocalizedString(key: "Cancel")
                         }
                         .buttonStyle(ControlButton())
                         .tag("close")

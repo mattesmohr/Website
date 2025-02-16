@@ -18,9 +18,7 @@ enum ArticleAdminPage {
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/articles/create") {
                             Symbol(system: .file)
-                            Text {
-                                "Create"
-                            }
+                            Text("Create")
                         }
                         .buttonStyle(.primary)
                         .borderShape(.smallrounded)
@@ -77,13 +75,11 @@ enum ArticleAdminPage {
                             List(direction: .vertical) {
                                 Grouping {
                                     Symbol(system: .trash)
-                                    Text {
-                                        "Delete"
-                                    }
-                                    .tag("delete")
-                                    .onClick { action in
-                                        action.open("delete-modal")
-                                    }
+                                    Text("Delete")
+                                        .tag("delete")
+                                        .onClick { action in
+                                            action.open("delete-modal")
+                                        }
                                 }
                                 .foregroundColor(.red)
                             }

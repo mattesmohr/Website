@@ -9,14 +9,14 @@ extension ProjectAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "excerpt") {
-                        "Excerpt"
+                        LocalizedString(key: "Excerpt")
                     }
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
@@ -25,7 +25,7 @@ extension ProjectAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "content") {
-                        "Content"
+                        LocalizedString(key: "Content")
                     }
                     TextPad(name: "content", prompt: "Content") {
                     }
@@ -35,14 +35,14 @@ extension ProjectAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "repository") {
-                            "Repository"
+                            LocalizedString(key: "Repository")
                         }
                         TextField(name: "repository", prompt: "Repository")
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "documentation") {
-                            "Documentation"
+                            LocalizedString(key: "Documentation")
                         }
                         TextField(name: "documentation", prompt: "Documentation")
                             .borderShape(.smallrounded)
@@ -51,7 +51,7 @@ extension ProjectAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
-                            "Category"
+                            LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS") {
                             for category in ProjectModel.Categories.allCases {
@@ -64,7 +64,7 @@ extension ProjectAdminPage {
                     }
                     VStack {
                         FieldLabel(for: "status") {
-                            "Status"
+                            LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published") {
                             for state in ProjectModel.States.allCases {
@@ -78,7 +78,7 @@ extension ProjectAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)
@@ -98,14 +98,14 @@ extension ProjectAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title", value: project.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "excerpt") {
-                        "Excerpt"
+                        LocalizedString(key: "Excerpt")
                     }
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         project.excerpt
@@ -115,7 +115,7 @@ extension ProjectAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "content") {
-                        "Content"
+                        LocalizedString(key: "Content")
                     }
                     TextPad(name: "content", prompt: "Content") {
                         project.content
@@ -126,14 +126,14 @@ extension ProjectAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "repository") {
-                            "Repository"
+                            LocalizedString(key: "Repository")
                         }
                         TextField(name: "repository", prompt: "Repository", value: project.repository)
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "documentation") {
-                            "Documentation"
+                            LocalizedString(key: "Documentation")
                         }
                         TextField(name: "documentation", prompt: "Documentation", value: project.documentation)
                             .borderShape(.smallrounded)
@@ -142,7 +142,7 @@ extension ProjectAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
-                            "Category"
+                            LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS", selection: project.category) {
                             for category in ProjectModel.Categories.allCases {
@@ -155,7 +155,7 @@ extension ProjectAdminPage {
                     }
                     VStack {
                         FieldLabel(for: "status") {
-                            "Status"
+                            LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published", selection: project.status) {
                             for state in ProjectModel.States.allCases {
@@ -169,7 +169,7 @@ extension ProjectAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)

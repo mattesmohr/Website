@@ -37,8 +37,6 @@ struct PagePagination<T: Sequence>: View {
         }
         .navigationStyle(.pagination)
         .borderShape(.smallrounded)
-        Text {
-            "Page \(meta.currentPage) of \(meta.totalPages)"
-        }
+        Text("Page \(meta.currentPage) of \(meta.totalPages)")
     }
 }

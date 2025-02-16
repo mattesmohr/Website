@@ -21,27 +21,29 @@ struct ViewContainer: View {
                         .foregroundColor(.black)
                     }
                     .frame(width: .minimum)
-                    List(direction: .horizontal) {
-                        Link(destination: "/home/#about") {
-                            Text("menu.about")
-                        }
-                        Link(destination: "/projects") {
-                            Text("menu.projects")
-                        }
-                        Link(destination: "/feed") {
-                            Text("menu.feed")
-                        }
-                        Link(destination: "/articles") {
-                            Text("menu.blog")
-                        }
-                        Link(destination: "https://github.com/mattesmohr", target: .blank) {
-                            Image(source: "/assets/github.svg")
-                        }
-                        Link(destination: "https://iosdev.space/@mattesmohr", target: .blank) {
-                            Image(source: "/assets/mastodon.svg")
-                        }
-                        Link(destination: "https://www.linkedin.com/mattesmohr", target: .blank) {
-                            Image(source: "/assets/linkedin.svg")
+                    Navigation {
+                        List(direction: .horizontal) {
+                            Link(destination: "/home/#about") {
+                                Text("About")
+                            }
+                            Link(destination: "/projects") {
+                                Text("Projects")
+                            }
+                            Link(destination: "/feed") {
+                                Text("Feed")
+                            }
+                            Link(destination: "/articles") {
+                                Text("Blog")
+                            }
+                            Link(destination: "https://github.com/mattesmohr", target: .blank) {
+                                Image(source: "/assets/github.svg")
+                            }
+                            Link(destination: "https://iosdev.space/@mattesmohr", target: .blank) {
+                                Image(source: "/assets/mastodon.svg")
+                            }
+                            Link(destination: "https://www.linkedin.com/mattesmohr", target: .blank) {
+                                Image(source: "/assets/linkedin.svg")
+                            }
                         }
                     }
                     .listSpacing(.large)
@@ -68,10 +70,10 @@ struct ViewContainer: View {
                     .listSpacing(.small)
                     List(direction: .horizontal) {
                         Link(destination: "/legal") {
-                            Text("menu.legal")
+                            Text("Legal")
                         }
                         Link(destination: "/privacy") {
-                            Text("menu.privacy")
+                            Text("Privacy")
                         }
                     }
                     .listSpacing(.small)

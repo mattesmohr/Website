@@ -1,9 +1,10 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum ConditionPageModel {
     
     struct IndexView {
         
-        let title: String = "Condition"
+        let title = LocalizedString(key: "Condition")
     }
 }

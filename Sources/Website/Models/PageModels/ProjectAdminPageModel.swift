@@ -1,21 +1,22 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum ProjectAdminPageModel {
     
     struct IndexView {
         
-        let title: String = "Show projects"
+        let title = LocalizedString(key: "Projects")
         let pagination: Pagination<[ProjectModel.Output]>
     }
     
     struct CreateView {
         
-        let title: String = "Create project"
+        let title = LocalizedString(key: "Create project")
     }
     
     struct EditView {
         
-        let title: String = "Edit project"
+        let title = LocalizedString(key: "Edit project")
         let project: ProjectModel.Output
     }
 }

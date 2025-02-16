@@ -19,9 +19,7 @@ struct FeedList: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/feed/\(feed.id)/edit") {
                                     Symbol(system: .pencil)
-                                    Text {
-                                        "Edit"
-                                    }
+                                    Text("Edit")
                                 }
                             }
                         } label: {

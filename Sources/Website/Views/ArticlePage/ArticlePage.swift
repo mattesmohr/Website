@@ -87,7 +87,7 @@ enum ArticlePage {
                             .frame(width: .nine)
                             VStack(spacing: .large) {
                                 VStack {
-                                    Text("detail.category")
+                                    Text("Category")
                                     Text {
                                         if let category = ProjectModel.Categories(rawValue: viewModel.article.category) {
                                             category.description
@@ -97,7 +97,7 @@ enum ArticlePage {
                                 }
                                 if let publishedOn = viewModel.article.publishedOn {
                                     VStack {
-                                        Text("detail.date")
+                                        Text("Date")
                                         Text {
                                             publishedOn.formatted(date: .long, time: .none)
                                         }

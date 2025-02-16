@@ -1,9 +1,10 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum LegalPageModel {
     
     struct IndexView {
         
-        let title: String = "Legal notice"
+        let title = LocalizedString(key: "Legal notice")
     }
 }

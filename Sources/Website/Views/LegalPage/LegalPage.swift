@@ -17,16 +17,12 @@ enum LegalPage {
                 }
                 Section {
                     VStack(spacing: .large) {
-                        Text {
-                            "This website represents me as a person and has no commercial use!"
-                        }
-                        .fontSize(.medium)
-                        VStack {
-                            Text {
-                                "Responsible for the content"
-                            }
-                            .bold()
+                        Text("This website represents me as a person and has no commercial use!")
                             .fontSize(.medium)
+                        VStack {
+                            Text("Responsible for the content")
+                                .bold()
+                                .fontSize(.medium)
                             Text {
                                 "Matthias Mohr"
                             }

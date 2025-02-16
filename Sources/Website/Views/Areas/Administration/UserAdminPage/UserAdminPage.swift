@@ -18,9 +18,7 @@ enum UserAdminPage {
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/users/create") {
                             Symbol(system: .person)
-                            Text {
-                                "Create"
-                            }
+                            Text("Create")
                         }
                         .buttonStyle(.primary)
                         .borderShape(.smallrounded)
@@ -83,21 +81,19 @@ enum UserAdminPage {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/users/\(viewModel.user.id)/unlock/") {
                                     Symbol(system: .key)
-                                    Text("action.unlock")
+                                    Text("Unlock")
                                 }
                                 Link(destination: "/area/admin/users/\(viewModel.user.id)/reset/") {
                                     Symbol(system: .key)
-                                    Text("action.reset")
+                                    Text("Reset")
                                 }
                                 Grouping {
                                     Symbol(system: .trash)
-                                    Text {
-                                        "Delete"
-                                    }
-                                    .tag("delete")
-                                    .onClick { action in
-                                        action.open("delete-modal")
-                                    }
+                                    Text("Delete")
+                                        .tag("delete")
+                                        .onClick { action in
+                                            action.open("delete-modal")
+                                        }
                                 }
                                 .foregroundColor(.red)
                             }

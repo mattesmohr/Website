@@ -9,21 +9,21 @@ extension AssetAdminPage {
             Form(method: .post, encoding: .multipart) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "asset") {
-                        "Asset"
+                        LocalizedString(key: "Asset")
                     }
                     FileDialog(name: "asset")
                         .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)
@@ -39,21 +39,21 @@ extension AssetAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title", value: asset.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "asset") {
-                        "Asset"
+                        LocalizedString(key: "Asset")
                     }
                     FileDialog(name: "asset")
                         .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)

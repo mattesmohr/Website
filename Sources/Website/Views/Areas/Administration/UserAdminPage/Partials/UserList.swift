@@ -41,9 +41,7 @@ struct UserList: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/users/\(user.id)/edit") {
                                     Symbol(system: .pencil)
-                                    Text {
-                                        "Edit"
-                                    }
+                                    Text("Edit")
                                 }
                             }
                         } label: {

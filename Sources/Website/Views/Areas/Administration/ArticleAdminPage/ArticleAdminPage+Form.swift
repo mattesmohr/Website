@@ -9,14 +9,14 @@ extension ArticleAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "excerpt") {
-                        "Excerpt"
+                        LocalizedString(key: "Excerpt")
                     }
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
@@ -25,7 +25,7 @@ extension ArticleAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "content") {
-                        "Content"
+                        LocalizedString(key: "Content")
                     }
                     TextPad(name: "content", prompt: "Content") {
                     }
@@ -35,7 +35,7 @@ extension ArticleAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
-                            "Category"
+                            LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS") {
                             for category in ArticleModel.Categories.allCases {
@@ -48,7 +48,7 @@ extension ArticleAdminPage {
                     }
                     VStack {
                         FieldLabel(for: "status") {
-                            "Status"
+                            LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published") {
                             for state in ArticleModel.States.allCases {
@@ -62,7 +62,7 @@ extension ArticleAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)
@@ -82,14 +82,14 @@ extension ArticleAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "title") {
-                        "Title"
+                        LocalizedString(key: "Title")
                     }
                     TextField(name: "title", prompt: "Title", value: article.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel(for: "excerpt") {
-                        "Excerpt"
+                        LocalizedString(key: "Excerpt")
                     }
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         article.excerpt
@@ -99,7 +99,7 @@ extension ArticleAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "content") {
-                        "Content"
+                        LocalizedString(key: "Content")
                     }
                     TextPad(name: "content", prompt: "Content") {
                         article.content
@@ -110,7 +110,7 @@ extension ArticleAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "category") {
-                            "Category"
+                            LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS", selection: article.category) {
                             for category in ArticleModel.Categories.allCases {
@@ -123,7 +123,7 @@ extension ArticleAdminPage {
                     }
                     VStack {
                         FieldLabel(for: "status") {
-                            "Status"
+                            LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published", selection: article.status) {
                             for state in ArticleModel.States.allCases {
@@ -137,7 +137,7 @@ extension ArticleAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)

@@ -36,7 +36,7 @@ enum HomePage {
                 }
                 Section {
                     VStack(alignment: .center, spacing: .large) {
-                        Text("headline.about")
+                        Text("About")
                             .textStyle(.subheadline)
                         Text {
                             "Developer. Swift. Server Side."
@@ -54,7 +54,7 @@ enum HomePage {
                 }
                 Section {
                     VStack(alignment: .center, spacing: .large) {
-                        Text("headline.projects")
+                        Text("Projects")
                             .textStyle(.subheadline)
                         Text {
                             "Open Source. Vapor. Community."
@@ -105,7 +105,7 @@ enum HomePage {
                             }
                             HStack {
                                 Link(destination: "/projects") {
-                                    "View all projects"
+                                    LocalizedString(key: "View all")
                                 }
                                 .foregroundColor(.blue)
                                 .bold()

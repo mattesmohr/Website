@@ -1,9 +1,10 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum PrivacyPageModel {
     
     struct IndexView {
      
-        let title: String = "Privacy policy"
+        let title = LocalizedString(key: "Privacy policy")
     }
 }

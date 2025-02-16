@@ -54,9 +54,7 @@ enum ProjectPage {
                                 }
                             }
                         } label: {
-                            Text {
-                                "All"
-                            }
+                            Text("All")
                         }
                         .badge(viewModel.pagination.items.count)
                         .tag("all")
@@ -131,13 +129,11 @@ enum ProjectPage {
                             .frame(width: .nine)
                             VStack(spacing: .large) {
                                 VStack(spacing: .small) {
-                                    Text {
-                                        "Gallerie"
-                                    }
+                                    Text("Gallery")
                                     Gallery {}
                                 }
                                 VStack {
-                                    Text("detail.category")
+                                    Text("Category")
                                     Text {
                                         if let category = ProjectModel.Categories(rawValue: viewModel.project.category) {
                                             category.description
@@ -147,7 +143,7 @@ enum ProjectPage {
                                 }
                                 if let documentation = viewModel.project.documentation {
                                     VStack {
-                                        Text("detail.documentation")
+                                        Text("Documentation")
                                         Link(destination: documentation, target: .blank) {
                                             Text {
                                                 "Github"
@@ -158,7 +154,7 @@ enum ProjectPage {
                                 }
                                 if let repository = viewModel.project.repository {
                                     VStack {
-                                        Text("detail.repository")
+                                        Text("Repository")
                                         Link(destination: repository, target: .blank) {
                                             Text {
                                                 "Github"

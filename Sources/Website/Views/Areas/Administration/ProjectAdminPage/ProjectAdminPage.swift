@@ -18,9 +18,7 @@ enum ProjectAdminPage {
                         .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/projects/create") {
                             Symbol(system: .folder)
-                            Text {
-                                "Create"
-                            }
+                            Text("Create")
                         }
                         .buttonStyle(.primary)
                         .borderShape(.smallrounded)
@@ -77,13 +75,11 @@ enum ProjectAdminPage {
                             List(direction: .vertical) {
                                 Grouping {
                                     Symbol(system: .trash)
-                                    Text {
-                                        "Delete"
-                                    }
-                                    .tag("delete")
-                                    .onClick { action in
-                                        action.open("delete-modal")
-                                    }
+                                    Text("Delete")
+                                        .tag("delete")
+                                        .onClick { action in
+                                            action.open("delete-modal")
+                                        }
                                 }
                                 .foregroundColor(.red)
                             }

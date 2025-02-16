@@ -29,9 +29,7 @@ struct AssetList: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/assets/\(asset.id)/edit") {
                                     Symbol(system: .pencil)
-                                    Text {
-                                        "Edit"
-                                    }
+                                    Text("Edit")
                                 }
                             }
                         } label: {

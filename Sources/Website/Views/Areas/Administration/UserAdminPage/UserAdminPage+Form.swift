@@ -9,7 +9,7 @@ extension UserAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "email") {
-                        "Email"
+                        LocalizedString(key: "Email")
                     }
                     TextField(name: "email", prompt: "john.doe@provider.com")
                         .borderShape(.smallrounded)
@@ -17,14 +17,14 @@ extension UserAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "firstName") {
-                            "Firstname"
+                            LocalizedString(key: "Firstname")
                         }
                         TextField(name: "firstName", prompt: "John")
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "lastName") {
-                            "Lastname"
+                            LocalizedString(key: "Lastname")
                         }
                         TextField(name: "lastName", prompt: "Doe")
                             .borderShape(.smallrounded)
@@ -32,7 +32,7 @@ extension UserAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "biography") {
-                        "Description"
+                        LocalizedString(key: "Biography")
                     }
                     TextEditor(name: "biography", prompt: "Biography") {
                     }
@@ -41,7 +41,7 @@ extension UserAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "role") {
-                        "Role"
+                        LocalizedString(key: "Role")
                     }
                     SelectField(name: "role", prompt: "Administrator") {
                         for role in UserModel.Roles.allCases {
@@ -54,7 +54,7 @@ extension UserAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)
@@ -74,7 +74,7 @@ extension UserAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "email") {
-                        "Email"
+                        LocalizedString(key: "Email")
                     }
                     TextField(name: "email", prompt: "john.doe@provider.com", value: user.email)
                         .borderShape(.smallrounded)
@@ -82,14 +82,14 @@ extension UserAdminPage {
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel(for: "firstName") {
-                            "Firstname"
+                            LocalizedString(key: "Firstname")
                         }
                         TextField(name: "firstName", prompt: "John", value: user.firstName)
                             .borderShape(.smallrounded)
                     }
                     VStack {
                         FieldLabel(for: "lastName") {
-                            "Lastname"
+                            LocalizedString(key: "Lastname")
                         }
                         TextField(name: "lastName", prompt: "Doe", value: user.lastName)
                             .borderShape(.smallrounded)
@@ -97,7 +97,7 @@ extension UserAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "biography") {
-                        "Description"
+                        LocalizedString(key: "Biography")
                     }
                     TextEditor(name: "biography", prompt: "Biography") {
                         user.biography
@@ -107,7 +107,7 @@ extension UserAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "role") {
-                        "Role"
+                        LocalizedString(key: "Role")
                     }
                     SelectField(name: "role", prompt: "Administrator", selection: user.role) {
                         for role in UserModel.Roles.allCases {
@@ -120,7 +120,7 @@ extension UserAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)

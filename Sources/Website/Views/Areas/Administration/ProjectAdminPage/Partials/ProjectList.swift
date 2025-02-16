@@ -38,9 +38,7 @@ struct ProjectList: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/projects/\(project.id)/edit") {
                                     Symbol(system: .pencil)
-                                    Text {
-                                        "Edit"
-                                    }
+                                    Text("Edit")
                                 }
                             }
                         } label: {

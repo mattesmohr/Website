@@ -9,7 +9,7 @@ extension FeedAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "message") {
-                        "Message"
+                        LocalizedString(key: "Message")
                     }
                     TextEditor(name: "message", prompt: "Message") {
                     }
@@ -18,7 +18,7 @@ extension FeedAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "tags") {
-                        "Tags"
+                        LocalizedString(key: "Tags")
                     }
                     TextEditor(name: "tags", prompt: "Tags") {
                     }
@@ -27,7 +27,7 @@ extension FeedAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "status") {
-                        "Status"
+                        LocalizedString(key: "Status")
                     }
                     SelectField(name: "status", prompt: "Published") {
                         for state in ArticleModel.States.allCases {
@@ -40,7 +40,7 @@ extension FeedAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)
@@ -60,7 +60,7 @@ extension FeedAdminPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel(for: "message") {
-                        "Message"
+                        LocalizedString(key: "Message")
                     }
                     TextEditor(name: "message", prompt: "Message") {
                         feed.message
@@ -70,7 +70,7 @@ extension FeedAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "tags") {
-                        "Tags"
+                        LocalizedString(key: "Tags")
                     }
                     TextEditor(name: "tags", prompt: "Tags") {
                         feed.tags
@@ -80,7 +80,7 @@ extension FeedAdminPage {
                 }
                 VStack {
                     FieldLabel(for: "status") {
-                        "Status"
+                        LocalizedString(key: "Status")
                     }
                     SelectField(name: "status", prompt: "Published", selection: feed.status) {
                         for state in ArticleModel.States.allCases {
@@ -93,7 +93,7 @@ extension FeedAdminPage {
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {
-                    "Submit"
+                    LocalizedString(key: "Submit")
                 }
                 .buttonStyle(.primary)
                 .borderShape(.smallrounded)

@@ -1,21 +1,22 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum AssetAdminPageModel {
     
     struct IndexView {
         
-        let title: String = "Show assets"
+        let title = LocalizedString(key: "Assets")
         let pagination: Pagination<[AssetModel.Output]>
     }
     
     struct CreateView {
         
-        let title: String = "Create asset"
+        let title = LocalizedString(key: "Create asset")
     }
     
     struct EditView {
         
-        let title: String = "Edit asset"
+        let title = LocalizedString(key: "Edit asset")
         let asset: AssetModel.Output
     }
 }

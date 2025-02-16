@@ -1,16 +1,17 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum ProjectPageModel {
     
     struct IndexView {
         
-        let title: String = "Projects"
+        let title = LocalizedString(key: "Projects")
         let pagination: Pagination<[ProjectModel.Output]>
     }
     
     struct ShowView {
         
-        let title: String = "Project"
+        let title = LocalizedString(key: "Project")
         let project: ProjectModel.Output
     }
 }

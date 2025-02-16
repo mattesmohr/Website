@@ -1,21 +1,22 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum FeedAdminPageModel {
     
     struct IndexView {
         
-        let title: String = "Show feed"
+        let title = LocalizedString(key: "Feed")
         let pagination: Pagination<[FeedModel.Output]>
     }
     
     struct CreateView {
         
-        let title: String = "Create feed"
+        let title = LocalizedString(key: "Create feed")
     }
     
     struct EditView {
         
-        var title: String = "Edit feed"
+        var title = LocalizedString(key: "Edit feed")
         let feed: FeedModel.Output
     }
 }

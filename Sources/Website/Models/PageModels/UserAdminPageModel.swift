@@ -1,21 +1,22 @@
+import HTMLKit
 import HTMLKitComponents
 
 enum UserAdminPageModel {
     
     struct IndexView {
         
-        let title: String = "Show users"
+        let title = LocalizedString(key: "Users")
         let pagination: Pagination<[UserModel.Output]>
     }
     
     struct CreateView {
         
-        let title: String = "Create user"
+        let title = LocalizedString(key: "Create user")
     }
     
     struct EditView {
         
-        let title: String = "Edit user"
+        let title = LocalizedString(key: "Edit user")
         let user: UserModel.Output
     }
 }
