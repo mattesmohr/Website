@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ErrorPage {
+enum ErrorAdminPage {
     
     struct ErrorView: View {
         
@@ -15,7 +15,7 @@ enum ErrorPage {
                             "Ooops!"
                         }
                         .textStyle(.headline)
-                        Text("Something went wrong (\(message)). Sorry for the inconvenience!")
+                        Text("An error has occured: \(message)")
                     }
                 }
             }

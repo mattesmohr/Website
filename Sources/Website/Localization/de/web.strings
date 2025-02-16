@@ -97,7 +97,9 @@
 "This website represents me as a person and has no commercial use!" = "Diese Website repräsentiert mich als Person und dient keinem kommerziellen Zweck!";
 "Responsible for the content" = "Veranwortlich für den Inhalt";
 
-"Something went wrong (%@). Sorry for the inconvenience!" = "Es scheint etwas schief gelaufen zu sein. (%@). Sorry für den Umstand!";
+"An error has occured: %@" = "Es ist ein Fehler aufgetreten: %@";
+
+"Something went wrong. Sorry for the inconvenience!" = "Es scheint etwas schief gelaufen zu sein. Sorry für den Umstand!";
 
 "The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiiert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.";
 

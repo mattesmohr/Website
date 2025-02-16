@@ -97,7 +97,9 @@
 "This website represents me as a person and has no commercial use!" = "This website represents me as a person and has no commercial use!";
 "Responsible for the content" = "Responsible for the content";
 
-"Something went wrong (%@). Sorry for the inconvenience!" = "Something went wrong (%@). Sorry for the inconvenience!";
+"An error has occured: %@" = "An error has occured: %@";
+
+"Something went wrong. Sorry for the inconvenience!" = "Something went wrong. Sorry for the inconvenience!";
 
 "The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy.";
 
