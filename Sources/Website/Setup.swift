@@ -18,10 +18,6 @@ enum Setup {
         
         let application = try await Application.make(environment)
         
-        let executorTakeoverSuccess = NIOSingletons.unsafeTryInstallSingletonPosixEventLoopGroupAsConcurrencyGlobalExecutor()
-        
-        application.logger.debug("Running with \(executorTakeoverSuccess ? "SwiftNIO" : "standard") Swift Concurrency default executor")
-        
         application.passwords.use(.bcrypt)
         application.sessions.use(.fluent(.mysql))
         
