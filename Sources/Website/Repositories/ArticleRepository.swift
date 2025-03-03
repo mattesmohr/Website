@@ -74,12 +74,14 @@ final class ArticleRepository {
         
         try await database.query(ArticleEntity.self)
             .set(\.$id, to: UUID())
+            .set(\.$slug, to: entity.slug)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
             .set(\.$status, to: entity.status)
             .set(\.$publishedOn, to: entity.publishedOn)
+            .set(\.$author.$id, to: entity.$author.id)
             .create()
     }
     
@@ -97,12 +99,14 @@ final class ArticleRepository {
         
         try await database.query(ArticleEntity.self)
             .filter(\.$id == id)
+            .set(\.$slug, to: entity.slug)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
             .set(\.$status, to: entity.status)
             .set(\.$publishedOn, to: entity.publishedOn)
+            .set(\.$author.$id, to: entity.$author.id)
             .update()
     }
     

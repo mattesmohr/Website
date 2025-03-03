@@ -37,6 +37,10 @@ struct ArticleAdminController {
         var model = try request.content.decode(ArticleModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
+        if model.status == "published" {
+            model.publishedOn = Date.now
+        }
+        
         try await request.unit.article.insert(entity: ArticleEntity(input: model))
         
         return request.redirect(to: "/area/admin/articles")

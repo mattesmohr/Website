@@ -35,6 +35,9 @@ final class ProjectEntity: Model, @unchecked Sendable {
     @OptionalField(key: "documentation")
     var documentation: String?
     
+    @OptionalField(key: "published_on")
+    var publishedOn: Date?
+    
     @Siblings(through: ProjectAsset.self, from: \.$project, to: \.$asset)
     var assets: [AssetEntity]
     
@@ -49,7 +52,7 @@ final class ProjectEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, slug: String, thumbnailId: UUID? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, slug: String, thumbnailId: UUID? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.slug = slug
@@ -61,6 +64,7 @@ final class ProjectEntity: Model, @unchecked Sendable {
         self.status = status
         self.repository = repository
         self.documentation = documentation
+        self.publishedOn = publishedOn
         self.$author.id = authorId
         self.createdAt = createdAt
         self.modifiedAt = modifiedAt
@@ -68,7 +72,7 @@ final class ProjectEntity: Model, @unchecked Sendable {
     
     convenience init(input: ProjectModel.Input) {
         
-        self.init(slug: input.slug, title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, repository: input.repository, documentation: input.documentation, authorId: input.authorId!)
+        self.init(slug: input.slug, title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, repository: input.repository, documentation: input.documentation, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
             self.$thumbnail.id = UUID(uuidString: thumbnailId)

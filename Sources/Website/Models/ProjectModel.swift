@@ -78,12 +78,20 @@ struct ProjectModel {
         /// A link to the documentation
         var documentation: String?
         
+        /// The timestamp when the project should be published
+        var publishedOn: Date?
+        
         /// The author for the article
         var authorId: UUID?
         
         /// The slug representation of the project
         var slug: String {
-            return title.replacingOccurrences(of: " ", with: "-").lowercased()
+            return title.replacingOccurrences(of: " ", with: "-")
+                .replacingOccurrences(of: "ä", with: "ae")
+                .replacingOccurrences(of: "ö", with: "oe")
+                .replacingOccurrences(of: "ü", with: "ue")
+                .replacingOccurrences(of: "ß", with: "ss")
+                .lowercased()
         }
         
         static func validations(_ validations: inout Validations) {

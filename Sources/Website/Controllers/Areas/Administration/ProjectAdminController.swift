@@ -37,6 +37,10 @@ struct ProjectAdminController {
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
         
+        if model.status == "published" {
+            model.publishedOn = Date.now
+        }
+        
         try await request.unit.project.insert(entity: ProjectEntity(input: model))
         
         return request.redirect(to: "/area/admin/projects")
@@ -71,6 +75,10 @@ struct ProjectAdminController {
         
         var model = try request.content.decode(ProjectModel.Input.self)
         model.authorId = try request.auth.require(UserModel.Output.self).id
+        
+        if model.status == "published" {
+            model.publishedOn = Date.now
+        }
         
         try await request.unit.project.update(entity: ProjectEntity(input: model), on: id)
         

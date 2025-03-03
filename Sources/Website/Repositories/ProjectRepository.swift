@@ -70,6 +70,7 @@ final class ProjectRepository {
         
         try await database.query(ProjectEntity.self)
             .set(\.$id, to: UUID())
+            .set(\.$slug, to: entity.slug)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
@@ -77,6 +78,8 @@ final class ProjectRepository {
             .set(\.$status, to: entity.status)
             .set(\.$repository, to: entity.repository)
             .set(\.$documentation, to: entity.documentation)
+            .set(\.$publishedOn, to: entity.publishedOn)
+            .set(\.$author.$id, to: entity.$author.id)
             .create()
     }
     
@@ -95,12 +98,15 @@ final class ProjectRepository {
         try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
+            .set(\.$slug, to: entity.slug)
             .set(\.$excerpt, to: entity.excerpt)
             .set(\.$content, to: entity.content)
             .set(\.$category, to: entity.category)
             .set(\.$status, to: entity.status)
             .set(\.$repository, to: entity.repository)
             .set(\.$documentation, to: entity.documentation)
+            .set(\.$publishedOn, to: entity.publishedOn)
+            .set(\.$author.$id, to: entity.$author.id)
             .update()
     }
     
