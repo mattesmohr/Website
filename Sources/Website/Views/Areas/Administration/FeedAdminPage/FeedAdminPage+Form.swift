@@ -54,7 +54,7 @@ extension FeedAdminPage {
     
     struct EditForm: View {
         
-        var feed: FeedModel.Output
+        let feed: FeedModel.Output
         
         var body: Content {
             Form(method: .post) {

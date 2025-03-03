@@ -5,7 +5,7 @@ enum HomePageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Home")
+        let title = LocalizedStringKey("Home")
         let pagination: Pagination<[ProjectModel.Output]>
     }
 }

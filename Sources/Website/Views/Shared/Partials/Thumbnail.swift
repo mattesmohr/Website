@@ -1,9 +1,8 @@
 import HTMLKit
-import HTMLKitComponents
 
 struct Thumbnail: View {
     
-    var content: [Content]
+    let content: [Content]
     
     init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()

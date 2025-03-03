@@ -5,16 +5,14 @@ enum FeedPage {
     
     struct IndexView: View {
         
-        var viewModel: FeedPageModel.IndexView
+        let viewModel: FeedPageModel.IndexView
 
         var body: Content {
             ViewContainer {
                 Header {
                     VStack(spacing: .medium) {
-                        Text {
-                            viewModel.title
-                        }
-                        .textStyle(.subheadline)
+                        Text(viewModel.title)
+                            .textStyle(.subheadline)
                         Text {
                             MarkdownString {
                                 "I am absolutly in love with the \(bold: "Swift") language. Especially since its debut on the \(bold: "Server-side"). So expect to read a lot about the language itself, the projects I'm involved in and the insights I encounter along the way."

@@ -5,16 +5,15 @@ enum FeedAdminPage {
     
     struct IndexView: View {
         
-        var viewModel: FeedAdminPageModel.IndexView
+        let viewModel: FeedAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/feed/create") {
                             Symbol(system: .photo)
                             Text("Create")
@@ -35,16 +34,14 @@ enum FeedAdminPage {
     
     struct CreateView: View {
         
-        var viewModel: FeedAdminPageModel.CreateView
+        let viewModel: FeedAdminPageModel.CreateView
         
         var body: Content {
             AreaViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
-                    }
-                    .fontSize(.medium)
-                    .fontWeight(.medium)
+                    Text(viewModel.title)
+                        .fontSize(.medium)
+                        .fontWeight(.medium)
                 }
                 Section {
                     FeedAdminPage.CreateForm()
@@ -55,17 +52,15 @@ enum FeedAdminPage {
     
     struct EditView: View {
         
-        var viewModel: FeedAdminPageModel.EditView
+        let viewModel: FeedAdminPageModel.EditView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         Dropdown {
                             List(direction: .vertical) {
                                 Grouping {

@@ -5,17 +5,15 @@ enum HomeAdminPage {
     
     struct IndexView: View {
         
-        var viewModel: HomeAdminPageModel.IndexView
+        let viewModel: HomeAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                     }
                 }
                 Section {

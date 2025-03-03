@@ -3,7 +3,7 @@ import HTMLKitComponents
 
 struct ArticleList: View {
     
-    var articles: [ArticleModel.Output]
+    let articles: [ArticleModel.Output]
     
     var body: Content {
         Card {

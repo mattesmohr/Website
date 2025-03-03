@@ -5,18 +5,18 @@ enum AssetAdminPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Assets")
+        let title = LocalizedStringKey("Assets")
         let pagination: Pagination<[AssetModel.Output]>
     }
     
     struct CreateView {
         
-        let title = LocalizedString(key: "Create asset")
+        let title = LocalizedStringKey("Create asset")
     }
     
     struct EditView {
         
-        let title = LocalizedString(key: "Edit asset")
+        let title = LocalizedStringKey("Edit asset")
         let asset: AssetModel.Output
     }
 }

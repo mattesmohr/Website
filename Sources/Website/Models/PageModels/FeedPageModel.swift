@@ -5,7 +5,7 @@ enum FeedPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Feed")
+        let title = LocalizedStringKey("Feed")
         let pagination: Pagination<[FeedModel.Output]>
     }
 }

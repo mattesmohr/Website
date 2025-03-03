@@ -76,7 +76,7 @@ extension ArticleAdminPage {
     
     struct EditForm: View {
         
-        var article: ArticleModel.Output
+        let article: ArticleModel.Output
         
         var body: Content {
             Form(method: .post) {

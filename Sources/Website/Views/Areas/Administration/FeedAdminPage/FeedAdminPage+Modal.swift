@@ -6,7 +6,7 @@ extension FeedAdminPage {
     
     struct DeleteModal: View {
         
-        var id: UUID
+        let id: UUID
         
         var body: Content {
             Modal {

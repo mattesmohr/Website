@@ -28,6 +28,8 @@ enum Setup {
             try await tables(application)
             try await services(application)
             
+            try await application.execute()
+            
         } catch {
             
             application.logger.report(error: error)
@@ -37,7 +39,6 @@ enum Setup {
             throw error
         }
         
-        try await application.execute()
         try await application.asyncShutdown()
     }
     

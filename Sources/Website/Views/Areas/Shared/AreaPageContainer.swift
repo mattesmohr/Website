@@ -3,7 +3,7 @@ import HTMLKitComponents
 
 struct AreaPageContainer: View {
     
-    var content: [BodyElement]
+    let content: [BodyElement]
     
     init(@ContentBuilder<BodyElement> content: () -> [BodyElement]) {
         self.content = content()

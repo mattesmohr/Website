@@ -2,7 +2,7 @@ import HTMLKit
 
 struct Feed: View {
     
-    var content: [Content]
+    let content: [Content]
     
     init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()

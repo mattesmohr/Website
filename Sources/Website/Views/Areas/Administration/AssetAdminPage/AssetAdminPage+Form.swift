@@ -33,7 +33,7 @@ extension AssetAdminPage {
     
     struct EditForm: View {
         
-        var asset: AssetModel.Output
+        let asset: AssetModel.Output
         
         var body: Content {
             Form(method: .post) {

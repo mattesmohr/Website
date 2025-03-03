@@ -5,16 +5,14 @@ enum ProjectPage {
     
     struct IndexView: View {
 
-        var viewModel: ProjectPageModel.IndexView
+        let viewModel: ProjectPageModel.IndexView
 
         var body: Content {
             ViewContainer {
                 Header {
                     VStack(spacing: .medium) {
-                        Text {
-                            viewModel.title
-                        }
-                        .textStyle(.subheadline)
+                        Text(viewModel.title)
+                            .textStyle(.subheadline)
                         Text {
                             MarkdownString {
                                 "To do what I love, I rely on software and the individuals behind that craft. Contributing to a \(bold: "community") is my means of expressing gratitude and \(bold: "giving back"). Explore the projects I'm involved with."
@@ -128,7 +126,7 @@ enum ProjectPage {
                         .tag("macos")
                         Pane {
                             Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
-                                for project in viewModel.pagination.items.filter({$0.category == "swiftserver"}) {
+                                for project in viewModel.pagination.items.filter({$0.category == "server"}) {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
                                             Thumbnail {
@@ -168,15 +166,13 @@ enum ProjectPage {
     
     struct ShowView: View {
 
-        var viewModel: ProjectPageModel.ShowView
+        let viewModel: ProjectPageModel.ShowView
 
         var body: Content {
             ViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
-                    }
-                    .textStyle(.subheadline)
+                    Text(viewModel.title)
+                        .textStyle(.subheadline)
                 }
                 Section {
                     VStack(spacing: .large) {

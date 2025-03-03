@@ -3,7 +3,7 @@ import HTMLKitComponents
 
 struct ProjectList: View {
     
-    var projects: [ProjectModel.Output]
+    let projects: [ProjectModel.Output]
     
     var body: Content {
         Card {

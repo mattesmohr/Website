@@ -5,15 +5,13 @@ enum HomePage {
     
     struct IndexView: View {
 
-        var viewModel: HomePageModel.IndexView
+        let viewModel: HomePageModel.IndexView
 
         var body: Content {
             ViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
-                    }
-                    .textStyle(.subheadline)
+                    Text(viewModel.title)
+                        .textStyle(.subheadline)
                 }
                 Section {
                     Carousel {

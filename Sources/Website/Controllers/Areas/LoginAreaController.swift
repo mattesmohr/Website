@@ -121,7 +121,9 @@ struct LoginAreaController {
         // Create form token and store it to verify it in the post request
         request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
         
-        return try await request.htmlkit.render(LoginAreaPage.RegisterView())
+        let viewModel = LoginAreaPageModel.RegisterViewModel()
+        
+        return try await request.htmlkit.render(LoginAreaPage.RegisterView(viewModel: viewModel))
     }
     
     // [:id/register/:model]
@@ -173,7 +175,9 @@ struct LoginAreaController {
         // Create form token and store it to verify it in the post request
         request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
         
-        return try await request.htmlkit.render(LoginAreaPage.ResetView())
+        let viewModel = LoginAreaPageModel.ResetViewModel()
+        
+        return try await request.htmlkit.render(LoginAreaPage.ResetView(viewModel: viewModel))
     }
     
     // [:id/reset/:model]

@@ -1,6 +1,7 @@
 @import url('reset.css');
 @import url('utilities.css');
 @import url('thumbnails.css');
+@import url('components/thumbnail.css');
 @import url('components/feed.css');
 @import url('components/gallery.css');
 
@@ -94,21 +95,6 @@ html {
 
 a {
     color: hsla(var(--blackColor), 1.0);
-}
-
-.thumbnail {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    inline-size: 100%;
-    block-size: 250px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #E5F0F5;
-    border-radius: 5px;
-    background-color: #FAFCFD;
-    text-align: center;
-    overflow: hidden;
 }
 
 .tabs-tabs {

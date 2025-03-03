@@ -5,17 +5,15 @@ enum UserAdminPage {
     
     struct IndexView: View {
 
-        var viewModel: UserAdminPageModel.IndexView
+        let viewModel: UserAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/users/create") {
                             Symbol(system: .person)
                             Text("Create")
@@ -42,17 +40,15 @@ enum UserAdminPage {
     
     struct CreateView: View {
         
-        var viewModel: UserAdminPageModel.CreateView
+        let viewModel: UserAdminPageModel.CreateView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                     }
                 }
                 Section {
@@ -66,17 +62,15 @@ enum UserAdminPage {
     
     struct EditView: View {
         
-        var viewModel: UserAdminPageModel.EditView
+        let viewModel: UserAdminPageModel.EditView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         Dropdown {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/users/\(viewModel.user.id)/unlock/") {

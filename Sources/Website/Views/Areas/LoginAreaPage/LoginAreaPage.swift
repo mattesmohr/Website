@@ -5,7 +5,7 @@ enum LoginAreaPage {
     
     struct LoginView: View {
         
-        var viewModel: LoginAreaPageModel.LoginViewModel
+        let viewModel: LoginAreaPageModel.LoginViewModel
 
         var body: Content {
             AreaPageContainer {
@@ -26,6 +26,8 @@ enum LoginAreaPage {
     }
     
     struct RegisterView: View {
+        
+        let viewModel: LoginAreaPageModel.RegisterViewModel
 
         var body: Content {
             AreaPageContainer {
@@ -46,6 +48,8 @@ enum LoginAreaPage {
     }
     
     struct ResetView: View {
+        
+        let viewModel: LoginAreaPageModel.ResetViewModel
 
         var body: Content {
             AreaPageContainer {

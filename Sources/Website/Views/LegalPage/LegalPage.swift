@@ -5,15 +5,13 @@ enum LegalPage {
     
     struct IndexView: View {
 
-        var viewModel: LegalPageModel.IndexView
+        let viewModel: LegalPageModel.IndexView
 
         var body: Content {
             ViewContainer {
                 Header {
-                    Text {
-                        viewModel.title
-                    }
-                    .textStyle(.subheadline)
+                    Text(viewModel.title)
+                        .textStyle(.subheadline)
                 }
                 Section {
                     VStack(spacing: .large) {

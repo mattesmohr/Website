@@ -92,7 +92,7 @@ extension ProjectAdminPage {
     
     struct EditForm: View {
         
-        var project: ProjectModel.Output
+        let project: ProjectModel.Output
         
         var body: Content {
             Form(method: .post) {

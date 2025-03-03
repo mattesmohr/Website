@@ -3,7 +3,7 @@ import HTMLKitComponents
 
 struct FeedList: View {
     
-    var feeds: [FeedModel.Output]
+    let feeds: [FeedModel.Output]
     
     var body: Content {
         Card {

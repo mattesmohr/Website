@@ -3,7 +3,7 @@ import HTMLKitComponents
 
 struct AssetList: View {
     
-    var assets: [AssetModel.Output]
+    let assets: [AssetModel.Output]
     
     var body: Content {
         Card {

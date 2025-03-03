@@ -1,5 +1,6 @@
 import Vapor
 
+/// A middleware responsible for authenticating user
 struct UserSessionAuthenticator: AsyncSessionAuthenticator {
     
     typealias User = Website.UserModel.Output

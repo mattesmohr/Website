@@ -5,13 +5,13 @@ enum ProjectPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Projects")
+        let title = LocalizedStringKey("Projects")
         let pagination: Pagination<[ProjectModel.Output]>
     }
     
     struct ShowView {
         
-        let title = LocalizedString(key: "Project")
+        let title = LocalizedStringKey("Project")
         let project: ProjectModel.Output
     }
 }

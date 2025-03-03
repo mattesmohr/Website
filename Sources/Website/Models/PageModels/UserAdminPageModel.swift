@@ -5,18 +5,18 @@ enum UserAdminPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Users")
+        let title = LocalizedStringKey("Users")
         let pagination: Pagination<[UserModel.Output]>
     }
     
     struct CreateView {
         
-        let title = LocalizedString(key: "Create user")
+        let title = LocalizedStringKey("Create user")
     }
     
     struct EditView {
         
-        let title = LocalizedString(key: "Edit user")
+        let title = LocalizedStringKey("Edit user")
         let user: UserModel.Output
     }
 }

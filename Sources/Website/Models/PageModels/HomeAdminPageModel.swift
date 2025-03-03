@@ -5,6 +5,6 @@ enum HomeAdminPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Dashboard")
+        let title = LocalizedStringKey("Dashboard")
     }
 }

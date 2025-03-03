@@ -5,18 +5,18 @@ enum FeedAdminPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Feed")
+        let title = LocalizedStringKey("Feed")
         let pagination: Pagination<[FeedModel.Output]>
     }
     
     struct CreateView {
         
-        let title = LocalizedString(key: "Create feed")
+        let title = LocalizedStringKey("Create feed")
     }
     
     struct EditView {
         
-        var title = LocalizedString(key: "Edit feed")
+        var title = LocalizedStringKey("Edit feed")
         let feed: FeedModel.Output
     }
 }

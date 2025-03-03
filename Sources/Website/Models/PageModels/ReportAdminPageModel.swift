@@ -5,7 +5,7 @@ enum ReportAdminPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Reports")
+        let title = LocalizedStringKey("Reports")
         let projects: [StatisticEntity]
     }
 }

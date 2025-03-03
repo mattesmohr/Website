@@ -5,17 +5,15 @@ enum ArticleAdminPage {
     
     struct IndexView: View {
 
-        var viewModel: ArticleAdminPageModel.IndexView
+        let viewModel: ArticleAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/articles/create") {
                             Symbol(system: .file)
                             Text("Create")
@@ -36,23 +34,19 @@ enum ArticleAdminPage {
     
     struct CreateView: View {
      
-        var viewModel: ArticleAdminPageModel.CreateView
+        let viewModel: ArticleAdminPageModel.CreateView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                     }
                 }
                 Section {
-                    VStack {
-                        ArticleAdminPage.CreateForm()
-                    }
+                    ArticleAdminPage.CreateForm()
                 }
             }
         }
@@ -60,17 +54,15 @@ enum ArticleAdminPage {
     
     struct EditView: View {
         
-        var viewModel: ArticleAdminPageModel.EditView
+        let viewModel: ArticleAdminPageModel.EditView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         Dropdown {
                             List(direction: .vertical) {
                                 Grouping {
@@ -93,9 +85,7 @@ enum ArticleAdminPage {
                     }
                 }
                 Section {
-                    VStack {
-                        ArticleAdminPage.EditForm(article: viewModel.article)
-                    }
+                    ArticleAdminPage.EditForm(article: viewModel.article)
                 }
                 ArticleAdminPage.DeleteModal(id: viewModel.article.id)
             }

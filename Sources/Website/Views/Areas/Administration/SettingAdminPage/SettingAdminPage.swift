@@ -5,7 +5,7 @@ enum SettingAdminPage {
     
     struct CreateView: View {
         
-        var viewModel: SettingAdminPageModel.CreateViewModel
+        let viewModel: SettingAdminPageModel.CreateViewModel
         
         var body: Content {
             AreaViewContainer {
@@ -27,7 +27,7 @@ enum SettingAdminPage {
     
     struct EditView: View {
         
-        var viewModel: SettingAdminPageModel.EditViewModel
+        let viewModel: SettingAdminPageModel.EditViewModel
         
         var body: Content {
             AreaViewContainer {

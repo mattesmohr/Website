@@ -1,9 +1,8 @@
 import HTMLKit
-import HTMLKitComponents
 
 struct Gallery: View {
     
-    var content: [Content]
+    let content: [Content]
     
     init(@ContentBuilder<Content> content: () -> [Content]) {
         self.content = content()

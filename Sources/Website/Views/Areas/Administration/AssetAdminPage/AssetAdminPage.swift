@@ -5,17 +5,15 @@ enum AssetAdminPage {
     
     struct IndexView: View {
         
-        var viewModel: AssetAdminPageModel.IndexView
+        let viewModel: AssetAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         LinkButton(destination: "/area/admin/assets/create") {
                             Symbol(system: .photo)
                             Text("Create")
@@ -36,23 +34,19 @@ enum AssetAdminPage {
     
     struct CreateView: View {
         
-        var viewModel: AssetAdminPageModel.CreateView
+        let viewModel: AssetAdminPageModel.CreateView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                     }
                 }
                 Section {
-                    VStack {
-                        AssetAdminPage.CreateForm()
-                    }
+                    AssetAdminPage.CreateForm()
                 }
             }
         }
@@ -60,17 +54,15 @@ enum AssetAdminPage {
     
     struct EditView: View {
         
-        var viewModel: AssetAdminPageModel.EditView
+        let viewModel: AssetAdminPageModel.EditView
         
         var body: Content {
             AreaViewContainer {
                 Header {
                     HStack(spacing: .between) {
-                        Text {
-                            viewModel.title
-                        }
-                        .fontSize(.medium)
-                        .fontWeight(.medium)
+                        Text(viewModel.title)
+                            .fontSize(.medium)
+                            .fontWeight(.medium)
                         Dropdown {
                             List(direction: .vertical) {
                                 Grouping {
@@ -93,9 +85,7 @@ enum AssetAdminPage {
                     }
                 }
                 Section {
-                    VStack {
-                        AssetAdminPage.EditForm(asset: viewModel.asset)
-                    }
+                    AssetAdminPage.EditForm(asset: viewModel.asset)
                 }
                 AssetAdminPage.DeleteModal(id: viewModel.asset.id)
             }

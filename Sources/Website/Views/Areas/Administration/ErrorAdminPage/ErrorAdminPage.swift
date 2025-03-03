@@ -5,7 +5,7 @@ enum ErrorAdminPage {
     
     struct ErrorView: View {
         
-        var message: String
+        let message: String
         
         var body: Content {
             AreaViewContainer {

@@ -5,6 +5,6 @@ enum ConditionPageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Condition")
+        let title = LocalizedStringKey("Condition")
     }
 }

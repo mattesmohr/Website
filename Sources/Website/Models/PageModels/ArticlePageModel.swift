@@ -5,13 +5,13 @@ enum ArticlePageModel {
     
     struct IndexView {
         
-        let title = LocalizedString(key: "Articles")
+        let title = LocalizedStringKey("Articles")
         let pagination: Pagination<[ArticleModel.Output]>
     }
     
     struct ShowView {
         
-        let title = LocalizedString(key: "Article")
+        let title = LocalizedStringKey("Article")
         let article: ArticleModel.Output
     }
 }

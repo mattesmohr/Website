@@ -1,5 +1,4 @@
 import HTMLKit
-import HTMLKitComponents
 
 struct SafariIcon: View {
     
