@@ -1,7 +1,7 @@
 .feed {
     inline-size: 100%;
     column-count: 1;
-    column-gap: 2rem;
+    column-gap: var(--mediumSpacing);
     column-fill: balance;
     
     @media (min-width: 768px) {
@@ -14,7 +14,7 @@
 
     .article {
         display: block;
-        margin-bottom: 3rem;
+        margin-bottom: var(--mediumSpacing);
     }
 }
 

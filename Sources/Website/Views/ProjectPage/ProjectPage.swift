@@ -38,7 +38,6 @@ enum ProjectPage {
                                             }
                                             .fontSize(.small)
                                             .foregroundColor(.accent)
-                                            .bold()
                                             Text {
                                                 project.title
                                             }
@@ -71,7 +70,6 @@ enum ProjectPage {
                                             }
                                             .fontSize(.small)
                                             .foregroundColor(.accent)
-                                            .bold()
                                             Text {
                                                 project.title
                                             }
@@ -105,7 +103,6 @@ enum ProjectPage {
                                             }
                                             .fontSize(.small)
                                             .foregroundColor(.accent)
-                                            .bold()
                                             Text {
                                                 project.title
                                             }
@@ -139,7 +136,6 @@ enum ProjectPage {
                                             }
                                             .fontSize(.small)
                                             .foregroundColor(.accent)
-                                            .bold()
                                             Text {
                                                 project.title
                                             }
@@ -191,6 +187,7 @@ enum ProjectPage {
                                 .fontSize(.medium)
                             }
                             .frame(width: .nine)
+                            .tag("project-content")
                             VStack(spacing: .large) {
                                 VStack(spacing: .small) {
                                     Text("Gallery")
@@ -229,8 +226,10 @@ enum ProjectPage {
                                 }
                             }
                             .frame(width: .three)
+                            .tag("project-detail")
                         }
                     }
+                    .tag("project")
                 }
             }
         }

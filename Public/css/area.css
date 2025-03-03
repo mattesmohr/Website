@@ -8,11 +8,19 @@
 
 :root {
     --fontFamily: 'Inter';
-    --containerSize: 60%;
+    --containerSize: 100%;
     --systemBorderColor: 199, 44%, 93%;
+    --smallSpacing: 1rem;
+    --mediumSpacing: 1.5rem;
+    --largeSpacing: 2.25rem;
+    --extraLargeSpacing: 3.5rem;
 
-    @media (min-width: 768px) {
-        --containerSize: 90%;
+    @media (min-width: 80rem) {
+        --containerSize: 80%;
+    }
+
+    @media (min-width: 96rem) {
+        --containerSize: 60%;
     }
 }
 
@@ -25,7 +33,10 @@
 html {
     inline-size: 100vw;
     block-size: 100vh;
-    overflow: hidden;
+
+    @media(min-width: 64rem) {
+        overflow: hidden;
+    }
 
     body {
         block-size: 100%;
@@ -55,33 +66,36 @@ html {
             padding-inline: 25px;
             inline-size: var(--containerSize);
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
+
+            @media (min-width: 64rem) {
+                flex-direction: row;
+                height: calc(100% - 75px);
+            }
 
             > section {
-                inline-size: 85%;
-                block-size: 100%;
-                display: grid;
-                grid-template-rows: auto 1fr auto;
-                grid-template-columns: 1fr;
-                grid-template-areas: "header" "section" "footer";
+                inline-size: 100%;
+                display: flex;
+                flex-direction: column;
+
+                @media (min-width: 64rem) {
+                    inline-size: 85%;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                }
 
                 > header {
-                    grid-area: header;
-
                     padding-block: 10px;
                     padding-inline: 25px;
+
                 }
 
                 > section {
-                    grid-area: section;
-
                     padding-block: 10px;
                     padding-inline: 25px;
                 }
 
                 > footer {
-                    grid-area: footer;
-
                     padding-block: 10px;
                     padding-inline: 25px;
                 }
@@ -89,23 +103,36 @@ html {
 
             > aside {
                 min-inline-size: 200px;
-                inline-size: 15%;
+                inline-size: 100%;
                 display: flex;
                 flex-direction: column;
+
+                @media (min-width: 64rem) {
+                    inline-size: 15%;
+                }
 
                 > section {
                     flex-grow: 1;
 
                     padding-block: 10px;
                     padding-inline: 15px;
-                }
 
-                > footer {
-                    padding-block: 10px;
-                    padding-inline: 25px;
-                    border-top-width: 1px;
-                    border-top-style: solid;
-                    border-top-color: hsla(var(--systemBorderColor), 1.0);
+                    > .navigation {
+                        overflow-x: scroll;
+                        scrollbar-width: none;
+
+                        &::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                        > .list {
+                            flex-direction: row;
+
+                            @media(min-width: 64rem) {
+                                flex-direction: column;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -36,7 +36,6 @@ enum ArticlePage {
                                     }
                                     .fontSize(.small)
                                     .foregroundColor(.accent)
-                                    .bold()
                                     Text {
                                         article.title
                                     }
@@ -81,6 +80,7 @@ enum ArticlePage {
                                 .fontSize(.medium)
                             }
                             .frame(width: .nine)
+                            .tag("article-content")
                             VStack(spacing: .large) {
                                 VStack {
                                     Text("Category")
@@ -102,8 +102,10 @@ enum ArticlePage {
                                 }
                             }
                             .frame(width: .three)
+                            .tag("article-detail")
                         }
                     }
+                    .tag("article")
                 }
             }
         }

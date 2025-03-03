@@ -163,6 +163,7 @@ enum PrivacyPage {
                             .tag("ssl-encryption")
                         }
                         .frame(width: .nine)
+                        .tag("privacy-content")
                         VStack {
                             Text("Quick navigation")
                                 .bold()
@@ -212,7 +213,9 @@ enum PrivacyPage {
                             }
                         }
                         .frame(width: .three)
+                        .tag("privacy-detail")
                     }
+                    .tag("privacy")
                 }
             }
         }

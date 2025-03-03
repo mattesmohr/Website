@@ -35,6 +35,9 @@ struct PageContainer: View {
                 content
                 Script {
                 }
+                .source("/js/page.js")
+                Script {
+                }
                 .source("/htmlkit/all.js")
             }
         }

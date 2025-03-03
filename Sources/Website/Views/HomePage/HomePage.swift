@@ -10,63 +10,60 @@ enum HomePage {
         var body: Content {
             ViewContainer {
                 Header {
-                    Text(viewModel.title)
-                        .textStyle(.subheadline)
-                }
-                Section {
-                    Carousel {
-                        Slide {
-                            VStack(alignment: .center, spacing: .around) {
-                                MacIcon()
+                    VStack(spacing: .medium) {
+                        Text(viewModel.title)
+                            .textStyle(.subheadline)
+                        Carousel {
+                            Slide {
+                                VStack(alignment: .center, spacing: .around) {
+                                    MacIcon()
+                                }
                             }
-                        }
-                        .backgroundColor(.system)
-                        .tag("slide1")
-                        Slide {
-                            VStack(alignment: .center, spacing: .around) {
-                                SafariIcon()
+                            .backgroundColor(.system)
+                            .tag("slide1")
+                            Slide {
+                                VStack(alignment: .center, spacing: .around) {
+                                    SafariIcon()
+                                }
                             }
+                            .backgroundColor(.system)
+                            .tag("slide2")
                         }
-                        .backgroundColor(.system)
-                        .tag("slide2")
+                        .frame(width: .twelve)
+                        .borderShape(.smallrounded)
                     }
-                    .borderShape(.smallrounded)
                 }
                 Section {
                     VStack(alignment: .center, spacing: .large) {
                         Text("About")
                             .textStyle(.subheadline)
-                        Text {
+                        Text(alignment: .center) {
                             "Developer. Swift. Server Side."
                         }
                         .textStyle(.headline)
-                        Text {
+                        Text(alignment: .center) {
                             MarkdownString {
                                 "Hi there, I am \(bold: "Mattes"). A developer from \(bold: "Bavaria, Germany"). I am building websites for living."
                             }
                         }
                         .fontSize(.medium)
-                        .frame(width: .eight)
                     }
                     .tag("about")
-                }
-                Section {
                     VStack(alignment: .center, spacing: .large) {
                         Text("Projects")
                             .textStyle(.subheadline)
-                        Text {
+                        Text(alignment: .center) {
                             "Open Source. Vapor. Community."
                         }
                         .textStyle(.headline)
-                        Text {
+                        Text(alignment: .center) {
                             MarkdownString {
                                 "The majority of my spare time is dedicated to \(bold: "open source") contributions."
                             }
                         }
                         .fontSize(.medium)
-                        .frame(width: .eight)
                         VStack(spacing: .large) {
-                            Scroll {
+                            Scroll(showIndicators: false) {
                                 HStack(alignment: .top, spacing: .small) {
                                     for project in viewModel.pagination.items {
                                         Link(destination: "/projects/\(project.slug)") {
@@ -88,7 +85,6 @@ enum HomePage {
                                                 }
                                                 .fontSize(.small)
                                                 .foregroundColor(.accent)
-                                                .bold()
                                                 Text {
                                                     project.title
                                                 }
@@ -99,6 +95,7 @@ enum HomePage {
                                                 .lineLimit(.three)
                                             }
                                         }
+                                        .frame(width: .four)
                                     }
                                 }
                                 .frame(width: .twelve)
@@ -108,7 +105,6 @@ enum HomePage {
                                     LocalizedString(key: "View all")
                                 }
                                 .foregroundColor(.accent)
-                                .bold()
                             }
                         }
                     }
