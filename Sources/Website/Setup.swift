@@ -78,6 +78,7 @@ enum Setup {
                 try restricted.register(collection: AssetAdminController())
                 try restricted.register(collection: UserAdminController())
                 try restricted.register(collection: FeedAdminController())
+                try restricted.register(collection: CommentAdminController())
                 try restricted.register(collection: ReportAdminController())
                 try restricted.register(collection: SettingAdminController())
             }

@@ -90,6 +90,58 @@ struct ArticleModel {
         }
     }
     
+    /// An enumeration representing the possible states of a comment section
+    enum CommentStatus: String, Codable, CaseIterable {
+        
+        /// Indicates the comment section is fully open and allows new comments
+        case open
+        
+        /// Indicates the comment section is closed and does not accept new comments
+        case closed
+        
+        /// Indicates the comment section is archived and is only visible to administrators
+        case archived
+        
+        /// Indicates the comment section is disabled, preventing submitting comments
+        case disabled
+        
+        /// The label for the status of the comment section
+        var description: String {
+            
+            switch self {
+            case .open:
+                return "Open"
+                
+            case .closed:
+                return "Closed"
+                
+            case .archived:
+                return "Archived"
+                
+            case .disabled:
+                return "Disabled"
+            }
+        }
+        
+        /// The localized label for the status of the comment section
+        var localizedDescription: LocalizedStringKey {
+        
+            switch self {
+            case .open:
+                return "Open"
+                
+            case .closed:
+                return "Closed"
+                
+            case .archived:
+                return "Archived"
+                
+            case .disabled:
+                return "Disabled"
+            }
+        }
+    }
+    
     /// The data transfer object for the article input
     struct Input: Vapor.Content, Validatable {
         
@@ -110,6 +162,9 @@ struct ArticleModel {
         
         /// The publication status for the article
         let status: String
+        
+        /// The status for the comment section
+        let comment: String
         
         /// The timestamp when the article should be published
         var publishedOn: Date?
@@ -180,6 +235,9 @@ struct ArticleModel {
         /// The publication status of the article
         let status: ArticleStatus
         
+        /// The status of the comment section
+        let comment: CommentStatus
+        
         /// The timestamp when the article was published
         var publishedOn: Date?
         
@@ -198,7 +256,7 @@ struct ArticleModel {
         /// The timestamp when the article was last updated
         let modifiedAt: Date
         
-        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.slug = slug
@@ -208,6 +266,7 @@ struct ArticleModel {
             self.content = content
             self.category = ArticleCategory(rawValue: category)!
             self.status = ArticleStatus(rawValue: status)!
+            self.comment = CommentStatus(rawValue: comment)!
             self.publishedOn = publishedOn
             self.assets = assets
             self.comments = comments
@@ -218,7 +277,7 @@ struct ArticleModel {
         
         init(entity: ArticleEntity) {
             
-            self.init(id: entity.id!, slug: entity.slug, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
+            self.init(id: entity.id!, slug: entity.slug, title: entity.title, excerpt: entity.excerpt, content: entity.content, category: entity.category, status: entity.status, comment: entity.comment, publishedOn: entity.publishedOn, author: UserModel.Output(entity: entity.author), createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         
             if let thumbnail = entity.thumbnail {
                 self.thumbnail = AssetModel.Output(entity: thumbnail)

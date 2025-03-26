@@ -13,6 +13,7 @@ struct ArticleMigration: AsyncMigration {
             .field("content", .custom("text"), .required)
             .field("category", .string, .required)
             .field("status", .string, .required)
+            .field("comment", .string)
             .field("published_on", .datetime)
             .field("author_id", .uuid, .required, .references("users", "id"))
             .field("created_at", .datetime)

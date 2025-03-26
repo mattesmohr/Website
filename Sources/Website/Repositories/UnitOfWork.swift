@@ -18,6 +18,11 @@ struct UnitOfWork {
     }
     
     /// Access to the contact repository
+    var comment: CommentRepository {
+        return .init(database: database)
+    }
+    
+    /// Access to the contact repository
     var contact: ContactRepository {
         return .init(database: database)
     }

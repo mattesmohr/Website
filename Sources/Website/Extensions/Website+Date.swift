@@ -10,4 +10,12 @@ extension Date {
         
         return formatter.string(from: self)
     }
+    
+    func formatted(unit: RelativeDateTimeFormatter.UnitsStyle) -> String {
+        
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = unit
+        
+        return formatter.localizedString(for: self, relativeTo: Date())
+    }
 }

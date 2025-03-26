@@ -29,6 +29,9 @@ final class ArticleEntity: Model, @unchecked Sendable {
     @Field(key: "status")
     var status: String
     
+    @Field(key: "comment")
+    var comment: String
+    
     @OptionalField(key: "published_on")
     var publishedOn: Date?
     
@@ -49,7 +52,7 @@ final class ArticleEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, slug: String, thumbnailId: UUID? = nil, title: String, excerpt: String, content: String, category: String, status: String, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, slug: String, thumbnailId: UUID? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
     
         self.id = id
         self.slug = slug
@@ -59,6 +62,7 @@ final class ArticleEntity: Model, @unchecked Sendable {
         self.content = content
         self.category = category
         self.status = status
+        self.comment = comment
         self.publishedOn = publishedOn
         self.$author.id = authorId
         self.createdAt = createdAt
@@ -67,7 +71,7 @@ final class ArticleEntity: Model, @unchecked Sendable {
     
     convenience init(input: ArticleModel.Input) {
         
-        self.init(slug: input.slug, title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, publishedOn: input.publishedOn, authorId: input.authorId!)
+        self.init(slug: input.slug, title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, comment: input.comment, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
             self.$thumbnail.id = UUID(uuidString: thumbnailId)

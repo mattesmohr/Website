@@ -34,6 +34,19 @@ extension ArticleAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
+                        FieldLabel(for: "comment") {
+                            LocalizedString(key: "Comments")
+                        }
+                        SelectField(name: "comment", prompt: "Open") {
+                            for comment in ArticleModel.CommentStatus.allCases {
+                                RadioSelect(value: comment.rawValue) {
+                                    comment.description
+                                }
+                            }
+                        }
+                        .borderShape(.smallrounded)
+                    }
+                    VStack {
                         FieldLabel(for: "category") {
                             LocalizedString(key: "Category")
                         }
@@ -108,6 +121,19 @@ extension ArticleAdminPage {
                     .lineLimit(15)
                 }
                 HStack(spacing: .small) {
+                    VStack {
+                        FieldLabel(for: "comment") {
+                            LocalizedString(key: "Comments")
+                        }
+                        SelectField(name: "comment", prompt: "Open", selection: article.comment.rawValue) {
+                            for comment in ArticleModel.CommentStatus.allCases {
+                                RadioSelect(value: comment.rawValue) {
+                                    comment.description
+                                }
+                            }
+                        }
+                        .borderShape(.smallrounded)
+                    }
                     VStack {
                         FieldLabel(for: "category") {
                             LocalizedString(key: "Category")

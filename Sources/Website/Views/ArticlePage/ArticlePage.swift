@@ -96,6 +96,28 @@ enum ArticlePage {
                             .frame(width: .three)
                             .tag("article-detail")
                         }
+                        if viewModel.article.comment != .disabled {
+                            HStack(alignment: .top, spacing: .large) {
+                                VStack(spacing: .small) {
+                                    Text("Comments")
+                                    if viewModel.article.comment == .open {
+                                        CommentForm()
+                                    }
+                                    if let comments = viewModel.article.comments {
+                                        VStack(spacing: .small) {
+                                            for comment in comments where comment.status == .approved {
+                                                CommentView(comment: comment)
+                                            }
+                                        }
+                                    }
+                                }
+                                .frame(width: .nine)
+                                .tag("article-comments")
+                                VStack {
+                                }
+                                .frame(width: .three)
+                            }
+                        }
                     }
                     .tag("article")
                 }

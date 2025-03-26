@@ -10,6 +10,8 @@
 "Blog" = "Blog";
 "Cancel" = "Cancel";
 "Category" = "Category";
+"Comments" = "Comments";
+"Comment" = "Comment";
 "Confirmation" = "Confirmation";
 "Content" = "Content";
 "Create" = "Create";
@@ -37,6 +39,7 @@
 "Privacy policy" = "Privacy policy";
 "Project"= "Project";
 "Projects" = "Projects";
+"Reply" = "Reply";
 "Repository" = "Repository";
 "Reports" = "Reports";
 "Reset" = "Reset";
@@ -66,6 +69,7 @@
 "Edit asset" = "Edit asset";
 "Create user" = "Create user";
 "Edit user" = "Edit user";
+"Edit comment" = "Edit comment";
 
 "Do you really want to delete it? It cannot be undone." = "Do you really want to delete it? It cannot be undone.";
 

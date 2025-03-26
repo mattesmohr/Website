@@ -66,6 +66,10 @@ struct AreaViewContainer: View {
                                     Symbol(system: .scope)
                                     Text("Feed")
                                 }
+                                Link(destination: "/area/admin/comments") {
+                                    Symbol(system: .file)
+                                    Text("Comments")
+                                }
                                 Link(destination: "/area/admin/assets") {
                                     Symbol(system: .photo)
                                     Text("Assets")

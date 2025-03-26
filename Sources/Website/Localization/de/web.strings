@@ -10,6 +10,8 @@
 "Blog" = "Blog";
 "Cancel" = "Abbrechen";
 "Category" = "Kategorie";
+"Comments" = "Kommentare";
+"Comment" = "Kommentieren";
 "Confirmation" = "Bestätigung";
 "Content" = "Inhalt";
 "Create" = "Erstellen";
@@ -37,6 +39,7 @@
 "Privacy policy" = "Datenschutzerklärung";
 "Project"= "Projekt";
 "Projects" = "Projekte";
+"Reply" = "Antwort";
 "Repository" = "Repository";
 "Reports" = "Berichte";
 "Reset" = "Zurücksetzen";
@@ -66,6 +69,7 @@
 "Edit asset" = "Asset bearbeiten";
 "Create user" = "Benutzer erstellen";
 "Edit user" = "Benutzer bearbeiten";
+"Edit comment" = "Kommentar bearbeiten";
 
 "Do you really want to delete it? It cannot be undone." = "Möchtest du es wirklich löschen? Der Vorgang kann nicht rückgängig gemacht werden.";
 
