@@ -16,7 +16,7 @@ final class UserRepository {
     func find(id: UUID) async throws -> UserEntity? {
         
        return try await database.query(UserEntity.self)
-            .with(\.$credential)
+            .with(\.$account)
             .filter(\.$id == id)
             .first()
     }
@@ -25,7 +25,7 @@ final class UserRepository {
     func find(email: String) async throws -> UserEntity? {
         
         return try await database.query(UserEntity.self)
-            .with(\.$credential)
+            .with(\.$account)
             .filter(\.$email == email)
             .first()
     }
@@ -34,7 +34,7 @@ final class UserRepository {
     func find() async throws -> [UserEntity] {
         
         return try await database.query(UserEntity.self)
-            .with(\.$credential)
+            .with(\.$account)
             .sort(\.$modifiedAt, .descending)
             .all()
     }

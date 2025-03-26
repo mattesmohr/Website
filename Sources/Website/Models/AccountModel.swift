@@ -1,7 +1,7 @@
 import Vapor
 import HTMLKitComponents
 
-struct CredentialModel {
+struct AccountModel {
 
     enum States: String, Codable, CaseIterable {
         
@@ -11,7 +11,7 @@ struct CredentialModel {
         case unlocked
     }
     
-    /// The data transfer object for the credential input
+    /// The data transfer object for the account input
     struct Input: Content, Validatable {
         
         /// The plaintext version of the password
@@ -29,25 +29,25 @@ struct CredentialModel {
         ]
     }
     
-    /// The data transfer object for the credential entity
+    /// The data transfer object for the account entity
     struct Output: Content {
         
-        /// The unique identifier of the credential
+        /// The unique identifier of the account
         let id: UUID
         
         /// The hashed version of the password
         let password: String
         
-        /// The current status of the credential, such as  locked or deactivated
+        /// The current status of the account, such as  locked or deactivated
         var status: String?
         
-        /// The number of failed attempts using the credential
+        /// The number of failed attempts using the account
         let attempt: Int
         
-        /// The timestamp when the credential was first stored
+        /// The timestamp when the account was first stored
         let createdAt: Date
         
-        /// The timestamp when the credential was last updated
+        /// The timestamp when the account was last updated
         let modifiedAt: Date
         
         init(id: UUID, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
@@ -60,7 +60,7 @@ struct CredentialModel {
             self.modifiedAt = modifiedAt
         }
         
-        init(entity: CredentialEntity) {
+        init(entity: AccountEntity) {
             
             self.init(id: entity.id!, password: entity.password, status: entity.status, attempt: entity.attempt, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
         }

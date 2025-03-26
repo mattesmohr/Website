@@ -100,8 +100,8 @@ struct UserAdminController {
             throw Abort(.notFound)
         }
         
-        if let credential = user.credential {
-            try await request.unit.credential.patch(field: \.$status, to: "deactivated", for: credential.requireID())
+        if let account = user.account {
+            try await request.unit.account.patch(field: \.$status, to: "deactivated", for: account.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")
@@ -119,8 +119,8 @@ struct UserAdminController {
             throw Abort(.notFound)
         }
         
-        if let credential = user.credential {
-            try await request.unit.credential.patch(field: \.$status, to: "unlocked", for: credential.requireID())
+        if let account = user.account {
+            try await request.unit.account.patch(field: \.$status, to: "unlocked", for: account.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")
@@ -138,8 +138,8 @@ struct UserAdminController {
             throw Abort(.notFound)
         }
         
-        if let credential = user.credential {
-            try await request.unit.credential.patch(field: \.$status, to: "reseted", for: credential.requireID())
+        if let account = user.account {
+            try await request.unit.account.patch(field: \.$status, to: "reseted", for: account.requireID())
         }
         
         return request.redirect(to: "/area/admin/users/\(id)/edit")

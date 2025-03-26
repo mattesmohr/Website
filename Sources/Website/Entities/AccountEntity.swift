@@ -1,9 +1,9 @@
 import Fluent
 import Foundation
 
-final class CredentialEntity: Model, @unchecked Sendable {
+final class AccountEntity: Model, @unchecked Sendable {
     
-    static let schema = "credentials"
+    static let schema = "accounts"
     
     @ID
     var id: UUID?

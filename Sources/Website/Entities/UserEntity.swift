@@ -36,7 +36,7 @@ final class UserEntity: Model, @unchecked Sendable {
     var articles: [ArticleEntity]
     
     @OptionalChild(for: \.$user)
-    var credential: CredentialEntity?
+    var account: AccountEntity?
     
     init() {}
     

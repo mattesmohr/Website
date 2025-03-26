@@ -22,8 +22,8 @@ struct UnitOfWork {
         return .init(database: database)
     }
     
-    /// Access to the credential repository
-    var credential: CredentialRepository {
+    /// Access to the account repository
+    var account: AccountRepository {
         return .init(database: database)
     }
     

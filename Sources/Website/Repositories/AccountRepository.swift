@@ -1,7 +1,7 @@
 import Fluent
 import Foundation
 
-final class CredentialRepository {
+final class AccountRepository {
     
     /// The database instance used by the repository for e. g. querying
     let database: Database
@@ -12,18 +12,18 @@ final class CredentialRepository {
         self.database = database
     }
     
-    /// Finds the first matching credential entity by the given identifier
-    func find(id: UUID) async throws -> CredentialEntity? {
+    /// Finds the first matching account entity by the given identifier
+    func find(id: UUID) async throws -> AccountEntity? {
         
-       return try await database.query(CredentialEntity.self)
+       return try await database.query(AccountEntity.self)
             .filter(\.$id == id)
             .first()
     }
     
-    /// Inserts a new credential entity
-    func insert(entity: CredentialEntity) async throws {
+    /// Inserts a new account entity
+    func insert(entity: AccountEntity) async throws {
         
-        try await database.query(CredentialEntity.self)
+        try await database.query(AccountEntity.self)
             .set(\.$id, to: UUID())
             .set(\.$password, to: entity.password)
             .set(\.$status, to: entity.status)
@@ -32,19 +32,19 @@ final class CredentialRepository {
             .create()
     }
     
-    /// Updates a specific field of the credential entity
-    func patch<Field: QueryableProperty>(field: KeyPath<CredentialEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == CredentialEntity {
+    /// Updates a specific field of the account entity
+    func patch<Field: QueryableProperty>(field: KeyPath<AccountEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == AccountEntity {
         
-        try await database.query(CredentialEntity.self)
+        try await database.query(AccountEntity.self)
             .filter(\.$id == id)
             .set(field, to: value)
             .update()
     }
 
-    /// Updates all fields of the credential entity.
-    func update(entity: CredentialEntity, on id: UUID) async throws {
+    /// Updates all fields of the account entity.
+    func update(entity: AccountEntity, on id: UUID) async throws {
         
-        try await database.query(CredentialEntity.self)
+        try await database.query(AccountEntity.self)
             .filter(\.$id == id)
             .set(\.$password, to: entity.password)
             .set(\.$status, to: entity.status)

@@ -19,7 +19,7 @@ final class ProjectRepository {
        return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$assets)
             .filter(\.$id == id)
@@ -32,7 +32,7 @@ final class ProjectRepository {
         return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$assets)
             .sort(\.$modifiedAt, .descending)
@@ -44,7 +44,7 @@ final class ProjectRepository {
         return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$assets)
             .filter(\.$slug == slug)
@@ -57,7 +57,7 @@ final class ProjectRepository {
         return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$assets)
             .filter(\.$status == status)

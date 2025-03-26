@@ -40,10 +40,10 @@ struct LoginAreaController {
             return request.redirect(to: "/area/login/login")
         }
         
-        // Check credential and the current status
-        if let credential = user.credential {
+        // Check account and the current status
+        if let account = user.account {
             
-            switch credential.status {
+            switch account.status {
             case "deactivated", "locked":
                 
                 // Do nothing
@@ -54,15 +54,15 @@ struct LoginAreaController {
                 
             default:
                 
-                if try await request.password.async.verify(login.password, created: credential.password) {
+                if try await request.password.async.verify(login.password, created: account.password) {
                 
                     request.session.authenticate(UserModel.Output(entity: user))
                     
                     // The attempt was successful, let's reset the counter
-                    if credential.attempt > 0 {
+                    if account.attempt > 0 {
                         
                         // Reset the counter
-                        try await request.unit.credential.patch(field: \.$attempt, to: 0, for: credential.requireID())
+                        try await request.unit.account.patch(field: \.$attempt, to: 0, for: account.requireID())
                     }
             
                     return request.redirect(to: "/area/admin/home")
@@ -70,15 +70,15 @@ struct LoginAreaController {
                 } else {
                     
                     // Track the attempt. If the maximum number of attempts is reached, lock the account
-                    if credential.attempt < 4 {
+                    if account.attempt < 4 {
                         
                         // Increment the attempt count
-                        try await request.unit.credential.patch(field: \.$attempt, to: (credential.attempt + 1), for: credential.requireID())
+                        try await request.unit.account.patch(field: \.$attempt, to: (account.attempt + 1), for: account.requireID())
                         
                     } else {
                         
                         // Otherwise lock the account
-                        try await request.unit.credential.patch(field: \.$status, to: "locked", for: credential.requireID())
+                        try await request.unit.account.patch(field: \.$status, to: "locked", for: account.requireID())
                     }
                 }
             }
@@ -112,7 +112,7 @@ struct LoginAreaController {
             throw Abort(.notFound)
         }
         
-        if let _ = user.credential {
+        if let _ = user.account {
             
             // The user is already registered, therefore abort the request
             throw Abort(.badRequest)
@@ -146,7 +146,7 @@ struct LoginAreaController {
         
         let digest = try await request.password.async.hash(reset.password)
         
-        try await request.unit.credential.insert(entity: CredentialEntity(password: digest, status: "unlocked", attempt: 0, userId: id))
+        try await request.unit.account.insert(entity: AccountEntity(password: digest, status: "unlocked", attempt: 0, userId: id))
         
         return request.redirect(to: "/area/login/login")
     }
@@ -163,9 +163,9 @@ struct LoginAreaController {
             throw Abort(.notFound)
         }
         
-        if let credential = user.credential {
+        if let account = user.account {
             
-            if credential.status != "reseted" {
+            if account.status != "reseted" {
                 
                 // The reset was not initiated, therefore abort the request
                 throw Abort(.badRequest)
@@ -202,12 +202,12 @@ struct LoginAreaController {
             throw Abort(.notFound)
         }
         
-        if let credential = user.credential {
+        if let account = user.account {
             
-            credential.password = try await request.password.async.hash(reset.password)
-            credential.status = "unlocked"
+            account.password = try await request.password.async.hash(reset.password)
+            account.status = "unlocked"
             
-            try await request.unit.credential.update(entity: credential, on: credential.requireID())
+            try await request.unit.account.update(entity: account, on: account.requireID())
         }
         
         return request.redirect(to: "/area/login/login")

@@ -19,7 +19,7 @@ final class ArticleRepository {
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$comments)
             .filter(\.$id == id)
@@ -33,7 +33,7 @@ final class ArticleRepository {
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$comments)
             .filter(\.$slug == slug)
@@ -47,7 +47,7 @@ final class ArticleRepository {
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$comments)
             .sort(\.$modifiedAt, .descending)
@@ -61,7 +61,7 @@ final class ArticleRepository {
             .with(\.$thumbnail)
             .with(\.$assets)
             .with(\.$author) { user in
-                user.with(\.$credential)
+                user.with(\.$account)
             }
             .with(\.$comments)
             .filter(\.$status == status)

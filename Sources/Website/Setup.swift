@@ -100,7 +100,7 @@ enum Setup {
         
         application.migrations.add(SessionRecord.migration)
         application.migrations.add(AssetMigration())
-        application.migrations.add(CredentialMigration())
+        application.migrations.add(AccountMigration())
         application.migrations.add(UserMigration())
         application.migrations.add(ArticleMigration())
         application.migrations.add(ProjectMigration())
