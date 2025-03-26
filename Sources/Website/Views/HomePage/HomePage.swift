@@ -70,21 +70,17 @@ enum HomePage {
                                             VStack(spacing: .small) {
                                                 Thumbnail {
                                                     switch project.category {
-                                                    case "macos":
+                                                    case .macos:
                                                         MacIcon()
-                                                    case "ios":
+                                                    case .ios:
                                                         PadIcon()
                                                     default:
-                                                        SafariIcon()
+                                                        PadIcon()
                                                     }
                                                 }
-                                                Text {
-                                                    if let category = ProjectModel.Categories(rawValue: project.category) {
-                                                        category.description
-                                                    }
-                                                }
-                                                .fontSize(.small)
-                                                .foregroundColor(.accent)
+                                                Text(project.category.localizedDescription)
+                                                    .fontSize(.small)
+                                                    .foregroundColor(.accent)
                                                 Text {
                                                     project.title
                                                 }

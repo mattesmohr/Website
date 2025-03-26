@@ -29,13 +29,9 @@ enum ArticlePage {
                                     Thumbnail {
                                         MacIcon()
                                     }
-                                    Text {
-                                        if let category = ArticleModel.Categories(rawValue: article.category) {
-                                            category.description
-                                        }
-                                    }
-                                    .fontSize(.small)
-                                    .foregroundColor(.accent)
+                                    Text(article.category.localizedDescription)
+                                        .fontSize(.small)
+                                        .foregroundColor(.accent)
                                     Text {
                                         article.title
                                     }
@@ -84,12 +80,8 @@ enum ArticlePage {
                             VStack(spacing: .large) {
                                 VStack {
                                     Text("Category")
-                                    Text {
-                                        if let category = ProjectModel.Categories(rawValue: viewModel.article.category) {
-                                            category.description
-                                        }
-                                    }
-                                    .bold()
+                                    Text(viewModel.article.category.localizedDescription)
+                                        .bold()
                                 }
                                 if let publishedOn = viewModel.article.publishedOn {
                                     VStack {

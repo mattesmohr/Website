@@ -38,7 +38,7 @@ extension ArticleAdminPage {
                             LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS") {
-                            for category in ArticleModel.Categories.allCases {
+                            for category in ArticleModel.ArticleCategory.allCases {
                                 RadioSelect(value: category.rawValue) {
                                     category.description
                                 }
@@ -51,7 +51,7 @@ extension ArticleAdminPage {
                             LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published") {
-                            for state in ArticleModel.States.allCases {
+                            for state in ArticleModel.ArticleStatus.allCases {
                                 RadioSelect(value: state.rawValue) {
                                     state.description
                                 }
@@ -112,8 +112,8 @@ extension ArticleAdminPage {
                         FieldLabel(for: "category") {
                             LocalizedString(key: "Category")
                         }
-                        SelectField(name: "category", prompt: "macOS", selection: article.category) {
-                            for category in ArticleModel.Categories.allCases {
+                        SelectField(name: "category", prompt: "macOS", selection: article.category.rawValue) {
+                            for category in ArticleModel.ArticleCategory.allCases {
                                 RadioSelect(value: category.rawValue) {
                                     category.description
                                 }
@@ -125,8 +125,8 @@ extension ArticleAdminPage {
                         FieldLabel(for: "status") {
                             LocalizedString(key: "Status")
                         }
-                        SelectField(name: "status", prompt: "Published", selection: article.status) {
-                            for state in ArticleModel.States.allCases {
+                        SelectField(name: "status", prompt: "Published", selection: article.status.rawValue) {
+                            for state in ArticleModel.ArticleStatus.allCases {
                                 RadioSelect(value: state.rawValue) {
                                     state.description
                                 }

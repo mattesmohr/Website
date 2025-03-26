@@ -15,20 +15,12 @@ struct ProjectList: View {
                         }
                         .frame(width: .four)
                         .lineLimit(.one)
-                        Text {
-                            if let category = ProjectModel.Categories(rawValue: project.category) {
-                                category.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
-                        Text {
-                            if let state = ProjectModel.States(rawValue: project.status) {
-                                state.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
+                        Text(project.category.localizedDescription)
+                            .frame(width: .two)
+                            .lineLimit(.one)
+                        Text(project.status.localizedDescription)
+                            .frame(width: .two)
+                            .lineLimit(.one)
                         Text {
                             project.modifiedAt.formatted(date: .short, time: .none)
                         }

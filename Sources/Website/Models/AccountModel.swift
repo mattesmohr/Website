@@ -1,18 +1,63 @@
 import Vapor
+import HTMLKit
 import HTMLKitComponents
 
 struct AccountModel {
 
-    enum States: String, Codable, CaseIterable {
+    /// An enumeration representing the potential states of a credential
+    enum AccountStatus: String, Codable, CaseIterable {
         
+        /// Indicates the account is deactivated
         case deactivated
+        
+        /// Indicates the account is locked
         case locked
+        
+        /// Indicates the account is new
         case new
+        
+        /// Indicates the account is unlocked
         case unlocked
+        
+        /// The label for the credential status
+        var description: String {
+            
+            switch self {
+            case .deactivated:
+                return "Deactivated"
+                
+            case .locked:
+                return "Locked"
+                
+            case .new:
+                return "New"
+                
+            case .unlocked:
+                return "Unlocked"
+            }
+        }
+    
+        /// The localized label for the credential status
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .deactivated:
+                return "Deactivated"
+                
+            case .locked:
+                return "Locked"
+                
+            case .new:
+                return "New"
+                
+            case .unlocked:
+                return "Unlocked"
+            }
+        }
     }
     
-    /// The data transfer object for the account input
-    struct Input: Content, Validatable {
+    /// The data transfer object for the credential input
+    struct Input: Vapor.Content, Validatable {
         
         /// The plaintext version of the password
         let password: String
@@ -29,25 +74,25 @@ struct AccountModel {
         ]
     }
     
-    /// The data transfer object for the account entity
-    struct Output: Content {
+    /// The data transfer object for the credential entity
+    struct Output: Vapor.Content {
         
-        /// The unique identifier of the account
+        /// The unique identifier of the credential
         let id: UUID
         
         /// The hashed version of the password
         let password: String
         
-        /// The current status of the account, such as  locked or deactivated
+        /// The current status of the credential, such as  locked or deactivated
         var status: String?
         
-        /// The number of failed attempts using the account
+        /// The number of failed attempts using the credential
         let attempt: Int
         
-        /// The timestamp when the account was first stored
+        /// The timestamp when the credential was first stored
         let createdAt: Date
         
-        /// The timestamp when the account was last updated
+        /// The timestamp when the credential was last updated
         let modifiedAt: Date
         
         init(id: UUID, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {

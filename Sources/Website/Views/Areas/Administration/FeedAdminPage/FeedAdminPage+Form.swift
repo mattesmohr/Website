@@ -30,7 +30,7 @@ extension FeedAdminPage {
                         LocalizedString(key: "Status")
                     }
                     SelectField(name: "status", prompt: "Published") {
-                        for state in ArticleModel.States.allCases {
+                        for state in FeedModel.FeedStatus.allCases {
                             RadioSelect(value: state.rawValue) {
                                 state.description
                             }
@@ -82,8 +82,8 @@ extension FeedAdminPage {
                     FieldLabel(for: "status") {
                         LocalizedString(key: "Status")
                     }
-                    SelectField(name: "status", prompt: "Published", selection: feed.status) {
-                        for state in ArticleModel.States.allCases {
+                    SelectField(name: "status", prompt: "Published", selection: feed.status.rawValue) {
+                        for state in FeedModel.FeedStatus.allCases {
                             RadioSelect(value: state.rawValue) {
                                 state.description
                             }

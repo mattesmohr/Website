@@ -1,58 +1,97 @@
 import Vapor
+import HTMLKit
 import HTMLKitComponents
 
 struct ArticleModel {
     
-    enum Categories: String, Codable, CaseIterable {
+    /// An enumeration representing the potential states of a article
+    enum ArticleCategory: String, Codable, CaseIterable {
         
+        /// Indicates the article is about macos
         case macos
+
+        /// Indicates the article is about ios
         case ios
+        
+        /// Indicates the article is about swift on server
         case server
         
+        /// The label for the article category
         var description: String {
             
-            switch rawValue {
-            case "macos":
+            switch self {
+            case .macos:
                 return "macOS"
                 
-            case "ios":
+            case .ios:
                 return "iOS"
                 
-            case "server":
+            case .server:
                 return "Swift on server"
+            }
+        }
+        
+        /// The localized label for the article category
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .macos:
+                return "macOS"
                 
-            default:
-                return "Choose"
+            case .ios:
+                return "iOS"
+                
+            case .server:
+                return "Swift on server"
             }
         }
     }
     
-    enum States: String, CaseIterable {
+    /// An enumeration representing the potential states of a article
+    enum ArticleStatus: String, Codable, CaseIterable {
         
+        /// Indicates the article is publicly visible
         case published
+        
+        /// Indicates the article is still a draft and not publicly visible
         case draft
+        
+        /// Indicates the article has been archived and is only visible to administrators
         case archived
         
+        /// The label for the article status
         var description: String {
             
-            switch rawValue {
-            case "published":
+            switch self {
+            case .published:
                 return "Published"
                 
-            case "archived":
-                return "Archived"
-                
-            case "draft":
+            case .draft:
                 return "Draft"
                 
-            default:
-                return "Unkown"
+            case .archived:
+                return "Archived"
+            }
+        }
+        
+        /// The localized label for the article status
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .published:
+                return "Published"
+                
+            case .draft:
+                return "Draft"
+                
+            case .archived:
+                return "Archived"
             }
         }
     }
     
     /// The data transfer object for the article input
-    struct Input: Content, Validatable {
+    struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the thumbnail image
         var thumbnailId: String?
@@ -115,7 +154,7 @@ struct ArticleModel {
     }
     
     /// The data transfer object for the article entity
-    struct Output: Content {
+    struct Output: Vapor.Content {
         
         /// The unique identifier of the article
         let id: UUID
@@ -136,10 +175,10 @@ struct ArticleModel {
         let content: String
         
         /// The category  under which the category is classified
-        let category: String
+        let category: ArticleCategory
         
         /// The publication status of the article
-        let status: String
+        let status: ArticleStatus
         
         /// The timestamp when the article was published
         var publishedOn: Date?
@@ -167,8 +206,8 @@ struct ArticleModel {
             self.title = title
             self.excerpt = excerpt
             self.content = content
-            self.category = category
-            self.status = status
+            self.category = ArticleCategory(rawValue: category)!
+            self.status = ArticleStatus(rawValue: status)!
             self.publishedOn = publishedOn
             self.assets = assets
             self.comments = comments

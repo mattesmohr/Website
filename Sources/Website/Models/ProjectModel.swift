@@ -1,58 +1,106 @@
 import Vapor
+import HTMLKit
 import HTMLKitComponents
 
 struct ProjectModel {
     
-    enum Categories: String, CaseIterable {
+    /// An enumeration representing the potential categories of a project
+    enum ProjectCategory: String, Codable, CaseIterable {
         
+        /// Indicates the project is about macos
         case macos
+        
+        /// Indicates the project is about ios
         case ios
+        
+        /// Indicates the project is about swift on server
         case server
         
+        /// The label for the project category
         var description: String {
             
-            switch rawValue {
-            case "macos":
+            switch self {
+            case .macos:
                 return "macOS"
                 
-            case "ios":
+            case .ios:
                 return "iOS"
                 
-            case "server":
-                return "Swift on Server"
+            case .server:
+                return "Swift on server"
+            }
+        }
+        
+        /// The localized label for the project category
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .macos:
+                return "macOS"
                 
-            default:
-                return "Unkown"
+            case .ios:
+                return "iOS"
+                
+            case .server:
+                return "Swift on server"
             }
         }
     }
     
-    enum States: String, CaseIterable {
+    /// An enumeration representing the potential states of a project
+    enum ProjectStatus: String, Codable, CaseIterable {
         
+        /// Indicates the project is public visible
         case published
+        
+        /// Indicates the project is public visible but protected
         case confidential
+        
+        /// Indicates the article is still a draft and not publicly visible
         case draft
         
+        /// Indicates the comment has been archived and is only visible to administrators
+        case archived
+        
+        /// The label for the project status
         var description: String {
             
-            switch rawValue {
-            case "published":
+            switch self {
+            case .published:
                 return "Published"
                 
-            case "confidential":
+            case .confidential:
                 return "Confidential"
                 
-            case "draft":
+            case .draft:
                 return "Draft"
                 
-            default:
-                return "Unkown"
+            case .archived:
+                return "Archived"
+            }
+        }
+        
+        /// The localized label for the project status
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .published:
+                return "Published"
+                
+            case .confidential:
+                return "Confidential"
+                
+            case .draft:
+                return "Draft"
+                
+            case .archived:
+                return "Archived"
             }
         }
     }
     
     /// The data transfer object for the project input
-    struct Input: Content, Validatable {
+    struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the thumbnail image
         var thumbnailId: String?
@@ -123,7 +171,7 @@ struct ProjectModel {
     }
     
     /// The data transfer object for the project entity
-    struct Output: Content {
+    struct Output: Vapor.Content {
         
         /// The unique identifier of the project
         let id: UUID
@@ -144,10 +192,10 @@ struct ProjectModel {
         let content: String
         
         /// The category under which the project was classified
-        let category: String
+        let category: ProjectCategory
         
         /// The publication status of the project
-        let status: String
+        let status: ProjectStatus
         
         /// The author of the project
         var author: UserModel.Output?
@@ -175,8 +223,8 @@ struct ProjectModel {
             self.title = title
             self.excerpt = excerpt
             self.content = content
-            self.category = category
-            self.status = status
+            self.category = ProjectCategory(rawValue: category)!
+            self.status = ProjectStatus(rawValue: status)!
             self.author = author
             self.repository = repository
             self.documentation = documentation

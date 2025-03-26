@@ -54,7 +54,7 @@ extension ProjectAdminPage {
                             LocalizedString(key: "Category")
                         }
                         SelectField(name: "category", prompt: "macOS") {
-                            for category in ProjectModel.Categories.allCases {
+                            for category in ProjectModel.ProjectCategory.allCases {
                                 RadioSelect(value: category.rawValue) {
                                     category.description
                                 }
@@ -67,7 +67,7 @@ extension ProjectAdminPage {
                             LocalizedString(key: "Status")
                         }
                         SelectField(name: "status", prompt: "Published") {
-                            for state in ProjectModel.States.allCases {
+                            for state in ProjectModel.ProjectStatus.allCases {
                                 RadioSelect(value: state.rawValue) {
                                     state.description
                                 }
@@ -144,8 +144,8 @@ extension ProjectAdminPage {
                         FieldLabel(for: "category") {
                             LocalizedString(key: "Category")
                         }
-                        SelectField(name: "category", prompt: "macOS", selection: project.category) {
-                            for category in ProjectModel.Categories.allCases {
+                        SelectField(name: "category", prompt: "macOS", selection: project.category.rawValue) {
+                            for category in ProjectModel.ProjectCategory.allCases {
                                 RadioSelect(value: category.rawValue) {
                                     category.description
                                 }
@@ -157,8 +157,8 @@ extension ProjectAdminPage {
                         FieldLabel(for: "status") {
                             LocalizedString(key: "Status")
                         }
-                        SelectField(name: "status", prompt: "Published", selection: project.status) {
-                            for state in ProjectModel.States.allCases {
+                        SelectField(name: "status", prompt: "Published", selection: project.status.rawValue) {
+                            for state in ProjectModel.ProjectStatus.allCases {
                                 RadioSelect(value: state.rawValue) {
                                     state.description
                                 }

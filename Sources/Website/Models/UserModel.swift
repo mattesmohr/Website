@@ -1,34 +1,45 @@
 import Vapor
+import HTMLKit
 import HTMLKitComponents
 
 struct UserModel {
     
-    enum Roles: String, Codable, CaseIterable {
+    /// An enumeration representing the potential states of a user
+    enum UserRole: String, Codable, CaseIterable {
         
+        /// Indicates the user as administrator
         case administrator
-        case moderator
-        case customer
         
+        /// Indicates the user as moderator
+        case moderator
+        
+        /// The label of a user role
         var description: String {
             
-            switch rawValue {
-            case "administrator":
+            switch self {
+            case .administrator:
                 return "Administrator"
                 
-            case "moderator":
+            case .moderator:
                 return "Moderator"
+            }
+        }
+        
+        /// The localized label for a user role
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .administrator:
+                return "Administrator"
                 
-            case "customer":
-                return "Customer"
-                
-            default:
-                return "Unkown"
+            case .moderator:
+                return "Moderator"
             }
         }
     }
     
     /// The data transfer object for the user input
-    struct Input: Content, Validatable {
+    struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the user avatar
         var avatarId: String?
@@ -72,7 +83,7 @@ struct UserModel {
     }
     
     /// The data transfer object for the user entity
-    struct Output: Content, SessionAuthenticatable {
+    struct Output: Vapor.Content, SessionAuthenticatable {
         
         /// The unique identifier of the user
         let id: UUID
@@ -93,7 +104,7 @@ struct UserModel {
         var biography: String?
         
         /// The permission role of the user
-        let role: String
+        let role: UserRole
         
         /// The account associated with the user
         var account: AccountModel.Output?
@@ -127,7 +138,7 @@ struct UserModel {
             self.firstName = firstName
             self.lastName = lastName
             self.biography = biography
-            self.role = role
+            self.role = UserRole(rawValue: role)!
             self.account = account
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt

@@ -15,20 +15,12 @@ struct ArticleList: View {
                         }
                         .frame(width: .four)
                         .lineLimit(.one)
-                        Text {
-                            if let category = ArticleModel.Categories(rawValue: article.category) {
-                                category.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
-                        Text {
-                            if let state = ArticleModel.States(rawValue: article.status) {
-                                state.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
+                        Text(article.category.localizedDescription)
+                            .frame(width: .two)
+                            .lineLimit(.one)
+                        Text(article.status.localizedDescription)
+                            .frame(width: .two)
+                            .lineLimit(.one)
                         Text {
                             article.modifiedAt.formatted(date: .short, time: .none)
                         }

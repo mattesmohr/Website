@@ -31,13 +31,9 @@ enum ProjectPage {
                                             Thumbnail {
                                                 SafariIcon()
                                             }
-                                            Text {
-                                                if let category = ProjectModel.Categories(rawValue: project.category) {
-                                                    category.description
-                                                }
-                                            }
-                                            .fontSize(.small)
-                                            .foregroundColor(.accent)
+                                            Text(project.category.localizedDescription)
+                                                .fontSize(.small)
+                                                .foregroundColor(.accent)
                                             Text {
                                                 project.title
                                             }
@@ -57,19 +53,15 @@ enum ProjectPage {
                         .tag("all")
                         Pane {
                             Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
-                                for project in viewModel.pagination.items.filter({$0.category == "ios"}) {
+                                for project in viewModel.pagination.items.filter({$0.category == .ios}) {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
                                             Thumbnail {
                                                 SafariIcon()
                                             }
-                                            Text {
-                                                if let category = ProjectModel.Categories(rawValue: project.category) {
-                                                    category.description
-                                                }
-                                            }
-                                            .fontSize(.small)
-                                            .foregroundColor(.accent)
+                                            Text(project.category.localizedDescription)
+                                                .fontSize(.small)
+                                                .foregroundColor(.accent)
                                             Text {
                                                 project.title
                                             }
@@ -90,19 +82,15 @@ enum ProjectPage {
                         .tag("ios")
                         Pane {
                             Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
-                                for project in viewModel.pagination.items.filter({$0.category == "macos"}) {
+                                for project in viewModel.pagination.items.filter({$0.category == .macos}) {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
                                             Thumbnail {
                                                 SafariIcon()
                                             }
-                                            Text {
-                                                if let category = ProjectModel.Categories(rawValue: project.category) {
-                                                    category.description
-                                                }
-                                            }
-                                            .fontSize(.small)
-                                            .foregroundColor(.accent)
+                                            Text(project.category.localizedDescription)
+                                                .fontSize(.small)
+                                                .foregroundColor(.accent)
                                             Text {
                                                 project.title
                                             }
@@ -123,19 +111,15 @@ enum ProjectPage {
                         .tag("macos")
                         Pane {
                             Grid(ratio: .third, horizontalSpacing: .medium, verticalSpacing: .large) {
-                                for project in viewModel.pagination.items.filter({$0.category == "server"}) {
+                                for project in viewModel.pagination.items.filter({$0.category == .server}) {
                                     Link(destination: "/projects/\(project.slug)") {
                                         VStack(spacing: .small) {
                                             Thumbnail {
                                                 SafariIcon()
                                             }
-                                            Text {
-                                                if let category = ProjectModel.Categories(rawValue: project.category) {
-                                                    category.description
-                                                }
-                                            }
-                                            .fontSize(.small)
-                                            .foregroundColor(.accent)
+                                            Text(project.category.localizedDescription)
+                                                .fontSize(.small)
+                                                .foregroundColor(.accent)
                                             Text {
                                                 project.title
                                             }
@@ -195,12 +179,8 @@ enum ProjectPage {
                                 }
                                 VStack {
                                     Text("Category")
-                                    Text {
-                                        if let category = ProjectModel.Categories(rawValue: viewModel.project.category) {
-                                            category.description
-                                        }
-                                    }
-                                    .bold()
+                                    Text(viewModel.project.category.localizedDescription)
+                                        .bold()
                                 }
                                 if let documentation = viewModel.project.documentation {
                                     VStack {

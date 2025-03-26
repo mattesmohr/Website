@@ -25,13 +25,9 @@ struct UserList: View {
                         }
                         .frame(width: .two)
                         .lineLimit(.one)
-                        Text {
-                            if let role = UserModel.Roles(rawValue: user.role) {
-                                role.description
-                            }
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
+                        Text(user.role.localizedDescription)
+                            .frame(width: .two)
+                            .lineLimit(.one)
                         Text {
                             user.modifiedAt.formatted(date: .short, time: .none)
                         }

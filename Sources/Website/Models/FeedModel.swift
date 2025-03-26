@@ -1,10 +1,54 @@
 import Vapor
+import HTMLKit
 import HTMLKitComponents
 
 struct FeedModel {
     
+    /// An enumeration representing the potential states of a feed
+    enum FeedStatus: String, Codable, CaseIterable {
+        
+        /// Indicates the article is publicly visible
+        case published
+        
+        /// Indicates the article is still a draft and not publicly visible
+        case draft
+        
+        /// Indicates the article has been archived and is only visible to administrators
+        case archived
+        
+        /// The label for the article status
+        var description: String {
+            
+            switch self {
+            case .published:
+                return "Published"
+                
+            case .draft:
+                return "Draft"
+                
+            case .archived:
+                return "Archived"
+            }
+        }
+        
+        /// The localized label for the article status
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .published:
+                return "Published"
+                
+            case .draft:
+                return "Draft"
+                
+            case .archived:
+                return "Archived"
+            }
+        }
+    }
+    
     /// The data transfer object for the credential input
-    struct Input: Content, Validatable {
+    struct Input: Vapor.Content, Validatable {
         
         var thumbnailId: String?
         
@@ -34,10 +78,11 @@ struct FeedModel {
     }
     
     /// The data transfer object for the feed entity
-    struct Output: Content {
+    struct Output: Vapor.Content {
         
         /// The unique identifier of the feed
         var id: UUID
+        
         var thumbnail: AssetModel.Output?
         
         /// The feed message
@@ -47,7 +92,7 @@ struct FeedModel {
         var tags: String?
         
         /// The publication status of the feed
-        let status: String
+        let status: FeedStatus
         
         /// The timestamp when the feed was first stored
         let createdAt: Date
@@ -61,7 +106,7 @@ struct FeedModel {
             self.thumbnail = thumbnail
             self.message = message
             self.tags = tags
-            self.status = status
+            self.status = FeedStatus(rawValue: status)!
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
         }

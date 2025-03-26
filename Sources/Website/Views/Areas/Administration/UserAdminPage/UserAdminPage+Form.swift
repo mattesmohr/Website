@@ -44,7 +44,7 @@ extension UserAdminPage {
                         LocalizedString(key: "Role")
                     }
                     SelectField(name: "role", prompt: "Administrator") {
-                        for role in UserModel.Roles.allCases {
+                        for role in UserModel.UserRole.allCases {
                             RadioSelect(value: role.rawValue) {
                                 role.description
                             }
@@ -109,8 +109,8 @@ extension UserAdminPage {
                     FieldLabel(for: "role") {
                         LocalizedString(key: "Role")
                     }
-                    SelectField(name: "role", prompt: "Administrator", selection: user.role) {
-                        for role in UserModel.Roles.allCases {
+                    SelectField(name: "role", prompt: "Administrator", selection: user.role.rawValue) {
+                        for role in UserModel.UserRole.allCases {
                             RadioSelect(value: role.rawValue) {
                                 role.description
                             }
