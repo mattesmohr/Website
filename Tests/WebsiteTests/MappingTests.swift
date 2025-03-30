@@ -36,6 +36,7 @@ final class MappingTests: XCTestCase {
             content: "Content",
             category: "Category",
             status: "Status",
+            comment: "Comment",
             authorId: .init()
         )
         
@@ -44,6 +45,7 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(input.content, "Content")
         XCTAssertEqual(input.category, "Category")
         XCTAssertEqual(input.status, "Status")
+        XCTAssertEqual(input.comment, "Comment")
         
         let entity = ArticleEntity(input: input)
         
@@ -52,6 +54,7 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(entity.content, "Content")
         XCTAssertEqual(entity.category, "Category")
         XCTAssertEqual(entity.status, "Status")
+        XCTAssertEqual(entity.comment, "Comment")
     }
     
     func testContactMapping() {
@@ -97,17 +100,14 @@ final class MappingTests: XCTestCase {
     
     func testCommentMapping() {
         
-        let input = CommentModel.Input(
-            name: "Name",
-            content: "Content"
+        let input = CommentModel.Input.Private(
+            message: "Message",
+            reply: "Reply",
+            status: "Status"
         )
         
-        XCTAssertEqual(input.name, "Name")
-        XCTAssertEqual(input.content, "Content")
-        
-        let entity = CommentEntity(input: input)
-        
-        XCTAssertEqual(entity.name, "Name")
-        XCTAssertEqual(entity.content, "Content")
+        XCTAssertEqual(input.message, "Message")
+        XCTAssertEqual(input.reply, "Reply")
+        XCTAssertEqual(input.status, "Status")
     }
 }
