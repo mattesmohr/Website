@@ -15,6 +15,13 @@ extension AssetAdminPage {
                         .borderShape(.smallrounded)
                 }
                 VStack {
+                    FieldLabel(for: "alternateText") {
+                        LocalizedString(key: "Alternate text")
+                    }
+                    TextEditor(name: "alternateText") {
+                    }
+                }
+                VStack {
                     FieldLabel(for: "asset") {
                         LocalizedString(key: "Asset")
                     }
@@ -36,7 +43,19 @@ extension AssetAdminPage {
         let asset: AssetModel.Output
         
         var body: Content {
-            Form(method: .post) {
+            Form(method: .post, encoding: .multipart) {
+                Image(source: asset.filePath)
+                    .borderShape(.smallrounded)
+                    .border(.system)
+                    .backgroundColor(.system)
+                    .imageScale(.medium)
+                VStack {
+                    FieldLabel(for: "asset") {
+                        LocalizedString(key: "Asset")
+                    }
+                    FileDialog(name: "asset")
+                        .borderShape(.smallrounded)
+                }
                 VStack {
                     FieldLabel(for: "title") {
                         LocalizedString(key: "Title")
@@ -45,11 +64,13 @@ extension AssetAdminPage {
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "asset") {
-                        LocalizedString(key: "Asset")
+                    FieldLabel(for: "alternateText") {
+                        LocalizedString(key: "Alternate text")
                     }
-                    FileDialog(name: "asset")
-                        .borderShape(.smallrounded)
+                    TextEditor(name: "alternateText") {
+                        asset.alternate
+                    }
+                    .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button(role: .submit) {

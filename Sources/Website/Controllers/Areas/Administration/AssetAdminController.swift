@@ -36,11 +36,19 @@ struct AssetAdminController {
         
         let model = try request.content.decode(AssetModel.Input.self)
         
-        let path = request.application.directory.publicDirectory + "/assets/\(model.asset.filename)"
-        
-        try await request.fileio.writeFile(model.asset.data, at: path)
-        
-        try await request.unit.asset.insert(entity: AssetEntity(input: model))
+        if model.asset.data.readableBytes > 0 {
+            
+            let path = request.application.directory.publicDirectory
+                .appending("/assets/")
+                .appending(model.asset.filename)
+            
+            try await request.fileio.writeFile(model.asset.data, at: path)
+            
+            try await request.unit.asset.insert(entity: AssetEntity(input: model))
+            
+        } else {
+            throw Abort(.internalServerError)
+        }
         
         return request.redirect(to: "/area/admin/assets")
     }
@@ -74,6 +82,21 @@ struct AssetAdminController {
         
         let model = try request.content.decode(AssetModel.Input.self)
         
+        if model.asset.data.readableBytes > 0 {
+            
+            let path = request.application.directory.publicDirectory
+                .appending("/assets/")
+                .appending(model.asset.filename)
+            
+            try await request.fileio.writeFile(model.asset.data, at: path)
+            
+            try await request.unit.asset.patch(field: \.$fileName, to: model.asset.name, for: id)
+            try await request.unit.asset.patch(field: \.$fileFullName, to: model.asset.filename, for: id)
+            try await request.unit.asset.patch(field: \.$filePath, to: "/assets/\(model.asset.filename)", for: id)
+            try await request.unit.asset.patch(field: \.$fileExtension, to: model.asset.extension, for: id)
+            try await request.unit.asset.patch(field: \.$fileSize, to: model.asset.data.readableBytes, for: id)
+        }
+        
         try await request.unit.asset.update(entity: AssetEntity(input: model), on: id)
         
         return request.redirect(to: "/area/admin/assets")
@@ -86,6 +109,14 @@ struct AssetAdminController {
         guard let id = request.parameters.get("id", as: UUID.self) else {
             throw Abort(.badRequest)
         }
+        
+        guard let entity = try await request.unit.asset.find(id: id) else {
+            throw Abort(.notFound)
+        }
+        
+        let path = request.application.directory.publicDirectory + entity.filePath
+        
+        try FileManager.default.removeItem(atPath: path)
         
         try await request.unit.asset.delete(id: id)
         

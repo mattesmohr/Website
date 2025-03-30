@@ -34,6 +34,7 @@ final class AssetRepository {
         try await database.query(AssetEntity.self)
             .set(\.$id, to: UUID())
             .set(\.$title, to: entity.title)
+            .set(\.$alternateText, to: entity.alternateText)
             .set(\.$fileName, to: entity.fileName)
             .set(\.$fileFullName, to: entity.fileFullName)
             .set(\.$filePath, to: entity.filePath)
@@ -57,11 +58,7 @@ final class AssetRepository {
         try await database.query(AssetEntity.self)
             .filter(\.$id == id)
             .set(\.$title, to: entity.title)
-            .set(\.$fileName, to: entity.fileName)
-            .set(\.$fileFullName, to: entity.fileFullName)
-            .set(\.$filePath, to: entity.filePath)
-            .set(\.$fileExtension, to: entity.fileExtension)
-            .set(\.$fileSize, to: entity.fileSize)
+            .set(\.$alternateText, to: entity.alternateText)
             .update()
     }
     /// Deletes an asset entity.

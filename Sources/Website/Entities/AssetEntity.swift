@@ -11,20 +11,23 @@ final class AssetEntity: Model, @unchecked Sendable {
     @Field(key: "title")
     var title: String
     
-    @OptionalField(key: "fileName")
-    var fileName: String?
+    @OptionalField(key: "alternate_text")
+    var alternateText: String?
     
-    @OptionalField(key: "fileFullName")
-    var fileFullName: String?
+    @Field(key: "file_name")
+    var fileName: String
     
-    @OptionalField(key: "filePath")
-    var filePath: String?
+    @Field(key: "file_fullname")
+    var fileFullName: String
     
-    @OptionalField(key: "fileExtension")
+    @Field(key: "file_path")
+    var filePath: String
+    
+    @OptionalField(key: "file_extension")
     var fileExtension: String?
     
-    @OptionalField(key: "fileSize")
-    var fileSize: Int?
+    @Field(key: "file_size")
+    var fileSize: Int
     
     @OptionalChild(for: \.$thumbnail)
     var article: ArticleEntity?
@@ -49,10 +52,11 @@ final class AssetEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Int? = nil, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: UUID? = nil, title: String, alternateText: String? = nil, fileName: String, fileFullName: String, filePath: String, fileExtension: String? = nil, fileSize: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.title = title
+        self.alternateText = alternateText
         self.fileName = fileName
         self.fileFullName = fileFullName
         self.filePath = filePath
@@ -64,6 +68,6 @@ final class AssetEntity: Model, @unchecked Sendable {
     
     convenience init(input: AssetModel.Input) {
     
-        self.init(title: input.title, fileName: input.asset.name, fileFullName: input.asset.filename, filePath: "/assets/\(input.asset.filename)", fileExtension: input.asset.extension, fileSize: input.asset.data.readableBytes)
+        self.init(title: input.title, alternateText: input.alternateText, fileName: input.asset.name, fileFullName: input.asset.filename, filePath: "/assets/\(input.asset.filename)", fileExtension: input.asset.extension, fileSize: input.asset.data.readableBytes)
     }
 }

@@ -6,25 +6,13 @@ struct AssetList: View {
     let assets: [AssetModel.Output]
     
     var body: Content {
-        Card {
-            List(direction: .vertical) {
-                for asset in assets {
-                    HStack {
+        Grid(ratio: .fifth, spacing: .small) {
+            for asset in assets {
+                Card {
+                    HStack(spacing: .between) {
                         Text {
                             asset.title
                         }
-                        .frame(width: .four)
-                        .lineLimit(.one)
-                        Text {
-                            asset.filePath ?? "-"
-                        }
-                        .frame(width: .four)
-                        .lineLimit(.one)
-                        Text {
-                            asset.fileSize ?? "0 MB"
-                        }
-                        .frame(width: .two)
-                        .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/assets/\(asset.id)/edit") {
@@ -38,12 +26,12 @@ struct AssetList: View {
                         .frame(width: .two)
                         .borderShape(.smallrounded)
                     }
-                    .padding(insets: .vertical, length: .small)
+                } header: {
+                    Image(source: asset.filePath)
                 }
+                .borderShape(.smallrounded)
             }
-            .listStyle(.listgroup)
         }
-        .borderShape(.smallrounded)
         .margin(insets: .bottom, length: .medium)
     }
 }

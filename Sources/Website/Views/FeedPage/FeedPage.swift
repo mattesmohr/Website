@@ -27,7 +27,7 @@ enum FeedPage {
                             Card {
                                 VStack(spacing: .small) {
                                     if let thumbnail = feed.thumbnail {
-                                        Image(source: thumbnail.filePath!)
+                                        Image(source: thumbnail.filePath)
                                     }
                                     Text {
                                         feed.message

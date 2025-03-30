@@ -9,8 +9,11 @@ struct AssetModel {
         /// The title for the asset
         var title: String
         
+        /// The alternate text for the asset
+        var alternateText: String?
+        
         /// The asset file
-        let asset: File
+        var asset: File
         
         static func validations(_ validations: inout Validations) {
             
@@ -25,6 +28,7 @@ struct AssetModel {
         mutating func afterDecode() throws {
             
             self.title = title.sanitize()
+            self.alternateText = alternateText?.sanitize()
         }
     }
     
@@ -37,20 +41,23 @@ struct AssetModel {
         /// The title of the asset
         let title: String
         
+        /// The alternate text of the asset
+        let alternate: String?
+        
         /// The file name of the asset
         var fileName: String?
         
         /// The file name with file extension of the asset
-        var fileFullName: String?
+        var fileFullName: String
         
         /// The full path of the asset
-        var filePath: String?
+        var filePath: String
         
         /// The file extension of the asset
         var fileExtension: String?
         
         /// The file size of the asset
-        var fileSize: String?
+        var fileSize: String
         
         /// The timestamp when the asset was first stored
         let createdAt: Date
@@ -58,10 +65,11 @@ struct AssetModel {
         /// The timestamp when the asset was last updated
         let modifiedAt: Date
         
-        init(id: UUID, title: String, fileName: String? = nil, fileFullName: String? = nil, filePath: String? = nil, fileExtension: String? = nil, fileSize: Int? = nil, modifiedAt: Date, createdAt: Date) {
+        init(id: UUID, title: String, alternate: String?, fileName: String, fileFullName: String, filePath: String, fileExtension: String?, fileSize: Int, modifiedAt: Date, createdAt: Date) {
 
             self.id = id
             self.title = title
+            self.alternate = alternate
             self.fileName = fileName
             self.fileFullName = fileFullName
             self.filePath = filePath
@@ -73,14 +81,12 @@ struct AssetModel {
             formatter.countStyle = .file
             formatter.allowedUnits = [.useMB]
             
-            if let size = fileSize {
-                self.fileSize = formatter.string(for: size)
-            }
+            self.fileSize = formatter.string(for: fileSize)!
         }
         
         init(entity: AssetEntity) {
             
-            self.init(id: entity.id!, title: entity.title, fileName: entity.fileName, fileFullName: entity.fileFullName, filePath: entity.filePath, fileExtension: entity.fileExtension, fileSize: entity.fileSize, modifiedAt: entity.modifiedAt!, createdAt: entity.createdAt!)
+            self.init(id: entity.id!, title: entity.title, alternate: entity.alternateText, fileName: entity.fileName, fileFullName: entity.fileFullName, filePath: entity.filePath, fileExtension: entity.fileExtension, fileSize: entity.fileSize, modifiedAt: entity.modifiedAt!, createdAt: entity.createdAt!)
         }
     }
 }
