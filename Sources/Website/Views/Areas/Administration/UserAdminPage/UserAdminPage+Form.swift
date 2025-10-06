@@ -8,56 +8,42 @@ extension UserAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "email") {
-                        LocalizedString(key: "Email")
-                    }
+                    FieldLabel("Email", for: "email")
                     TextField(name: "email", prompt: "john.doe@provider.com")
                         .borderShape(.smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "firstName") {
-                            LocalizedString(key: "Firstname")
-                        }
+                        FieldLabel("Firstname", for: "firstName")
                         TextField(name: "firstName", prompt: "John")
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "lastName") {
-                            LocalizedString(key: "Lastname")
-                        }
+                        FieldLabel("Lastname", for: "lastName")
                         TextField(name: "lastName", prompt: "Doe")
                             .borderShape(.smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel(for: "biography") {
-                        LocalizedString(key: "Biography")
-                    }
+                    FieldLabel("Biography", for: "biography")
                     TextEditor(name: "biography", prompt: "Biography") {
                     }
                     .lineLimit(4)
                     .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "role") {
-                        LocalizedString(key: "Role")
-                    }
+                    FieldLabel("Role", for: "role")
                     SelectField(name: "role", prompt: "Administrator") {
                         for role in UserModel.UserRole.allCases {
-                            RadioSelect(value: role.rawValue) {
-                                role.description
-                            }
+                            RadioSelect(role.localizedDescription, value: role.rawValue)
                         }
                     }
                     .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -73,32 +59,24 @@ extension UserAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "email") {
-                        LocalizedString(key: "Email")
-                    }
+                    FieldLabel("Email", for: "email")
                     TextField(name: "email", prompt: "john.doe@provider.com", value: user.email)
                         .borderShape(.smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "firstName") {
-                            LocalizedString(key: "Firstname")
-                        }
+                        FieldLabel("Firstname", for: "firstName")
                         TextField(name: "firstName", prompt: "John", value: user.firstName)
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "lastName") {
-                            LocalizedString(key: "Lastname")
-                        }
+                        FieldLabel("Lastname", for: "lastName")
                         TextField(name: "lastName", prompt: "Doe", value: user.lastName)
                             .borderShape(.smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel(for: "biography") {
-                        LocalizedString(key: "Biography")
-                    }
+                    FieldLabel("Biography", for: "biography")
                     TextEditor(name: "biography", prompt: "Biography") {
                         user.biography
                     }
@@ -106,24 +84,18 @@ extension UserAdminPage {
                     .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "role") {
-                        LocalizedString(key: "Role")
-                    }
+                    FieldLabel("Role", for: "role")
                     SelectField(name: "role", prompt: "Administrator", selection: user.role.rawValue) {
                         for role in UserModel.UserRole.allCases {
-                            RadioSelect(value: role.rawValue) {
-                                role.description
-                            }
+                            RadioSelect(role.localizedDescription, value: role.rawValue)
                         }
                     }
                     .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

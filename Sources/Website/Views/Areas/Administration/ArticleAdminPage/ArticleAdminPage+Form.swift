@@ -8,25 +8,19 @@ extension ArticleAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "title") {
-                        LocalizedString(key: "Title")
-                    }
+                    FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "excerpt") {
-                        LocalizedString(key: "Excerpt")
-                    }
+                    FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
-                    FieldLabel(for: "content") {
-                        LocalizedString(key: "Content")
-                    }
+                    FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                     }
                     .borderShape(.smallrounded)
@@ -34,51 +28,37 @@ extension ArticleAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "comment") {
-                            LocalizedString(key: "Comments")
-                        }
+                        FieldLabel("Comments", for: "comment")
                         SelectField(name: "comment", prompt: "Open") {
                             for comment in ArticleModel.CommentStatus.allCases {
-                                RadioSelect(value: comment.rawValue) {
-                                    comment.description
-                                }
+                                RadioSelect(comment.localizedDescription, value: comment.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "category") {
-                            LocalizedString(key: "Category")
-                        }
+                        FieldLabel("Category", for: "category")
                         SelectField(name: "category", prompt: "macOS") {
                             for category in ArticleModel.ArticleCategory.allCases {
-                                RadioSelect(value: category.rawValue) {
-                                    category.description
-                                }
+                                RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "status") {
-                            LocalizedString(key: "Status")
-                        }
+                        FieldLabel("Status", for: "status")
                         SelectField(name: "status", prompt: "Published") {
                             for state in ArticleModel.ArticleStatus.allCases {
-                                RadioSelect(value: state.rawValue) {
-                                    state.description
-                                }
+                                RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -94,16 +74,12 @@ extension ArticleAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "title") {
-                        LocalizedString(key: "Title")
-                    }
+                    FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title", value: article.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "excerpt") {
-                        LocalizedString(key: "Excerpt")
-                    }
+                    FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         article.excerpt
                     }
@@ -111,9 +87,7 @@ extension ArticleAdminPage {
                     .lineLimit(5)
                 }
                 VStack {
-                    FieldLabel(for: "content") {
-                        LocalizedString(key: "Content")
-                    }
+                    FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                         article.content
                     }
@@ -122,51 +96,37 @@ extension ArticleAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "comment") {
-                            LocalizedString(key: "Comments")
-                        }
+                        FieldLabel("Comments", for: "comment")
                         SelectField(name: "comment", prompt: "Open", selection: article.comment.rawValue) {
                             for comment in ArticleModel.CommentStatus.allCases {
-                                RadioSelect(value: comment.rawValue) {
-                                    comment.description
-                                }
+                                RadioSelect(comment.localizedDescription, value: comment.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "category") {
-                            LocalizedString(key: "Category")
-                        }
+                        FieldLabel("Category", for: "category")
                         SelectField(name: "category", prompt: "macOS", selection: article.category.rawValue) {
                             for category in ArticleModel.ArticleCategory.allCases {
-                                RadioSelect(value: category.rawValue) {
-                                    category.description
-                                }
+                                RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "status") {
-                            LocalizedString(key: "Status")
-                        }
+                        FieldLabel("Status", for: "status")
                         SelectField(name: "status", prompt: "Published", selection: article.status.rawValue) {
                             for state in ArticleModel.ArticleStatus.allCases {
-                                RadioSelect(value: state.rawValue) {
-                                    state.description
-                                }
+                                RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

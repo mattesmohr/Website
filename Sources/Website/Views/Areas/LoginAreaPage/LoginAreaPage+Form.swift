@@ -11,16 +11,12 @@ extension LoginAreaPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "email") {
-                        LocalizedString(key: "Email")
-                    }
+                    FieldLabel("Email", for: "email")
                     TextField(name: "email")
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "password") {
-                        LocalizedString(key: "Password")
-                    }
+                    FieldLabel("Password", for: "password")
                     SecureField(name: "password")
                         .borderShape(.smallrounded)
                 }
@@ -29,12 +25,10 @@ extension LoginAreaPage {
                     .type(.hidden)
                     .name("nonce")
                     .custom(key: "value", value: nonce.value)
-                Button(role: .submit) {
-                    LocalizedString(key: "Sign in")
-                }
-                .buttonStyle(PrimaryButton())
-                .controlSize(.full)
-                .margin(insets: .bottom, length: .small)
+                Button("Sign in", role: .submit)
+                    .buttonStyle(PrimaryButton())
+                    .controlSize(.full)
+                    .margin(insets: .bottom, length: .small)
             }
             .tag("login-form")
             .onSubmit { form in
@@ -51,16 +45,12 @@ extension LoginAreaPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "password") {
-                        LocalizedString(key: "Password")
-                    }
+                    FieldLabel("Password", for: "password")
                     SecureField(name: "password", prompt: "Passwort")
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "confirmation") {
-                        LocalizedString(key: "Confirmation")
-                    }
+                    FieldLabel("Confirmation", for: "confirmation")
                     SecureField(name: "confirmation", prompt: "Passwort")
                         .borderShape(.smallrounded)
                 }
@@ -69,12 +59,10 @@ extension LoginAreaPage {
                     .type(.hidden)
                     .name("nonce")
                     .custom(key: "value", value: nonce.value)
-                Button(role: .submit) {
-                    LocalizedString(key: "Reset")
-                }
-                .buttonStyle(PrimaryButton())
-                .controlSize(.full)
-                .margin(insets: .bottom, length: .small)
+                Button("Reset", role: .submit)
+                    .buttonStyle(PrimaryButton())
+                    .controlSize(.full)
+                    .margin(insets: .bottom, length: .small)
             }
             .tag("reset-form")
             .onSubmit { form in

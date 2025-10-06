@@ -98,7 +98,7 @@ enum HomePage {
                             }
                             HStack {
                                 Link(destination: "/projects") {
-                                    LocalizedString(key: "View all")
+                                    Text("View all")
                                 }
                                 .foregroundColor(.accent)
                             }

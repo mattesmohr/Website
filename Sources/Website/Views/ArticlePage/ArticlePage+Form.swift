@@ -18,11 +18,9 @@ extension ArticlePage {
                         .type(.hidden)
                         .name("nonce")
                         .custom(key: "value", value: nonce.value)
-                    Button(role: .submit) {
-                        LocalizedString(key: "Comment")
-                    }
-                    .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    Button("Comment", role: .submit)
+                        .buttonStyle(.primary)
+                        .borderShape(.smallrounded)
                 }
             }
         }

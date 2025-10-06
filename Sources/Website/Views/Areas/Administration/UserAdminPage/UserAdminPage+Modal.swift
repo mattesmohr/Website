@@ -13,19 +13,15 @@ extension UserAdminPage {
                 VStack(spacing: .small) {
                     Text("Do you really want to delete it? It cannot be undone.")
                     HStack(spacing: .small) {
-                        LinkButton(destination: "/area/admin/users/\(id)/delete") {
-                            LocalizedString(key: "Delete")
-                        }
-                        .borderShape(.smallrounded)
-                        .buttonStyle(.primary)
-                        Button(role: .button) {
-                            LocalizedString(key: "Cancel")
-                        }
-                        .buttonStyle(ControlButton())
-                        .tag("close")
-                        .onClick { action in
-                            action.close("delete-modal")
-                        }
+                        LinkButton("Delete", destination: "/area/admin/users/\(id)/delete")
+                            .borderShape(.smallrounded)
+                            .buttonStyle(.primary)
+                        Button("Cancel", role: .button)
+                            .buttonStyle(ControlButton())
+                            .tag("close")
+                            .onClick { action in
+                                action.close("delete-modal")
+                            }
                     }
                 }
             }

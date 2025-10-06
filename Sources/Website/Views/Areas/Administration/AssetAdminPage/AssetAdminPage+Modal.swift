@@ -14,18 +14,16 @@ extension AssetAdminPage {
                     Text("Do you really want to delete it? It cannot be undone.")
                     HStack(spacing: .small) {
                         LinkButton(destination: "/area/admin/assets/\(id)/delete") {
-                            LocalizedString(key: "Delete")
+                            Text("Delete")
                         }
                         .borderShape(.smallrounded)
                         .buttonStyle(.primary)
-                        Button(role: .button) {
-                            LocalizedString(key: "Cancel")
-                        }
-                        .buttonStyle(ControlButton())
-                        .tag("close")
-                        .onClick { action in
-                            action.close("delete-modal")
-                        }
+                        Button("Cancel", role: .button)
+                            .buttonStyle(ControlButton())
+                            .tag("close")
+                            .onClick { action in
+                                action.close("delete-modal")
+                            }
                     }
                 }
             }

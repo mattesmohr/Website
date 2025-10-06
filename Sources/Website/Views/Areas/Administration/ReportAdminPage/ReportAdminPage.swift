@@ -32,6 +32,7 @@ enum ReportAdminPage {
                                     Text {
                                         "Pie"
                                     }
+                                    .textStyle(.subheadline)
                                 }
                                 .tag("piechart")
                                 Pane {

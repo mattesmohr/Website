@@ -10,42 +10,32 @@ extension CommentAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "message") {
-                        LocalizedString(key: "Message")
-                    }
+                    FieldLabel("Message", for: "message")
                     TextEditor(name: "message", prompt: "Message") {
                         comment.message
                     }
                     .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "reply") {
-                        LocalizedString(key: "Reply")
-                    }
+                    FieldLabel("Reply", for: "reply")
                     TextEditor(name: "reply", prompt: "Reply") {
                         comment.reply
                     }
                     .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "status") {
-                        LocalizedString(key: "Status")
-                    }
+                    FieldLabel("Status", for: "status")
                     SelectField(name: "status", selection: comment.status.rawValue) {
                         for state in CommentModel.CommentStatus.allCases {
-                            RadioSelect(value: state.rawValue) {
-                                state.description
-                            }
+                            RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
                     .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

@@ -8,42 +8,32 @@ extension FeedAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "message") {
-                        LocalizedString(key: "Message")
-                    }
+                    FieldLabel("Message", for: "message")
                     TextEditor(name: "message", prompt: "Message") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(8)
                 }
                 VStack {
-                    FieldLabel(for: "tags") {
-                        LocalizedString(key: "Tags")
-                    }
+                    FieldLabel("Tags", for: "tags")
                     TextEditor(name: "tags", prompt: "Tags") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(4)
                 }
                 VStack {
-                    FieldLabel(for: "status") {
-                        LocalizedString(key: "Status")
-                    }
+                    FieldLabel("Status", for: "status")
                     SelectField(name: "status", prompt: "Published") {
                         for state in FeedModel.FeedStatus.allCases {
-                            RadioSelect(value: state.rawValue) {
-                                state.description
-                            }
+                            RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
                     .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -59,9 +49,7 @@ extension FeedAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "message") {
-                        LocalizedString(key: "Message")
-                    }
+                    FieldLabel("Message", for: "message")
                     TextEditor(name: "message", prompt: "Message") {
                         feed.message
                     }
@@ -69,9 +57,7 @@ extension FeedAdminPage {
                     .lineLimit(8)
                 }
                 VStack {
-                    FieldLabel(for: "tags") {
-                        LocalizedString(key: "Tags")
-                    }
+                    FieldLabel("Tags", for: "tags")
                     TextEditor(name: "tags", prompt: "Tags") {
                         feed.tags
                     }
@@ -79,24 +65,18 @@ extension FeedAdminPage {
                     .lineLimit(4)
                 }
                 VStack {
-                    FieldLabel(for: "status") {
-                        LocalizedString(key: "Status")
-                    }
+                    FieldLabel("Status", for: "status")
                     SelectField(name: "status", prompt: "Published", selection: feed.status.rawValue) {
                         for state in FeedModel.FeedStatus.allCases {
-                            RadioSelect(value: state.rawValue) {
-                                state.description
-                            }
+                            RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
                     .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

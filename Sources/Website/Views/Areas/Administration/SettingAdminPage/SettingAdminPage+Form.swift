@@ -9,48 +9,36 @@ extension SettingAdminPage {
             Form(method: .post) {
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "title") {
-                            LocalizedString(key: "Site title")
-                        }
+                        FieldLabel("Site title", for: "title")
                         TextField(name: "title", prompt: "Title")
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "email") {
-                            LocalizedString(key: "Email")
-                        }
+                        FieldLabel("Email", for: "email")
                         TextField(name: "email", prompt: "Email")
                             .borderShape(.smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel(for: "description") {
-                        LocalizedString(key: "Site description")
-                    }
+                    FieldLabel("Site description", for: "description")
                     TextEditor(name: "description", prompt: "Description") {
                     }
                     .borderShape(.smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "hostname") {
-                            LocalizedString(key: "Hostname")
-                        }
+                        FieldLabel("Hostname", for: "hostname")
                         TextField(name: "hostname", prompt: "Hostname")
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "port") {
-                            LocalizedString(key: "Port")
-                        }
+                        FieldLabel("Port", for: "port")
                         TextField(name: "port", prompt: "465")
                             .borderShape(.smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
-                        FieldLabel(for: "security") {
-                            LocalizedString(key: "Security")
-                        }
+                        FieldLabel("Security", for: "security")
                         SelectField(name: "security", prompt: "SSL") {
                             RadioSelect(value: "ssl") {
                                 "SSL"
@@ -62,26 +50,20 @@ extension SettingAdminPage {
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "username") {
-                            LocalizedString(key: "Username")
-                        }
+                        FieldLabel("Username", for: "username")
                         TextField(name: "username", prompt: "Username")
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "password") {
-                            LocalizedString(key: "Password")
-                        }
+                        FieldLabel("Password", for: "password")
                         SecureField(name: "password", prompt: "Password")
                             .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
         }
     }
@@ -94,24 +76,18 @@ extension SettingAdminPage {
             Form(method: .post) {
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "title") {
-                            LocalizedString(key: "Site title")
-                        }
+                        FieldLabel("Site title", for: "title")
                         TextField(name: "title", prompt: "Title", value: settings.title)
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "email") {
-                            LocalizedString(key: "Email")
-                        }
+                        FieldLabel("Email", for: "email")
                         TextField(name: "email", prompt: "Email", value: settings.email)
                             .borderShape(.smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel(for: "description") {
-                        LocalizedString(key: "Site description")
-                    }
+                    FieldLabel("Site description", for: "description")
                     TextEditor(name: "description", prompt: "Description") {
                         settings.description
                     }
@@ -119,24 +95,18 @@ extension SettingAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "hostname") {
-                            LocalizedString(key: "Hostname")
-                        }
+                        FieldLabel("Hostname", for: "hostname")
                         TextField(name: "hostname", prompt: "Hostname", value: settings.hostname)
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "port") {
-                            LocalizedString(key: "Port")
-                        }
+                        FieldLabel("Port", for: "port")
                         TextField(name: "port", prompt: "465", value: settings.port)
                             .borderShape(.smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
-                        FieldLabel(for: "security") {
-                            LocalizedString(key: "Security")
-                        }
+                        FieldLabel("Security", for: "security")
                         SelectField(name: "security", prompt: "SSL", selection: settings.security) {
                             RadioSelect(value: "ssl") {
                                "SSL"
@@ -148,26 +118,20 @@ extension SettingAdminPage {
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "username") {
-                            LocalizedString(key: "Username")
-                        }
+                        FieldLabel("Username", for: "username")
                         TextField(name: "username", prompt: "Username", value: settings.username)
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "password") {
-                            LocalizedString(key: "Password")
-                        }
+                        FieldLabel("Password", for: "password")
                         SecureField(name: "password", prompt: "Password", value: settings.password)
                             .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
         }
     }

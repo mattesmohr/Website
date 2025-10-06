@@ -8,25 +8,19 @@ extension ProjectAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "title") {
-                        LocalizedString(key: "Title")
-                    }
+                    FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title")
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "excerpt") {
-                        LocalizedString(key: "Excerpt")
-                    }
+                    FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
-                    FieldLabel(for: "content") {
-                        LocalizedString(key: "Content")
-                    }
+                    FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                     }
                     .borderShape(.smallrounded)
@@ -34,54 +28,40 @@ extension ProjectAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "repository") {
-                            LocalizedString(key: "Repository")
-                        }
+                        FieldLabel("Repository", for: "repository")
                         TextField(name: "repository", prompt: "Repository")
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "documentation") {
-                            LocalizedString(key: "Documentation")
-                        }
+                        FieldLabel("Documentation", for: "documentation")
                         TextField(name: "documentation", prompt: "Documentation")
                             .borderShape(.smallrounded)
                     }
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "category") {
-                            LocalizedString(key: "Category")
-                        }
+                        FieldLabel("Category", for: "category")
                         SelectField(name: "category", prompt: "macOS") {
                             for category in ProjectModel.ProjectCategory.allCases {
-                                RadioSelect(value: category.rawValue) {
-                                    category.description
-                                }
+                                RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "status") {
-                            LocalizedString(key: "Status")
-                        }
+                        FieldLabel("Status", for: "status")
                         SelectField(name: "status", prompt: "Published") {
                             for state in ProjectModel.ProjectStatus.allCases {
-                                RadioSelect(value: state.rawValue) {
-                                    state.description
-                                }
+                                RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -97,16 +77,12 @@ extension ProjectAdminPage {
         var body: Content {
             Form(method: .post) {
                 VStack {
-                    FieldLabel(for: "title") {
-                        LocalizedString(key: "Title")
-                    }
+                    FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title", value: project.title)
                         .borderShape(.smallrounded)
                 }
                 VStack {
-                    FieldLabel(for: "excerpt") {
-                        LocalizedString(key: "Excerpt")
-                    }
+                    FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         project.excerpt
                     }
@@ -114,9 +90,7 @@ extension ProjectAdminPage {
                     .lineLimit(5)
                 }
                 VStack {
-                    FieldLabel(for: "content") {
-                        LocalizedString(key: "Content")
-                    }
+                    FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                         project.content
                     }
@@ -125,54 +99,40 @@ extension ProjectAdminPage {
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "repository") {
-                            LocalizedString(key: "Repository")
-                        }
+                        FieldLabel("Repository", for: "repository")
                         TextField(name: "repository", prompt: "Repository", value: project.repository)
                             .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "documentation") {
-                            LocalizedString(key: "Documentation")
-                        }
+                        FieldLabel("Documentation", for: "documentation")
                         TextField(name: "documentation", prompt: "Documentation", value: project.documentation)
                             .borderShape(.smallrounded)
                     }
                 }
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel(for: "category") {
-                            LocalizedString(key: "Category")
-                        }
+                        FieldLabel("Category", for: "category")
                         SelectField(name: "category", prompt: "macOS", selection: project.category.rawValue) {
                             for category in ProjectModel.ProjectCategory.allCases {
-                                RadioSelect(value: category.rawValue) {
-                                    category.description
-                                }
+                                RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                     VStack {
-                        FieldLabel(for: "status") {
-                            LocalizedString(key: "Status")
-                        }
+                        FieldLabel("Status", for: "status")
                         SelectField(name: "status", prompt: "Published", selection: project.status.rawValue) {
                             for state in ProjectModel.ProjectStatus.allCases {
-                                RadioSelect(value: state.rawValue) {
-                                    state.description
-                                }
+                                RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
-                Button(role: .submit) {
-                    LocalizedString(key: "Submit")
-                }
-                .buttonStyle(.primary)
-                .borderShape(.smallrounded)
+                Button("Submit", role: .submit)
+                    .buttonStyle(.primary)
+                    .borderShape(.smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

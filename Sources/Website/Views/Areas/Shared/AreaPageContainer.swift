@@ -17,7 +17,7 @@ struct AreaPageContainer: View {
                     .charset(.utf8)
                 Meta()
                     .name(.viewport)
-                    .content("width=device-width, initial-scale=1.0")
+                    .content(verbatim: "width=device-width, initial-scale=1.0")
                 Title {
                     "mattesmohr"
                 }
