@@ -124,6 +124,6 @@ enum Setup {
         
         application.htmlkit.localization.set(source: localeSourcePath)
         application.htmlkit.localization.set(locale: "en-GB")
-        application.htmlkit.features = [.markdown]
+        application.htmlkit.features = [.escaping, .markdown]
     }
 }
