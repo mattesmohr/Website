@@ -23,7 +23,7 @@ enum Setup {
         
         do {
     
-            try await middlwares(application)
+            try await middlewares(application)
             try await routes(application)
             try await tables(application)
             try await services(application)
@@ -42,7 +42,7 @@ enum Setup {
         try await application.asyncShutdown()
     }
     
-    static func middlwares(_ application: Application) async throws {
+    static func middlewares(_ application: Application) async throws {
         
         application.middleware = .init()
         application.middleware.use(RouteLoggingMiddleware(logLevel: .info))
