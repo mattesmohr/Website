@@ -23,13 +23,13 @@ struct PageContainer: View {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/htmlkit/all.css")
+                    .reference("/vendor/htmlkit/all.css")
                 Link()
                     .relationship(.stylesheet)
                     .reference("/css/page.css")
                 Script {
                 }
-                .source("/htmlkit/query.js")
+                .source("/vendor/htmlkit/query.js")
             }
             Body {
                 content
@@ -38,7 +38,7 @@ struct PageContainer: View {
                 .source("/js/page.js")
                 Script {
                 }
-                .source("/htmlkit/all.js")
+                .source("/vendor/htmlkit/all.js")
             }
         }
         .language(.english)

@@ -23,13 +23,13 @@ struct AreaPageContainer: View {
                 }
                 Link()
                     .relationship(.stylesheet)
-                    .reference("/htmlkit/all.css")
+                    .reference("/vendor/htmlkit/all.css")
                 Link()
                     .relationship(.stylesheet)
                     .reference("/css/area.css")
                 Script {
                 }
-                .source("/htmlkit/query.js")
+                .source("/vendor/htmlkit/query.js")
             }
             Body {
                 content
@@ -38,7 +38,7 @@ struct AreaPageContainer: View {
                 .source("/js/area.js")
                 Script {
                 }
-                .source("/htmlkit/all.js")
+                .source("/vendor/htmlkit/all.js")
             }
         }
     }
