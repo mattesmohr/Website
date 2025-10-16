@@ -20,7 +20,7 @@ rm -rf Package.resolved
 rm -rf Package.swift
 rm -rf README.md
 rm -rf .gitignore
-rm -rf deploy.sh
+rm -rf .plesk
 
 # Start the service again
 sudo /usr/bin/systemctl start mattesmohr
