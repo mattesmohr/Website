@@ -30,9 +30,7 @@ struct ArticleList: View {
                             List(direction: .vertical) {
                                 Link(destination: "/area/admin/articles/\(article.id)/edit") {
                                     Symbol(system: .pencil)
-                                    Text {
-                                        "Edit"
-                                    }
+                                    Text("Edit")
                                 }
                             }
                         } label: {

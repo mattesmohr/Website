@@ -33,18 +33,15 @@ extension SettingAdminPage {
                     }
                     VStack {
                         FieldLabel("Port", for: "port")
-                        TextField(name: "port", prompt: "465")
+                        TextField(name: "port", prompt: String("465"))
                             .borderShape(.smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
                         FieldLabel("Security", for: "security")
-                        SelectField(name: "security", prompt: "SSL") {
-                            RadioSelect(value: "ssl") {
-                                "SSL"
-                            }
-                            RadioSelect(value: "tls") {
-                                "TLS"
+                        SelectField(name: "security", prompt: String("SSL")) {
+                            for encryption in SettingModel.MailEncryption.allCases {
+                                RadioSelect(encryption.localizedDescription, value: encryption.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)
@@ -101,18 +98,15 @@ extension SettingAdminPage {
                     }
                     VStack {
                         FieldLabel("Port", for: "port")
-                        TextField(name: "port", prompt: "465", value: settings.port)
+                        TextField(name: "port", prompt: String("465"), value: settings.port)
                             .borderShape(.smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
                         FieldLabel("Security", for: "security")
-                        SelectField(name: "security", prompt: "SSL", selection: settings.security) {
-                            RadioSelect(value: "ssl") {
-                               "SSL"
-                            }
-                            RadioSelect(value: "tls") {
-                               "TLS"
+                        SelectField(name: "security", prompt: "SSL", selection: settings.security.rawValue) {
+                            for encryption in SettingModel.MailEncryption.allCases {
+                                RadioSelect(encryption.localizedDescription, value: encryption.rawValue)
                             }
                         }
                         .borderShape(.smallrounded)

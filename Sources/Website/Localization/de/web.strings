@@ -162,6 +162,7 @@
 "Draft" = "Entwurf";
 "Confidential" = "Vertraulich";
 "Disabled" = "Deaktiviert";
+"Closed" = "Geschlossen";
 
 "iOS" = "iOS";
 "macOS" = "macOS";
@@ -169,3 +170,13 @@
 
 "Administrator" = "Administrator";
 "Moderator" = "Moderator";
+
+"john.doe@provider.com" = "max.mustermann@provider.com";
+"John" = "Max";
+"Doe" = "Mustermann";
+
+"Description" = "Beschreibung";
+
+"TLS" = "TLS";
+"SSL" = "SSL";
+"None" = "Keine";

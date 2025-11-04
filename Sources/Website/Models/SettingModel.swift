@@ -1,8 +1,52 @@
+import HTMLKit
 import Vapor
 
 struct SettingModel {
     
-    struct Input: Content {
+    /// An enumeration of potential mail encryptions
+    enum MailEncryption: String, CaseIterable, Equatable {
+        
+        /// Indicates a TLS encryption
+        case tls
+        
+        /// Indicates a SSL encryption
+        case ssl
+        
+        /// Indicates no encryption
+        case none
+        
+        /// The description of the mail encryption
+        var description: String {
+            
+            switch self {
+            case .tls:
+                return "TLS"
+                
+            case .ssl:
+                return "SSL"
+                
+            case .none:
+                return "None"
+            }
+        }
+        
+        /// The localized description of the mail encryption
+        var localizedDescription: LocalizedStringKey {
+            
+            switch self {
+            case .tls:
+                return "TLS"
+                
+            case .ssl:
+                return "SSL"
+                
+            case .none:
+                return "None"
+            }
+        }
+    }
+    
+    struct Input: Vapor.Content {
      
         /// The title for the site
         var title: String?
@@ -50,7 +94,7 @@ struct SettingModel {
         var port: String?
         
         /// The encryption method for smtp
-        var security: String?
+        var security: MailEncryption
         
         /// The username for smtp authentication
         var username: String?
@@ -72,11 +116,16 @@ struct SettingModel {
             self.email = email
             self.hostname = hostname
             self.port = port
-            self.security = security
             self.username = username
             self.password = password
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
+            
+            if let security = security {
+                self.security = MailEncryption(rawValue: security)!
+            } else {
+                self.security = .none
+            }
             
         }
         
