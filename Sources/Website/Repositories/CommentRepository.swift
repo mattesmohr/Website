@@ -13,7 +13,7 @@ final class CommentRepository {
     }
     
     /// Finds the first matching contact entity by the given identifier
-    func find(id: UUID) async throws -> CommentEntity? {
+    func find(id: Int) async throws -> CommentEntity? {
         
        return try await database.query(CommentEntity.self)
             .filter(\.$id == id)
@@ -32,7 +32,6 @@ final class CommentRepository {
     func insert(entity: CommentEntity) async throws {
 
         try await database.query(CommentEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$name, to: entity.name)
             .set(\.$message, to: entity.message)
             .set(\.$status, to: entity.status)
@@ -41,7 +40,7 @@ final class CommentRepository {
     }
     
     /// Updates a specific field of the contact entity
-    func patch<Field: QueryableProperty>(field: KeyPath<CommentEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == CommentEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<CommentEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == CommentEntity {
         
         try await database.query(CommentEntity.self)
             .filter(\.$id == id)
@@ -50,7 +49,7 @@ final class CommentRepository {
     }
         
     /// Updates all fields of the contact entity.
-    func update(entity: CommentEntity, on id: UUID) async throws {
+    func update(entity: CommentEntity, on id: Int) async throws {
         
         try await database.query(CommentEntity.self)
             .filter(\.$id == id)
@@ -62,7 +61,7 @@ final class CommentRepository {
     }
     
     /// Deletes an contact entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(CommentEntity.self)
             .filter(\.$id == id)

@@ -13,7 +13,7 @@ final class UserRepository {
     }
     
     /// Finds the first matching user entity by the given identifier
-    func find(id: UUID) async throws -> UserEntity? {
+    func find(id: Int) async throws -> UserEntity? {
         
        return try await database.query(UserEntity.self)
             .with(\.$account)
@@ -43,7 +43,6 @@ final class UserRepository {
     func insert(entity: UserEntity) async throws {
         
         try await database.query(UserEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$email, to: entity.email)
             .set(\.$firstName, to: entity.firstName)
             .set(\.$lastName, to: entity.lastName)
@@ -53,7 +52,7 @@ final class UserRepository {
     }
     
     /// Updates a specific field of the user entity
-    func patch<Field: QueryableProperty>(field: KeyPath<UserEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == UserEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<UserEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == UserEntity {
         
         try await database.query(UserEntity.self)
             .filter(\.$id == id)
@@ -62,7 +61,7 @@ final class UserRepository {
     }
     
     /// Updates all fields of the user entity.
-    func update(entity: UserEntity, on id: UUID) async throws {
+    func update(entity: UserEntity, on id: Int) async throws {
         
         try await database.query(UserEntity.self)
             .filter(\.$id == id)
@@ -75,7 +74,7 @@ final class UserRepository {
     }
     
     /// Deletes an user entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(UserEntity.self)
             .filter(\.$id == id)

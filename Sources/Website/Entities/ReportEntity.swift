@@ -5,8 +5,8 @@ final class ReportEntity: Model, @unchecked Sendable {
     
     static let schema = "reports"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Field(key: "uri")
     var uri: String
@@ -22,7 +22,7 @@ final class ReportEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, uri: String, count: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, uri: String, count: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.uri = uri

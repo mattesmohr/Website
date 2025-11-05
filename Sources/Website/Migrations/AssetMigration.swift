@@ -5,7 +5,7 @@ struct AssetMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         
         try await database.schema("assets")
-            .id()
+            .field("id", .int, .identifier(auto: true))
             .field("title", .string, .required)
             .field("alternate_text", .string)
             .field("file_name", .string, .required)

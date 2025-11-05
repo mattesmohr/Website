@@ -50,7 +50,7 @@ struct ProjectAdminController {
     @Sendable
     func getEdit(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -67,7 +67,7 @@ struct ProjectAdminController {
     @Sendable
     func postEdit(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -89,7 +89,7 @@ struct ProjectAdminController {
     @Sendable
     func getDelete(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         

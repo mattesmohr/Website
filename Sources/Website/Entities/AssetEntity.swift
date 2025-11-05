@@ -5,8 +5,8 @@ final class AssetEntity: Model, @unchecked Sendable {
     
     static let schema = "assets"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Field(key: "title")
     var title: String
@@ -52,7 +52,7 @@ final class AssetEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, title: String, alternateText: String? = nil, fileName: String, fileFullName: String, filePath: String, fileExtension: String? = nil, fileSize: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, title: String, alternateText: String? = nil, fileName: String, fileFullName: String, filePath: String, fileExtension: String? = nil, fileSize: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.title = title

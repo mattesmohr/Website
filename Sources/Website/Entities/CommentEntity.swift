@@ -5,8 +5,8 @@ final class CommentEntity: Model, @unchecked Sendable {
     
     static let schema = "comments"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @OptionalParent(key: "avatar_id")
     var avatar: AssetEntity?
@@ -34,7 +34,7 @@ final class CommentEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, avatarId: UUID? = nil, name: String, message: String, reply: String?, status: String, articleId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, avatarId: Int? = nil, name: String, message: String, reply: String?, status: String, articleId: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.$avatar.id = avatarId
@@ -48,12 +48,12 @@ final class CommentEntity: Model, @unchecked Sendable {
     }
     
     
-    convenience init(input: CommentModel.Input.Public, on article: UUID) {
+    convenience init(input: CommentModel.Input.Public, on article: Int) {
         
         self.init(name: "Anonymous", message: input.message, reply: nil, status: "pending", articleId: article)
     }
     
-    convenience init(input: CommentModel.Input.Private, on article: UUID) {
+    convenience init(input: CommentModel.Input.Private, on article: Int) {
         
         self.init(name: "Anonymous", message: input.message, reply: input.reply, status: input.status ,articleId: article)
     }

@@ -47,7 +47,7 @@ struct ContactModel {
     struct Output: Content {
         
         /// The  unique identifier of the contact
-        let id: UUID
+        let id: Int
         
         /// The first name of the contact
         let firstName: String
@@ -67,7 +67,7 @@ struct ContactModel {
         /// The timestamp when the article was last updated
         let modifiedAt: Date
         
-        init(id: UUID, firstName: String, lastName: String, email: String, message: String, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, firstName: String, lastName: String, email: String, message: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.firstName = firstName

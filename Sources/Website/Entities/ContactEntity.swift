@@ -5,8 +5,8 @@ final class ContactEntity: Model, @unchecked Sendable {
     
     static let schema = "contacts"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Field(key: "first_name")
     var firstName: String
@@ -28,7 +28,7 @@ final class ContactEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, message: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, firstName: String, lastName: String, email: String, message: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.firstName = firstName

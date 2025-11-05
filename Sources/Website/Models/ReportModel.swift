@@ -21,7 +21,7 @@ struct ReportModel {
     struct Output: Content {
         
         /// The unique identifier of the report
-        let id: UUID
+        let id: Int
         
         /// The url which was visited
         let uri: String
@@ -35,7 +35,7 @@ struct ReportModel {
         /// The timestamp when the report was last updated
         let modifiedAt: Date
         
-        init(id: UUID, uri: String, count: Int? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, uri: String, count: Int? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.uri = uri

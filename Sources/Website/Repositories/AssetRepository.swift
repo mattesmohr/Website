@@ -13,7 +13,7 @@ final class AssetRepository {
     }
     
     /// Finds the first matching asset entity by the given identifier
-    func find(id: UUID) async throws -> AssetEntity? {
+    func find(id: Int) async throws -> AssetEntity? {
         
         return try await database.query(AssetEntity.self)
             .filter(\.$id == id)
@@ -32,7 +32,6 @@ final class AssetRepository {
     func insert(entity: AssetEntity) async throws {
 
         try await database.query(AssetEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$title, to: entity.title)
             .set(\.$alternateText, to: entity.alternateText)
             .set(\.$fileName, to: entity.fileName)
@@ -44,7 +43,7 @@ final class AssetRepository {
     }
     
     /// Updates a specific field of the asset entity
-    func patch<Field: QueryableProperty>(field: KeyPath<AssetEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == AssetEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<AssetEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == AssetEntity {
         
         try await database.query(AssetEntity.self)
             .filter(\.$id == id)
@@ -53,7 +52,7 @@ final class AssetRepository {
     }
     
     /// Updates all fields of the asset entity.
-    func update(entity: AssetEntity, on id: UUID) async throws {
+    func update(entity: AssetEntity, on id: Int) async throws {
         
         try await database.query(AssetEntity.self)
             .filter(\.$id == id)
@@ -62,7 +61,7 @@ final class AssetRepository {
             .update()
     }
     /// Deletes an asset entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(AssetEntity.self)
             .filter(\.$id == id)

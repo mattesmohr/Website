@@ -13,7 +13,7 @@ final class FeedRepository {
     }
     
     /// Finds the first matching feed entity by the given identifier
-    func find(id: UUID) async throws -> FeedEntity? {
+    func find(id: Int) async throws -> FeedEntity? {
        
         return try await database.query(FeedEntity.self)
             .filter(\.$id == id)
@@ -41,7 +41,6 @@ final class FeedRepository {
     func insert(entity: FeedEntity) async throws {
 
         try await database.query(FeedEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$message, to: entity.message)
             .set(\.$tags, to: entity.tags)
             .set(\.$status, to: entity.status)
@@ -49,7 +48,7 @@ final class FeedRepository {
     }
     
     /// Updates a specific field of the feed entity
-    func patch<Field: QueryableProperty>(field: KeyPath<FeedEntity, Field>, to value: Field.Value, on id: UUID) async throws where Field.Model == FeedEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<FeedEntity, Field>, to value: Field.Value, on id: Int) async throws where Field.Model == FeedEntity {
         
         try await database.query(FeedEntity.self)
             .filter(\.$id == id)
@@ -58,7 +57,7 @@ final class FeedRepository {
     }
     
     /// Updates all fields of the feed entity.
-    func update(entity: FeedEntity, on id: UUID) async throws {
+    func update(entity: FeedEntity, on id: Int) async throws {
         
         try await database.query(FeedEntity.self)
             .filter(\.$id == id)
@@ -69,7 +68,7 @@ final class FeedRepository {
     }
     
     /// Deletes an feed entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(FeedEntity.self)
             .filter(\.$id == id)

@@ -5,9 +5,9 @@ struct ArticleMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         
         try await database.schema("articles")
-            .id()
+            .field("id", .int, .identifier(auto: true))
             .field("slug", .string, .required)
-            .field("thumbnail_id", .uuid, .references("assets", "id"))
+            .field("thumbnail_id", .int, .references("assets", "id"))
             .field("title", .string, .required)
             .field("excerpt", .string, .required)
             .field("content", .custom("text"), .required)
@@ -15,7 +15,7 @@ struct ArticleMigration: AsyncMigration {
             .field("status", .string, .required)
             .field("comment", .string)
             .field("published_on", .datetime)
-            .field("author_id", .uuid, .required, .references("users", "id"))
+            .field("author_id", .int, .required, .references("users", "id"))
             .field("created_at", .datetime)
             .field("modified_at", .datetime)
             .create()

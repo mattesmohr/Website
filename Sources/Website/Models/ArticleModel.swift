@@ -146,7 +146,7 @@ struct ArticleModel {
     struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the thumbnail image
-        var thumbnailId: String?
+        var thumbnailId: Int?
         
         /// The title for the article
         var title: String
@@ -170,7 +170,7 @@ struct ArticleModel {
         var publishedOn: Date?
         
         /// The author for the article
-        var authorId: UUID?
+        var authorId: Int?
         
         /// The slug representation of the article
         var slug: String {
@@ -212,7 +212,7 @@ struct ArticleModel {
     struct Output: Vapor.Content {
         
         /// The unique identifier of the article
-        let id: UUID
+        let id: Int
         
         /// The slug representation of the article
         let slug: String
@@ -256,7 +256,7 @@ struct ArticleModel {
         /// The timestamp when the article was last updated
         let modifiedAt: Date
         
-        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, assets: [AssetModel.Output]? = nil, comments: [CommentModel.Output]? = nil, author: UserModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.slug = slug

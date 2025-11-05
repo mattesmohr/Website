@@ -19,7 +19,7 @@ final class SettingRepository {
     /// - Parameter id: The identifier to look for
     ///
     /// - Returns: The potential entity
-    func find(id: UUID) async throws -> SettingEntity? {
+    func find(id: Int) async throws -> SettingEntity? {
         
         return try await database.query(SettingEntity.self)
             .filter(\.$id == id)
@@ -41,7 +41,6 @@ final class SettingRepository {
     func insert(entity: SettingEntity) async throws {
 
         try await database.query(SettingEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$title, to: entity.title)
             .set(\.$description, to: entity.description)
             .set(\.$email, to: entity.email)
@@ -58,7 +57,7 @@ final class SettingRepository {
     /// - Parameters:
     ///   - entity: The new entity
     ///   - id: The identifier to look for
-    func update(entity: SettingEntity, on id: UUID) async throws {
+    func update(entity: SettingEntity, on id: Int) async throws {
         
         try await database.query(SettingEntity.self)
             .filter(\.$id == id)
@@ -76,7 +75,7 @@ final class SettingRepository {
     /// Delete the setting entity
     ///
     /// - Parameter id: The identifier to look for
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(SettingEntity.self)
             .filter(\.$id == id)

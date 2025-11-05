@@ -45,7 +45,7 @@ struct UserAdminController {
     @Sendable
     func getEdit(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -62,7 +62,7 @@ struct UserAdminController {
     @Sendable
     func postEdit(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -79,7 +79,7 @@ struct UserAdminController {
     @Sendable
     func getDelete(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -92,7 +92,7 @@ struct UserAdminController {
     @Sendable
     func getDeactivate(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -111,7 +111,7 @@ struct UserAdminController {
     @Sendable
     func getUnlock(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -130,7 +130,7 @@ struct UserAdminController {
     @Sendable
     func getReset(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         

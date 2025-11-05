@@ -103,7 +103,7 @@ struct ProjectModel {
     struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the thumbnail image
-        var thumbnailId: String?
+        var thumbnailId: Int?
         
         /// The title for the project
         var title: String
@@ -130,7 +130,7 @@ struct ProjectModel {
         var publishedOn: Date?
         
         /// The author for the article
-        var authorId: UUID?
+        var authorId: Int?
         
         /// The slug representation of the project
         var slug: String {
@@ -174,7 +174,7 @@ struct ProjectModel {
     struct Output: Vapor.Content {
         
         /// The unique identifier of the project
-        let id: UUID
+        let id: Int
         
         /// The slug representation of the project
         let slug: String
@@ -215,7 +215,7 @@ struct ProjectModel {
         /// The timestamp when the article was last updated
         let modifiedAt: Date
         
-        init(id: UUID, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, author: UserModel.Output? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, slug: String, thumbnail: AssetModel.Output? = nil, title: String, excerpt: String, content: String, category: String, status: String, repository: String? = nil, documentation: String? = nil, author: UserModel.Output? = nil, assets: [AssetModel.Output]? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.slug = slug

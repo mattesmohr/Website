@@ -5,7 +5,7 @@ struct SettingMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         
         try await database.schema("settings")
-            .id()
+            .field("id", .int, .identifier(auto: true))
             .field("site_name", .string)
             .field("meta_description", .string)
             .field("site_email", .string)

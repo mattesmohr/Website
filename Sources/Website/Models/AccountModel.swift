@@ -78,7 +78,7 @@ struct AccountModel {
     struct Output: Vapor.Content {
         
         /// The unique identifier of the credential
-        let id: UUID
+        let id: Int
         
         /// The hashed version of the password
         let password: String
@@ -95,7 +95,7 @@ struct AccountModel {
         /// The timestamp when the credential was last updated
         let modifiedAt: Date
         
-        init(id: UUID, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, password: String, status: String? = nil, attempt: Int, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.password = password

@@ -5,8 +5,8 @@ final class FeedEntity: Model, @unchecked Sendable {
     
     static let schema = "feeds"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @OptionalParent(key: "thumbnail_id")
     var thumbnail: AssetEntity?
@@ -28,7 +28,7 @@ final class FeedEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, thumbnailId: UUID? = nil, message: String, tags: String? = nil, status: String,  createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, thumbnailId: Int? = nil, message: String, tags: String? = nil, status: String,  createdAt: Date? = nil, modifiedAt: Date? = nil) {
     
         self.id = id
         self.$thumbnail.id = thumbnailId
@@ -44,7 +44,7 @@ final class FeedEntity: Model, @unchecked Sendable {
         self.init(message: input.message, tags: input.tags, status: input.status)
         
         if let thumbnailId = input.thumbnailId {
-            self.$thumbnail.id = UUID(uuidString: thumbnailId)
+            self.$thumbnail.id = thumbnailId
         }
     }
 }

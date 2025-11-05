@@ -106,7 +106,7 @@ struct CommentModel {
     struct Output: Vapor.Content {
         
         /// The unique identifier of the comment
-        let id: UUID
+        let id: Int
         
         /// The avatar image of the comment author
         var avatar: AssetModel.Output?
@@ -129,7 +129,7 @@ struct CommentModel {
         /// The timestamp when the comment was last updated
         let modifiedAt: Date
         
-        init(id: UUID, avatar: AssetModel.Output? = nil, name: String, message: String, reply: String?, status: String, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, avatar: AssetModel.Output? = nil, name: String, message: String, reply: String?, status: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar

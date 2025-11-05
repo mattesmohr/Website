@@ -5,9 +5,9 @@ struct ArticleAssetMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         
         try await database.schema("article+asset")
-            .id()
-            .field("article_id", .uuid)
-            .field("asset_id", .uuid)
+            .field("id", .int, .identifier(auto: true))
+            .field("article_id", .int)
+            .field("asset_id", .int)
             .create()
     }
     

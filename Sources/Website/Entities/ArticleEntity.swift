@@ -5,8 +5,8 @@ final class ArticleEntity: Model, @unchecked Sendable {
     
     static let schema = "articles"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Field(key: "slug")
     var slug: String
@@ -52,7 +52,7 @@ final class ArticleEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, slug: String, thumbnailId: UUID? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, authorId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, slug: String, thumbnailId: Int? = nil, title: String, excerpt: String, content: String, category: String, status: String, comment: String, publishedOn: Date? = nil, authorId: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
     
         self.id = id
         self.slug = slug
@@ -74,7 +74,7 @@ final class ArticleEntity: Model, @unchecked Sendable {
         self.init(slug: input.slug, title: input.title, excerpt: input.excerpt, content: input.content, category: input.category, status: input.status, comment: input.comment, publishedOn: input.publishedOn, authorId: input.authorId!)
         
         if let thumbnailId = input.thumbnailId {
-            self.$thumbnail.id = UUID(uuidString: thumbnailId)
+            self.$thumbnail.id = thumbnailId
         }
     }
 }

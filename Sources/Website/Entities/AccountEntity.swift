@@ -5,8 +5,8 @@ final class AccountEntity: Model, @unchecked Sendable {
     
     static let schema = "accounts"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Field(key: "password")
     var password: String
@@ -28,7 +28,7 @@ final class AccountEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, password: String, status: String, attempt: Int, userId: UUID, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, password: String, status: String, attempt: Int, userId: Int, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.password = password

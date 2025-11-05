@@ -5,8 +5,8 @@ final class ProjectAsset: Model, @unchecked Sendable {
  
     static let schema = "project+asset"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Parent(key: "project_id")
     var project: ProjectEntity
@@ -16,7 +16,7 @@ final class ProjectAsset: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, project: ProjectEntity, asset: AssetEntity) throws {
+    init(id: Int? = nil, project: ProjectEntity, asset: AssetEntity) throws {
         
         self.id = id
         self.$project.id = try project.requireID()

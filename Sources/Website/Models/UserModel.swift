@@ -42,7 +42,7 @@ struct UserModel {
     struct Input: Vapor.Content, Validatable {
         
         /// The identifier of the user avatar
-        var avatarId: String?
+        var avatarId: Int?
         
         /// The email for the user
         var email: String
@@ -86,7 +86,7 @@ struct UserModel {
     struct Output: Vapor.Content, SessionAuthenticatable {
         
         /// The unique identifier of the user
-        let id: UUID
+        let id: Int
         
         /// The file name of the avatar
         var avatar: AssetModel.Output?
@@ -130,7 +130,7 @@ struct UserModel {
             return nil
         }
         
-        init(id: UUID, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, account: AccountModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, avatar: AssetModel.Output? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, account: AccountModel.Output? = nil, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.avatar = avatar

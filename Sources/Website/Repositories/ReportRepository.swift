@@ -13,7 +13,7 @@ final class ReportRepository {
     }
     
     /// Finds the first matching report entity by the given identifier
-    func find(id: UUID) async throws -> ReportEntity? {
+    func find(id: Int) async throws -> ReportEntity? {
         
        return try await database.query(ReportEntity.self)
             .filter(\.$id == id)
@@ -40,14 +40,13 @@ final class ReportRepository {
     func insert(entity: ReportEntity) async throws {
         
         try await database.query(ReportEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$uri, to: entity.uri)
             .set(\.$count, to: entity.count)
             .create()
     }
     
     /// Updates a specific field of the report entity
-    func patch<Field: QueryableProperty>(field: KeyPath<ReportEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ReportEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<ReportEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == ReportEntity {
         
         try await database.query(ReportEntity.self)
             .filter(\.$id == id)
@@ -56,7 +55,7 @@ final class ReportRepository {
     }
     
     /// Updates all fields of the report entity.
-    func update(entity: ReportEntity, on id: UUID) async throws {
+    func update(entity: ReportEntity, on id: Int) async throws {
         
         try await database.query(ReportEntity.self)
             .filter(\.$id == id)
@@ -66,7 +65,7 @@ final class ReportRepository {
     }
     
     /// Deletes an report entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(ReportEntity.self)
             .filter(\.$id == id)

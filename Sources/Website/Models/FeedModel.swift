@@ -50,7 +50,7 @@ struct FeedModel {
     /// The data transfer object for the credential input
     struct Input: Vapor.Content, Validatable {
         
-        var thumbnailId: String?
+        var thumbnailId: Int?
         
         /// The feed message
         var message: String
@@ -81,7 +81,7 @@ struct FeedModel {
     struct Output: Vapor.Content {
         
         /// The unique identifier of the feed
-        var id: UUID
+        var id: Int
         
         var thumbnail: AssetModel.Output?
         
@@ -100,7 +100,7 @@ struct FeedModel {
         /// The timestamp when the feed was last updated
         let modifiedAt: Date
         
-        init(id: UUID, thumbnail: AssetModel.Output? = nil, message: String, tags: String? = nil, status: String, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, thumbnail: AssetModel.Output? = nil, message: String, tags: String? = nil, status: String, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.thumbnail = thumbnail

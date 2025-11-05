@@ -36,7 +36,7 @@ struct AssetModel {
     struct Output: Content {
         
         /// The unique identifier of the asset
-        let id: UUID
+        let id: Int
         
         /// The title of the asset
         let title: String
@@ -65,7 +65,7 @@ struct AssetModel {
         /// The timestamp when the asset was last updated
         let modifiedAt: Date
         
-        init(id: UUID, title: String, alternate: String?, fileName: String, fileFullName: String, filePath: String, fileExtension: String?, fileSize: Int, modifiedAt: Date, createdAt: Date) {
+        init(id: Int, title: String, alternate: String?, fileName: String, fileFullName: String, filePath: String, fileExtension: String?, fileSize: Int, modifiedAt: Date, createdAt: Date) {
 
             self.id = id
             self.title = title

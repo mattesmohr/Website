@@ -13,7 +13,7 @@ final class ArticleRepository {
     }
     
     /// Finds the first matching activity entity by the given identifier
-    func find(id: UUID) async throws -> ArticleEntity? {
+    func find(id: Int) async throws -> ArticleEntity? {
        
         return try await database.query(ArticleEntity.self)
             .with(\.$thumbnail)
@@ -73,7 +73,6 @@ final class ArticleRepository {
     func insert(entity: ArticleEntity) async throws {
         
         try await database.query(ArticleEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$slug, to: entity.slug)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
@@ -86,7 +85,7 @@ final class ArticleRepository {
     }
     
     /// Updates a specific field of the article entity
-    func patch<Field: QueryableProperty>(field: KeyPath<ArticleEntity, Field>, to value: Field.Value, on id: UUID) async throws where Field.Model == ArticleEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<ArticleEntity, Field>, to value: Field.Value, on id: Int) async throws where Field.Model == ArticleEntity {
         
         try await database.query(ArticleEntity.self)
             .filter(\.$id == id)
@@ -95,7 +94,7 @@ final class ArticleRepository {
     }
     
     /// Updates all fields of the article entity.
-    func update(entity: ArticleEntity, on id: UUID) async throws {
+    func update(entity: ArticleEntity, on id: Int) async throws {
         
         try await database.query(ArticleEntity.self)
             .filter(\.$id == id)
@@ -111,7 +110,7 @@ final class ArticleRepository {
     }
     
     /// Deletes an article entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(ArticleEntity.self)
             .filter(\.$id == id)

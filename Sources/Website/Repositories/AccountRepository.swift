@@ -13,7 +13,7 @@ final class AccountRepository {
     }
     
     /// Finds the first matching account entity by the given identifier
-    func find(id: UUID) async throws -> AccountEntity? {
+    func find(id: Int) async throws -> AccountEntity? {
         
        return try await database.query(AccountEntity.self)
             .filter(\.$id == id)
@@ -24,7 +24,6 @@ final class AccountRepository {
     func insert(entity: AccountEntity) async throws {
         
         try await database.query(AccountEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$password, to: entity.password)
             .set(\.$status, to: entity.status)
             .set(\.$attempt, to: entity.attempt)
@@ -33,7 +32,7 @@ final class AccountRepository {
     }
     
     /// Updates a specific field of the account entity
-    func patch<Field: QueryableProperty>(field: KeyPath<AccountEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == AccountEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<AccountEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == AccountEntity {
         
         try await database.query(AccountEntity.self)
             .filter(\.$id == id)
@@ -42,7 +41,7 @@ final class AccountRepository {
     }
 
     /// Updates all fields of the account entity.
-    func update(entity: AccountEntity, on id: UUID) async throws {
+    func update(entity: AccountEntity, on id: Int) async throws {
         
         try await database.query(AccountEntity.self)
             .filter(\.$id == id)

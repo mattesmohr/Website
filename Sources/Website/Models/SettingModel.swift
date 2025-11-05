@@ -76,7 +76,7 @@ struct SettingModel {
     struct Output {
         
         /// The unique identifier of the setting
-        let id: UUID
+        let id: Int
         
         /// The title of the site
         var title: String?
@@ -108,7 +108,7 @@ struct SettingModel {
         /// The timestamp when the setting was last updated
         let modifiedAt: Date
         
-        init(id: UUID, title: String?, description: String?, email: String?, hostname: String?, port: String?, security: String?, username: String?, password: String?, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, title: String?, description: String?, email: String?, hostname: String?, port: String?, security: String?, username: String?, password: String?, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.title = title

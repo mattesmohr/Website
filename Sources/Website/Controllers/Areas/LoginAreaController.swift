@@ -104,7 +104,7 @@ struct LoginAreaController {
     @Sendable
     func getRegister(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -130,7 +130,7 @@ struct LoginAreaController {
     @Sendable
     func postRegister(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -155,7 +155,7 @@ struct LoginAreaController {
     @Sendable
     func getReset(_ request: Request) async throws -> View {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         
@@ -184,7 +184,7 @@ struct LoginAreaController {
     @Sendable
     func postReset(_ request: Request) async throws -> Response {
         
-        guard let id = request.parameters.get("id", as: UUID.self) else {
+        guard let id = request.parameters.get("id", as: Int.self) else {
             throw Abort(.badRequest)
         }
         

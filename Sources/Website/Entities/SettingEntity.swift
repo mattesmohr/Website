@@ -5,8 +5,8 @@ final class SettingEntity: Model, @unchecked Sendable {
     
     static let schema = "settings"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @OptionalField(key: "site_name")
     var title: String?
@@ -40,7 +40,7 @@ final class SettingEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, title: String?, description: String?, email: String?, hostname: String?, port: String?, security: String?, username: String?, password: String?, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, title: String?, description: String?, email: String?, hostname: String?, port: String?, security: String?, username: String?, password: String?, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.title = title

@@ -5,8 +5,8 @@ struct UserMigration: AsyncMigration {
     func prepare(on database: Database) async throws {
         
         try await database.schema("users")
-            .id()
-            .field("avatar_id", .uuid, .references("assets", "id"))
+            .field("id", .int, .identifier(auto: true))
+            .field("avatar_id", .int, .references("assets", "id"))
             .field("email", .string, .required).unique(on: "email")
             .field("first_name", .string)
             .field("last_name", .string)

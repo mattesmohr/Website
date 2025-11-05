@@ -5,8 +5,8 @@ final class UserEntity: Model, @unchecked Sendable {
     
     static let schema = "users"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @OptionalParent(key: "avatar_id")
     var avatar: AssetEntity?
@@ -40,7 +40,7 @@ final class UserEntity: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, avatarID: UUID? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
+    init(id: Int? = nil, avatarID: Int? = nil, email: String, firstName: String? = nil, lastName: String? = nil, biography: String? = nil, role: String, createdAt: Date? = nil, modifiedAt: Date? = nil) {
         
         self.id = id
         self.$avatar.id = avatarID
@@ -58,7 +58,7 @@ final class UserEntity: Model, @unchecked Sendable {
         self.init(email: input.email, firstName: input.firstName, lastName: input.lastName, biography: input.biography, role: input.role)
         
         if let avatarId = input.avatarId {
-            self.$avatar.id = UUID(uuidString: avatarId)
+            self.$avatar.id = avatarId
         }
     }
 }

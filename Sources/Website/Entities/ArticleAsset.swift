@@ -5,8 +5,8 @@ final class ArticleAsset: Model, @unchecked Sendable {
  
     static let schema = "article+asset"
     
-    @ID
-    var id: UUID?
+    @ID(custom: "id")
+    var id: Int?
     
     @Parent(key: "article_id")
     var article: ArticleEntity
@@ -16,7 +16,7 @@ final class ArticleAsset: Model, @unchecked Sendable {
     
     init() {}
     
-    init(id: UUID? = nil, article: ArticleEntity, asset: AssetEntity) throws {
+    init(id: Int? = nil, article: ArticleEntity, asset: AssetEntity) throws {
         
         self.id = id
         self.$article.id = try article.requireID()

@@ -23,7 +23,7 @@ final class RepositoryTests: XCTestCase {
         
         self.application.databases.use(database.configuration, as: .mysql)
         
-        let id = UUID()
+        let id = 2
         
         database.append([
             TestOutput(ContactEntity(

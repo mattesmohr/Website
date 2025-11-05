@@ -14,7 +14,7 @@ final class ProjectRepository {
     }
     
     /// Finds the first matching project entity by the given identifier
-    func find(id: UUID) async throws -> ProjectEntity? {
+    func find(id: Int) async throws -> ProjectEntity? {
         
        return try await database.query(ProjectEntity.self)
             .with(\.$thumbnail)
@@ -69,7 +69,6 @@ final class ProjectRepository {
     func insert(entity: ProjectEntity) async throws {
         
         try await database.query(ProjectEntity.self)
-            .set(\.$id, to: UUID())
             .set(\.$slug, to: entity.slug)
             .set(\.$title, to: entity.title)
             .set(\.$excerpt, to: entity.excerpt)
@@ -84,7 +83,7 @@ final class ProjectRepository {
     }
     
     /// Updates a specific field of the project entity
-    func patch<Field: QueryableProperty>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: UUID) async throws where Field.Model == ProjectEntity {
+    func patch<Field: QueryableProperty>(field: KeyPath<ProjectEntity, Field>, to value: Field.Value, for id: Int) async throws where Field.Model == ProjectEntity {
         
         try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
@@ -93,7 +92,7 @@ final class ProjectRepository {
     }
     
     /// Updates all fields of the project entity.
-    func update(entity: ProjectEntity, on id: UUID) async throws {
+    func update(entity: ProjectEntity, on id: Int) async throws {
         
         try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
@@ -111,7 +110,7 @@ final class ProjectRepository {
     }
     
     /// Deletes an project entity.
-    func delete(id: UUID) async throws {
+    func delete(id: Int) async throws {
         
         try await database.query(ProjectEntity.self)
             .filter(\.$id == id)
