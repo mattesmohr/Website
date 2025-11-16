@@ -1,10 +1,10 @@
 import Fluent
 
-struct FeedMigration: AsyncMigration {
+struct PostMigration: AsyncMigration {
     
     func prepare(on database: Database) async throws {
         
-        try await  database.schema("feeds")
+        try await  database.schema("posts")
             .field("id", .int, .identifier(auto: true))
             .field("thumbnail_id", .int, .references("assets", "id"))
             .field("message", .custom("text"), .required)
@@ -17,7 +17,7 @@ struct FeedMigration: AsyncMigration {
     
     func revert(on database: Database) async throws {
         
-        try await database.schema("feeds")
+        try await database.schema("posts")
             .delete()
     }
 }

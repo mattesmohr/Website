@@ -9,10 +9,14 @@ struct UserAdminController {
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
+        let limit: Int = request.query["limit"] ?? 10
         
-        let pagination = try await request.unit.user.find()
+        guard let pagination = try await request.unit.user.find()
             .map(UserModel.Output.init)
-            .page(page: page, per: 10)
+            .page(at: page, per: limit) else {
+            
+            throw Abort(.badRequest)
+        }
         
         let viewModel = UserAdminPageModel.IndexView(pagination: pagination)
         

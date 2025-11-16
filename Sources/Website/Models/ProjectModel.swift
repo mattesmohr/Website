@@ -142,6 +142,16 @@ struct ProjectModel {
                 .lowercased()
         }
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "title", rule: .value),
+                Validator(field: "excerpt", rule: .value),
+                Validator(field: "content", rule: .value),
+                Validator(field: "category", rule: .value),
+                Validator(field: "status", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("title", as: String.self, is: !.empty)
@@ -150,14 +160,6 @@ struct ProjectModel {
             validations.add("category", as: String.self, is: !.empty)
             validations.add("status", as: String.self, is: !.empty)
         }
-        
-        static let validators = [
-            Validator(field: "title", rule: .value),
-            Validator(field: "excerpt", rule: .value),
-            Validator(field: "content", rule: .value),
-            Validator(field: "category", rule: .value),
-            Validator(field: "status", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {

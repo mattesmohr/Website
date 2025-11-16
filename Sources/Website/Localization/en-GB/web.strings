@@ -64,8 +64,8 @@
 "Edit project" = "Edit project";
 "Create article" = "Create article";
 "Edit article" = "Edit article";
-"Create feed" = "Create feed";
-"Edit feed" = "Edit feed";
+"Create post" = "Create post";
+"Edit post" = "Edit post";
 "Create asset" = "Create asset";
 "Edit asset" = "Edit asset";
 "Create user" = "Create user";
@@ -181,3 +181,6 @@
 "TLS" = "TLS";
 "SSL" = "SSL";
 "None" = "None";
+
+"Posts" = "Posts";
+"Post" = "Post";

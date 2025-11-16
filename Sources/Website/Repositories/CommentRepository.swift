@@ -1,9 +1,9 @@
 import Fluent
 import Foundation
 
-final class CommentRepository {
+struct CommentRepository {
     
-    /// The database instance used by the repository for e. g. querying
+    /// The database the repository is working on
     let database: Database
     
     /// Initializes the repository with the given database

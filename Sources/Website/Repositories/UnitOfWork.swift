@@ -1,11 +1,11 @@
 import Vapor
 import Fluent
 
-/// A type that summarizes the access to every repository
+/// A type that summarizes the access to every repository.
 struct UnitOfWork {
     
     /// The database to work on
-    var database: Database
+    let database: Database
     
     /// Access to the article repository
     var article: ArticleRepository {
@@ -32,8 +32,8 @@ struct UnitOfWork {
         return .init(database: database)
     }
     
-    /// Access to the feed repository
-    var feed: FeedRepository {
+    /// Access to the post repository
+    var post: PostRepository {
         return .init(database: database)
     }
     

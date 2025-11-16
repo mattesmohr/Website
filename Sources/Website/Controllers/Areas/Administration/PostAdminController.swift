@@ -1,44 +1,48 @@
 import HTMLKitVapor
 import Vapor
 
-// [/area/admin/feed]
-struct FeedAdminController {
+// [/area/admin/post]
+struct PostAdminController {
     
     // [/]
     @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
+        let limit: Int = request.query["limit"] ?? 10
         
-        let pagination = try await request.unit.feed.find()
-            .map(FeedModel.Output.init)
-            .page(page: page, per: 10)
+        guard let pagination = try await request.unit.post.find()
+            .map(PostModel.Output.init)
+            .page(at: page, per: limit) else {
+            
+            throw Abort(.badRequest)
+        }
         
-        let viewModel = FeedAdminPageModel.IndexView(pagination: pagination)
+        let viewModel = PostAdminPageModel.IndexView(pagination: pagination)
         
-        return try await request.htmlkit.render(FeedAdminPage.IndexView(viewModel: viewModel))
+        return try await request.htmlkit.render(PostAdminPage.IndexView(viewModel: viewModel))
     }
     
     // [/create]
     @Sendable
     func getCreate(_ request: Request) async throws -> View {
         
-        let viewModel = FeedAdminPageModel.CreateView()
+        let viewModel = PostAdminPageModel.CreateView()
         
-        return try await request.htmlkit.render(FeedAdminPage.CreateView(viewModel: viewModel))
+        return try await request.htmlkit.render(PostAdminPage.CreateView(viewModel: viewModel))
     }
     
     // [/create/:model]
     @Sendable
     func postCreate(_ request: Request) async throws -> Response {
         
-        try FeedModel.Input.validate(content: request)
+        try PostModel.Input.validate(content: request)
         
-        let model = try request.content.decode(FeedModel.Input.self)
+        let model = try request.content.decode(PostModel.Input.self)
         
-        try await request.unit.feed.insert(entity: FeedEntity(input: model))
+        try await request.unit.post.insert(entity: PostEntity(input: model))
         
-        return request.redirect(to: "/area/admin/feed")
+        return request.redirect(to: "/area/admin/posts")
     }
     
     // [/:id/edit]
@@ -49,13 +53,13 @@ struct FeedAdminController {
             throw Abort(.badRequest)
         }
         
-        guard let entity = try await request.unit.feed.find(id: id) else {
+        guard let entity = try await request.unit.post.find(id: id) else {
             throw Abort(.notFound)
         }
         
-        let viewModel = FeedAdminPageModel.EditView(feed: FeedModel.Output(entity: entity))
+        let viewModel = PostAdminPageModel.EditView(post: PostModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(FeedAdminPage.EditView(viewModel: viewModel))
+        return try await request.htmlkit.render(PostAdminPage.EditView(viewModel: viewModel))
     }
     
     // [/:id/edit/:model]
@@ -66,13 +70,13 @@ struct FeedAdminController {
             throw Abort(.badRequest)
         }
         
-        try FeedModel.Input.validate(content: request)
+        try PostModel.Input.validate(content: request)
         
-        let model = try request.content.decode(FeedModel.Input.self)
+        let model = try request.content.decode(PostModel.Input.self)
         
-        try await request.unit.feed.update(entity: FeedEntity(input: model), on: id)
+        try await request.unit.post.update(entity: PostEntity(input: model), on: id)
         
-        return request.redirect(to: "/area/admin/feed")
+        return request.redirect(to: "/area/admin/posts")
     }
     
     // [/:id/delete]
@@ -83,17 +87,17 @@ struct FeedAdminController {
             throw Abort(.badRequest)
         }
         
-        try await request.unit.feed.delete(id: id)
+        try await request.unit.post.delete(id: id)
         
-        return request.redirect(to: "/area/admin/feed")
+        return request.redirect(to: "/area/admin/posts")
     }
 }
 
-extension FeedAdminController: RouteCollection {
+extension PostAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("feed") { routes in
+        routes.group("posts") { routes in
             
             routes.get("", use: self.getIndex)
             routes.get("create", use: self.getCreate)

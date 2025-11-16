@@ -15,6 +15,7 @@ struct ProjectMigration: AsyncMigration {
             .field("repository", .string)
             .field("documentation", .string)
             .field("category", .string, .required)
+            .field("published_on", .datetime)
             .field("author_id", .int, .required, .references("users", "id"))
             .field("created_at", .datetime)
             .field("modified_at", .datetime)

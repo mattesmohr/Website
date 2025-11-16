@@ -1,11 +1,11 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum FeedAdminPage {
+enum PostAdminPage {
     
     struct IndexView: View {
         
-        let viewModel: FeedAdminPageModel.IndexView
+        let viewModel: PostAdminPageModel.IndexView
         
         var body: Content {
             AreaViewContainer {
@@ -14,7 +14,7 @@ enum FeedAdminPage {
                         Text(viewModel.title)
                             .fontSize(.medium)
                             .fontWeight(.medium)
-                        LinkButton(destination: "/area/admin/feed/create") {
+                        LinkButton(destination: "/area/admin/posts/create") {
                             Symbol(system: .photo)
                             Text("Create")
                         }
@@ -23,7 +23,7 @@ enum FeedAdminPage {
                     }
                 }
                 Section {
-                    FeedList(feeds: viewModel.pagination.items)
+                    PostList(posts: viewModel.pagination.items)
                     HStack(spacing: .between) {
                         PagePagination(meta: viewModel.pagination.meta)
                     }
@@ -34,7 +34,7 @@ enum FeedAdminPage {
     
     struct CreateView: View {
         
-        let viewModel: FeedAdminPageModel.CreateView
+        let viewModel: PostAdminPageModel.CreateView
         
         var body: Content {
             AreaViewContainer {
@@ -44,7 +44,7 @@ enum FeedAdminPage {
                         .fontWeight(.medium)
                 }
                 Section {
-                    FeedAdminPage.CreateForm()
+                    PostAdminPage.CreateForm()
                 }
             }
         }
@@ -52,7 +52,7 @@ enum FeedAdminPage {
     
     struct EditView: View {
         
-        let viewModel: FeedAdminPageModel.EditView
+        let viewModel: PostAdminPageModel.EditView
         
         var body: Content {
             AreaViewContainer {
@@ -83,9 +83,9 @@ enum FeedAdminPage {
                     }
                 }
                 Section {
-                    FeedAdminPage.EditForm(feed: viewModel.feed)
+                    PostAdminPage.EditForm(post: viewModel.post)
                 }
-                FeedAdminPage.DeleteModal(id: viewModel.feed.id)
+                PostAdminPage.DeleteModal(id: viewModel.post.id)
             }
         }
     }

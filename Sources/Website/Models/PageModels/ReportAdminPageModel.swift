@@ -6,6 +6,6 @@ enum ReportAdminPageModel {
     struct IndexView {
         
         let title = LocalizedStringKey("Reports")
-        let projects: [StatisticEntity]
+        let reports: [ReportModel.Output]
     }
 }

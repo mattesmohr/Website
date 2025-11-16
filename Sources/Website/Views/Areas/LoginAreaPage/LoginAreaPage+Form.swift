@@ -46,12 +46,12 @@ extension LoginAreaPage {
             Form(method: .post) {
                 VStack {
                     FieldLabel("Password", for: "password")
-                    SecureField(name: "password", prompt: "Passwort")
+                    SecureField(name: "password", prompt: "Password")
                         .borderShape(.smallrounded)
                 }
                 VStack {
                     FieldLabel("Confirmation", for: "confirmation")
-                    SecureField(name: "confirmation", prompt: "Passwort")
+                    SecureField(name: "confirmation", prompt: "Password")
                         .borderShape(.smallrounded)
                 }
                 .margin(insets: .bottom, length: .small)

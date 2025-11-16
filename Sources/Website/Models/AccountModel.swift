@@ -62,16 +62,18 @@ struct AccountModel {
         /// The plaintext version of the password
         let password: String
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "username", rule: .email),
+                Validator(field: "password", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("username", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }
-        
-        static let validators = [
-            Validator(field: "username", rule: .email),
-            Validator(field: "password", rule: .value)
-        ]
     }
     
     /// The data transfer object for the credential entity

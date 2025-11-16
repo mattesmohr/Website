@@ -58,7 +58,7 @@ enum Setup {
         let tracked = application.routes.grouped(PageRequestTracker())
         
         try tracked.register(collection: HomePageController())
-        try tracked.register(collection: ArticlesPageController())
+        try tracked.register(collection: BlogPageController())
         try tracked.register(collection: ProjectsPageController())
         try tracked.register(collection: FeedPageController())
         try tracked.register(collection: PrivacyPageController())
@@ -77,7 +77,7 @@ enum Setup {
                 try restricted.register(collection: ArticleAdminController())
                 try restricted.register(collection: AssetAdminController())
                 try restricted.register(collection: UserAdminController())
-                try restricted.register(collection: FeedAdminController())
+                try restricted.register(collection: PostAdminController())
                 try restricted.register(collection: CommentAdminController())
                 try restricted.register(collection: ReportAdminController())
                 try restricted.register(collection: SettingAdminController())
@@ -110,7 +110,7 @@ enum Setup {
         application.migrations.add(ProjectAssetMigration())
         application.migrations.add(ContactMigration())
         application.migrations.add(ReportMigration())
-        application.migrations.add(FeedMigration())
+        application.migrations.add(PostMigration())
         application.migrations.add(SettingMigration())
         
         try await application.autoMigrate()

@@ -8,11 +8,14 @@ struct HomePageController {
     @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
-        let projects = try await request.unit.project.find(status: "published")
+        guard let pagination = try await request.unit.project.find(status: "published")
             .map(ProjectModel.Output.init)
-            .page(page: 1, per: 10)
+            .page(at: 1, per: 10) else {
+            
+            throw Abort(.notFound)
+        }
         
-        let viewModel = HomePageModel.IndexView(pagination: projects)
+        let viewModel = HomePageModel.IndexView(pagination: pagination)
         
         return try await request.htmlkit.render(HomePage.IndexView(viewModel: viewModel))
     }

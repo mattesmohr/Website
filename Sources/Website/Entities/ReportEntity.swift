@@ -32,7 +32,7 @@ final class ReportEntity: Model, @unchecked Sendable {
     }
     
     convenience init(input: ReportModel.Input) {
-        self.init(uri: input.uri, count: input.count!)
+        self.init(uri: input.uri, count: input.count)
     }
 }
 

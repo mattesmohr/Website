@@ -1,7 +1,7 @@
 import Fluent
 import Foundation
 
-final class SettingRepository {
+struct SettingRepository {
     
     /// The database the repository is working on
     let database: Database

@@ -1,7 +1,7 @@
 import HTMLKitVapor
 import Vapor
 
-// [/area/admin/setting]
+// [/area/admin/settings]
 struct SettingAdminController {
     
     //  [/]
@@ -35,7 +35,7 @@ struct SettingAdminController {
             try await request.unit.setting.insert(entity: SettingEntity(input: input))
         }
         
-        return request.redirect(to: "/area/admin/setting")
+        return request.redirect(to: "/area/admin/settings")
     }
 }
 
@@ -43,7 +43,7 @@ extension SettingAdminController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         
-        routes.group("setting") { routes in
+        routes.group("settings") { routes in
             
             routes.get("", use: self.getEdit)
             routes.post("", use: self.postEdit)

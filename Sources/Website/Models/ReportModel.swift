@@ -9,7 +9,7 @@ struct ReportModel {
         let uri: String
         
         /// The number of times the url was visited
-        var count: Int?
+        let count: Int
         
         static func validations(_ validations: inout Validations) {
             
@@ -27,7 +27,7 @@ struct ReportModel {
         let uri: String
         
         /// The number of times the url was visited
-        var count: Int?
+        let count: Int
         
         /// The timestamp when the report was first stored
         let createdAt: Date
@@ -35,7 +35,7 @@ struct ReportModel {
         /// The timestamp when the report was last updated
         let modifiedAt: Date
         
-        init(id: Int, uri: String, count: Int? = nil, createdAt: Date, modifiedAt: Date) {
+        init(id: Int, uri: String, count: Int, createdAt: Date, modifiedAt: Date) {
             
             self.id = id
             self.uri = uri

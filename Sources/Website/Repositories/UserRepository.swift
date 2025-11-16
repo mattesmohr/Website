@@ -1,7 +1,7 @@
 import Fluent
 import Foundation
 
-final class UserRepository {
+struct UserRepository {
     
     /// The database instance used by the repository for e. g. querying
     let database: Database

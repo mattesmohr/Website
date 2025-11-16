@@ -14,16 +14,18 @@ struct LoginModel {
         /// A unique token to verify the forms origin
         let nonce: String
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "email", rule: .email),
+                Validator(field: "password", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("email", as: String.self, is: .email)
             validations.add("password", as: String.self, is: .count(8...) && .alphanumeric)
         }
-        
-        static let validators = [
-            Validator(field: "email", rule: .email),
-            Validator(field: "password", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {

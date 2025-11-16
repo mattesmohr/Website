@@ -1,23 +1,23 @@
 import HTMLKit
 import HTMLKitComponents
 
-struct FeedList: View {
+struct PostList: View {
     
-    let feeds: [FeedModel.Output]
+    let posts: [PostModel.Output]
     
     var body: Content {
         Card {
             List(direction: .vertical) {
-                for feed in feeds {
+                for post in posts {
                     HStack {
                         Text {
-                            feed.message
+                            post.message
                         }
                         .frame(width: .ten)
                         .lineLimit(.one)
                         Dropdown {
                             List(direction: .vertical) {
-                                Link(destination: "/area/admin/feed/\(feed.id)/edit") {
+                                Link(destination: "/area/admin/posts/\(post.id)/edit") {
                                     Symbol(system: .pencil)
                                     Text("Edit")
                                 }

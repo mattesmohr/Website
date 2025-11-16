@@ -17,42 +17,13 @@ enum ReportAdminPage {
                     }
                 }
                 Section {
-                    HStack {
-                        Card {
-                            Tabs(direction: .horizontal) {
-                                Pane {
-                                    Chart {
-                                        for project in viewModel.projects {
-                                            SectorMark(value: project.count, label: project.name)
-                                                .foregroundColor(.random)
-                                        }
-                                    }
-                                    .innerRadius(.large)
-                                } label: {
-                                    Text {
-                                        "Pie"
-                                    }
-                                    .textStyle(.subheadline)
-                                }
-                                .tag("piechart")
-                                Pane {
-                                    Chart {
-                                        for project in viewModel.projects {
-                                            BarMark(value: project.count, label: project.name)
-                                                .foregroundColor(.random)
-                                        }
-                                    }
-                                } label: {
-                                    Text {
-                                        "Bar"
-                                    }
-                                }
-                                .tag("barchart")
-
+                    Card {
+                        Chart {
+                            for report in viewModel.reports {
+                                BarMark(value: report.count, label: report.uri)
+                                    .foregroundColor(.random)
                             }
                         }
-                        .frame(width: .twelve)
-                        .borderShape(.smallrounded)
                     }
                 }
             }

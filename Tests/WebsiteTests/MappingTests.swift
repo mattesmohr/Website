@@ -79,9 +79,9 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(entity.message, "Message")
     }
     
-    func testFeedMapping() {
+    func testPostMapping() {
         
-        let input = FeedModel.Input(
+        let input = PostModel.Input(
             message: "Message",
             tags: "Tags",
             status: "Status"
@@ -91,7 +91,7 @@ final class MappingTests: XCTestCase {
         XCTAssertEqual(input.tags, "Tags")
         XCTAssertEqual(input.status, "Status")
         
-        let entity = FeedEntity(input: input)
+        let entity = PostEntity(input: input)
         
         XCTAssertEqual(entity.message, "Message")
         XCTAssertEqual(entity.tags, "Tags")

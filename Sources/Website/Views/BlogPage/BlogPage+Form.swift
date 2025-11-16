@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-extension ArticlePage {
+extension BlogPage {
     
     struct CommentForm: View {
         

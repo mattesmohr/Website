@@ -62,9 +62,9 @@ struct AreaViewContainer: View {
                                     Symbol(system: .file)
                                     Text("Articles")
                                 }
-                                Link(destination: "/area/admin/feed") {
+                                Link(destination: "/area/admin/posts") {
                                     Symbol(system: .scope)
-                                    Text("Feed")
+                                    Text("Posts")
                                 }
                                 Link(destination: "/area/admin/comments") {
                                     Symbol(system: .file)
@@ -82,9 +82,9 @@ struct AreaViewContainer: View {
                                     Symbol(system: .person)
                                     Text("Users")
                                 }
-                                Link(destination: "/area/admin/setting") {
+                                Link(destination: "/area/admin/settings") {
                                     Symbol(system: .tresor)
-                                    Text("Setting")
+                                    Text("Settings")
                                 }
                             }
                             .listSpacing(.small)

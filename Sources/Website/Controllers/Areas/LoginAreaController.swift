@@ -26,15 +26,17 @@ struct LoginAreaController {
     @Sendable
     func postLogin(_ request: Request) async throws -> Response {
         
-        try LoginModel.Input.validate(content: request)
-        
-        let login = try request.content.decode(LoginModel.Input.self)
-        
         guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
             throw Abort(.internalServerError)
         }
         
-        try nonce.verify(nonce: login.nonce)
+        try LoginModel.Input.validate(content: request)
+        
+        let login = try request.content.decode(LoginModel.Input.self)
+        
+        guard nonce.verify(nonce: login.nonce) else {
+            return request.redirect(to: "/area/login/login")
+        }
         
         guard let user = try await request.unit.user.find(email: login.email) else {
             return request.redirect(to: "/area/login/login")
@@ -134,15 +136,17 @@ struct LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        try ResetModel.Input.validate(content: request)
-        
-        let reset = try request.content.decode(ResetModel.Input.self)
-        
         guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
             throw Abort(.internalServerError)
         }
         
-        try nonce.verify(nonce: reset.nonce)
+        try ResetModel.Input.validate(content: request)
+        
+        let reset = try request.content.decode(ResetModel.Input.self)
+        
+        guard nonce.verify(nonce: reset.nonce) else {
+            return request.redirect(to: "/area/login/\(id)/register")
+        }
         
         let digest = try await request.password.async.hash(reset.password)
         
@@ -188,15 +192,17 @@ struct LoginAreaController {
             throw Abort(.badRequest)
         }
         
-        try ResetModel.Input.validate(content: request)
-        
-        let reset = try request.content.decode(ResetModel.Input.self)
-        
         guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
             throw Abort(.internalServerError)
         }
         
-        try nonce.verify(nonce: reset.nonce)
+        try ResetModel.Input.validate(content: request)
+        
+        let reset = try request.content.decode(ResetModel.Input.self)
+        
+        guard nonce.verify(nonce: reset.nonce) else {
+            throw Abort(.badRequest)
+        }
         
         guard let user = try await request.unit.user.find(id: id) else {
             throw Abort(.notFound)

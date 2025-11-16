@@ -1,11 +1,11 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ArticlePageModel {
+enum BlogPageModel {
     
     struct IndexView {
         
-        let title = LocalizedStringKey("Articles")
+        let title = LocalizedStringKey("Blog")
         let pagination: Pagination<[ArticleModel.Output]>
     }
     

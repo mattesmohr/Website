@@ -58,13 +58,15 @@ struct CommentModel {
             /// A unique token to verify the forms origin
             let nonce: String
             
+            static var validators: [HTMLKitComponents.Validator] {
+                return [
+                    Validator(field: "message", rule: .value)
+                ]
+            }
+            
             static func validations(_ validations: inout Validations) {
                 validations.add("message", as: String.self, is: !.empty)
             }
-            
-            static let validators = [
-                Validator(field: "message", rule: .value),
-            ]
             
             /// Sanitize the input before it is processed any further
             mutating func afterDecode() throws {
@@ -85,13 +87,15 @@ struct CommentModel {
             /// The status of the comment
             let status: String
             
+            static var validators: [HTMLKitComponents.Validator] {
+                return [
+                    Validator(field: "message", rule: .value)
+                ]
+            }
+            
             static func validations(_ validations: inout Validations) {
                 validations.add("message", as: String.self, is: !.empty)
             }
-            
-            static let validators = [
-                Validator(field: "message", rule: .value),
-            ]
             
             /// Sanitize the input before it is processed any further
             mutating func afterDecode() throws {

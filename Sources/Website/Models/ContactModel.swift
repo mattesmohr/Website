@@ -18,6 +18,15 @@ struct ContactModel {
         /// A message about the contact
         var message: String
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "firstName", rule: .value),
+                Validator(field: "lastName", rule: .value),
+                Validator(field: "email", rule: .email),
+                Validator(field: "message", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("firstname", as: String.self, is: !.empty)
@@ -25,13 +34,6 @@ struct ContactModel {
             validations.add("email", as: String.self, is: .email)
             validations.add("message", as: String.self, is: !.empty)
         }
-        
-        static let validators = [
-            Validator(field: "firstName", rule: .value),
-            Validator(field: "lastName", rule: .value),
-            Validator(field: "email", rule: .email),
-            Validator(field: "message", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {

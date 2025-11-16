@@ -1,8 +1,8 @@
 "About" = "Über mich";
 "All" = "All";
 "Alternate text" = "Alternativtext";
-"Article" = "Beitrag";
-"Articles" = "Beiträge";
+"Article" = "Artikel";
+"Articles" = "Artikel";
 "Asset" = "Asset";
 "Assets" = "Assets";
 "Back to the backend" = "Zurück zum Backend";
@@ -62,10 +62,10 @@
 
 "Create project" = "Project erstellen";
 "Edit project" = "Projekt bearbeiten";
-"Create article" = "Beitrag erstellen";
-"Edit article" = "Beitrag bearbeiten";
-"Create feed" = "Feed erstellen";
-"Edit feed" = "Feed bearbeiten";
+"Create article" = "Artikel erstellen";
+"Edit article" = "Artikel bearbeiten";
+"Create post" = "Beitrag erstellen";
+"Edit post" = "Beitrag bearbeiten";
 "Create asset" = "Asset erstellen";
 "Edit asset" = "Asset bearbeiten";
 "Create user" = "Benutzer erstellen";
@@ -180,3 +180,6 @@
 "TLS" = "TLS";
 "SSL" = "SSL";
 "None" = "Keine";
+
+"Posts" = "Beiträge";
+"Post" = "Beitrag";

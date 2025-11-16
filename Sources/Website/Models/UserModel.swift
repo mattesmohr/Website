@@ -59,18 +59,20 @@ struct UserModel {
         /// A permission role for the user
         let role: String
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "email", rule: .email),
+                Validator(field: "firstName", rule: .value),
+                Validator(field: "lastName", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("email", as: String.self, is: !.empty)
             validations.add("firstName", as: String.self, is: !.empty)
             validations.add("lastName", as: String.self, is: !.empty)
         }
-        
-        static let validators = [
-            Validator(field: "email", rule: .email),
-            Validator(field: "firstName", rule: .value),
-            Validator(field: "lastName", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {

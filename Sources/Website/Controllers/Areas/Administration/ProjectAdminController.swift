@@ -9,10 +9,14 @@ struct ProjectAdminController {
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
+        let limit: Int = request.query["limit"] ?? 10
         
-        let pagination = try await request.unit.project.find()
+        guard let pagination = try await request.unit.project.find()
             .map(ProjectModel.Output.init)
-            .page(page: page, per: 10)
+            .page(at: page, per: limit) else {
+            
+            throw Abort(.notFound)
+        }
         
         let viewModel = ProjectAdminPageModel.IndexView(pagination: pagination)
         

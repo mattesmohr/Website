@@ -1,11 +1,11 @@
 import HTMLKit
 import HTMLKitComponents
 
-enum ArticlePage {
+enum BlogPage {
     
     struct IndexView: View {
         
-        let viewModel: ArticlePageModel.IndexView
+        let viewModel: BlogPageModel.IndexView
 
         var body: Content {
             ViewContainer {
@@ -24,7 +24,7 @@ enum ArticlePage {
                 Section {
                     Grid(ratio: .third, spacing: .small) {
                         for article in viewModel.pagination.items {
-                            Link(destination: "/articles/\(article.slug)") {
+                            Link(destination: "/blog/\(article.slug)") {
                                 VStack(spacing: .small) {
                                     Thumbnail {
                                         MacIcon()
@@ -51,7 +51,7 @@ enum ArticlePage {
 
     struct ShowView: View {
 
-        let viewModel: ArticlePageModel.ShowView
+        let viewModel: BlogPageModel.ShowView
 
         var body: Content {
             ViewContainer {

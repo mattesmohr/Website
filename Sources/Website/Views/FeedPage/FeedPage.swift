@@ -23,17 +23,17 @@ enum FeedPage {
                 }
                 Section {
                     Feed {
-                        for feed in viewModel.pagination.items {
+                        for post in viewModel.pagination.items {
                             Card {
                                 VStack(spacing: .small) {
-                                    if let thumbnail = feed.thumbnail {
+                                    if let thumbnail = post.thumbnail {
                                         Image(source: thumbnail.filePath)
                                     }
                                     Text {
-                                        feed.message
+                                        post.message
                                     }
                                     .italic()
-                                    if let tags = feed.tags {
+                                    if let tags = post.tags {
                                         Text {
                                             tags
                                         }
@@ -44,7 +44,7 @@ enum FeedPage {
                                             Image(source: "/assets/linkedin.svg")
                                         }
                                         Text {
-                                            feed.createdAt.formatted(date: .short, time: .short)
+                                            post.createdAt.formatted(date: .short, time: .short)
                                         }
                                         .fontSize(.small)
                                     }

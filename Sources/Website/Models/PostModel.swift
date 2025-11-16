@@ -2,10 +2,10 @@ import Vapor
 import HTMLKit
 import HTMLKitComponents
 
-struct FeedModel {
+struct PostModel {
     
-    /// An enumeration representing the potential states of a feed
-    enum FeedStatus: String, Codable, CaseIterable {
+    /// An enumeration representing the potential states of a post
+    enum PostStatus: String, Codable, CaseIterable {
         
         /// Indicates the article is publicly visible
         case published
@@ -52,23 +52,25 @@ struct FeedModel {
         
         var thumbnailId: Int?
         
-        /// The feed message
+        /// The post message
         var message: String
         
-        /// The tags for the feed
+        /// The tags for the post
         let tags: String
         
-        /// The publication status for the feed
+        /// The publication status for the post
         let status: String
+        
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "message", rule: .value)
+            ]
+        }
         
         static func validations(_ validations: inout Validations) {
             
             validations.add("message", as: String.self, is: !.empty)
         }
-        
-        static let validators = [
-            Validator(field: "message", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {
@@ -77,27 +79,27 @@ struct FeedModel {
         }
     }
     
-    /// The data transfer object for the feed entity
+    /// The data transfer object for the post entity
     struct Output: Vapor.Content {
         
-        /// The unique identifier of the feed
+        /// The unique identifier of the post
         var id: Int
         
         var thumbnail: AssetModel.Output?
         
-        /// The feed message
+        /// The post message
         let message: String
         
-        /// The tags of the feed
+        /// The tags of the post
         var tags: String?
         
-        /// The publication status of the feed
-        let status: FeedStatus
+        /// The publication status of the post
+        let status: PostStatus
         
-        /// The timestamp when the feed was first stored
+        /// The timestamp when the post was first stored
         let createdAt: Date
         
-        /// The timestamp when the feed was last updated
+        /// The timestamp when the post was last updated
         let modifiedAt: Date
         
         init(id: Int, thumbnail: AssetModel.Output? = nil, message: String, tags: String? = nil, status: String, createdAt: Date, modifiedAt: Date) {
@@ -106,12 +108,12 @@ struct FeedModel {
             self.thumbnail = thumbnail
             self.message = message
             self.tags = tags
-            self.status = FeedStatus(rawValue: status)!
+            self.status = PostStatus(rawValue: status)!
             self.createdAt = createdAt
             self.modifiedAt = modifiedAt
         }
         
-        init(entity: FeedEntity) {
+        init(entity: PostEntity) {
             
             self.init(id: entity.id!, message: entity.message, tags: entity.tags, status: entity.status, createdAt: entity.createdAt!, modifiedAt: entity.modifiedAt!)
             

@@ -9,12 +9,16 @@ struct ProjectsPageController {
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
+        let limit: Int = request.query["limit"] ?? 10
         
-        let projects = try await request.unit.project.find(status: "published")
+        guard let pagination = try await request.unit.project.find(status: "published")
             .map(ProjectModel.Output.init)
-            .page(page: page, per: 10)
+            .page(at: page, per: limit) else {
+                
+                throw Abort(.notFound)
+            }
         
-        let viewModel = ProjectPageModel.IndexView(pagination: projects)
+        let viewModel = ProjectPageModel.IndexView(pagination: pagination)
         
         return try await request.htmlkit.render(ProjectPage.IndexView(viewModel: viewModel))
     }

@@ -1,9 +1,9 @@
 import Fluent
 import Foundation
 
-final class FeedEntity: Model, @unchecked Sendable {
+final class PostEntity: Model, @unchecked Sendable {
     
-    static let schema = "feeds"
+    static let schema = "posts"
     
     @ID(custom: "id")
     var id: Int?
@@ -39,7 +39,7 @@ final class FeedEntity: Model, @unchecked Sendable {
         self.modifiedAt = modifiedAt
     }
     
-    convenience init(input: FeedModel.Input) {
+    convenience init(input: PostModel.Input) {
         
         self.init(message: input.message, tags: input.tags, status: input.status)
         

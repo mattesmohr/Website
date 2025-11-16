@@ -1,10 +1,9 @@
 import Fluent
-import FluentSQL
 import Foundation
 
-final class ProjectRepository {
+struct ProjectRepository {
     
-    /// The database instance used by the repository for e. g. querying
+    /// The database the repository is working on
     let database: Database
     
     /// Initializes the repository with the given database
@@ -122,23 +121,5 @@ final class ProjectRepository {
         
         return try await database.query(ProjectEntity.self)
             .count()
-    }
-    
-    func group(column: String) async throws -> [StatisticEntity] {
-
-        if let database = database as? SQLDatabase {
-            
-            let query = database.select()
-                .column(column, as: "name")
-                .column(SQLAlias(SQLFunction("COUNT", args: SQLDistinct("title")), as:  SQLIdentifier("count")))
-                .from(ProjectEntity.schema)
-                .groupBy(column)
-                .limit(5)
-                .orderBy("count", .descending)
-            
-            return try await query.all(decoding: StatisticEntity.self)
-        }
-        
-        return []
     }
 }

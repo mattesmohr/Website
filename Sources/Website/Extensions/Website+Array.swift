@@ -1,25 +1,33 @@
-import Fluent
-
 extension Array {
     
-    func page(page: Int, per: Int) -> Pagination<Self> {
+    /// Create a pagination.
+    ///
+    /// - Parameters:
+    ///   - page: The page number to evaluate.
+    ///   - limit: The number of items to retrieve.
+    ///
+    /// - Returns: The pagination
+    func page(at page: Int, per limit: Int) -> Pagination<Self>? {
         
-        let start = (page - 1) * per
-        let end = ((page - 1) * per) + per
-        let bound = Swift.max(self.count - 1, 0)
-        
-        if start == bound {
-            return Pagination(items: self, currentPage: page, pageSize: per, totalItems: self.count)
+        guard page > 0 && limit > 0 else {
+            return nil
         }
         
-        if start > bound {
-            return Pagination(items: Array(self[bound...bound]), currentPage: page, pageSize: per, totalItems: self.count)
+        guard self.count > 0 else {
+            return Pagination(items: [], currentPage: page, pageSize: limit, totalItems: self.count)
         }
         
-        if end > bound {
-            return Pagination(items: Array(self[start...bound]), currentPage: page, pageSize: per, totalItems: self.count)
+        // The lower bound for the range
+        let offset = Swift.max((page - 1) * limit, 0)
+        
+        // The upper bound for the range
+        let cap = Swift.min(offset + limit, self.count)
+        
+        // Validate the range first
+        guard offset < cap else {
+            return nil
         }
     
-        return Pagination(items: Array(self[start...(end - 1)]), currentPage: page, pageSize: per, totalItems: self.count)
+        return Pagination(items: Array(self[offset..<cap]), currentPage: page, pageSize: limit, totalItems: self.count)
     }
 }

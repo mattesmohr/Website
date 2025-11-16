@@ -66,7 +66,7 @@ struct ViewContainer: View {
                                 Link(destination: "/feed") {
                                     Text("Feed")
                                 }
-                                Link(destination: "/articles") {
+                                Link(destination: "/blog") {
                                     Text("Blog")
                                 }
                             }
@@ -133,7 +133,7 @@ struct ViewContainer: View {
                                         Text("Feed", alignment: .center)
                                             .fontSize(.large)
                                     }
-                                    Link(destination: "/articles") {
+                                    Link(destination: "/blog") {
                                         Text("Blog", alignment: .center)
                                             .fontSize(.large)
                                     }

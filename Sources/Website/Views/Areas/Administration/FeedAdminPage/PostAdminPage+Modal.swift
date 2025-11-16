@@ -2,7 +2,7 @@ import Foundation
 import HTMLKit
 import HTMLKitComponents
 
-extension FeedAdminPage {
+extension PostAdminPage {
     
     struct DeleteModal: View {
         
@@ -13,7 +13,7 @@ extension FeedAdminPage {
                 VStack(spacing: .small) {
                     Text("Do you really want to delete it? It cannot be undone.")
                     HStack(spacing: .small) {
-                        LinkButton("Delete", destination: "/area/admin/feed/\(id)/delete")
+                        LinkButton("Delete", destination: "/area/admin/posts/\(id)/delete")
                             .borderShape(.smallrounded)
                             .buttonStyle(.primary)
                         Button("Cancel", role: .button)

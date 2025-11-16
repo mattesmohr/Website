@@ -1,23 +1,26 @@
 import HTMLKitVapor
 import Vapor
 
-// [/articles]
-struct ArticlesPageController {
+// [/blog]
+struct BlogPageController {
     
     // [/]
     @Sendable
     func getIndex(_ request: Request) async throws -> View {
         
         let page: Int = request.query["page"] ?? 1
+        let limit: Int = request.query["limit"] ?? 10
         
-        let articles = try await request.unit.article.find(status: "published")
+        guard let pagination = try await request.unit.article.find(status: "published")
             .map(ArticleModel.Output.init)
-            .page(page: page, per: 10)
+            .page(at: page, per: limit) else {
+            
+            throw Abort(.notFound)
+        }
         
+        let viewModel = BlogPageModel.IndexView(pagination: pagination)
         
-        let viewModel = ArticlePageModel.IndexView(pagination: articles)
-        
-        return try await request.htmlkit.render(ArticlePage.IndexView(viewModel: viewModel))
+        return try await request.htmlkit.render(BlogPage.IndexView(viewModel: viewModel))
     }
     
     // [/:slug]
@@ -35,9 +38,9 @@ struct ArticlesPageController {
         // Create form token and store it to verify it in the post request
         request.application.htmlkit.environment.upsert(Nonce(), for: \Nonce.self)
         
-        let viewModel = ArticlePageModel.ShowView(article: ArticleModel.Output(entity: entity))
+        let viewModel = BlogPageModel.ShowView(article: ArticleModel.Output(entity: entity))
         
-        return try await request.htmlkit.render(ArticlePage.ShowView(viewModel: viewModel))
+        return try await request.htmlkit.render(BlogPage.ShowView(viewModel: viewModel))
     }
     
     // [/:slug/:modal]
@@ -52,28 +55,30 @@ struct ArticlesPageController {
             throw Abort(.notFound)
         }
         
-        try CommentModel.Input.Public.validate(content: request)
-        
-        var model = try request.content.decode(CommentModel.Input.Public.self)
-        
         guard let nonce = request.application.htmlkit.environment.retrieve(for: \Nonce.self) as? Nonce else {
             throw Abort(.internalServerError)
         }
         
-        try nonce.verify(nonce: model.nonce)
+        try CommentModel.Input.Public.validate(content: request)
+        
+        let model = try request.content.decode(CommentModel.Input.Public.self)
+        
+        guard nonce.verify(nonce: model.nonce) else {
+            throw Abort(.badRequest)
+        }
         
         try await request.unit.comment.insert(entity: CommentEntity(input: model, on: entity.requireID()))
         
-        return request.redirect(to: "/articles/\(slug)")
+        return request.redirect(to: "/blog/\(slug)")
     }
 
 }
 
-extension ArticlesPageController: RouteCollection {
+extension BlogPageController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
     
-        routes.group("articles") { routes in
+        routes.group("blog") { routes in
             
             routes.get("", use: self.getIndex)
             routes.get(":slug", use: self.getShow)

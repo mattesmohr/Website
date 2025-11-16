@@ -15,14 +15,16 @@ struct AssetModel {
         /// The asset file
         var asset: File
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "title", rule: .value)
+            ]
+        }
+        
         static func validations(_ validations: inout Validations) {
             
             validations.add("title", as: String.self, is: !.empty)
         }
-        
-        static let validators = [
-            Validator(field: "title", rule: .value),
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {

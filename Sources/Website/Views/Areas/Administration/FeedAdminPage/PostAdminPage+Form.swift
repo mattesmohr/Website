@@ -1,7 +1,7 @@
 import HTMLKit
 import HTMLKitComponents
 
-extension FeedAdminPage {
+extension PostAdminPage {
     
     struct CreateForm: View {
         
@@ -24,7 +24,7 @@ extension FeedAdminPage {
                 VStack {
                     FieldLabel("Status", for: "status")
                     SelectField(name: "status", prompt: "Published") {
-                        for state in FeedModel.FeedStatus.allCases {
+                        for state in PostModel.PostStatus.allCases {
                             RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
@@ -37,21 +37,21 @@ extension FeedAdminPage {
             }
             .tag("create-form")
             .onSubmit { form in
-                form.validate("create-form", FeedModel.Input.validators)
+                form.validate("create-form", PostModel.Input.validators)
             }
         }
     }
     
     struct EditForm: View {
         
-        let feed: FeedModel.Output
+        let post: PostModel.Output
         
         var body: Content {
             Form(method: .post) {
                 VStack {
                     FieldLabel("Message", for: "message")
                     TextEditor(name: "message", prompt: "Message") {
-                        feed.message
+                        post.message
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(8)
@@ -59,15 +59,15 @@ extension FeedAdminPage {
                 VStack {
                     FieldLabel("Tags", for: "tags")
                     TextEditor(name: "tags", prompt: "Tags") {
-                        feed.tags
+                        post.tags
                     }
                     .borderShape(.smallrounded)
                     .lineLimit(4)
                 }
                 VStack {
                     FieldLabel("Status", for: "status")
-                    SelectField(name: "status", prompt: "Published", selection: feed.status.rawValue) {
-                        for state in FeedModel.FeedStatus.allCases {
+                    SelectField(name: "status", prompt: "Published", selection: post.status.rawValue) {
+                        for state in PostModel.PostStatus.allCases {
                             RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
@@ -80,7 +80,7 @@ extension FeedAdminPage {
             }
             .tag("edit-form")
             .onSubmit { form in
-                form.validate("edit-form", FeedModel.Input.validators)
+                form.validate("edit-form", PostModel.Input.validators)
             }
         }
     }

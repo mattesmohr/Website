@@ -15,17 +15,19 @@ struct ResetModel: Content {
         /// A unique token to verify the forms origin
         var nonce: String
         
+        static var validators: [HTMLKitComponents.Validator] {
+            return [
+                Validator(field: "password", rule: .value),
+                Validator(field: "confirmation", rule: .value)
+            ]
+        }
+        
         /// Validate the input
         static func validations(_ validations: inout Validations) {
             
             validations.add("password", as: String.self, is: .count(8...) && .ascii)
             validations.add("confirmation", as: String.self, is: .count(8...) && .ascii)
         }
-        
-        static let validators = [
-            Validator(field: "password", rule: .value),
-            Validator(field: "confirmation", rule: .value)
-        ]
         
         /// Sanitize the input before it is processed any further
         mutating func afterDecode() throws {
