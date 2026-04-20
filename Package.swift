@@ -8,10 +8,10 @@ let package = Package(
        .macOS(.v13)
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.102.1"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.11.0"),
-        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.49.0"),
-        .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.6.0"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.121.4"),
+        .package(url: "https://github.com/vapor/fluent.git", from: "4.13.0"),
+        .package(url: "https://github.com/vapor/fluent-kit.git", from: "1.56.0"),
+        .package(url: "https://github.com/vapor/fluent-mysql-driver.git", from: "4.8.0"),
         .package(url: "https://github.com/vapor-community/HTMLKit.git", branch: "main")
     ],
     targets: [
