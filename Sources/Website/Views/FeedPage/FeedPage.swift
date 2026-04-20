@@ -50,7 +50,7 @@ enum FeedPage {
                                     }
                                 }
                             }
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                         }
                     }
                 }

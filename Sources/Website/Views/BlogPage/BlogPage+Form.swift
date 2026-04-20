@@ -13,14 +13,14 @@ extension BlogPage {
                 VStack(spacing: .small) {
                     TextEditor(name: "message") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     HTMLKit.Input()
                         .type(.hidden)
                         .name("nonce")
                         .custom(key: "value", value: nonce.value)
                     Button("Comment", role: .submit)
                         .buttonStyle(.primary)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
             }
         }

@@ -14,14 +14,14 @@ extension CommentAdminPage {
                     TextEditor(name: "message", prompt: "Message") {
                         comment.message
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Reply", for: "reply")
                     TextEditor(name: "reply", prompt: "Reply") {
                         comment.reply
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Status", for: "status")
@@ -30,12 +30,12 @@ extension CommentAdminPage {
                             RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

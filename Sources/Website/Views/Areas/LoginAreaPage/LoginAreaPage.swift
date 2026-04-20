@@ -15,7 +15,7 @@ enum LoginAreaPage {
                             Card {
                                 LoginAreaPage.LoginForm()
                             }
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                             .frame(width: .twelve)
                         }
                         .frame(width: .three)
@@ -37,7 +37,7 @@ enum LoginAreaPage {
                             Card {
                                 LoginAreaPage.ResetForm()
                             }
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                             .frame(width: .twelve)
                         }
                         .frame(width: .three)
@@ -59,7 +59,7 @@ enum LoginAreaPage {
                             Card {
                                 LoginAreaPage.ResetForm()
                             }
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                             .frame(width: .twelve)
                         }
                         .frame(width: .three)

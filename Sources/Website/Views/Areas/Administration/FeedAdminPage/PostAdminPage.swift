@@ -19,7 +19,7 @@ enum PostAdminPage {
                             Text("Create")
                         }
                         .buttonStyle(.primary)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {
@@ -79,7 +79,7 @@ enum PostAdminPage {
                             }
                             .buttonStyle(ControlButton())
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {

@@ -19,7 +19,7 @@ enum ProjectAdminPage {
                             Text("Create")
                         }
                         .buttonStyle(.primary)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {
@@ -81,7 +81,7 @@ enum ProjectAdminPage {
                             }
                             .buttonStyle(ControlButton())
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
 
                     }
                 }

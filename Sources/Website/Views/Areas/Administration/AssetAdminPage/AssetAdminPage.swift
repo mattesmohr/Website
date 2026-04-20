@@ -19,7 +19,7 @@ enum AssetAdminPage {
                             Text("Create")
                         }
                         .buttonStyle(.primary)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {
@@ -81,7 +81,7 @@ enum AssetAdminPage {
                             }
                             .buttonStyle(ControlButton())
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {

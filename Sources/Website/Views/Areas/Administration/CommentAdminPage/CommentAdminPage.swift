@@ -55,7 +55,7 @@ enum CommentAdminPage {
                             }
                             .buttonStyle(ControlButton())
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {

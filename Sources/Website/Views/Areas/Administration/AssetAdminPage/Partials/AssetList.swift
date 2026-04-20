@@ -24,12 +24,12 @@ struct AssetList: View {
                             Symbol(system: .ellipsis(.horizontal))
                         }
                         .frame(width: .two)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 } header: {
                     Image(source: asset.filePath)
                 }
-                .borderShape(.smallrounded)
+                .border(.system, shape: .smallrounded)
             }
         }
         .margin(insets: .bottom, length: .medium)

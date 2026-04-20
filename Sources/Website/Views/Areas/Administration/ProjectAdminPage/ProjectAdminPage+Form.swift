@@ -10,32 +10,32 @@ extension ProjectAdminPage {
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
                     FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(15)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Repository", for: "repository")
                         TextField(name: "repository", prompt: "Repository")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Documentation", for: "documentation")
                         TextField(name: "documentation", prompt: "Documentation")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 HStack(spacing: .small) {
@@ -46,7 +46,7 @@ extension ProjectAdminPage {
                                 RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Status", for: "status")
@@ -55,13 +55,13 @@ extension ProjectAdminPage {
                                 RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -79,14 +79,14 @@ extension ProjectAdminPage {
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title", value: project.title)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         project.excerpt
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
@@ -94,19 +94,19 @@ extension ProjectAdminPage {
                     TextPad(name: "content", prompt: "Content") {
                         project.content
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(15)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Repository", for: "repository")
                         TextField(name: "repository", prompt: "Repository", value: project.repository)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Documentation", for: "documentation")
                         TextField(name: "documentation", prompt: "Documentation", value: project.documentation)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 HStack(spacing: .small) {
@@ -117,7 +117,7 @@ extension ProjectAdminPage {
                                 RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Status", for: "status")
@@ -126,13 +126,13 @@ extension ProjectAdminPage {
                                 RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

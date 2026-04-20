@@ -9,32 +9,32 @@ extension SettingAdminPage {
             Form(method: .post) {
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel("Site title", for: "title")
+                        FieldLabel("Site Title", for: "title")
                         TextField(name: "title", prompt: "Title")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Email", for: "email")
                         TextField(name: "email", prompt: "Email")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel("Site description", for: "description")
+                    FieldLabel("Site Description", for: "description")
                     TextEditor(name: "description", prompt: "Description") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Hostname", for: "hostname")
                         TextField(name: "hostname", prompt: "Hostname")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Port", for: "port")
                         TextField(name: "port", prompt: String("465"))
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
@@ -44,23 +44,23 @@ extension SettingAdminPage {
                                 RadioSelect(encryption.localizedDescription, value: encryption.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Username", for: "username")
                         TextField(name: "username", prompt: "Username")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Password", for: "password")
                         SecureField(name: "password", prompt: "Password")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
         }
     }
@@ -73,33 +73,33 @@ extension SettingAdminPage {
             Form(method: .post) {
                 HStack(spacing: .small) {
                     VStack {
-                        FieldLabel("Site title", for: "title")
+                        FieldLabel("Site Title", for: "title")
                         TextField(name: "title", prompt: "Title", value: settings.title)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Email", for: "email")
                         TextField(name: "email", prompt: "Email", value: settings.email)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 VStack {
-                    FieldLabel("Site description", for: "description")
+                    FieldLabel("Site Description", for: "description")
                     TextEditor(name: "description", prompt: "Description") {
                         settings.description
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Hostname", for: "hostname")
                         TextField(name: "hostname", prompt: "Hostname", value: settings.hostname)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Port", for: "port")
                         TextField(name: "port", prompt: String("465"), value: settings.port)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     .frame(width: .three)
                     VStack {
@@ -109,23 +109,23 @@ extension SettingAdminPage {
                                 RadioSelect(encryption.localizedDescription, value: encryption.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Username", for: "username")
                         TextField(name: "username", prompt: "Username", value: settings.username)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Password", for: "password")
                         SecureField(name: "password", prompt: "Password", value: settings.password)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
         }
     }

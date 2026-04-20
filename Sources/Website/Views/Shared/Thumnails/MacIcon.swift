@@ -16,7 +16,7 @@ struct MacIcon: View {
                     }
                     .fill("purple")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app safari")
                 Division {
@@ -27,7 +27,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app mail")
                 Division {
@@ -38,7 +38,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app discord")
                 Division {
@@ -49,7 +49,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app message")
                 Division {
@@ -61,7 +61,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app facetime")
                 Division {
@@ -72,7 +72,7 @@ struct MacIcon: View {
                     }
                     .fill("red")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                     
                 }
                 .class("app playground")
@@ -84,7 +84,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app github")
                 Division {
@@ -102,7 +102,7 @@ struct MacIcon: View {
                     }
                     .fill("white")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app music")
                 Division {
@@ -113,7 +113,7 @@ struct MacIcon: View {
                     }
                     .fill("black")
                     .namespace("http://www.w3.org/2000/svg")
-                    .viewBox("0 0 16 16")
+                    .viewBox(x: 0, y: 0, width: 16, height: 16)
                 }
                 .class("app settings")
             }

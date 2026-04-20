@@ -36,7 +36,7 @@ struct PagePagination<T: Swift.Sequence>: View {
             }
         }
         .navigationStyle(.pagination)
-        .borderShape(.smallrounded)
+        .border(.system, shape: .smallrounded)
         Text("Page \(meta.currentPage) of \(meta.totalPages)")
     }
 }

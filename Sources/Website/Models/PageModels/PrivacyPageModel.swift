@@ -5,6 +5,6 @@ enum PrivacyPageModel {
     
     struct IndexView {
      
-        let title = LocalizedStringKey("Privacy policy")
+        let title = LocalizedStringKey("Privacy Policy")
     }
 }

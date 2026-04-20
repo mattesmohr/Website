@@ -25,7 +25,7 @@ struct AreaViewContainer: View {
                         } label: {
                             Symbol(system: .bell)
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                         Dropdown {
                             List(direction: .vertical) {
                                 Link(destination: "/area/login/logout") {
@@ -38,7 +38,7 @@ struct AreaViewContainer: View {
                                 identity.fullname
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     .frame(width: .maximum)
                     .margin(insets: .leading, length: .auto)

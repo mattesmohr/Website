@@ -13,7 +13,7 @@ extension LoginAreaPage {
                 VStack {
                     FieldLabel("Email", for: "email")
                     TextField(name: "email")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Password", for: "password")

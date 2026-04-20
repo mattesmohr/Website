@@ -1,6 +1,6 @@
 "About" = "About";
 "All" = "All";
-"Alternate text" = "Alternate text";
+"Alternate Text" = "Alternate Text";
 "Article" = "Article";
 "Articles" = "Articles";
 "Asset" = "Asset";
@@ -30,14 +30,14 @@
 "Hostname" = "Hostname";
 "Lastname" = "Lastname";
 "Legal" = "Legal";
-"Legal notice" = "Legal notice";
+"Legal Notice" = "Legal Notice";
 "Log out" = "Log out";
 "Message" = "Message";
 "Page %lld of %lld" = "Page %lld of %lld";
 "Password" = "Password";
 "Port" = "Port";
 "Privacy" = "Privacy";
-"Privacy policy" = "Privacy policy";
+"Privacy Policy" = "Privacy Policy";
 "Project"= "Project";
 "Projects" = "Projects";
 "Reply" = "Reply";
@@ -49,8 +49,8 @@
 "Setting" = "Setting";
 "Settings" = "Settings";
 "Sign in" = "Sign in";
-"Site description" = "Site description";
-"Site title" = "Site title";
+"Site Description" = "Site Description";
+"Site Title" = "Site Title";
 "Status" = "Status";
 "Submit" = "Submit";
 "Title" = "Title";
@@ -76,38 +76,28 @@
 
 "No notifications" = "No notifications";
 
-"Quick navigation" = "Quick navigation";
-"Data recording" = "Data recording";
-"Hosting provider" = "Hosting provider";
-"Data protection" = "Data protection";
-"Responsible party" = "Responsible party";
-"Storage duration" = "Storage duration";
-"Data processing" = "Data processing";
-"Data recipients" = "Data recipients";
-"Consent revocation" = "Consent revocation";
-"Data objection" = "Data objection";
-"Complaint log" = "Complaint log";
-"Data portability" = "Data portability";
-"Data eradication" = "Data eradication";
-"Processing restrictions" = "Processing restrictions";
-"SSL encryption" = "SSL encryption";
+"Quick Navigation" = "Quick Navigation";
+"Data Recording" = "Data Recording";
+"Hosting Provider" = "Hosting Provider";
+"Data Protection" = "Data Protection";
+"Responsible Party" = "Responsible Party";
+"Storage Duration" = "Storage Duration";
+"Data Processing" = "Data Processing";
+"Data Recipients" = "Data Recipients";
+"Consent Revocation" = "Consent Revocation";
+"Data Objection" = "Data Objection";
+"Complaint Log" = "Complaint Log";
+"Data Portability" = "Data Portability";
+"Data Eradication" = "Data Eradication";
+"Processing Restrictions" = "Processing Restrictions";
+"SSL Encryption" = "SSL Encryption";
 
-"General information" = "General information";
+"General Information" = "General Information";
 "Who is the responsible party for the recording of data on this website?" = "Who is the responsible party for the recording of data on this website?";
 "How do we record your data?" = "How do we record your data?";
 "What are the purposes we use your data for?" = "What are the purposes we use your data for?";
 "What rights do you have as far as your information is concerned?" = "What rights do you have as far as your information is concerned?";
-"Mandatory information" = "Mandatory information";
-"Information about the responsible party" = "Information about the responsible party";
-"General information on the legal basis for the data processing on this website" = "General information on the legal basis for the data processing on this website";
-"Recipients of personal data" = "Recipients of personal data";
-"Revocation of your consent to the processing of data" = "Revocation of your consent to the processing of data";
-"Right to object to the collection of data in special cases; right to object to direct advertising (Art. 21 GDPR)" = "Right to object to the collection of data in special cases; right to object to direct advertising";
-"Right to log a complaint with the competent supervisory agency" = "Right to log a complaint with the competent supervisory agency";
-"Right to data portability" = "Right to data portability";
-"Information about, rectification and eradication of data" = "Information about, rectification and eradication of data";
-"Right to demand processing restrictions" = "Right to demand processing restrictions";
-"SSL and/or TLS encryption" = "SSL and/or TLS encryption";
+"Mandatory Information" = "Mandatory Information";
 
 "This website represents me as a person and has no commercial use!" = "This website represents me as a person and has no commercial use!";
 "Responsible for the content" = "Responsible for the content";
@@ -116,9 +106,9 @@
 
 "Something went wrong. Sorry for the inconvenience!" = "Something went wrong. Sorry for the inconvenience!";
 
-"The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy.";
+"The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term \"personal data\" comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term \"personal data\" comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy.";
 
-"The data on this website is processed by the operator of the website, whose contact information is available under section “Information about the responsible party (referred to as the “controller” in the GDPR)” in this privacy policy." = "The data on this website is processed by the operator of the website, whose contact information is available under section “Information about the responsible party (referred to as the “controller” in the GDPR)” in this privacy policy.";
+"The data on this website is processed by the operator of the website." = "The data on this website is processed by the operator of the website.";
 
 "We collect your data as a result of your sharing of your data with us. This may, for instance be information you enter into our contact form. Other data shall be recorded by our IT systems automatically or after you consent to its recording during your website visit. This data comprises primarily technical information (e.g., web browser, operating system, or time the site was accessed). This information is recorded automatically when you access this website." = "We collect your data as a result of your sharing of your data with us. This may, for instance be information you enter into our contact form. Other data shall be recorded by our IT systems automatically or after you consent to its recording during your website visit. This data comprises primarily technical information (e.g., web browser, operating system, or time the site was accessed). This information is recorded automatically when you access this website.";
 

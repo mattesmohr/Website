@@ -5,6 +5,6 @@ enum LegalPageModel {
     
     struct IndexView {
         
-        let title = LocalizedStringKey("Legal notice")
+        let title = LocalizedStringKey("Legal Notice")
     }
 }

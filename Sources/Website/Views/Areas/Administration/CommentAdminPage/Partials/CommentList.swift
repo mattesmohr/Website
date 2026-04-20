@@ -16,8 +16,8 @@ struct CommentList: View {
                         .frame(width: .six)
                         .lineLimit(.one)
                         Text(comment.status.localizedDescription)
-                        .frame(width: .three)
-                        .lineLimit(.one)
+                            .frame(width: .three)
+                            .lineLimit(.one)
                         Text {
                             comment.modifiedAt.formatted(date: .short, time: .short)
                         }
@@ -34,14 +34,14 @@ struct CommentList: View {
                             Symbol(system: .ellipsis(.horizontal))
                         }
                         .frame(width: .one)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     .padding(insets: .vertical, length: .small)
                 }
             }
             .listStyle(.listgroup)
         }
-        .borderShape(.smallrounded)
+        .border(.system, shape: .smallrounded)
         .margin(insets: .bottom, length: .medium)
     }
 }

@@ -44,14 +44,14 @@ struct UserList: View {
                             Symbol(system: .ellipsis(.horizontal))
                         }
                         .frame(width: .two)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     .padding(insets: .vertical, length: .small)
                 }
             }
             .listStyle(.listgroup)
         }
-        .borderShape(.smallrounded)
+        .border(.system, shape: .smallrounded)
         .margin(insets: .bottom, length: .medium)
     }
 }

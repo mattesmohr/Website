@@ -10,20 +10,20 @@ extension ArticleAdminPage {
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
                     FieldLabel("Content", for: "content")
                     TextPad(name: "content", prompt: "Content") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(15)
                 }
                 HStack(spacing: .small) {
@@ -34,7 +34,7 @@ extension ArticleAdminPage {
                                 RadioSelect(comment.localizedDescription, value: comment.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Category", for: "category")
@@ -43,7 +43,7 @@ extension ArticleAdminPage {
                                 RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Status", for: "status")
@@ -52,13 +52,13 @@ extension ArticleAdminPage {
                                 RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -76,14 +76,14 @@ extension ArticleAdminPage {
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title", value: article.title)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Excerpt", for: "excerpt")
                     TextEditor(name: "excerpt", prompt: "Excerpt") {
                         article.excerpt
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(5)
                 }
                 VStack {
@@ -91,7 +91,7 @@ extension ArticleAdminPage {
                     TextPad(name: "content", prompt: "Content") {
                         article.content
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(15)
                 }
                 HStack(spacing: .small) {
@@ -102,7 +102,7 @@ extension ArticleAdminPage {
                                 RadioSelect(comment.localizedDescription, value: comment.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Category", for: "category")
@@ -111,7 +111,7 @@ extension ArticleAdminPage {
                                 RadioSelect(category.localizedDescription, value: category.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Status", for: "status")
@@ -120,13 +120,13 @@ extension ArticleAdminPage {
                                 RadioSelect(state.localizedDescription, value: state.rawValue)
                             }
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

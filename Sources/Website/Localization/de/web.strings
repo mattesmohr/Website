@@ -1,6 +1,6 @@
 "About" = "Über mich";
 "All" = "All";
-"Alternate text" = "Alternativtext";
+"Alternate Text" = "Alternativtext";
 "Article" = "Artikel";
 "Articles" = "Artikel";
 "Asset" = "Asset";
@@ -30,14 +30,14 @@
 "Hostname" = "Hostname";
 "Lastname" = "Nachname";
 "Legal" = "Impressum";
-"Legal notice" = "Impressum";
+"Legal Notice" = "Impressum";
 "Log out" = "Abmelden";
 "Message" = "Nachricht";
 "Page %lld of %lld" = "Seite %lld von %lld";
 "Password" = "Passwort";
 "Port" = "Port";
 "Privacy" = "Datenschutz";
-"Privacy policy" = "Datenschutzerklärung";
+"Privacy Policy" = "Datenschutzerklärung";
 "Project"= "Projekt";
 "Projects" = "Projekte";
 "Reply" = "Antwort";
@@ -49,8 +49,8 @@
 "Setting" = "Einstellung";
 "Settings" = "Einstellungen";
 "Sign in" = "Anmelden";
-"Site description" = "Seitenbeschreibung";
-"Site title" = "Seitentitel";
+"Site Description" = "Seitenbeschreibung";
+"Site Title" = "Seitentitel";
 "Status" = "Status";
 "Submit" = "Speichern";
 "Title" = "Titel";
@@ -76,38 +76,28 @@
 
 "No notifications" = "Keine Benachrichtigungen";
 
-"Quick navigation" = "Schnellnavigation";
-"Data recording" = "Datenerfassung";
-"Hosting provider" = "Externes Hosting";
-"Data protection" = "Datenschutz";
-"Responsible party" = "Verantwortliche Stelle";
-"Storage duration" = "Speicherdauer";
-"Data processing" = "Datenverarbeitung";
-"Data recipients" = "Datenempfänger";
-"Consent revocation" = "Widerruf der Einwilligung";
-"Data objection" = "Widerspruch gegen die Datenverarbeitung";
-"Complaint log" = "Beschwerdeprotokoll";
-"Data portability" = "Datenübertragbarkeit";
-"Data eradication" = "Datenlöschung";
-"Processing restrictions" = "Einschränkung der Verarbeitung";
-"SSL encryption" = "SSL Verschlüsselung";
+"Quick Navigation" = "Schnellnavigation";
+"Data Recording" = "Datenerfassung";
+"Hosting Provider" = "Externes Hosting";
+"Data Protection" = "Datenschutz";
+"Responsible Party" = "Verantwortliche Stelle";
+"Storage Duration" = "Speicherdauer";
+"Data Processing" = "Datenverarbeitung";
+"Data Recipients" = "Datenempfänger";
+"Consent Revocation" = "Widerruf der Einwilligung";
+"Data Objection" = "Widerspruch gegen die Datenverarbeitung";
+"Complaint Log" = "Beschwerdeprotokoll";
+"Data Portability" = "Datenübertragbarkeit";
+"Data Eradication" = "Datenlöschung";
+"Processing Restrictions" = "Einschränkung der Verarbeitung";
+"SSL Encryption" = "SSL Verschlüsselung";
 
-"General information" = "Allgemeine Hinweise";
+"General Information" = "Allgemeine Hinweise";
 "Who is the responsible party for the recording of data on this website?" = "Wer ist verantwortlich für die Datenerfassung auf dieser Website?";
 "How do we record your data?" = "Wie erfassen wir Ihre Daten?";
 "What are the purposes we use your data for?" = "Wofür nutzen wir Ihre Daten?";
 "What rights do you have as far as your information is concerned?" = "Welche Rechte haben Sie bezüglich Ihrer Daten?";
-"Mandatory information" = "Pflicht­informationen";
-"Information about the responsible party" = "Hinweis zur verantwortlichen Stelle";
-"General information on the legal basis for the data processing on this website" = "Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website";
-"Recipients of personal data" = "Empfänger von personenbezogenen Daten";
-"Revocation of your consent to the processing of data" = "Widerruf Ihrer Einwilligung zur Datenverarbeitung";
-"Right to object to the collection of data in special cases; right to object to direct advertising (Art. 21 GDPR)" = "Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21 DSGVO)";
-"Right to log a complaint with the competent supervisory agency" = "Beschwerde­recht bei der zuständigen Aufsichts­behörde";
-"Right to data portability" = "Recht auf Daten­übertrag­barkeit";
-"Information about, rectification and eradication of data" = "Auskunft, Berichtigung und Löschung";
-"Right to demand processing restrictions" = "Recht auf Einschränkung der Verarbeitung";
-"SSL and/or TLS encryption" = "SSL- bzw. TLS-Verschlüsselung";
+"Mandatory Information" = "Pflicht­informationen";
 
 "This website represents me as a person and has no commercial use!" = "Diese Website repräsentiert mich als Person und dient keinem kommerziellen Zweck!";
 "Responsible for the content" = "Veranwortlich für den Inhalt";
@@ -116,9 +106,9 @@
 
 "Something went wrong. Sorry for the inconvenience!" = "Es scheint etwas schief gelaufen zu sein. Sorry für den Umstand!";
 
-"The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term &ldquo;personal data&rdquo; comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiiert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.";
+"The following information will provide you with an easy to navigate overview of what will happen with your personal data when you visit this website. The term \"personal data\" comprises all data that can be used to personally identify you. For detailed information about the subject matter of data protection, please consult our Data Protection Declaration, which we have included beneath this copy." = "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiiert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.";
 
-"The data on this website is processed by the operator of the website, whose contact information is available under section “Information about the responsible party (referred to as the “controller” in the GDPR)” in this privacy policy." = "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt „Hinweis zur Verantwortlichen Stelle“ in dieser Datenschutzerklärung entnehmen.";
+"The data on this website is processed by the operator of the website." = "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber.";
 
 "We collect your data as a result of your sharing of your data with us. This may, for instance be information you enter into our contact form. Other data shall be recorded by our IT systems automatically or after you consent to its recording during your website visit. This data comprises primarily technical information (e.g., web browser, operating system, or time the site was accessed). This information is recorded automatically when you access this website." = "Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.";
 

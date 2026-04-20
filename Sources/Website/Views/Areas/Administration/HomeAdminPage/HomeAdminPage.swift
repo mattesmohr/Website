@@ -20,13 +20,13 @@ enum HomeAdminPage {
                     Grid(ratio: .third, spacing: .small) {
                         Card {
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                         Card {
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                         Card {
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {

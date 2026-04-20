@@ -10,22 +10,22 @@ extension AssetAdminPage {
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
-                    FieldLabel("Alternate text", for: "alternateText")
+                    FieldLabel("Alternate Text", for: "alternateText")
                     TextEditor(name: "alternateText") {
                     }
                 }
                 VStack {
                     FieldLabel("Asset", for: "asset")
                     FileDialog(name: "asset")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
         }
     }
@@ -37,31 +37,31 @@ extension AssetAdminPage {
         var body: Content {
             Form(method: .post, encoding: .multipart) {
                 Image(source: asset.filePath)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .border(.system)
-                    .backgroundColor(.system)
+                    .background(.system)
                     .imageScale(.medium)
                 VStack {
                     FieldLabel("Asset", for: "asset")
                     FileDialog(name: "asset")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Title", for: "title")
                     TextField(name: "title", prompt: "Title", value: asset.title)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 VStack {
-                    FieldLabel("Alternate text", for: "alternateText")
+                    FieldLabel("Alternate Text", for: "alternateText")
                     TextEditor(name: "alternateText") {
                         asset.alternate
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
         }
     }

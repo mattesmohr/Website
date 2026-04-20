@@ -19,18 +19,18 @@ enum HomePage {
                                     MacIcon()
                                 }
                             }
-                            .backgroundColor(.system)
+                            .background(.system)
                             .tag("slide1")
                             Slide {
                                 VStack(alignment: .center, spacing: .around) {
                                     SafariIcon()
                                 }
                             }
-                            .backgroundColor(.system)
+                            .background(.system)
                             .tag("slide2")
                         }
                         .frame(width: .twelve)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                     }
                 }
                 Section {
@@ -63,7 +63,7 @@ enum HomePage {
                         }
                         .fontSize(.medium)
                         VStack(spacing: .large) {
-                            Scroll(showIndicators: false) {
+                            Scroll(indicators: false) {
                                 HStack(alignment: .top, spacing: .small) {
                                     for project in viewModel.pagination.items {
                                         Link(destination: "/projects/\(project.slug)") {

@@ -11,14 +11,14 @@ extension PostAdminPage {
                     FieldLabel("Message", for: "message")
                     TextEditor(name: "message", prompt: "Message") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(8)
                 }
                 VStack {
                     FieldLabel("Tags", for: "tags")
                     TextEditor(name: "tags", prompt: "Tags") {
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(4)
                 }
                 VStack {
@@ -28,12 +28,12 @@ extension PostAdminPage {
                             RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -53,7 +53,7 @@ extension PostAdminPage {
                     TextEditor(name: "message", prompt: "Message") {
                         post.message
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(8)
                 }
                 VStack {
@@ -61,7 +61,7 @@ extension PostAdminPage {
                     TextEditor(name: "tags", prompt: "Tags") {
                         post.tags
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                     .lineLimit(4)
                 }
                 VStack {
@@ -71,12 +71,12 @@ extension PostAdminPage {
                             RadioSelect(state.localizedDescription, value: state.rawValue)
                         }
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

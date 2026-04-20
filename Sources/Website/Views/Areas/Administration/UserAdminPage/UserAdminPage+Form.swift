@@ -10,18 +10,18 @@ extension UserAdminPage {
                 VStack {
                     FieldLabel("Email", for: "email")
                     TextField(name: "email", prompt: "john.doe@provider.com")
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Firstname", for: "firstName")
                         TextField(name: "firstName", prompt: "John")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Lastname", for: "lastName")
                         TextField(name: "lastName", prompt: "Doe")
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 VStack {
@@ -29,7 +29,7 @@ extension UserAdminPage {
                     TextEditor(name: "biography", prompt: "Biography") {
                     }
                     .lineLimit(4)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Role", for: "role")
@@ -38,12 +38,12 @@ extension UserAdminPage {
                             RadioSelect(role.localizedDescription, value: role.rawValue)
                         }
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("create-form")
             .onSubmit { form in
@@ -61,18 +61,18 @@ extension UserAdminPage {
                 VStack {
                     FieldLabel("Email", for: "email")
                     TextField(name: "email", prompt: "john.doe@provider.com", value: user.email)
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                 }
                 HStack(spacing: .small) {
                     VStack {
                         FieldLabel("Firstname", for: "firstName")
                         TextField(name: "firstName", prompt: "John", value: user.firstName)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                     VStack {
                         FieldLabel("Lastname", for: "lastName")
                         TextField(name: "lastName", prompt: "Doe", value: user.lastName)
-                            .borderShape(.smallrounded)
+                            .border(.system, shape: .smallrounded)
                     }
                 }
                 VStack {
@@ -81,7 +81,7 @@ extension UserAdminPage {
                         user.biography
                     }
                     .lineLimit(4)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 VStack {
                     FieldLabel("Role", for: "role")
@@ -90,12 +90,12 @@ extension UserAdminPage {
                             RadioSelect(role.localizedDescription, value: role.rawValue)
                         }
                     }
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
                 }
                 .margin(insets: .bottom, length: .large)
                 Button("Submit", role: .submit)
                     .buttonStyle(.primary)
-                    .borderShape(.smallrounded)
+                    .border(.system, shape: .smallrounded)
             }
             .tag("edit-form")
             .onSubmit { form in

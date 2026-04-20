@@ -16,7 +16,7 @@ extension AssetAdminPage {
                         LinkButton(destination: "/area/admin/assets/\(id)/delete") {
                             Text("Delete")
                         }
-                        .borderShape(.smallrounded)
+                        .border(.system, shape: .smallrounded)
                         .buttonStyle(.primary)
                         Button("Cancel", role: .button)
                             .buttonStyle(ControlButton())
@@ -28,7 +28,7 @@ extension AssetAdminPage {
                 }
             }
             .frame(width: .three)
-            .borderShape(.smallrounded)
+            .border(.system, shape: .smallrounded)
             .tag("delete-modal")
         }
     }
